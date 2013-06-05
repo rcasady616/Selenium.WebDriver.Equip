@@ -1,0 +1,84 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <title>PageA</title>
+    <script>
+        define(["amdUtils/string/interpolate"], function (interpolate) {
+            window.jsErrors = [];
+
+            window.onerror = function (errorMessage, url, lineNumber) {
+                var message = interpolate("Error: [{{0}}], url: [{{1}}], line: [{{2}}]", [errorMessage, url, lineNumber]);
+                window.jsErrors.push(message);
+                return false;
+            };
+        });
+        var logOfConsole = [];
+        var _log = console.log,
+    _warn = console.warn,
+    _error = console.error;
+        console.warn = function () {
+            logOfConsole.push({ method: 'warn', arguments: arguments });
+            return _warn.apply(console, arguments);
+        };
+        
+        var container = document.getElementById('div1');
+        document.getElementById('add').onclick = function () {
+            var input = document.createElement('input'),
+                            div = document.createElement('div');
+            input.type = "text";
+            container.appendChild(input);
+            f
+        };
+    </script>
+</head>
+<body>
+    <table id="tabel1" cellspacing="2">
+        <tbody>
+            <tr>
+                <th>
+                    Input text
+                </th>
+                <th>
+                    Input checkbox
+                </th>
+                <th>
+                    Select
+                </th>
+                <th>
+                    Label
+                </th>
+                <th>
+                    JavaScript
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <input id="text1" type="text" />
+                </td>
+                <td>
+                    <input id="checkbox1" type="checkbox" value="seven" />
+                </td>
+                <td>
+                    <select id="select1">
+                        <option label="1" value="1">one</option>
+                        <option label="2" value="2">two</option>
+                        <option label="3" value="3">three</option>
+                    </select>
+                </td>
+                <td>
+                    <label id="label1">
+                    </label>
+                </td>
+                <td>
+                    <input type="button" id="add1" value="add" />
+                    <div id="div1">
+                    </div>
+                    <script type="text/javascript">
+                      
+                    </script>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
