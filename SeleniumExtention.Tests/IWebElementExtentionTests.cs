@@ -32,10 +32,11 @@ namespace SeleniumExtention.Tests
             Assert.AreEqual("myinput", driver.FindElement("text1").ClassName());
         }
 
-        [Test]
-        public void TestExistsExtention()
+        [TestCase("text1", true)]
+        [TestCase("dosentExist", false)]
+        public void TestExistsExtention(string id, bool expected)
         {
-            Assert.AreEqual(true, driver.FindElement("text1").Exists());
+            Assert.AreEqual(expected, driver.FindElement(id).Exists());
         }
 
         [Test]
@@ -94,5 +95,13 @@ namespace SeleniumExtention.Tests
         }
 
         #endregion
+
+        [TestCase("text1", "class", "myinput")]
+        [TestCase("label1", "title", "label one")]
+        [TestCase("add1", "value", "add")]
+        public void TestGetAttribute(string id, string attribute, string expected)
+        {
+            Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(attribute));
+        }
     }
 }
