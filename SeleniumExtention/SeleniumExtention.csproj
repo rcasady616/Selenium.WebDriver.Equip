@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlTagAttribute.cs" />
+    <Compile Include="IPage.cs" />
     <Compile Include="ISearchContextExtention.cs" />
     <Compile Include="IWebDriverExtention.cs" />
     <Compile Include="IwebDriverFactory.cs" />
