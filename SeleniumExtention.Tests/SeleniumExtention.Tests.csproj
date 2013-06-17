@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPageTests.cs" />
     <Compile Include="IsearchContextExtentionTests.cs" />
     <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="IWebElementExtentionTests.cs" />
@@ -64,6 +65,10 @@
     <ProjectReference Include="..\SeleniumExtention\SeleniumExtention.csproj">
       <Project>{941863E2-933B-482C-9DAA-8CC81069B2F6}</Project>
       <Name>SeleniumExtention</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestWebPages.UIFramework\TestWebPages.UIFramework.csproj">
+      <Project>{5D63DA78-6414-4A71-A94E-B0394A2DA09F}</Project>
+      <Name>TestWebPages.UIFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
