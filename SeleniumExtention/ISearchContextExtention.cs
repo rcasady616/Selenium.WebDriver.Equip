@@ -50,6 +50,17 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to not be present on the page DOM
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilOblivion(this ISearchContext iSearchContext, By locator, int waitTimeInSeconds = 10)
+        {
+            return WaitUntil(iSearchContext, ExpectedCondition.ElementOblivion(locator), waitTimeInSeconds);
+        }
+
+        /// <summary>
         /// Waits for a <see cref="IWebElement"/> to be visible in the page
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
@@ -58,6 +69,17 @@ namespace OpenQA.Selenium
         public static bool WaitUntilVisible(this ISearchContext iSearchContext, By locator, int waitTimeInSeconds = 10)
         {
             return WaitUntil(iSearchContext, ExpectedConditions.ElementIsVisible(locator), waitTimeInSeconds);
+        }
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to not be visible in the page
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become not visible</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not visible; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, By locator, int waitTimeInSeconds = 10)
+        {
+            return WaitUntil(iSearchContext, ExpectedCondition.ElementNotVisible(locator), waitTimeInSeconds);
         }
 
         /// <summary>

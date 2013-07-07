@@ -4,10 +4,31 @@ using OpenQA.Selenium;
 namespace SeleniumExtention
 {
     /// <summary>
-    /// Defines conditions of a <see cref="IWebElement"> 
+    /// Defines Expected conditions of a <see cref="IWebElement"> 
     /// </summary>
     public static class ExpectedCondition
     {
+        /// <summary>
+        /// An expectation for checking that an element is not present on the DOM of a page.
+        /// This method returns faster than <see cref="ElementExists"/> when the <see cref="IWebElement"/> is expected to not be present
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> is not present; otherwise, <see langword="false"/></returns>
+        public static Func<IWebDriver, bool> ElementOblivion(By locator)
+        {
+            return (driver) =>
+                {
+                    try
+                    {
+                        return !driver.ElementExists(locator);
+                    }
+                    catch (StaleElementReferenceException)
+                    {
+                        return true;
+                    }
+                };
+        }
+
         /// <summary>
         /// An expectation for checking that an elements text.
         /// </summary>
@@ -32,6 +53,7 @@ namespace SeleniumExtention
 
         /// <summary>
         /// An expectation for checking that an element is not present on the DOM of a page and not visible
+        /// This method returns faster than <see cref="ElementIsVisible"/> when the <see cref="IWebElement"/> is expected to not be visible
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not present; otherwise, <see langword="false"/></returns>

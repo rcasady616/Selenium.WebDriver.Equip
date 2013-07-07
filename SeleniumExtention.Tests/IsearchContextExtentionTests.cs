@@ -43,12 +43,20 @@ namespace SeleniumExtention.Tests
             Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id)));
         }
 
+        [Test]
         public void TestWaitUntilExists()
         {
             page.GreenRadio.Click();
             page.NewLabelText.SendKeys("TestIsPageLoaded");
             page.SubmitButton.Click();
             Assert.AreEqual(true, _driver.WaitUntilExists(AjaxyControlPage.ByLabelsDiv));
+        }
+
+        [TestCase(false, "red")]
+        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilOblivion(bool expected, string id)
+        {
+            Assert.AreEqual(expected, _driver.WaitUntilOblivion(By.Id(id)));
         }
 
         [TestCase(true, "red")]
@@ -58,7 +66,7 @@ namespace SeleniumExtention.Tests
             Assert.AreEqual(expected, _driver.WaitUntilVisible(By.Id(id)));
         }
 
-        [Test]
+        [TestCase]
         public void TestWaitUntilVisible()
         {
             page.GreenRadio.Click();
