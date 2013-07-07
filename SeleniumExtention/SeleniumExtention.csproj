@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>bin\Debug\SeleniumExtention.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -52,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpectedConditionsExtention.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="ISearchContextExtention.cs" />
@@ -61,6 +63,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeleniumServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

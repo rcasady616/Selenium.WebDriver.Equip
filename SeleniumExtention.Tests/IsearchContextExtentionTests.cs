@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtention.Tests
@@ -9,10 +10,15 @@ namespace SeleniumExtention.Tests
     public class IsearchContextExtentionTests
     {
         private IWebDriver _driver;
+        private AjaxyControlPage page;
+
         [SetUp]
         public void SetupTest()
         {
-            _driver = IWebDriverFactory.GetBrowser(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
+            _driver = IWebDriverFactory.GetBrowser(url);
+            page = new AjaxyControlPage(_driver);
+            Assert.AreEqual(true, page.IsPageLoaded());
         }
 
         [TearDown]
@@ -28,20 +34,45 @@ namespace SeleniumExtention.Tests
         [Test]
         public void TestFindElementExtention()
         {
-            Assert.AreEqual(_driver.FindElement(By.Id("text1")), _driver.FindElement("text1"));
+            Assert.AreEqual(_driver.FindElement(By.Id("red")), _driver.FindElement("red"));
         }
 
-        [Test]
+        [TestCase(true, "red")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilExists(bool expected, string id)
+        {
+            Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id)));
+        }
+
         public void TestWaitUntilExists()
         {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            _driver.Navigate().GoToUrl(url);
-            var page = new AjaxyControlPage(_driver);
-            Assert.AreEqual(true, page.IsPageLoaded());
             page.GreenRadio.Click();
             page.NewLabelText.SendKeys("TestIsPageLoaded");
             page.SubmitButton.Click();
             Assert.AreEqual(true, _driver.WaitUntilExists(AjaxyControlPage.ByLabelsDiv));
+        }
+
+        [TestCase(true, "red")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilVisible(bool expected, string id)
+        {
+            Assert.AreEqual(expected, _driver.WaitUntilVisible(By.Id(id)));
+        }
+
+        [Test]
+        public void TestWaitUntilVisible()
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(true, _driver.WaitUntilVisible(AjaxyControlPage.ByLabelsDiv));
+        }
+
+        [TestCase(true, "red")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestElementExists(bool expected, string id)
+        {
+            Assert.AreEqual(expected, _driver.ElementExists(By.Id(id)));
         }
     }
 }

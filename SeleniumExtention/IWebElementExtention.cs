@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using SeleniumExtention;
 
 namespace OpenQA.Selenium
@@ -9,7 +8,7 @@ namespace OpenQA.Selenium
         #region Mock properties extention
 
         /// <summary>
-        /// Gets the class name of this element
+        /// Gets the class name of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The class name of the <see cref="IWebElement"/> on the current context</returns>
         public static string ClassName(this IWebElement iWebElement)
@@ -18,7 +17,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the value indicating whether or not this element exists.
+        /// Gets the value indicating whether or not this <see cref="IWebElement"/> exists.
         /// </summary>
         /// <returns>A <see cref="bool"/> if it is exists or not of the <see cref="IWebElement"/> on the current context</returns>
         public static bool Exists(this IWebElement iWebElement)
@@ -36,7 +35,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the id of this element
+        /// Gets the id of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The id of the <see cref="IWebElement"/> on the current context</returns>
         public static string Id(this IWebElement iWebElement)
@@ -45,7 +44,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the name of this element
+        /// Gets the name of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The name of the <see cref="IWebElement"/> on the current context</returns>
         public static string Name(this IWebElement iWebElement)
@@ -54,7 +53,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the next sibling of this element
+        /// Gets the next sibling of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The next sibling <see cref="IWebElement"/> on the current context</returns>
         public static IWebElement NextSibling(this IWebElement iWebElement)
@@ -63,7 +62,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the parent of this element
+        /// Gets the parent of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The parent <see cref="IWebElement"/> on the current context</returns>
         public static IWebElement Parent(this IWebElement iWebElement)
@@ -72,7 +71,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the previous sibling of this element
+        /// Gets the previous sibling of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The previous sibling <see cref="IWebElement"/> on the current context</returns>
         public static IWebElement PreviousSibling(this IWebElement iWebElement)
@@ -81,7 +80,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the style of this element
+        /// Gets the style of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The style of the <see cref="IWebElement"/> on the current context</returns>
         public static string Style(this IWebElement iWebElement)
@@ -90,7 +89,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the title of this element
+        /// Gets the title of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The title of the <see cref="IWebElement"/> on the current context</returns>
         public static string Title(this IWebElement iWebElement)
@@ -99,7 +98,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the type of this element
+        /// Gets the type of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The type of the <see cref="IWebElement"/> on the current context</returns>
         public static string Type(this IWebElement iWebElement)
@@ -108,7 +107,7 @@ namespace OpenQA.Selenium
         }
 
         /// <summary>
-        /// Gets the value of this element
+        /// Gets the value of this <see cref="IWebElement"/>
         /// </summary>
         /// <returns>The value of the <see cref="IWebElement"/> on the current context</returns>
         public static string Value(this IWebElement iWebElement)
@@ -119,13 +118,13 @@ namespace OpenQA.Selenium
         #endregion
 
         /// <summary>
-        /// Gets the value of the Html Tag attribute 
+        /// Gets the value of the <see cref="HtmlTagAttribute"/> 
         /// </summary>
-        /// <param name="htmlAttribute">The <see cref="HtmlAttribute"/> to get the value of</param>
+        /// <param name="htmlTagAttribute">The <see cref="HtmlTagAttribute"/> to get the value of</param>
         /// <returns>The value of the attribute</returns>
-        public static string GetAttribute(this IWebElement iWebElement, HtmlTagAttribute htmlAttribute)
+        public static string GetAttribute(this IWebElement iWebElement, HtmlTagAttribute htmlTagAttribute)
         {
-            return iWebElement.GetAttribute(htmlAttribute.ToString());
+            return iWebElement.GetAttribute(htmlTagAttribute.ToString());
         }
     }
 }

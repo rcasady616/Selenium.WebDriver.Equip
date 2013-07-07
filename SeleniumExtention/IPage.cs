@@ -1,11 +1,14 @@
 ﻿namespace SeleniumExtention
 {
+    /// <summary>
+    /// Defines an interface through which a web page is controlled 
+    /// </summary>
     public interface IPage
     {
         /// <summary>
-        /// Gets the value indicating whether or not this page has loaded
+        /// Gets the value indicating whether or not this <see cref="IPage"/> has loaded
         /// </summary>
-        /// <returns>A <see cref="bool"/> if it is loaded or not</returns>
+        /// <returns><see langword="true"/> if the <see cref="IPage"/> is loaded; otherwise, <see langword="false"/></returns>
         bool IsPageLoaded();
     }
 }

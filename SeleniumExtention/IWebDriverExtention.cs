@@ -1,10 +1,7 @@
-﻿using System;
-using OpenQA.Selenium.Internal;
-
-namespace OpenQA.Selenium
+﻿namespace OpenQA.Selenium
 {
     public static class IWebDriverExtention
     {
-       
+        
     }
 }
