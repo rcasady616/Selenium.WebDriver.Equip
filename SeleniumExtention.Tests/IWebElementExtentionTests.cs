@@ -32,13 +32,6 @@ namespace SeleniumExtention.Tests
             Assert.AreEqual("myinput", driver.FindElement("text1").ClassName());
         }
 
-        [TestCase("text1", true)]
-        [TestCase("dosentExist", false)]
-        public void TestExistsExtention(string id, bool expected)
-        {
-            Assert.AreEqual(expected, driver.FindElement(id).Exists());
-        }
-
         [Test]
         public void TestIdExtention()
         {

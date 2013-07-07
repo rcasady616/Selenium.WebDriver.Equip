@@ -1,9 +1,12 @@
 ﻿using System;
-using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
 
-namespace OpenQA.Selenium
+namespace SeleniumExtention
 {
-    public static class ExpectedConditionsExtention
+    /// <summary>
+    /// Defines conditions of a <see cref="IWebElement"> 
+    /// </summary>
+    public static class ExpectedCondition
     {
         /// <summary>
         /// An expectation for checking that an elements text.
@@ -11,7 +14,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should be</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> text equals; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextEquals(this ExpectedConditions expectedConditions, By locator, string text)
+        public static Func<IWebDriver, bool> ElementTextEquals(By locator, string text)
         {
             return (driver) => { return driver.FindElement(locator).Text == text; };
         }
@@ -22,7 +25,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should contain</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> contains the text; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextContains(this ExpectedConditions expectedConditions, By locator, string text)
+        public static Func<IWebDriver, bool> ElementTextContains(By locator, string text)
         {
             return (driver) => { return driver.FindElement(locator).Text.Contains(text); };
         }
@@ -32,7 +35,7 @@ namespace OpenQA.Selenium
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not present; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementNotVisible(this ExpectedConditions expectedConditions, By locator)
+        public static Func<IWebDriver, bool> ElementNotVisible(By locator)
         {
             return (driver) =>
             {
@@ -50,13 +53,8 @@ namespace OpenQA.Selenium
         private static IWebElement ElementIfVisible(IWebElement element)
         {
             if (element.Displayed)
-            {
                 return element;
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 }

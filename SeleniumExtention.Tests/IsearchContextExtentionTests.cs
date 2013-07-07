@@ -1,13 +1,12 @@
 ﻿using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtention.Tests
 {
     [TestFixture]
-    public class IsearchContextExtentionTests
+    public class ISearchContextExtentionTests
     {
         private IWebDriver _driver;
         private AjaxyControlPage page;
@@ -73,6 +72,34 @@ namespace SeleniumExtention.Tests
         public void TestElementExists(bool expected, string id)
         {
             Assert.AreEqual(expected, _driver.ElementExists(By.Id(id)));
+        }
+
+        [TestCase(true, "AjaxyControl")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilTitleIs(bool expected, string title)
+        {
+            Assert.AreEqual(expected, _driver.WaitUntilTitleIs(title));
+        }
+
+        [TestCase(true, "TestIsPageLoaded")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilTextEquals(bool expected, string text)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(expected, _driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text));
+        }
+
+        [TestCase(true, "TestIsPageLoaded")]
+        [TestCase(true, "Load")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilTextContains(bool expected, string text)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(expected, _driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text));
         }
     }
 }

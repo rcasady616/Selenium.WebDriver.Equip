@@ -53,10 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPageTests.cs" />
-    <Compile Include="IsearchContextExtentionTests.cs" />
+    <Compile Include="ISearchContextExtentionTests.cs" />
     <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="IWebElementExtentionTests.cs" />
-    <Compile Include="Exceptions\NoSuchElementExceptionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

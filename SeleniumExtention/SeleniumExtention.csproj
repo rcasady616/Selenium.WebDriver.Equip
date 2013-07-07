@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpectedConditionsExtention.cs" />
+    <Compile Include="ExpectedCondition.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="ISearchContextExtention.cs" />

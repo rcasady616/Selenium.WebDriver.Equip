@@ -1,9 +1,8 @@
-﻿using System;
-using SeleniumExtention;
+﻿using SeleniumExtention;
 
 namespace OpenQA.Selenium
 {
-    public static class IWebElementExtention 
+    public static class IWebElementExtention
     {
         #region Mock properties extention
 
@@ -14,24 +13,6 @@ namespace OpenQA.Selenium
         public static string ClassName(this IWebElement iWebElement)
         {
             return iWebElement.GetAttribute(HtmlTagAttribute.Class);
-        }
-
-        /// <summary>
-        /// Gets the value indicating whether or not this <see cref="IWebElement"/> exists.
-        /// </summary>
-        /// <returns>A <see cref="bool"/> if it is exists or not of the <see cref="IWebElement"/> on the current context</returns>
-        public static bool Exists(this IWebElement iWebElement)
-        {
-            try
-            {
-                if (iWebElement != null)
-                    return true;
-                return false;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
 
         /// <summary>
