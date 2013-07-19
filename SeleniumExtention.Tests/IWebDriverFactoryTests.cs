@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
 
 namespace SeleniumExtention.Tests
@@ -53,6 +54,13 @@ namespace SeleniumExtention.Tests
         {
             _driver = IWebDriverFactory.GetBrowser<SafariDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(SafariDriver), _driver.GetType());
+        }
+
+        [Test]
+        public void GetRemoteWebDriverFirefoxTest()
+        {
+            _driver = IWebDriverFactory.GetRemoteWebDriver(null, "http://rickcasady.blogspot.com/");
+            Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
         }
     }
 }
