@@ -43,7 +43,7 @@ namespace SeleniumExtention.Tests
             Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id)));
         }
 
-        [Test]
+        [TestCase]
         public void TestWaitUntilExists()
         {
             page.GreenRadio.Click();

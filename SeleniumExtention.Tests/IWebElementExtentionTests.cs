@@ -89,10 +89,10 @@ namespace SeleniumExtention.Tests
 
         #endregion
 
-        [TestCase("text1", "class", "myinput")]
-        [TestCase("label1", "title", "label one")]
-        [TestCase("add1", "value", "add")]
-        public void TestGetAttribute(string id, string attribute, string expected)
+        [TestCase("text1", HtmlTagAttribute.Class, "myinput")]
+        [TestCase("label1", HtmlTagAttribute.Title, "label one")]
+        [TestCase("add1", HtmlTagAttribute.Value, "add")]
+        public void TestGetAttribute(string id, HtmlTagAttribute attribute, string expected)
         {
             Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(attribute));
         }
