@@ -32,5 +32,13 @@ namespace SeleniumExtention.Tests
             _driver.Navigate().GoToUrl(url);
             Assert.AreEqual(true, new AjaxyControlPage(_driver).IsPageLoaded());
         }
+
+        [Test]
+        public void TestIsPageLoadedFalse()
+        {
+            string url = string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory());
+            _driver.Navigate().GoToUrl(url);
+            Assert.AreEqual(false, new AjaxyControlPage(_driver).IsPageLoaded());
+        }
     }
 }
