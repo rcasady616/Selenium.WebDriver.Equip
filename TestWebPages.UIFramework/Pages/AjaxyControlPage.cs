@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using OpenQA.Selenium;
-using SeleniumExtention;
+using SeleniumExtension;
 
 namespace TestWebPages.UIFramework.Pages
 {
