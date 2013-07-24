@@ -4,6 +4,7 @@ using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using SeleniumExtension.Server;
 
 namespace SeleniumExtension
 {

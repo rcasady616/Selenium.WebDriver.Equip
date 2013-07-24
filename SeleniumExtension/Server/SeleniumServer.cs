@@ -4,9 +4,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading;
-using Selenium;
 
-namespace SeleniumExtension
+namespace SeleniumExtension.Server
 {
     public class SeleniumServer
     {

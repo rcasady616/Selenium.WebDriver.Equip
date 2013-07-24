@@ -67,9 +67,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SeleniumServerManager.cs" />
+    <Compile Include="Server\SeleniumServerManager.cs" />
     <Compile Include="SeleniumSettings.cs" />
-    <Compile Include="SeleniumServer.cs" />
+    <Compile Include="Server\SeleniumServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SeleniumExtension.Server;
 
 namespace SeleniumExtension.Tests
 {
