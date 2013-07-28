@@ -89,12 +89,22 @@ namespace SeleniumExtension.Tests
 
         #endregion
 
-        [TestCase("text1", HtmlTagAttribute.Class, "myinput")]
-        [TestCase("label1", HtmlTagAttribute.Title, "label one")]
-        [TestCase("add1", HtmlTagAttribute.Value, "add")]
-        public void TestGetAttribute(string id, HtmlTagAttribute attribute, string expected)
+        [TestCase("text1", "myinput")]
+        public void TestGetAttributeClass(string id,  string expected)
         {
-            Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(attribute));
+            Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(HtmlTagAttribute.Class));
+        }
+
+        [TestCase("label1", "label one")]
+        public void TestGetAttributeTitle(string id, string expected)
+        {
+            Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(HtmlTagAttribute.Title));
+        }
+
+        [TestCase("add1", "add")]
+        public void TestGetAttributeValue(string id,  string expected)
+        {
+            Assert.AreEqual(expected, driver.FindElement(id).GetAttribute(HtmlTagAttribute.Value));
         }
     }
 }

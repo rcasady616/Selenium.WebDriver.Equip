@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Threading;
+using NUnit.Framework;
 using SeleniumExtension.Server;
 
 namespace SeleniumExtension.Tests
@@ -33,15 +34,15 @@ namespace SeleniumExtension.Tests
         public void TestStop()
         {
             SeleniumServer.Start();
+            Thread.Sleep(10000);
             Assert.AreEqual(true, SeleniumServer.WaitUntilSeleniumServerRunning());
             Assert.AreEqual(true, SeleniumServer.Stop());
-            Assert.AreEqual(false, SeleniumServer.WaitUntilSeleniumServerRunning());
         }
 
         [TestCase(true)]
         [TestCase(false)]
         [Category("SeleniumServer")]
-        public void TestisSeleniumServerRunning(bool running)
+        public void TestIsSeleniumServerRunning(bool running)
         {
             if (running)
                 SeleniumServer.Start();
