@@ -55,7 +55,8 @@
   <ItemGroup>
     <Compile Include="IPageTests.cs" />
     <Compile Include="Extensions\ISearchContextExtensionTests.cs" />
-    <Compile Include="Extensions\IWebDriverFactoryTests.cs" />
+    <Compile Include="IWebDriverFactoryRemoteTests.cs" />
+    <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="Extensions\IWebElementExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\SeleniumServerManagerTests.cs" />

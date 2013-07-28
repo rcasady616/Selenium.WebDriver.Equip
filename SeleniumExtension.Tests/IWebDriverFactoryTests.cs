@@ -5,6 +5,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Safari;
+using SeleniumExtension.Server;
 
 namespace SeleniumExtension.Tests
 {
@@ -56,11 +57,5 @@ namespace SeleniumExtension.Tests
             Assert.AreEqual(typeof(SafariDriver), _driver.GetType());
         }
 
-        [Test]
-        public void GetRemoteWebDriverFirefoxTest()
-        {
-            _driver = IWebDriverFactory.GetRemoteWebDriver(null, "http://rickcasady.blogspot.com/");
-            Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
-        }
     }
 }

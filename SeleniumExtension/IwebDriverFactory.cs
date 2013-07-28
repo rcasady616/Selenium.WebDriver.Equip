@@ -42,8 +42,6 @@ namespace SeleniumExtension
         {
             if (seleniumSettings == null)
                 seleniumSettings = new SeleniumSettings();
-            if (!SeleniumServer.isSeleniumServerRunning())
-                SeleniumServer.Start();
             DesiredCapabilities capabilities = null;
             RemoteWebDriver driver = null;
             try
