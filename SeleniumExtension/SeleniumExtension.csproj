@@ -60,10 +60,10 @@
     <Compile Include="ExpectedCondition.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="IPage.cs" />
-    <Compile Include="ISearchContextExtension.cs" />
-    <Compile Include="IWebDriverExtension.cs" />
+    <Compile Include="Extensions\ISearchContextExtension.cs" />
+    <Compile Include="Extensions\IWebDriverExtension.cs" />
     <Compile Include="IwebDriverFactory.cs" />
-    <Compile Include="IWebElementExtension.cs">
+    <Compile Include="Extensions\IWebElementExtension.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

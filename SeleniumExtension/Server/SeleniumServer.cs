@@ -7,6 +7,9 @@ using System.Threading;
 
 namespace SeleniumExtension.Server
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SeleniumServer
     {
         public event SettingsLoadedEventHandler SettingsLoaded;
