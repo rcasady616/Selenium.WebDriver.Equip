@@ -13,9 +13,9 @@ namespace SeleniumExtension.Tests.Server
             using (var seleniumServerManager = new SeleniumServerManager("localhost",4444,"firefox","http://cnn.com"))
             {
                 seleniumServerManager.Start();
-                Assert.AreEqual(true, SeleniumServer.isSeleniumServerRunning());
+                Assert.AreEqual(true, SeleniumServer.IsSeleniumServerRunning());
                 seleniumServerManager.Stop();
-                Assert.AreEqual(true, SeleniumServer.isSeleniumServerRunning());
+                Assert.AreEqual(true, SeleniumServer.IsSeleniumServerRunning());
             }
         }
     }

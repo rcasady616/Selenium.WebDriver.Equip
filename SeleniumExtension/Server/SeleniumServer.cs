@@ -39,28 +39,36 @@ namespace SeleniumExtension.Server
 
         public static bool Stop()
         {
-            HttpWebResponse response = SeleniumCommand("shutDownSeleniumServer");
+            HttpWebResponse response;
+            try
+            {
+                response = SeleniumCommand("shutDownSeleniumServer");
+            }
+            catch (Exception)
+            {
+                return false;
+            }
             return GetResponseAsString(response).Contains("OKOK");
         }
 
         public static bool WaitUntilSeleniumServerRunning()
         {
             int ctr = 0;
-            while (!isSeleniumServerRunning() && ctr < 10)
+            while (!IsSeleniumServerRunning() && ctr < 10)
             {
                 Thread.Sleep(2000);
                 ctr++;
             }
-            return isSeleniumServerRunning();
+            return IsSeleniumServerRunning();
         }
 
-        public static bool isSeleniumServerRunning()
+        public static bool IsSeleniumServerRunning()
         {
             try
             {
-                return (SeleniumCommand("testComplete").StatusCode == HttpStatusCode.OK);
+                return (SeleniumCommand("").StatusCode == HttpStatusCode.OK);
             }
-            catch (NullReferenceException ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -70,25 +78,29 @@ namespace SeleniumExtension.Server
         {
             var se = new SeleniumSettings();
             string urlString = string.Format("http://{0}:{1}/selenium-server/driver/?cmd={2}", se.SeleniumHost, se.SeleniumPort, command);
+            HttpWebResponse response;
             try
             {
                 var commandUrl = new Uri(urlString);
                 var request = (HttpWebRequest)WebRequest.Create(commandUrl);
-                return (HttpWebResponse)request.GetResponse();
+                response = (HttpWebResponse)request.GetResponse();
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine(e);
+                throw;
             }
-            return null;
+            return response;
         }
 
         private static string GetResponseAsString(HttpWebResponse response)
         {
-            using (Stream dataStream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(dataStream))
-                return reader.ReadToEnd();
-
+            using (var dataStream = response.GetResponseStream())
+            {
+                using (var reader = new StreamReader(dataStream))
+                {
+                    return reader.ReadToEnd();
+                }
+            }
         }
     }
 }

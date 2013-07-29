@@ -16,7 +16,7 @@ namespace SeleniumExtension.Tests
         [SetUp]
         public void SetupTest()
         {
-            if (SeleniumServer.isSeleniumServerRunning())
+            if (SeleniumServer.IsSeleniumServerRunning())
                 throw new Exception("Server is already running, please shut down before running tests again!");
             SeleniumServer.Start();
         }

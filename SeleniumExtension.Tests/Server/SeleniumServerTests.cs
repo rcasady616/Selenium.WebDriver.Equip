@@ -10,14 +10,17 @@ namespace SeleniumExtension.Tests
         [SetUp]
         public void Setup()
         {
-            if (SeleniumServer.isSeleniumServerRunning())
+            if (SeleniumServer.IsSeleniumServerRunning())
+            {
                 Assert.AreEqual(true, SeleniumServer.Stop());
+                Thread.Sleep(10000);
+            }
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (SeleniumServer.isSeleniumServerRunning())
+            if (SeleniumServer.IsSeleniumServerRunning())
                 Assert.AreEqual(true, SeleniumServer.Stop());
         }
 
@@ -26,7 +29,7 @@ namespace SeleniumExtension.Tests
         public void TestStart()
         {
             SeleniumServer.Start();
-            Assert.AreEqual(true, SeleniumServer.isSeleniumServerRunning());
+            Assert.AreEqual(true, SeleniumServer.IsSeleniumServerRunning());
         }
 
         [Test]
@@ -42,11 +45,21 @@ namespace SeleniumExtension.Tests
         [TestCase(true)]
         [TestCase(false)]
         [Category("SeleniumServer")]
+        public void TestWaitUntilSeleniumServerRunning(bool running)
+        {
+            if (running)
+                SeleniumServer.Start();
+            Assert.AreEqual(running, SeleniumServer.WaitUntilSeleniumServerRunning());
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        [Category("SeleniumServer")]
         public void TestIsSeleniumServerRunning(bool running)
         {
             if (running)
                 SeleniumServer.Start();
-            Assert.AreEqual(running, SeleniumServer.isSeleniumServerRunning());
+            Assert.AreEqual(running, SeleniumServer.IsSeleniumServerRunning());
         }
     }
 }
