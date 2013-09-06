@@ -1,4 +1,7 @@
-﻿using SeleniumExtension;
+﻿using System;
+using System.Threading;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
@@ -106,6 +109,23 @@ namespace OpenQA.Selenium
         public static string GetAttribute(this IWebElement iWebElement, HtmlTagAttribute htmlTagAttribute)
         {
             return iWebElement.GetAttribute(htmlTagAttribute.ToString());
+        }
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to be exists in the page DOM
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        {
+            int stop = 0;
+            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds )
+            {
+                Thread.Sleep(1000);
+                stop++;
+            }
+            return iWebElement.ElementExists(by);
         }
     }
 }
