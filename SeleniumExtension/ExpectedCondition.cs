@@ -14,7 +14,7 @@ namespace SeleniumExtension
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> is not present; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementOblivion(By locator)
+        public static Func<IWebDriver, bool> ElementNotExists(By locator)
         {
             return (driver) =>
                 {

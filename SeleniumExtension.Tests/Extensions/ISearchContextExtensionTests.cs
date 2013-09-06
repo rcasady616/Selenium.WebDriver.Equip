@@ -43,6 +43,14 @@ namespace SeleniumExtension.Tests
             Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id)));
         }
 
+        [TestCase(true, "red")]
+        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilExistsIWebElement(bool expected, string id)
+        {
+            var body = _driver.FindElement(By.TagName("body"));
+            Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
+        }
+
         [TestCase]
         public void TestWaitUntilExists()
         {
@@ -56,7 +64,7 @@ namespace SeleniumExtension.Tests
         [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
         public void TestWaitUntilOblivion(bool expected, string id)
         {
-            Assert.AreEqual(expected, _driver.WaitUntilOblivion(By.Id(id)));
+            Assert.AreEqual(expected, _driver.WaitUntilNotExists(By.Id(id)));
         }
 
         [TestCase(true, "red")]
