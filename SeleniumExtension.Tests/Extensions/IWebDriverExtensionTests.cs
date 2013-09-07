@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
@@ -69,6 +70,22 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, _driver.WaitUntilVisible(AjaxyControlPage.ByLabelsDiv));
         }
 
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestWaitUntilVisiblesTrue(List<By> locators)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(true, _driver.WaitUntilVisible(locators));
+        }
+
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestWaitUntilVisiblesFalse(List<By> locators)
+        {
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            Assert.AreEqual(false, _driver.WaitUntilVisible(locators));
+        }
+
         [TestCase(true, "AjaxyControl")]
         [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
         public void TestWaitUntilTitleIs(bool expected, string title)
@@ -96,5 +113,21 @@ namespace SeleniumExtension.Tests.Extensions
             page.SubmitButton.Click();
             Assert.AreEqual(expected, _driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text));
         }
+
+        #region testdata
+
+        public static List<List<By>> GetAjaxyControlPageLocators()
+        {
+            List<List<By>> ret = new List<List<By>>();
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv });
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio });
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio });
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio });
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton });
+            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton, AjaxyControlPage.ByNewLableText });
+            return ret;
+        }
+
+        #endregion
     }
 }
