@@ -53,6 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IWebDriverExtensionTests.cs" />
     <Compile Include="IPageTests.cs" />
     <Compile Include="Extensions\ISearchContextExtensionTests.cs" />
     <Compile Include="IWebDriverFactoryRemoteTests.cs" />
