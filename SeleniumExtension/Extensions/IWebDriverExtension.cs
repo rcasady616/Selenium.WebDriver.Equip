@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
 
@@ -60,6 +61,29 @@ namespace OpenQA.Selenium
         public static bool WaitUntilVisible(this IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
             return WaitUntil(iWebDriver, ExpectedConditions.ElementIsVisible(locator), maxWaitTimeInSeconds);
+        }
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to be visible in the page
+        /// </summary>
+        /// <param name="locator">The <see cref="List"/>/<<see cref="By"/>/> locators of the <see cref="IWebElement"/>s</param>
+        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilVisible(this IWebDriver iWebDriver, List<By> locator, int waitTimeInSeconds = 10)
+        {
+            List<By> failedLocs = new List<By>();
+            foreach (var loc in locator)
+            {
+                if (!WaitUntil(iWebDriver, ExpectedConditions.ElementIsVisible(loc), waitTimeInSeconds))
+                    failedLocs.Add(loc);
+            }
+            if (failedLocs.Count == 0)
+                return true;
+            if (failedLocs.Count > 0 && waitTimeInSeconds > 1)
+                return WaitUntilVisible(iWebDriver, failedLocs, waitTimeInSeconds / 2);
+            if (failedLocs.Count > 0 && waitTimeInSeconds <= 1)
+                return false;
+            return true;
         }
 
         /// <summary>
