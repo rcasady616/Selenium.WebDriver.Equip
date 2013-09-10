@@ -86,6 +86,19 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(false, _driver.WaitUntilVisible(locators));
         }
 
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestWaitUntilNotVisiblesFalse(List<By> locators)
+        {
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            Assert.AreEqual(false, _driver.WaitUntilNotVisible(locators));
+        }
+
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestWaitUntilNotVisiblesTrue(List<By> locators)
+        {
+            Assert.Fail("not implemented yet");
+        }
+
         [TestCase(true, "AjaxyControl")]
         [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
         public void TestWaitUntilTitleIs(bool expected, string title)
