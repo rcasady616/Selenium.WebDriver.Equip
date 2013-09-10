@@ -124,6 +124,17 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, _driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text));
         }
 
+        [TestCase(false, "TestIsPageLoaded")]
+        [TestCase(false, "Load")]
+        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilTextNotContains(bool expected, string text)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(expected, _driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text));
+        }
+
         #region testdata
 
         public static List<List<By>> GetAjaxyControlPageLocators()

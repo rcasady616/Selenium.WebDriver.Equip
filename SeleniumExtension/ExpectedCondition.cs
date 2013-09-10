@@ -40,6 +40,12 @@ namespace SeleniumExtension
             return (driver) => { return driver.FindElement(locator).Text == text; };
         }
 
+        /// <summary>
+        /// An expectation for checking that an elements text.
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="text">The text an <see cref="IWebElement"/> should not be</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> text not equals; otherwise, <see langword="false"/></returns>
         public static Func<IWebDriver, bool> ElementTextNotEquals(By locator, string text)
         {
             return (driver) => { return driver.FindElement(locator).Text != text; };
@@ -54,6 +60,17 @@ namespace SeleniumExtension
         public static Func<IWebDriver, bool> ElementTextContains(By locator, string text)
         {
             return (driver) => { return driver.FindElement(locator).Text.Contains(text); };
+        }
+
+        /// <summary>
+        /// An expectation for checking that an element text not contains specific text.
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="text">The text an <see cref="IWebElement"/> should contain</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> not contains the text; otherwise, <see langword="false"/></returns>
+        public static Func<IWebDriver, bool> ElementTextNotContains(By locator, string text)
+        {
+            return (driver) => { return !driver.FindElement(locator).Text.Contains(text); };
         }
 
         /// <summary>
