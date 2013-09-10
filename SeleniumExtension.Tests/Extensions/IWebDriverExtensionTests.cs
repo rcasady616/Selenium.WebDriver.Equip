@@ -103,6 +103,16 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, _driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text));
         }
 
+        [TestCase(false, "TestIsPageLoaded")]
+        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilTextNotEquals(bool expected, string text)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.Click();
+            Assert.AreEqual(expected, _driver.WaitUntilTextNotEquals(AjaxyControlPage.ByLabelsDiv, text));
+        }
+
         [TestCase(true, "TestIsPageLoaded")]
         [TestCase(true, "Load")]
         [TestCase(false, "NeverGonnaGetNeverGonnaGet")]

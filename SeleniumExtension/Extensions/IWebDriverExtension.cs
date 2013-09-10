@@ -18,7 +18,7 @@ namespace OpenQA.Selenium
         public static bool WaitUntil<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition, int maxWaitTimeInSeconds = 10)
         {
             var driver = (IWebDriver)iWebDriver;
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(maxWaitTimeInSeconds));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(maxWaitTimeInSeconds));
             try
             {
                 wait.Until(condition);
@@ -71,7 +71,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilVisible(this IWebDriver iWebDriver, List<By> locator, int waitTimeInSeconds = 10)
         {
-            List<By> failedLocs = new List<By>();
+            var failedLocs = new List<By>();
             foreach (var loc in locator)
             {
                 if (!WaitUntil(iWebDriver, ExpectedConditions.ElementIsVisible(loc), waitTimeInSeconds))
@@ -118,6 +118,18 @@ namespace OpenQA.Selenium
         public static bool WaitUntilTextEquals(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
         {
             return WaitUntil(iWebDriver, ExpectedCondition.ElementTextEquals(locator, text), maxWaitTimeInSeconds);
+        }
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to not have specific text
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="text">The text it should equal</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> text is not a match; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilTextNotEquals(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
+        {
+            return WaitUntil(iWebDriver, ExpectedCondition.ElementTextNotEquals(locator, text), maxWaitTimeInSeconds);
         }
 
         /// <summary>

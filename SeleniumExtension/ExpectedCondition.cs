@@ -40,6 +40,11 @@ namespace SeleniumExtension
             return (driver) => { return driver.FindElement(locator).Text == text; };
         }
 
+        public static Func<IWebDriver, bool> ElementTextNotEquals(By locator, string text)
+        {
+            return (driver) => { return driver.FindElement(locator).Text != text; };
+        }
+
         /// <summary>
         /// An expectation for checking that an element contains specific text.
         /// </summary>
