@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
@@ -120,12 +121,29 @@ namespace OpenQA.Selenium
         public static bool WaitUntilExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
         {
             int stop = 0;
-            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds )
+            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
             {
                 Thread.Sleep(1000);
                 stop++;
             }
             return iWebElement.ElementExists(by);
+        }
+
+        public static bool ClickWaitForCondition<T>(this IWebElement iWebElement, IWebDriver driver, Func<IWebDriver, T> condition)
+        {
+            iWebElement.Click();
+            return driver.WaitUntil(condition);
+        }
+
+        public static bool ClickWaitForConditions<T>(this IWebElement iWebElement, IWebDriver driver, List<Func<IWebDriver, T>> conditions)
+        {
+            iWebElement.Click();
+            foreach (var condition in conditions)
+            {
+                if (!driver.WaitUntil(condition))
+                    return false;
+            }
+            return true;
         }
     }
 }
