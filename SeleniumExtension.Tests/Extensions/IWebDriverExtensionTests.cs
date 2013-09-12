@@ -96,7 +96,8 @@ namespace SeleniumExtension.Tests.Extensions
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
         public void TestWaitUntilNotVisiblesTrue(List<By> locators)
         {
-            Assert.Fail("not implemented yet");
+            _driver.Navigate().GoToUrl("http://rickcasady.blogspot.com/2013/08/automate-like-superhero.html");
+            Assert.AreEqual(true, _driver.WaitUntilNotVisible(locators));
         }
 
         [TestCase(true, "AjaxyControl")]

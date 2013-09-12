@@ -108,7 +108,7 @@ namespace OpenQA.Selenium
             var failedLocs = new List<By>();
             foreach (var loc in locators)
             {
-                if (!WaitUntil(iWebDriver, ExpectedCondition.ElementNotVisible(loc), maxWaitTimeInSeconds))
+                if (WaitUntil(iWebDriver, ExpectedCondition.ElementNotVisible(loc), maxWaitTimeInSeconds))
                     failedLocs.Add(loc);
             }
             if (failedLocs.Count == 0)
@@ -180,5 +180,6 @@ namespace OpenQA.Selenium
         }
 
         #endregion
+
     }
 }
