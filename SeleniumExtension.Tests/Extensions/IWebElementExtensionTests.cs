@@ -111,12 +111,22 @@ namespace SeleniumExtension.Tests
 
         [TestCase(true, "red")]
         [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
-        public void TestWaitUntilExistsIWebElement(bool expected, string id)
+        public void TestWaitUntilExists(bool expected, string id)
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
             _driver.Navigate().GoToUrl(url);
             var body = _driver.FindElement(By.TagName("body"));
             Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
+        }
+
+        [TestCase(false, "red")]
+        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        public void TestWaitUntilNotExists(bool expected, string id)
+        {
+            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
+            _driver.Navigate().GoToUrl(url);
+            var body = _driver.FindElement(By.TagName("body"));
+            Assert.AreEqual(expected, body.WaitUntilNotExists(By.Id(id)));
         }
 
         [Test]

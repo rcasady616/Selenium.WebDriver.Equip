@@ -167,6 +167,44 @@ namespace OpenQA.Selenium
 
         #endregion
 
+        #region WaitUntil
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to exists in the page DOM
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        {
+            int stop = 0;
+            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
+            {
+                Thread.Sleep(1000);
+                stop++;
+            }
+            return iWebElement.ElementExists(by);
+        }
+
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to not exists in the page DOM
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilNotExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        {
+            int stop = 0;
+            while (iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
+            {
+                Thread.Sleep(1000);
+                stop++;
+            }
+            return !iWebElement.ElementExists(by);
+        }
+
+        #endregion
+
         /// <summary>
         /// Gets the value of the <see cref="HtmlTagAttribute"/> 
         /// </summary>
@@ -189,34 +227,6 @@ namespace OpenQA.Selenium
                 throw new ArgumentException("element", "Element must wrap a web driver that supports javascript execution");
 
             javascript.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, attributeName, value);
-        }
-
-        /// <summary>
-        /// Waits for a <see cref="IWebElement"/> to be exists in the page DOM
-        /// </summary>
-        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
-        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
-        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
-        {
-            int stop = 0;
-            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
-            {
-                Thread.Sleep(1000);
-                stop++;
-            }
-            return iWebElement.ElementExists(by);
-        }
-
-        public static bool WaitUntilNotExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
-        {
-            int stop = 0;
-            while (iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
-            {
-                Thread.Sleep(1000);
-                stop++;
-            }
-            return !iWebElement.ElementExists(by);
         }
 
         #region experimental
