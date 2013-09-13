@@ -119,6 +119,21 @@ namespace OpenQA.Selenium
             return iWebDriver.WaitUntilNotExists(wait, maxWaitTimeInSeconds);
         }
 
+        /// <summary>
+        /// Clicks the current <see cref="IWebElement"/> and waits for the <see cref="IPage"/> to load
+        /// </summary>
+        /// <typeparam name="TPage">The type <see cref="IPage"/></typeparam>
+        /// <param name="driver">The <see cref="IWebDriver"/> to be used for creating an instance of the <see cref="IPage"/></param>
+        /// <returns><see langword="true"/> if the <see cref="IPage"/> has loaded; otherwise, <see langword="false"/></returns>
+        public static TPage ClickWaitForPage<TPage>(this IWebElement iWebElement, IWebDriver driver) where TPage : IPage, new()
+        {
+            TPage page = (TPage)Activator.CreateInstance(typeof(TPage), driver);
+            iWebElement.Click();
+            if (!page.IsPageLoaded())
+                throw new PageNotLoadedException(string.Format("Page name: {0}", page.ToString()));
+            return page;
+        }
+
         #endregion
 
         /// <summary>
@@ -171,15 +186,6 @@ namespace OpenQA.Selenium
                 stop++;
             }
             return !iWebElement.ElementExists(by);
-        }
-
-        public static TPage ClickWaitForPage<TPage>(this IWebElement iWebElement, IWebDriver driver) where TPage : IPage, new()
-        {
-            TPage page = (TPage)Activator.CreateInstance(typeof(TPage), driver);
-            iWebElement.Click();
-            if (!page.IsPageLoaded())
-                throw new PageNotLoadedException(string.Format("Page name: {0}", page.ToString()));
-            return page;
         }
 
         /// <summary>

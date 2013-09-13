@@ -204,7 +204,7 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestClickWaitForPage()
         {
-            IndexPage indexPage = new IndexPage(_driver);
+            var indexPage = new IndexPage(_driver);
             _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
             Assert.That(indexPage.IsPageLoaded());
             Assert.DoesNotThrow(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<AjaxyControlPage>(_driver); });
@@ -213,7 +213,7 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestClickWaitForPageFalse()
         {
-            IndexPage indexPage = new IndexPage(_driver);
+            var indexPage = new IndexPage(_driver);
             _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
             Assert.That(indexPage.IsPageLoaded());
             Assert.Throws<PageNotLoadedException>(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<IndexPage>(_driver); });
