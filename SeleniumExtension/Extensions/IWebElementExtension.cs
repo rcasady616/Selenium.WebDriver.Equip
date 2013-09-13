@@ -129,6 +129,8 @@ namespace OpenQA.Selenium
             return iWebElement.ElementExists(by);
         }
 
+        #region experimental
+
         public static bool ClickWaitForCondition<T>(this IWebElement iWebElement, IWebDriver driver, Func<IWebDriver, T> condition)
         {
             iWebElement.Click();
@@ -145,5 +147,7 @@ namespace OpenQA.Selenium
             }
             return true;
         }
+        
+        #endregion
     }
 }
