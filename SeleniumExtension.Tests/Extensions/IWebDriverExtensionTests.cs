@@ -160,6 +160,15 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, _driver.ElementExists(locator));
         }
 
+        [Test, TestCaseSource("GetLocators")]
+        public void TestClickWaitUnilVisable(By locator)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.ClickWaitUnilVisable(_driver, locator);
+            Assert.AreEqual(true, _driver.ElementExists(locator));
+        }
+
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
         public void TestClickWaitForConditions(List<By> locators)
         {
@@ -168,6 +177,19 @@ namespace SeleniumExtension.Tests.Extensions
             page.GreenRadio.Click();
             page.NewLabelText.SendKeys("TestIsPageLoaded");
             page.SubmitButton.ClickWaitForConditions(_driver, ex);
+
+            foreach (var locator in locators)
+            {
+                Assert.AreEqual(true, _driver.ElementExists(locator));
+            }
+        }
+
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestClickWaitUnilVisables(List<By> locators)
+        {
+            page.GreenRadio.Click();
+            page.NewLabelText.SendKeys("TestIsPageLoaded");
+            page.SubmitButton.ClickWaitUnilVisables(_driver, locators);
 
             foreach (var locator in locators)
             {

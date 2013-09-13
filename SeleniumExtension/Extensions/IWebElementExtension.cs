@@ -147,7 +147,24 @@ namespace OpenQA.Selenium
             }
             return true;
         }
-        
+
+        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver driver, By by)
+        {
+            iWebElement.Click();
+            return driver.WaitUntilVisible(by);
+        }
+
+        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys)
+        {
+            iWebElement.Click();
+            foreach (var by in bys)
+            {
+                if (!driver.WaitUntilVisible(by))
+                    return false;
+            }
+            return true;
+        }
+
         #endregion
     }
 }
