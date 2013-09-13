@@ -42,10 +42,12 @@
     <Reference Include="WebDriver">
       <HintPath>..\packages\Selenium.WebDriver.2.33.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver.Support, Version=2.33.0.0, Culture=neutral, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AjaxyControlPage.cs" />
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\IndexPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

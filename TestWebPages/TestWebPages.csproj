@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AjaxyControl.html" />
+    <Content Include="Index.html" />
     <Content Include="JavaScriptErrors.htm" />
     <Content Include="PageA.htm" />
   </ItemGroup>

@@ -129,6 +129,15 @@ namespace OpenQA.Selenium
             return iWebElement.ElementExists(by);
         }
 
+        public static TPage ClickWaitForPage<TPage>(this IWebElement iWebElement, IWebDriver driver) where TPage : IPage, new()
+        {
+            TPage page = (TPage)Activator.CreateInstance(typeof(TPage), driver);
+            iWebElement.Click();
+            if (!page.IsPageLoaded())
+                throw new Exception(string.Format("Page name: {0}", page.ToString()));
+            return page;
+        }
+
         #region experimental
 
         public static bool ClickWaitForCondition<T>(this IWebElement iWebElement, IWebDriver driver, Func<IWebDriver, T> condition)
