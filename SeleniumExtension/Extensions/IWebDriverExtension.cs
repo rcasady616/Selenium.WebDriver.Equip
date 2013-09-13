@@ -167,6 +167,12 @@ namespace OpenQA.Selenium
             return WaitUntil(iWebDriver, ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
         }
 
+        public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By by, HtmlTagAttribute htmlTagAttribute,
+                                                    string attributeValue, int maxWaitTimeInSeconds = 10)
+        {
+            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeEquals(by, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+        }
+
         /// <summary>
         /// Waits for a <see cref="IWebElement"/> to not contain specific text
         /// </summary>

@@ -13,5 +13,6 @@
         public const string Title = "title";
         public const string Type = "type";
         public const string Value = "value";
+        public const string WaitForPost = "waitforpost";
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
@@ -8,7 +9,7 @@ namespace SeleniumExtension.Tests
     [TestFixture]
     public class IWebElementExtentionTests
     {
-        private IWebDriver _driver = null;
+        private IWebDriver _driver;
         [SetUp]
         public void SetupTest()
         {
@@ -116,6 +117,24 @@ namespace SeleniumExtension.Tests
             _driver.Navigate().GoToUrl(url);
             var body = _driver.FindElement(By.TagName("body"));
             Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
+        }
+
+        [Test]
+        public void TestClickWaitUntilPost()
+        {
+            var indexPage = new IndexPage(_driver);
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Assert.That(indexPage.IsPageLoaded());
+            Assert.That(indexPage.AjaxyControlLink.ClickWaitUntilPost(_driver));
+        }
+
+        [Test]
+        public void TestClickWaitUntilPostFlase()
+        {
+            var ajaxPage = new AjaxyControlPage(_driver);
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url));
+            Assert.That(ajaxPage.IsPageLoaded());
+            Assert.That(!ajaxPage.GreenRadio.ClickWaitUntilPost(_driver));
         }
     }
 }

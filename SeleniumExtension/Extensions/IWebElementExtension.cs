@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using OpenQA.Selenium.Internal;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
 
@@ -112,6 +113,28 @@ namespace OpenQA.Selenium
             return iWebElement.GetAttribute(htmlTagAttribute.ToString());
         }
 
+        public static void SetAttribute(this IWebElement element, string attributeName, string value)
+        {
+            IWrapsDriver wrappedElement = element as IWrapsDriver;
+            if (wrappedElement == null)
+                throw new ArgumentException("element", "Element must wrap a web driver");
+
+            IWebDriver driver = wrappedElement.WrappedDriver;
+            IJavaScriptExecutor javascript = driver as IJavaScriptExecutor;
+            if (javascript == null)
+                throw new ArgumentException("element", "Element must wrap a web driver that supports javascript execution");
+
+            javascript.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, attributeName, value);
+        }
+
+        public static bool ClickWaitUntilPost(this IWebElement iWebElement, IWebDriver driver, int timeOutInSeconds = 10)
+        {
+            By wait = By.CssSelector(string.Format("[{0}=\"true\"]", HtmlTagAttribute.WaitForPost));
+            iWebElement.SetAttribute(HtmlTagAttribute.WaitForPost, "true");
+            iWebElement.Click();
+            return driver.WaitUntilNotExists(wait, timeOutInSeconds);
+        }
+
         /// <summary>
         /// Waits for a <see cref="IWebElement"/> to be exists in the page DOM
         /// </summary>
@@ -129,6 +152,17 @@ namespace OpenQA.Selenium
             return iWebElement.ElementExists(by);
         }
 
+        public static bool WaitUntilNotExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        {
+            int stop = 0;
+            while (iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
+            {
+                Thread.Sleep(1000);
+                stop++;
+            }
+            return !iWebElement.ElementExists(by);
+        }
+
         public static TPage ClickWaitForPage<TPage>(this IWebElement iWebElement, IWebDriver driver) where TPage : IPage, new()
         {
             TPage page = (TPage)Activator.CreateInstance(typeof(TPage), driver);
@@ -136,6 +170,30 @@ namespace OpenQA.Selenium
             if (!page.IsPageLoaded())
                 throw new PageNotLoadedException(string.Format("Page name: {0}", page.ToString()));
             return page;
+        }
+
+        /// <summary>
+        /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
+        /// </summary>
+        /// <param name="iWebDriver">to use for waiting</param>
+        /// <param name="by">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
+        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By by, int maxWaitTimeInSeconds = 10)
+        {
+            iWebElement.Click();
+            return iWebDriver.WaitUntilVisible(by, maxWaitTimeInSeconds);
+        }
+
+        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys)
+        {
+            iWebElement.Click();
+            foreach (var by in bys)
+            {
+                if (!driver.WaitUntilVisible(by))
+                    return false;
+            }
+            return true;
         }
 
         #region experimental
@@ -157,22 +215,7 @@ namespace OpenQA.Selenium
             return true;
         }
 
-        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver driver, By by)
-        {
-            iWebElement.Click();
-            return driver.WaitUntilVisible(by);
-        }
-
-        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys)
-        {
-            iWebElement.Click();
-            foreach (var by in bys)
-            {
-                if (!driver.WaitUntilVisible(by))
-                    return false;
-            }
-            return true;
-        }
+        
 
         #endregion
     }

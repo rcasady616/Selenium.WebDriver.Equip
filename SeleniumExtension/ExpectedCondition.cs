@@ -73,6 +73,11 @@ namespace SeleniumExtension
             return (driver) => { return !driver.FindElement(locator).Text.Contains(text); };
         }
 
+        public static Func<IWebDriver, bool> ElementAttributeEquals(By locator, HtmlTagAttribute htmlTagAttribute, string attributeValue)
+        {
+            return (driver) => { return driver.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue; };
+        }
+
         /// <summary>
         /// An expectation for checking that an element is not present on the DOM of a page and not visible
         /// This method returns faster than <see cref="ElementIsVisible"/> when the <see cref="IWebElement"/> is expected to not be visible
