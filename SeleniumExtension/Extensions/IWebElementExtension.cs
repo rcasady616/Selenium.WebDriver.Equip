@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using OpenQA.Selenium.Internal;
-using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
 
 namespace OpenQA.Selenium
@@ -103,6 +102,25 @@ namespace OpenQA.Selenium
 
         #endregion
 
+        #region Clicks
+
+        /// <summary>
+        /// Clicks the current <see cref="IWebElement"/> and waits for the Post to start
+        /// </summary>
+        /// <param name="iWebDriver">The <see cref="IWebDriver"/> to be used for waiting</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns></returns>
+        /// <returns><see langword="true"/> if the DOM is cleared or empty; otherwise, <see langword="false"/></returns>
+        public static bool ClickWaitUntilPost(this IWebElement iWebElement, IWebDriver iWebDriver, int maxWaitTimeInSeconds = 10)
+        {
+            By wait = By.CssSelector(string.Format("[{0}=\"true\"]", HtmlTagAttribute.WaitForPost));
+            iWebElement.SetAttribute(HtmlTagAttribute.WaitForPost, "true");
+            iWebElement.Click();
+            return iWebDriver.WaitUntilNotExists(wait, maxWaitTimeInSeconds);
+        }
+
+        #endregion
+
         /// <summary>
         /// Gets the value of the <see cref="HtmlTagAttribute"/> 
         /// </summary>
@@ -125,14 +143,6 @@ namespace OpenQA.Selenium
                 throw new ArgumentException("element", "Element must wrap a web driver that supports javascript execution");
 
             javascript.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, attributeName, value);
-        }
-
-        public static bool ClickWaitUntilPost(this IWebElement iWebElement, IWebDriver driver, int timeOutInSeconds = 10)
-        {
-            By wait = By.CssSelector(string.Format("[{0}=\"true\"]", HtmlTagAttribute.WaitForPost));
-            iWebElement.SetAttribute(HtmlTagAttribute.WaitForPost, "true");
-            iWebElement.Click();
-            return driver.WaitUntilNotExists(wait, timeOutInSeconds);
         }
 
         /// <summary>
@@ -214,9 +224,7 @@ namespace OpenQA.Selenium
             }
             return true;
         }
-
         
-
         #endregion
     }
 }
