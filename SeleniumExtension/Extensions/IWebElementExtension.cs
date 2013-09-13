@@ -134,6 +134,37 @@ namespace OpenQA.Selenium
             return page;
         }
 
+        /// <summary>
+        /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
+        /// </summary>
+        /// <param name="iWebDriver">to use for waiting</param>
+        /// <param name="by">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
+        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By by, int maxWaitTimeInSeconds = 10)
+        {
+            iWebElement.Click();
+            return iWebDriver.WaitUntilVisible(by, maxWaitTimeInSeconds);
+        }
+
+        /// <summary>
+        /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
+        /// </summary>
+        /// <param name="iWebDriver">to use for waiting</param>
+        /// <param name="bys">The <see cref="List"/>&lt;<see cref="By"/>&gt; locator of the <see cref="IWebElement"/>s to wait for</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/>s are visible; otherwise, <see langword="false"/></returns>
+        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys, int maxWaitTimeInSeconds = 10)
+        {
+            iWebElement.Click();
+            foreach (var by in bys)
+            {
+                if (!driver.WaitUntilVisible(by,maxWaitTimeInSeconds))
+                    return false;
+            }
+            return true;
+        }
+
         #endregion
 
         /// <summary>
@@ -186,30 +217,6 @@ namespace OpenQA.Selenium
                 stop++;
             }
             return !iWebElement.ElementExists(by);
-        }
-
-        /// <summary>
-        /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
-        /// </summary>
-        /// <param name="iWebDriver">to use for waiting</param>
-        /// <param name="by">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
-        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
-        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
-        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By by, int maxWaitTimeInSeconds = 10)
-        {
-            iWebElement.Click();
-            return iWebDriver.WaitUntilVisible(by, maxWaitTimeInSeconds);
-        }
-
-        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys)
-        {
-            iWebElement.Click();
-            foreach (var by in bys)
-            {
-                if (!driver.WaitUntilVisible(by))
-                    return false;
-            }
-            return true;
         }
 
         #region experimental

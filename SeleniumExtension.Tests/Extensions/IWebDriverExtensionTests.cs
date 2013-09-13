@@ -169,8 +169,17 @@ namespace SeleniumExtension.Tests.Extensions
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            ajaxyControlPage.SubmitButton.ClickWaitUnilVisable(_driver, locator);
+            Assert.AreEqual(true, ajaxyControlPage.SubmitButton.ClickWaitUnilVisable(_driver, locator));
             Assert.AreEqual(true, _driver.ElementExists(locator));
+        }
+
+        [Test, TestCaseSource("GetLocators")]
+        public void TestClickWaitUnilVisableFalse(By locator)
+        {
+            var indexPage = new IndexPage(_driver);
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(_driver, locator));
+            Assert.AreEqual(false, _driver.ElementExists(locator));
         }
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
