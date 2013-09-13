@@ -134,7 +134,7 @@ namespace OpenQA.Selenium
             TPage page = (TPage)Activator.CreateInstance(typeof(TPage), driver);
             iWebElement.Click();
             if (!page.IsPageLoaded())
-                throw new Exception(string.Format("Page name: {0}", page.ToString()));
+                throw new PageNotLoadedException(string.Format("Page name: {0}", page.ToString()));
             return page;
         }
 
