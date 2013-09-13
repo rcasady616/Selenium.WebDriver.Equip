@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Medrio.QA.UITestFramework.Pages;
@@ -206,8 +207,16 @@ namespace SeleniumExtension.Tests.Extensions
             IndexPage indexPage = new IndexPage(_driver);
             _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
             Assert.That(indexPage.IsPageLoaded());
-            var aPage = indexPage.AjaxyControlLink.ClickWaitForPage<AjaxyControlPage>(_driver);
-            Assert.That(aPage.IsPageLoaded());
+            Assert.DoesNotThrow(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<AjaxyControlPage>(_driver); });
+        }
+
+        [Test]
+        public void TestClickWaitForPageFalse()
+        {
+            IndexPage indexPage = new IndexPage(_driver);
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Assert.That(indexPage.IsPageLoaded());
+            Assert.Throws<Exception>(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<IndexPage>(_driver); });
         }
 
         #region testdata
