@@ -215,6 +215,10 @@ namespace OpenQA.Selenium
             return iWebElement.GetAttribute(htmlTagAttribute.ToString());
         }
 
+        /// <summary>
+        /// Sets the value of the <see cref="HtmlTagAttribute"/> 
+        /// </summary>
+        /// <param name="attributeName">The name of the attribute to set the value of</param>
         public static void SetAttribute(this IWebElement element, string attributeName, string value)
         {
             IWrapsDriver wrappedElement = element as IWrapsDriver;

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -91,22 +92,23 @@ namespace SeleniumExtension.Tests
 
         #endregion
 
-        [TestCase("text1", "myinput")]
-        public void TestGetAttributeClass(string id,  string expected)
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestGetAttribute(string id, string expectedValue, string htmlTagAttribute)
         {
-            Assert.AreEqual(expected, _driver.FindElement(id).GetAttribute(HtmlTagAttribute.Class));
+            Assert.AreEqual(expectedValue, _driver.FindElement(id).GetAttribute(htmlTagAttribute));
         }
 
-        [TestCase("label1", "label one")]
-        public void TestGetAttributeTitle(string id, string expected)
+        [TestCase("text1", HtmlTagAttribute.Class)]
+        [TestCase("label1", HtmlTagAttribute.Title)]
+        [TestCase("add1", HtmlTagAttribute.Value)]
+        public void TestSetAttribute(string id, string htmlTagAttribute)
         {
-            Assert.AreEqual(expected, _driver.FindElement(id).GetAttribute(HtmlTagAttribute.Title));
-        }
-
-        [TestCase("add1", "add")]
-        public void TestGetAttributeValue(string id,  string expected)
-        {
-            Assert.AreEqual(expected, _driver.FindElement(id).GetAttribute(HtmlTagAttribute.Value));
+            string expectedValue = "newValue";
+            _driver.FindElement(id).SetAttribute(htmlTagAttribute, expectedValue);
+            Assert.AreEqual(expectedValue, _driver.FindElement(id).GetAttribute(htmlTagAttribute));
         }
 
         [TestCase(true, "red")]
