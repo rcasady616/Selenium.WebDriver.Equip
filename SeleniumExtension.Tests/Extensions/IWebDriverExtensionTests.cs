@@ -173,6 +173,37 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, _driver.ElementExists(locator));
         }
 
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeEquals(string id, string expectedValue, string htmlTagAttribute)
+        {
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            Assert.AreEqual(true, _driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
+        }
+
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeEqualsFalse(string id, string expectedValue, string htmlTagAttribute)
+        {
+            Assert.AreEqual(false, _driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
+        }
+
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeNotEquals(string id, string expectedValue, string htmlTagAttribute)
+        {
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            string newValue = "newValue";
+            _driver.FindElement(id).SetAttribute(htmlTagAttribute, newValue);
+            Assert.AreEqual(true, _driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
+        }
+
         [Test, TestCaseSource("GetLocators")]
         public void TestClickWaitUnilVisableFalse(By locator)
         {
@@ -181,6 +212,8 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(_driver, locator));
             Assert.AreEqual(false, _driver.ElementExists(locator));
         }
+
+
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
         public void TestClickWaitForConditions(List<By> locators)

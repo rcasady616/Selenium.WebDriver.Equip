@@ -167,10 +167,16 @@ namespace OpenQA.Selenium
             return WaitUntil(iWebDriver, ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By by, HtmlTagAttribute htmlTagAttribute,
+        public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By by, string htmlTagAttribute,
                                                     string attributeValue, int maxWaitTimeInSeconds = 10)
         {
             return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeEquals(by, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+        }
+
+        public static bool WaitUntilAttributeNotEquals(this IWebDriver iWebDriver, By by, string htmlTagAttribute,
+                                                    string attributeValue, int maxWaitTimeInSeconds = 10)
+        {
+            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeNotEquals(by, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
 
         /// <summary>
