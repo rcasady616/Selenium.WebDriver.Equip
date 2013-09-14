@@ -87,7 +87,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilVisiblesFalse(List<By> locators)
         {
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            Assert.AreEqual(false, _driver.WaitUntilVisible(locators));
+            Assert.AreEqual(false, _driver.WaitUntilVisible(locators, 2));
         }
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
@@ -96,7 +96,7 @@ namespace SeleniumExtension.Tests.Extensions
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestWaitUntilNotVisiblesFalse");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(false, _driver.WaitUntilNotVisible(locators));
+            Assert.AreEqual(false, _driver.WaitUntilNotVisible(locators, 2));
         }
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
@@ -189,7 +189,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestWaitUntilAttributeEqualsFalse(string id, string expectedValue, string htmlTagAttribute)
         {
-            Assert.AreEqual(false, _driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
+            Assert.AreEqual(false, _driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue, 2));
         }
 
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
@@ -209,7 +209,7 @@ namespace SeleniumExtension.Tests.Extensions
         {
             var indexPage = new IndexPage(_driver);
             _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
-            Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(_driver, locator));
+            Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(_driver, locator, 2));
             Assert.AreEqual(false, _driver.ElementExists(locator));
         }
 
