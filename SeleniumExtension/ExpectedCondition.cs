@@ -73,6 +73,13 @@ namespace SeleniumExtension
             return (driver) => { return !driver.FindElement(locator).Text.Contains(text); };
         }
 
+        /// <summary>
+        /// An expectation for checking that an attribute value.
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="htmlTagAttribute">The the name of the attribute</param>
+        /// <param name="attributeValue">The <see cref="string"/> value the attribute should be equal to.</param>
+        /// <returns><see langword="true"/> if the attribute value equals; otherwise, <see langword="false"/></returns>
         public static Func<IWebDriver, bool> ElementAttributeEquals(By locator, HtmlTagAttribute htmlTagAttribute, string attributeValue)
         {
             return (driver) => { return driver.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue; };
