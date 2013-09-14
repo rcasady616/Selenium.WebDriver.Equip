@@ -112,7 +112,7 @@ namespace SeleniumExtension.Tests
         }
 
         [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilExists(bool expected, string id)
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
@@ -122,7 +122,7 @@ namespace SeleniumExtension.Tests
         }
 
         [TestCase(false, "red")]
-        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilNotExists(bool expected, string id)
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);

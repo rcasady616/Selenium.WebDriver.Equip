@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Medrio.QA.UITestFramework.Pages;
@@ -36,10 +35,10 @@ namespace SeleniumExtension.Tests.Extensions
         }
 
         [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilExists(bool expected, string id)
         {
-            Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id)));
+            Assert.AreEqual(expected, _driver.WaitUntilExists(By.Id(id), 2));
         }
 
         [TestCase]
@@ -52,17 +51,17 @@ namespace SeleniumExtension.Tests.Extensions
         }
 
         [TestCase(false, "red")]
-        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilNotExists(bool expected, string id)
         {
             Assert.AreEqual(expected, _driver.WaitUntilNotExists(By.Id(id)));
         }
 
         [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilVisible(bool expected, string id)
         {
-            Assert.AreEqual(expected, _driver.WaitUntilVisible(By.Id(id)));
+            Assert.AreEqual(expected, _driver.WaitUntilVisible(By.Id(id), 2));
         }
 
         [TestCase]
@@ -107,52 +106,52 @@ namespace SeleniumExtension.Tests.Extensions
         }
 
         [TestCase(true, "AjaxyControl")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilTitleIs(bool expected, string title)
         {
             Assert.AreEqual(expected, _driver.WaitUntilTitleIs(title));
         }
 
         [TestCase(true, "TestIsPageLoaded")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilTextEquals(bool expected, string text)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, _driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text));
+            Assert.AreEqual(expected, _driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
         [TestCase(false, "TestIsPageLoaded")]
-        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilTextNotEquals(bool expected, string text)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, _driver.WaitUntilTextNotEquals(AjaxyControlPage.ByLabelsDiv, text));
+            Assert.AreEqual(expected, _driver.WaitUntilTextNotEquals(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
         [TestCase(true, "TestIsPageLoaded")]
         [TestCase(true, "Load")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilTextContains(bool expected, string text)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, _driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text));
+            Assert.AreEqual(expected, _driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
         [TestCase(false, "TestIsPageLoaded")]
         [TestCase(false, "Load")]
-        [TestCase(true, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestWaitUntilTextNotContains(bool expected, string text)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, _driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text));
+            Assert.AreEqual(expected, _driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
         [Test, TestCaseSource("GetLocators")]
@@ -235,11 +234,24 @@ namespace SeleniumExtension.Tests.Extensions
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            ajaxyControlPage.SubmitButton.ClickWaitUnilVisables(_driver, locators);
 
+            Assert.AreEqual(true, ajaxyControlPage.SubmitButton.ClickWaitUnilVisables(_driver, locators));
             foreach (var locator in locators)
             {
                 Assert.AreEqual(true, _driver.ElementExists(locator));
+            }
+        }
+
+        [Test, TestCaseSource("GetAjaxyControlPageLocators")]
+        public void TestClickWaitUnilVisablesFalse(List<By> locators)
+        {
+            var indexPage = new IndexPage(_driver);
+            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+
+            Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisables(_driver, locators, 2));
+            foreach (var locator in locators)
+            {
+                Assert.AreEqual(false, _driver.ElementExists(locator));
             }
         }
 

@@ -37,7 +37,7 @@ namespace SeleniumExtension.Tests
         }
 
         [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetNeverGonnaGet")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestElementExists(bool expected, string id)
         {
             Assert.AreEqual(expected, _driver.ElementExists(By.Id(id)));
