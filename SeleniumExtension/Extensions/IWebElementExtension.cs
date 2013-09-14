@@ -138,13 +138,13 @@ namespace OpenQA.Selenium
         /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
         /// </summary>
         /// <param name="iWebDriver">to use for waiting</param>
-        /// <param name="by">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
-        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By by, int maxWaitTimeInSeconds = 10)
+        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
             iWebElement.Click();
-            return iWebDriver.WaitUntilVisible(by, maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntilVisible(locator, maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -175,15 +175,15 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilExists(this IWebElement iWebElement, By locator, int maxWaitTimeInSeconds = 10)
         {
             int stop = 0;
-            while (!iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
+            while (!iWebElement.ElementExists(locator) && stop <= maxWaitTimeInSeconds)
             {
                 Thread.Sleep(1000);
                 stop++;
             }
-            return iWebElement.ElementExists(by);
+            return iWebElement.ElementExists(locator);
         }
 
         /// <summary>
@@ -192,15 +192,15 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilNotExists(this IWebElement iWebElement, By by, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilNotExists(this IWebElement iWebElement, By locator, int maxWaitTimeInSeconds = 10)
         {
             int stop = 0;
-            while (iWebElement.ElementExists(by) && stop <= maxWaitTimeInSeconds)
+            while (iWebElement.ElementExists(locator) && stop <= maxWaitTimeInSeconds)
             {
                 Thread.Sleep(1000);
                 stop++;
             }
-            return !iWebElement.ElementExists(by);
+            return !iWebElement.ElementExists(locator);
         }
 
         #endregion
