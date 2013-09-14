@@ -167,16 +167,30 @@ namespace OpenQA.Selenium
             return WaitUntil(iWebDriver, ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By by, string htmlTagAttribute,
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to have specific attribute value
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="text">The value the <see cref="IWebElement"/> attribute should equal</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> attribute value is a match; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By locator, string htmlTagAttribute,
                                                     string attributeValue, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeEquals(by, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilAttributeNotEquals(this IWebDriver iWebDriver, By by, string htmlTagAttribute,
-                                                    string attributeValue, int maxWaitTimeInSeconds = 10)
+        /// <summary>
+        /// Waits for a <see cref="IWebElement"/> to not have specific attribute value
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="text">The value the <see cref="IWebElement"/> attribute not should equal</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> attribute value is not a match; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilAttributeNotEquals(this IWebDriver iWebDriver, By locator, string htmlTagAttribute,
+                                                     string attributeValue, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeNotEquals(by, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeNotEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
 
         /// <summary>
