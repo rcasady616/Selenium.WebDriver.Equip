@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
 
-namespace SeleniumExtension.Tests
+namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
     public class IWebElementExtentionTests
