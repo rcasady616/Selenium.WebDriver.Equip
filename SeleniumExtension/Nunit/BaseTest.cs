@@ -29,6 +29,10 @@ namespace SeleniumExtension.Nunit
         [TearDown]
         public void TearDown()
         {
+            if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
+            {
+                new TestCapture(Driver).CaptureWebPage();
+            }
             if (Driver != null)
             {
                 Driver.Close();
