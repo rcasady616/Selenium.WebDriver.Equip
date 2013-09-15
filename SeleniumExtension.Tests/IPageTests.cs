@@ -1,44 +1,27 @@
 ﻿using System.IO;
 using NUnit.Framework;
-using OpenQA.Selenium;
+using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests
 {
     [TestFixture]
-    public class IPageTests
+    public class IPageTests : BaseTest
     {
-        private IWebDriver _driver;
-        [SetUp]
-        public void SetupTest()
-        {
-            _driver = IWebDriverFactory.GetBrowser();
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (_driver != null)
-            {
-                _driver.Close();
-                _driver.Quit();
-            }
-        }
-
         [Test]
         public void TestIsPageLoaded()
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            _driver.Navigate().GoToUrl(url);
-            Assert.AreEqual(true, new AjaxyControlPage(_driver).IsPageLoaded());
+            Driver.Navigate().GoToUrl(url);
+            Assert.AreEqual(true, new AjaxyControlPage(Driver).IsPageLoaded());
         }
 
         [Test]
         public void TestIsPageLoadedFalse()
         {
             string url = string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory());
-            _driver.Navigate().GoToUrl(url);
-            Assert.AreEqual(false, new AjaxyControlPage(_driver).IsPageLoaded());
+            Driver.Navigate().GoToUrl(url);
+            Assert.AreEqual(false, new AjaxyControlPage(Driver).IsPageLoaded());
         }
     }
 }

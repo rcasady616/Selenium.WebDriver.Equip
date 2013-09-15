@@ -2,91 +2,81 @@
 using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
-    public class IWebElementExtentionTests
+    public class IWebElementExtentionTests :BaseTest
     {
-        private IWebDriver _driver;
         [SetUp]
         public void SetupTest()
         {
-            _driver = IWebDriverFactory.GetBrowser(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
         }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (_driver != null)
-            {
-                _driver.Close();
-                _driver.Quit();
-            }
-        }
-
+        
         #region Mock properties extention
 
         [Test]
         public void TestClassNameExtention()
         {
-            Assert.AreEqual("myinput", _driver.FindElement("text1").ClassName());
+            Assert.AreEqual("myinput", Driver.FindElement("text1").ClassName());
         }
 
         [Test]
         public void TestIdExtention()
         {
-            Assert.AreEqual("text1", _driver.FindElement("text1").Id());
+            Assert.AreEqual("text1", Driver.FindElement("text1").Id());
         }
 
         [Test]
         public void TestNameExtention()
         {
-            Assert.AreEqual("text1", _driver.FindElement("text1").Name());
+            Assert.AreEqual("text1", Driver.FindElement("text1").Name());
         }
 
         [Test]
         public void TestNextSiblingExtention()
         {
-            Assert.AreEqual(_driver.FindElement("tdthree"), _driver.FindElement("tdtwo").NextSibling());
+            Assert.AreEqual(Driver.FindElement("tdthree"), Driver.FindElement("tdtwo").NextSibling());
         }
 
         [Test]
         public void TestParentExtention()
         {
-            Assert.AreEqual(_driver.FindElement("tdone"), _driver.FindElement("text1").Parent());
+            Assert.AreEqual(Driver.FindElement("tdone"), Driver.FindElement("text1").Parent());
         }
 
         [Test]
         public void TestPreviousSiblingExtention()
         {
-            Assert.AreEqual(_driver.FindElement("tdone"), _driver.FindElement("tdtwo").PreviousSibling());
+            Assert.AreEqual(Driver.FindElement("tdone"), Driver.FindElement("tdtwo").PreviousSibling());
         }
 
         [Test]
         public void TestStyleExtention()
         {
-            string style = _driver.FindElement("label1").Style().Replace(" ", "");
+            string style = Driver.FindElement("label1").Style().Replace(" ", "");
             Assert.AreEqual("background-color:red;", style);
         }
 
         [Test]
         public void TestTitleExtention()
         {
-            Assert.AreEqual("label one", _driver.FindElement("label1").Title());
+            Assert.AreEqual("label one", Driver.FindElement("label1").Title());
         }
 
         [Test]
         public void TestTypeExtention()
         {
-            Assert.AreEqual("button", _driver.FindElement("add1").Type());
+            Assert.AreEqual("button", Driver.FindElement("add1").Type());
         }
 
         [Test]
         public void TestValueExtention()
         {
-            Assert.AreEqual("add", _driver.FindElement("add1").Value());
+            Assert.AreEqual("add", Driver.FindElement("add1").Value());
         }
 
         #endregion
@@ -97,7 +87,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestGetAttribute(string id, string expectedValue, string htmlTagAttribute)
         {
-            Assert.AreEqual(expectedValue, _driver.FindElement(id).GetAttribute(htmlTagAttribute));
+            Assert.AreEqual(expectedValue, Driver.FindElement(id).GetAttribute(htmlTagAttribute));
         }
 
         [TestCase("text1", HtmlTagAttribute.Class)]
@@ -106,8 +96,8 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestSetAttribute(string id, string htmlTagAttribute)
         {
             string expectedValue = "newValue";
-            _driver.FindElement(id).SetAttribute(htmlTagAttribute, expectedValue);
-            Assert.AreEqual(expectedValue, _driver.FindElement(id).GetAttribute(htmlTagAttribute));
+            Driver.FindElement(id).SetAttribute(htmlTagAttribute, expectedValue);
+            Assert.AreEqual(expectedValue, Driver.FindElement(id).GetAttribute(htmlTagAttribute));
         }
 
         [TestCase(true, "red")]
@@ -115,8 +105,8 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilExists(bool expected, string id)
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            _driver.Navigate().GoToUrl(url);
-            var body = _driver.FindElement(By.TagName("body"));
+            Driver.Navigate().GoToUrl(url);
+            var body = Driver.FindElement(By.TagName("body"));
             Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
         }
 
@@ -125,27 +115,27 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilNotExists(bool expected, string id)
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            _driver.Navigate().GoToUrl(url);
-            var body = _driver.FindElement(By.TagName("body"));
+            Driver.Navigate().GoToUrl(url);
+            var body = Driver.FindElement(By.TagName("body"));
             Assert.AreEqual(expected, body.WaitUntilNotExists(By.Id(id)));
         }
 
         [Test]
         public void TestClickWaitUntilPost()
         {
-            var indexPage = new IndexPage(_driver);
-            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            var indexPage = new IndexPage(Driver);
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
             Assert.That(indexPage.IsPageLoaded());
-            Assert.That(indexPage.AjaxyControlLink.ClickWaitUntilPost(_driver));
+            Assert.That(indexPage.AjaxyControlLink.ClickWaitUntilPost(Driver));
         }
 
         [Test]
         public void TestClickWaitUntilPostFlase()
         {
-            var ajaxPage = new AjaxyControlPage(_driver);
-            _driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url));
+            var ajaxPage = new AjaxyControlPage(Driver);
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url));
             Assert.That(ajaxPage.IsPageLoaded());
-            Assert.That(!ajaxPage.GreenRadio.ClickWaitUntilPost(_driver));
+            Assert.That(!ajaxPage.GreenRadio.ClickWaitUntilPost(Driver));
         }
     }
 }

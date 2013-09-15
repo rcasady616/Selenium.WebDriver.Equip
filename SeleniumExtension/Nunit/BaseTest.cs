@@ -12,7 +12,7 @@ namespace SeleniumExtension.Nunit
         /// <summary>
         /// Instance of the browser used for the test
         /// </summary>
-        public IWebDriver _driver;
+        public IWebDriver Driver;
 
         /// <summary>
         /// Initialize the browser before the test starts
@@ -20,7 +20,7 @@ namespace SeleniumExtension.Nunit
         [SetUp]
         public void SetupTest()
         {
-            _driver = IWebDriverFactory.GetBrowser();
+            Driver = IWebDriverFactory.GetBrowser();
         }
 
         /// <summary>
@@ -29,10 +29,10 @@ namespace SeleniumExtension.Nunit
         [TearDown]
         public void TearDown()
         {
-            if (_driver != null)
+            if (Driver != null)
             {
-                _driver.Close();
-                _driver.Quit();
+                Driver.Close();
+                Driver.Quit();
             }
         }
     }
