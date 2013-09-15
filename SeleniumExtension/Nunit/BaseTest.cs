@@ -25,16 +25,17 @@ namespace SeleniumExtension.Nunit
 
         /// <summary>
         /// Dereference the instance of the browser
+        /// Takes screenshot and gets page source when failure occurs 
         /// </summary>
         [TearDown]
         public void TearDown()
         {
-            if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
-            {
-                new TestCapture(Driver).CaptureWebPage();
-            }
             if (Driver != null)
             {
+                if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
+                {
+                    new TestCapture(Driver).CaptureWebPage();
+                }
                 Driver.Close();
                 Driver.Quit();
             }
