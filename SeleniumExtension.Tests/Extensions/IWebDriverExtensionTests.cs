@@ -5,33 +5,23 @@ using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
-    public class IWebDriverExtensionTests
+    public class IWebDriverExtensionTests : BaseTest
     {
-        private IWebDriver _driver;
         private AjaxyControlPage ajaxyControlPage;
 
         [SetUp]
         public void SetupTest()
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            _driver = IWebDriverFactory.GetBrowser(url);
+            _driver.Navigate().GoToUrl(url);
             ajaxyControlPage = new AjaxyControlPage(_driver);
             Assert.AreEqual(true, ajaxyControlPage.IsPageLoaded());
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            if (_driver != null)
-            {
-                _driver.Close();
-                _driver.Quit();
-            }
         }
 
         [TestCase(true, "red")]

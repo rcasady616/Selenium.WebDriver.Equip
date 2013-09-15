@@ -37,6 +37,9 @@
     <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\SeleniumExtension.Tests\bin\Debug\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -69,6 +72,7 @@
     <Compile Include="Extensions\IWebElementExtension.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Nunit\BaseTest.cs" />
     <Compile Include="PageNotLoadedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\SeleniumServerManager.cs" />
