@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
 
@@ -207,5 +208,11 @@ namespace OpenQA.Selenium
 
         #endregion
 
+        public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ImageFormat imageFormat)
+        {
+            var tempDriver = (ITakesScreenshot)iWebDriver;
+            var screenShot = tempDriver.GetScreenshot();
+            screenShot.SaveAsFile(fileName, imageFormat);
+        }
     }
 }

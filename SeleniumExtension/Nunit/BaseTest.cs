@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Linq;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace SeleniumExtension.Nunit
@@ -34,11 +35,19 @@ namespace SeleniumExtension.Nunit
             {
                 if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
                 {
-                    new TestCapture(Driver).CaptureWebPage();
+                    new TestCapture(Driver).CaptureWebPage(GetCleanTestName(TestContext.CurrentContext.Test.FullName) + ".Failed");
                 }
                 Driver.Close();
                 Driver.Quit();
             }
+        }
+
+        private static string GetCleanTestName(string fullName)
+        {
+            if (fullName.Contains("("))
+                fullName = fullName.Substring(0, fullName.LastIndexOf("("));
+            var justName = fullName.Split('.').Last();
+            return justName;
         }
     }
 }

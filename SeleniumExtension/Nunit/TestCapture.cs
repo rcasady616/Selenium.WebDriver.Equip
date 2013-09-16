@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using OpenQA.Selenium;
 
 namespace SeleniumExtension.Nunit
@@ -17,7 +16,7 @@ namespace SeleniumExtension.Nunit
 
         public void CaptureWebPage(string type = "Failed")
         {
-            string fileName = string.Format(@"{0}\{1}.{2}.", Directory.GetCurrentDirectory(), DateTime.Now.Ticks, type);
+            string fileName = string.Format(@"{0}\{1}.{2}", Directory.GetCurrentDirectory(), DateTime.Now.Ticks, type);
             PageSource(fileName);
             ScreenShot(fileName);
         }
@@ -31,17 +30,8 @@ namespace SeleniumExtension.Nunit
 
         public void ScreenShot(string fileName)
         {
-            var tempDriver = (ITakesScreenshot)_browser;
-            Screenshot screenShot = tempDriver.GetScreenshot();
-            screenShot.SaveAsFile(fileName + "jpeg", ImageFormat.Jpeg);
+            _browser.TakeScreenShot(fileName + ".jpeg", ImageFormat.Jpeg);
         }
 
-        private static string GetCleanTestName(string fullName)
-        {
-            if (fullName.Contains("("))
-                fullName = fullName.Substring(0, fullName.LastIndexOf("("));
-            var justName = fullName.Split('.').Last();
-            return justName;
-        }
     }
 }

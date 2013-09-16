@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Medrio.QA.UITestFramework.Pages;
@@ -23,6 +24,8 @@ namespace SeleniumExtension.Tests.Extensions
             ajaxyControlPage = new AjaxyControlPage(Driver);
             Assert.AreEqual(true, ajaxyControlPage.IsPageLoaded());
         }
+
+        #region Waits
 
         [TestCase(true, "red")]
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
@@ -144,24 +147,6 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
-        [Test, TestCaseSource("GetLocators")]
-        public void TestClickWaitForCondition(By locator)
-        {
-            ajaxyControlPage.GreenRadio.Click();
-            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedConditions.ElementExists(locator));
-            Assert.AreEqual(true, Driver.ElementExists(locator));
-        }
-
-        [Test, TestCaseSource("GetLocators")]
-        public void TestClickWaitUnilVisable(By locator)
-        {
-            ajaxyControlPage.GreenRadio.Click();
-            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            Assert.AreEqual(true, ajaxyControlPage.SubmitButton.ClickWaitUnilVisable(Driver, locator));
-            Assert.AreEqual(true, Driver.ElementExists(locator));
-        }
-
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
         [TestCase("label1", "label one", HtmlTagAttribute.Title)]
         [TestCase("add1", "add", HtmlTagAttribute.Value)]
@@ -193,6 +178,28 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, Driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
+        #endregion
+
+        #region click
+
+        [Test, TestCaseSource("GetLocators")]
+        public void TestClickWaitForCondition(By locator)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedConditions.ElementExists(locator));
+            Assert.AreEqual(true, Driver.ElementExists(locator));
+        }
+
+        [Test, TestCaseSource("GetLocators")]
+        public void TestClickWaitUnilVisable(By locator)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            Assert.AreEqual(true, ajaxyControlPage.SubmitButton.ClickWaitUnilVisable(Driver, locator));
+            Assert.AreEqual(true, Driver.ElementExists(locator));
+        }
+
         [Test, TestCaseSource("GetLocators")]
         public void TestClickWaitUnilVisableFalse(By locator)
         {
@@ -201,8 +208,6 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(Driver, locator, 2));
             Assert.AreEqual(false, Driver.ElementExists(locator));
         }
-
-
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
         public void TestClickWaitForConditions(List<By> locators)
@@ -261,6 +266,19 @@ namespace SeleniumExtension.Tests.Extensions
             Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
             Assert.That(indexPage.IsPageLoaded());
             Assert.Throws<PageNotLoadedException>(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<IndexPage>(Driver); });
+        }
+
+        #endregion
+
+        [Test]
+        public void TestTakeScreenShot()
+        {
+            string file = "TestTakeScreenShot.jpeg";
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Assert.DoesNotThrow(delegate { Driver.TakeScreenShot(file, ImageFormat.Jpeg); });
+            Assert.AreEqual(true, File.Exists(file));
+            var f = new FileInfo(file);
+            Assert.GreaterOrEqual(f.Length, 9000, "Check to see if the file is around expected size");
         }
 
         #region testdata
