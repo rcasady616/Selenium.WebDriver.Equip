@@ -39,18 +39,18 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilExists(this IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedConditions.ElementExists(locator), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedConditions.ElementExists(locator), maxWaitTimeInSeconds);
         }
 
         /// <summary>
-        /// Waits for a <see cref="IWebElement"/> to not be present on the page DOM
+        /// Waits for a <see cref="IWebElement"/> to not exists in the page DOM  
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilNotExists(this IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementNotExists(locator), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementNotExists(locator), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilVisible(this IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedConditions.ElementIsVisible(locator), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedConditions.ElementIsVisible(locator), maxWaitTimeInSeconds);
         }
 
         /// <summary>
-        /// Waits for a <see cref="IWebElement"/> to be visible in the page
+        /// Waits for a <see cref="List"/>/<<see cref="IWebElement"/>/> to be visible in the page
         /// </summary>
         /// <param name="locator">The <see cref="List"/>/<<see cref="By"/>/> locators of the <see cref="IWebElement"/>s</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
@@ -75,13 +75,13 @@ namespace OpenQA.Selenium
             var failedLocs = new List<By>();
             foreach (var loc in locators)
             {
-                if (!WaitUntil(iWebDriver, ExpectedConditions.ElementIsVisible(loc), maxWaitTimeInSeconds))
+                if (!iWebDriver.WaitUntil(ExpectedConditions.ElementIsVisible(loc), maxWaitTimeInSeconds))
                     failedLocs.Add(loc);
             }
             if (failedLocs.Count == 0)
                 return true;
             if (failedLocs.Count > 0 && maxWaitTimeInSeconds > 1)
-                return WaitUntilVisible(iWebDriver, failedLocs, maxWaitTimeInSeconds / 2);
+                return iWebDriver.WaitUntilVisible(failedLocs, maxWaitTimeInSeconds / 2);
             if (failedLocs.Count > 0 && maxWaitTimeInSeconds <= 1)
                 return false;
             return true;
@@ -95,7 +95,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not visible; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilNotVisible(this IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementNotVisible(locator), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementNotVisible(locator), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -109,13 +109,13 @@ namespace OpenQA.Selenium
             var failedLocs = new List<By>();
             foreach (var loc in locators)
             {
-                if (WaitUntil(iWebDriver, ExpectedCondition.ElementNotVisible(loc), maxWaitTimeInSeconds))
+                if (iWebDriver.WaitUntil(ExpectedCondition.ElementNotVisible(loc), maxWaitTimeInSeconds))
                     failedLocs.Add(loc);
             }
             if (failedLocs.Count == 0)
                 return true;
             if (failedLocs.Count > 0 && maxWaitTimeInSeconds > 1)
-                return WaitUntilNotVisible(iWebDriver, failedLocs, maxWaitTimeInSeconds / 2);
+                return iWebDriver.WaitUntilNotVisible(failedLocs, maxWaitTimeInSeconds / 2);
             if (failedLocs.Count > 0 && maxWaitTimeInSeconds <= 1)
                 return false;
             return true;
@@ -129,7 +129,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the title is a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> text is a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTextEquals(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementTextEquals(locator, text), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementTextEquals(locator, text), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -153,7 +153,9 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> text is not a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTextNotEquals(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementTextNotEquals(locator, text), maxWaitTimeInSeconds);
+            if (!iWebDriver.WaitUntilExists(locator, maxWaitTimeInSeconds))
+                return false;
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementTextNotEquals(locator, text), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -165,7 +167,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> contains the text; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTextContains(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -178,7 +180,7 @@ namespace OpenQA.Selenium
         public static bool WaitUntilAttributeEquals(this IWebDriver iWebDriver, By locator, string htmlTagAttribute,
                                                     string attributeValue, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementAttributeEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -191,7 +193,9 @@ namespace OpenQA.Selenium
         public static bool WaitUntilAttributeNotEquals(this IWebDriver iWebDriver, By locator, string htmlTagAttribute,
                                                      string attributeValue, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementAttributeNotEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
+            if (!iWebDriver.WaitUntilExists(locator, maxWaitTimeInSeconds))
+                return false;
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementAttributeNotEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -203,7 +207,9 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> not contains the text; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTextNotContains(this IWebDriver iWebDriver, By locator, string text, int maxWaitTimeInSeconds = 10)
         {
-            return WaitUntil(iWebDriver, ExpectedCondition.ElementTextNotContains(locator, text), maxWaitTimeInSeconds);
+            if (!iWebDriver.WaitUntilExists(locator, maxWaitTimeInSeconds))
+                return false;
+            return iWebDriver.WaitUntil(ExpectedCondition.ElementTextNotContains(locator, text), maxWaitTimeInSeconds);
         }
 
         #endregion

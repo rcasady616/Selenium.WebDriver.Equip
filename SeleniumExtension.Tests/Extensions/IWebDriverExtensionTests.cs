@@ -88,7 +88,7 @@ namespace SeleniumExtension.Tests.Extensions
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestWaitUntilNotVisiblesFalse");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(false, Driver.WaitUntilNotVisible(locators, 2));
+            Assert.AreEqual(false, Driver.WaitUntilNotVisible(locators));
         }
 
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
@@ -105,14 +105,14 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
         }
 
-        [TestCase(true, "TestIsPageLoaded")]
-        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilTextEquals(bool expected, string text)
+        [TestCase(true, "TestIsPageLoaded", 10)]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
+        public void TestWaitUntilTextEquals(bool expected, string text, int waitTime)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, Driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text, 2));
+            Assert.AreEqual(expected, Driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text, waitTime));
         }
 
         [TestCase(false, "TestIsPageLoaded")]
@@ -125,26 +125,26 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTextNotEquals(AjaxyControlPage.ByLabelsDiv, text, 2));
         }
 
-        [TestCase(true, "TestIsPageLoaded")]
-        [TestCase(true, "Load")]
-        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilTextContains(bool expected, string text)
+        [TestCase(true, "TestIsPageLoaded", 10)]
+        [TestCase(true, "Load", 10)]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
+        public void TestWaitUntilTextContains(bool expected, string text, int waitTime)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, Driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text, 2));
+            Assert.AreEqual(expected, Driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text, waitTime));
         }
 
-        [TestCase(false, "TestIsPageLoaded")]
-        [TestCase(false, "Load")]
-        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilTextNotContains(bool expected, string text)
+        [TestCase(false, "TestIsPageLoaded", 2)]
+        [TestCase(false, "Load", 2)]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt", 10)]
+        public void TestWaitUntilTextNotContains(bool expected, string text, int waitTime)
         {
             ajaxyControlPage.GreenRadio.Click();
             ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
             ajaxyControlPage.SubmitButton.Click();
-            Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text, 2));
+            Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text, waitTime));
         }
 
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
