@@ -8,6 +8,22 @@ namespace OpenQA.Selenium
 {
     public static class IWebDriverExtention
     {
+
+        public static IWebDriver SwitchBrowserWindow<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition)
+        {
+            var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
+            IWebDriver newWindowDriver = null;
+            var windowIterator = iWebDriver.WindowHandles;
+            foreach (var window in windowIterator)
+            {
+                var handel = window;
+                newWindowDriver = iWebDriver.SwitchTo().Window(window);
+                if (newWindowDriver.WaitUntil(condition, 2))
+                    return newWindowDriver;
+            }
+            return null;
+        }
+
         #region Expected conditions to wait
 
         /// <summary>

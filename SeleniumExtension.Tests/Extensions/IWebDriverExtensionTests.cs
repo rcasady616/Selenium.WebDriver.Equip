@@ -25,6 +25,19 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, ajaxyControlPage.IsPageLoaded());
         }
 
+        [Test]
+        public void TestSwitchBrowserWindow()
+        {
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            var index = new IndexPage(Driver);
+
+            index.AjaxyControlNewWindowLink.Click();
+            Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("AjaxyControl"));
+
+            var ajaxyControl = new AjaxyControlPage(Driver);
+            Assert.That(ajaxyControl.IsPageLoaded());
+        }
+
         #region Waits
 
         [TestCase(true, "red")]

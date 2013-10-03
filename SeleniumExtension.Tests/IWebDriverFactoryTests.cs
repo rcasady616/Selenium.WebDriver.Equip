@@ -30,28 +30,28 @@ namespace SeleniumExtension.Tests
         [Test]
         public void GetFirefoxBrowserTest()
         {
-            _driver = IWebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
 
         [Test]
         public void GetInternetExplorerBrowserTest()
         {
-            _driver = IWebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(InternetExplorerDriver), _driver.GetType());
         }
 
         [Test]
         public void GetChromeBrowserTest()
         {
-            _driver = IWebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(ChromeDriver), _driver.GetType());
         }
 
         [Test]
         public void GetSafariBrowserTest()
         {
-            _driver = IWebDriverFactory.GetBrowser<SafariDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetBrowser<SafariDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(SafariDriver), _driver.GetType());
         }
 

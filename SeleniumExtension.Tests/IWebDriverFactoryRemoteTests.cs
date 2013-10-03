@@ -33,7 +33,7 @@ namespace SeleniumExtension.Tests
         [Test]
         public void GetRemoteWebDriverFirefoxTest()
         {
-            _driver = IWebDriverFactory.GetRemoteWebDriver(null, "http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetRemoteWebDriver(null, "http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
         }
     }

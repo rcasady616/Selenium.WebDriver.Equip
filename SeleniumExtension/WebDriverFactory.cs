@@ -11,7 +11,7 @@ namespace SeleniumExtension
     /// <summary>
     /// Defines a factory for creating local and remote <see cref="IWebDriver"/>
     /// </summary>
-    public class IWebDriverFactory
+    public class WebDriverFactory
     {
         /// <summary>
         /// Gets a local <see cref="IWebDriver"/> and navigates to a url

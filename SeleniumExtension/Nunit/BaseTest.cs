@@ -21,7 +21,7 @@ namespace SeleniumExtension.Nunit
         [SetUp]
         public void SetupTest()
         {
-            Driver = IWebDriverFactory.GetBrowser();
+            Driver = WebDriverFactory.GetBrowser();
         }
 
         /// <summary>

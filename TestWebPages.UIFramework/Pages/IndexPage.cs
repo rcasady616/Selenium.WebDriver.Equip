@@ -12,13 +12,15 @@ namespace Medrio.QA.UITestFramework.Pages
 
         public static By ByAjaxyControlLink = By.LinkText("AjaxyControl Page");
         public static By ByPageALink = By.LinkText("PageA");
-
+        public static By ByAjaxyControlNewWindowLink = By.LinkText("AjaxyControl Page New window");
+        
         #endregion
 
         #region IWebElement properties
 
         public IWebElement AjaxyControlLink { get { return Driver.FindElement(ByAjaxyControlLink); } }
         public IWebElement PageALink { get { return Driver.FindElement(ByPageALink); } }
+        public IWebElement AjaxyControlNewWindowLink { get { return Driver.FindElement(ByAjaxyControlNewWindowLink); } }
 
         #endregion
 
