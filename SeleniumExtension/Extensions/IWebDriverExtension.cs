@@ -8,7 +8,12 @@ namespace OpenQA.Selenium
 {
     public static class IWebDriverExtention
     {
-
+        /// <summary>
+        /// Switches to the first browser that meets the <see cref="ExpectedConditions"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="condition">The <see cref="ExpectedConditions"/> criteria to <see cref="WebDriverWait"/> for</param>
+        /// <returns>An instance of the <see cref="IWebDriver"/></returns>
         public static IWebDriver SwitchBrowserWindow<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition)
         {
             var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
