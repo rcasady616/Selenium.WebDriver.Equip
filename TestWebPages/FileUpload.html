@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function displayResult() {
+        var x = document.getElementById("fname").value;
+        alert(x);
+    }
+</script>
+</head>
+<body>
+
+<form>
+Select a file to upload:
+<input type="file" id="fname" size="50"/>
+</form>
+
+<button type="button" id="display" onclick="displayResult()">Display file path</button>
+
+</body>
+</html>

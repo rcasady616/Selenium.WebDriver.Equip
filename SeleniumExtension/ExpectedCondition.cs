@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Threading;
 using OpenQA.Selenium;
 
 namespace SeleniumExtension
@@ -8,19 +10,20 @@ namespace SeleniumExtension
     /// </summary>
     public static class ExpectedCondition
     {
+      
         /// <summary>
         /// An expectation for checking that an element is not present on the DOM of a page.
         /// This method returns faster than <see cref="ElementExists"/> when the <see cref="IWebElement"/> is expected to not be present
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> is not present; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementNotExists(By locator)
+        public static Func<ISearchContext, bool> ElementNotExists(By locator)
         {
-            return (driver) =>
+            return (searchContext) =>
                 {
                     try
                     {
-                        return !driver.ElementExists(locator);
+                        return !searchContext.ElementExists(locator);
                     }
                     catch (StaleElementReferenceException)
                     {
@@ -35,9 +38,9 @@ namespace SeleniumExtension
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should be</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> text equals; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextEquals(By locator, string text)
+        public static Func<ISearchContext, bool> ElementTextEquals(By locator, string text)
         {
-            return (driver) => { return driver.FindElement(locator).Text == text; };
+            return (searchContext) => { return searchContext.FindElement(locator).Text == text; };
         }
 
         /// <summary>
@@ -46,9 +49,9 @@ namespace SeleniumExtension
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should not be</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement">IWebElements</see> text not equals; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextNotEquals(By locator, string text)
+        public static Func<ISearchContext, bool> ElementTextNotEquals(By locator, string text)
         {
-            return (driver) => { return driver.FindElement(locator).Text != text; };
+            return (searchContext) => { return searchContext.FindElement(locator).Text != text; };
         }
 
         /// <summary>
@@ -57,9 +60,9 @@ namespace SeleniumExtension
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should contain</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> contains the text; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextContains(By locator, string text)
+        public static Func<ISearchContext, bool> ElementTextContains(By locator, string text)
         {
-            return (driver) => { return driver.FindElement(locator).Text.Contains(text); };
+            return (searchContext) => { return searchContext.FindElement(locator).Text.Contains(text); };
         }
 
         /// <summary>
@@ -68,9 +71,9 @@ namespace SeleniumExtension
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="text">The text an <see cref="IWebElement"/> should contain</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> not contains the text; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementTextNotContains(By locator, string text)
+        public static Func<ISearchContext, bool> ElementTextNotContains(By locator, string text)
         {
-            return (driver) => { return !driver.FindElement(locator).Text.Contains(text); };
+            return (searchContext) => { return !searchContext.FindElement(locator).Text.Contains(text); };
         }
 
         /// <summary>
@@ -80,9 +83,9 @@ namespace SeleniumExtension
         /// <param name="htmlTagAttribute">The the name of the attribute</param>
         /// <param name="attributeValue">The <see cref="string"/> value the attribute should be equal to.</param>
         /// <returns><see langword="true"/> if the attribute value equals; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementAttributeEquals(By locator, string htmlTagAttribute, string attributeValue)
+        public static Func<ISearchContext, bool> ElementAttributeEquals(By locator, string htmlTagAttribute, string attributeValue)
         {
-            return (driver) => { return driver.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue; };
+            return (searchContext) => { return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue; };
         }
 
         /// <summary>
@@ -92,9 +95,9 @@ namespace SeleniumExtension
         /// <param name="htmlTagAttribute">The the name of the attribute</param>
         /// <param name="attributeValue">The <see cref="string"/> value the attribute should be not equal to.</param>
         /// <returns><see langword="true"/> if the attribute values not equal; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementAttributeNotEquals(By locator, string htmlTagAttribute, string attributeValue)
+        public static Func<ISearchContext, bool> ElementAttributeNotEquals(By locator, string htmlTagAttribute, string attributeValue)
         {
-            return (driver) => { return driver.FindElement(locator).GetAttribute(htmlTagAttribute) != attributeValue; };
+            return (searchContext) => { return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) != attributeValue; };
         }
 
         /// <summary>
@@ -103,18 +106,59 @@ namespace SeleniumExtension
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not present; otherwise, <see langword="false"/></returns>
-        public static Func<IWebDriver, bool> ElementNotVisible(By locator)
+        public static Func<ISearchContext, bool> ElementNotVisible(By locator)
         {
-            return (driver) =>
+            return (searchContext) =>
             {
                 try
                 {
-                    return null != ElementIfVisible(driver.FindElement(locator));
+                    return null != ElementIfVisible(searchContext.FindElement(locator));
                 }
                 catch (StaleElementReferenceException)
                 {
                     return true;
                 }
+            };
+        }
+
+        public static Func<ISearchContext, IWebElement> ElementIsVisible(By locator)
+        {
+            return (searchContext) =>
+            {
+                try
+                {
+                    return ElementIfVisible(searchContext.FindElement(locator));
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
+
+        public static Func<ISearchContext, IWebElement> ElementExists(By locator)
+        {
+            return (iSearchContext) => iSearchContext.FindElement(locator);
+        }
+        
+        public static Func<ISearchContext, bool> ElementCountIs(By locator, int expectedCount)
+        {
+            return (iSearchContext) => iSearchContext.FindElements(locator).Count == expectedCount;
+        }
+
+        public static Func<ISearchContext, bool> ElementRested(Func<ISearchContext, bool> condition, int restTimeInSeconds)
+        {
+            int restCtr = 0;
+            return (searchContext) =>
+            {
+                while (searchContext.WaitUntil(condition, 0))
+                {
+                    if (restCtr >= restTimeInSeconds)
+                        return true;
+                    restCtr++;
+                    Thread.Sleep(1000);
+                }
+                return false;
             };
         }
 

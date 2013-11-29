@@ -69,6 +69,7 @@
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\ISearchContextExtension.cs" />
     <Compile Include="Extensions\IWebDriverExtension.cs" />
+    <Compile Include="SearchContextWait.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\IWebElementExtension.cs">
       <SubType>Code</SubType>

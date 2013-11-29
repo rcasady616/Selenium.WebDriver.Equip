@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading;
 using OpenQA.Selenium.Internal;
 using SeleniumExtension;
 
@@ -159,48 +158,10 @@ namespace OpenQA.Selenium
             iWebElement.Click();
             foreach (var by in bys)
             {
-                if (!driver.WaitUntilVisible(by,maxWaitTimeInSeconds))
+                if (!driver.WaitUntilVisible(by, maxWaitTimeInSeconds))
                     return false;
             }
             return true;
-        }
-
-        #endregion
-
-        #region WaitUntil
-
-        /// <summary>
-        /// Waits for a <see cref="IWebElement"/> to exists in the page DOM
-        /// </summary>
-        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
-        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
-        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilExists(this IWebElement iWebElement, By locator, int maxWaitTimeInSeconds = 10)
-        {
-            int stop = 0;
-            while (!iWebElement.ElementExists(locator) && stop <= maxWaitTimeInSeconds)
-            {
-                Thread.Sleep(1000);
-                stop++;
-            }
-            return iWebElement.ElementExists(locator);
-        }
-
-        /// <summary>
-        /// Waits for a <see cref="IWebElement"/> to not exists in the page DOM
-        /// </summary>
-        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
-        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
-        /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilNotExists(this IWebElement iWebElement, By locator, int maxWaitTimeInSeconds = 10)
-        {
-            int stop = 0;
-            while (iWebElement.ElementExists(locator) && stop <= maxWaitTimeInSeconds)
-            {
-                Thread.Sleep(1000);
-                stop++;
-            }
-            return !iWebElement.ElementExists(locator);
         }
 
         #endregion
@@ -238,7 +199,7 @@ namespace OpenQA.Selenium
         public static bool ClickWaitForCondition<T>(this IWebElement iWebElement, IWebDriver driver, Func<IWebDriver, T> condition)
         {
             iWebElement.Click();
-            return driver.WaitUntil(condition);
+            return driver.DriverWaitUntil(condition);
         }
 
         public static bool ClickWaitForConditions<T>(this IWebElement iWebElement, IWebDriver driver, List<Func<IWebDriver, T>> conditions)
@@ -246,12 +207,67 @@ namespace OpenQA.Selenium
             iWebElement.Click();
             foreach (var condition in conditions)
             {
-                if (!driver.WaitUntil(condition))
+                if (!driver.DriverWaitUntil(condition))
                     return false;
             }
             return true;
         }
-        
+
+        public static string CreateLocatorName(this IWebElement iWebElement)
+        {
+            if (!string.IsNullOrEmpty(iWebElement.Id()))
+                return iWebElement.Id();
+            switch (iWebElement.TagName)
+            {
+                case HtmlTags.A:
+                    if (!string.IsNullOrEmpty(iWebElement.Text))
+                        return iWebElement.Text.Replace(" ", null);
+                    break;
+                default:
+                    return null;
+            }
+            return null;
+        }
+
+        public static string CreateCssSelector(this IWebElement iWebElement)
+        {
+            string cssString = null;
+            if (!string.IsNullOrEmpty(iWebElement.Id()))
+            {
+                cssString = string.Format("#{0}", iWebElement.Id());
+            }
+            switch (iWebElement.TagName)
+            {
+                case HtmlTags.A:
+                    if (!string.IsNullOrEmpty(iWebElement.Text))
+                        cssString = string.Format("a[href='{0}']", iWebElement.GetAttribute(HtmlTagAttribute.Href));
+                    break;
+                case HtmlTags.Input:
+                    switch (iWebElement.Type())
+                    {
+                        case "text":
+                            break;
+                        default:
+                            cssString = null;
+                            break;
+                    }
+                    //checkbox
+                    //radio
+                    //password
+                    break;
+                case HtmlTags.Button:
+                    break;
+                case HtmlTags.Select:
+                    break;
+                case HtmlTags.Option:
+                    break;
+                default:
+                    cssString = null;
+                    break;
+            }
+            return cssString;
+        }
+
         #endregion
     }
 }

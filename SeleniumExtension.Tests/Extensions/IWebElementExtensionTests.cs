@@ -8,7 +8,7 @@ using TestWebPages.UIFramework.Pages;
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
-    public class IWebElementExtentionTests :BaseTest
+    public class IWebElementExtentionTests : BaseTest
     {
         [SetUp]
         public void SetupTest()
@@ -98,26 +98,6 @@ namespace SeleniumExtension.Tests.Extensions
             string expectedValue = "newValue";
             Driver.FindElement(id).SetAttribute(htmlTagAttribute, expectedValue);
             Assert.AreEqual(expectedValue, Driver.FindElement(id).GetAttribute(htmlTagAttribute));
-        }
-
-        [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilExists(bool expected, string id)
-        {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            Driver.Navigate().GoToUrl(url);
-            var body = Driver.FindElement(By.TagName("body"));
-            Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
-        }
-
-        [TestCase(false, "red")]
-        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilNotExists(bool expected, string id)
-        {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            Driver.Navigate().GoToUrl(url);
-            var body = Driver.FindElement(By.TagName("body"));
-            Assert.AreEqual(expected, body.WaitUntilNotExists(By.Id(id)));
         }
 
         [Test]

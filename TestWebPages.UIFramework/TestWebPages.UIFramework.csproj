@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -48,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Pages\AjaxyControlPage.cs" />
     <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\FileUploadPage.cs" />
     <Compile Include="Pages\IndexPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

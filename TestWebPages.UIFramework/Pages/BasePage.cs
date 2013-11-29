@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace TestWebPages.UIFramework.Pages
 {
@@ -13,6 +14,15 @@ namespace TestWebPages.UIFramework.Pages
         {
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            if (Driver != null)
+            {
+                Driver.Close();
+                Driver.Quit();
+            }
+        }
         public IWebDriver Driver { get; set; }
     }
 }
