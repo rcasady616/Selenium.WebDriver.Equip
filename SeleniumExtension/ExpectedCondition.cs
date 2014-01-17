@@ -162,6 +162,17 @@ namespace SeleniumExtension
             };
         }
 
+        public static Func<IWebDriver, bool> AlertExists()
+        {
+            return (iWebDriver) =>
+            {
+                IAlert alert = iWebDriver.SwitchTo().Alert();
+                if (alert != null)
+                    return true;
+                return false;
+            };
+        }
+
         private static IWebElement ElementIfVisible(IWebElement element)
         {
             if (element.Displayed)

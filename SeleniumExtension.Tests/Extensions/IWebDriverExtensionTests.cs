@@ -212,6 +212,16 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, Driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
+        [Test]
+        public void TestWaitUntilAlertExists()
+        {
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/ThrowAlert.html", Directory.GetCurrentDirectory()));
+            Driver.FindElement("button1").Click();
+            var test = Driver.WaitUntilAlertExists();
+            Assert.AreEqual(true, Driver.WaitUntilAlertExists());
+            Driver.SwitchTo().Alert().Accept();
+        }
+
         #endregion
 
         #region click
