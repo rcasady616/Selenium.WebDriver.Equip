@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\IWebDriverExtensionTests.cs" />
+    <Compile Include="Extensions\WaitUntilTests.cs" />
     <Compile Include="IPageTests.cs" />
     <Compile Include="Extensions\ISearchContextExtensionTests.cs" />
     <Compile Include="IWebDriverFactoryRemoteTests.cs" />
@@ -80,6 +81,15 @@
       <Project>{5D63DA78-6414-4A71-A94E-B0394A2DA09F}</Project>
       <Name>TestWebPages.UIFramework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\phantomjs.exe.1.9.2\tools\phantomjs\phantomjs.exe">
+      <Link>phantomjs.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="phantomjs-license.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

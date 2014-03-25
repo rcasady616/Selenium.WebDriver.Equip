@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
@@ -33,29 +31,6 @@ namespace SeleniumExtension.Tests
         public void TestElementExists(bool expected, string id)
         {
             Assert.AreEqual(expected, Driver.ElementExists(By.Id(id)));
-        }
-
-        [TestCase(true, "red")]
-        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestWaitUntilExists(bool expected, string id)
-        {
-            var body = Driver.FindElement(By.TagName("body"));
-            Assert.AreEqual(expected, body.WaitUntilExists(By.Id(id)));
-        }
-
-        [TestCase(false, "red")]
-        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestIWebElemnetWaitUntilNotExists(bool expected, string id)
-        {
-            var body = Driver.FindElement(By.TagName("body"));
-            Assert.AreEqual(expected, body.WaitUntilNotExists(By.Id(id)));
-        }
-
-        [TestCase(false, "red")]
-        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
-        public void TestIWebDriverWaitUntilNotExists(bool expected, string id)
-        {
-            Assert.AreEqual(expected, Driver.WaitUntilNotExists(By.Id(id)));
         }
 
         [Test]

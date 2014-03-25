@@ -51,101 +51,6 @@ namespace OpenQA.Selenium
             return true;
         }
 
-
-
-        /// <summary>
-        /// An expectation for checking that an element contains specific text.
-        /// </summary>
-        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
-        /// <param name="expectedCount">The expected number of <see cref="IWebElement"/> that are found from the <see cref="By"/> locator</param>
-        /// <returns><see langword="true"/> there are the expected number of <see cref="IWebElement"/>'s; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilElementCountIs(this ISearchContext iSearchContext, By locator, int expectedCount, int waitTimeInSeconds = 10)
-        {
-            return iSearchContext.WaitUntil(ExpectedCondition.ElementCountIs(locator, expectedCount), waitTimeInSeconds);
-        }
-
-        public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)
-        {
-            var ticks = DateTime.Now.Ticks;
-            while (true)
-            {
-                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= timeoutseconds)
-                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", timeoutseconds));
-                try
-                {
-                    return func(list());
-                }
-                catch (StaleElementReferenceException)
-                {
-                    Console.WriteLine("caught stale element reference exception, retrying..");
-                    Thread.Sleep(500);
-                }
-            }
-        }
-
-        public static T2 trythis<T, T2>(this ISearchContext iSearchContext, Func<T, T2> action, T s)
-        {
-            return action(s);
-        }
-
-        public static Func<IWebDriver, IWebElement> fe(By locator, Action<string> action)
-        {
-            while (true)
-            {
-                try
-                {
-                    return (driver) => { return driver.FindElement(locator); };
-                }
-                catch (StaleElementReferenceException)
-                {
-                    Console.WriteLine("caught stale element reference exception, retrying..");
-                    Thread.Sleep(500);
-                }
-            }
-        }
-
-        public static void Rrefrain(Action<string> action, string text)
-        {
-            while (true)
-            {
-                try
-                {
-                    action.Invoke(text);
-                }
-                catch (StaleElementReferenceException)
-                {
-                    Console.WriteLine("caught stale element reference exception, retrying..");
-                    Thread.Sleep(500);
-                }
-            }
-        }
-
-        public static void Riprova(this ISearchContext iSearchContext, Action action, int maxTimeoutInSeconds = 10)
-        {
-            var ticks = DateTime.Now.Ticks;
-            while (true)
-            {
-                try
-                {
-                    action.Invoke();
-                    return;
-                }
-                catch (StaleElementReferenceException)
-                {
-                    Console.WriteLine("caught stale element reference exception, retrying..");
-                    Thread.Sleep(500);
-                }
-                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= maxTimeoutInSeconds)
-                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", maxTimeoutInSeconds));
-            }
-        }
-
-        public static void warap(this ISearchContext iSearchContext)
-        {
-            iSearchContext.Riprova(() => iSearchContext.FindElement(By.ClassName("tableRow")).SendKeys("val"));
-        }
-
-
         /// <summary>
         /// Switches to the first browser that meets the <see cref="ExpectedConditions"/>
         /// </summary>
@@ -166,6 +71,7 @@ namespace OpenQA.Selenium
             }
             return null;
         }
+     
         #region Expected conditions to wait
 
         /// <summary>
@@ -361,6 +267,102 @@ namespace OpenQA.Selenium
             return rested;
         }
 
+        /// <summary>
+        /// An expectation for checking that an element contains specific text.
+        /// </summary>
+        /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
+        /// <param name="expectedCount">The expected number of <see cref="IWebElement"/> that are found from the <see cref="By"/> locator</param>
+        /// <returns><see langword="true"/> there are the expected number of <see cref="IWebElement"/>'s; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilElementCountIs(this ISearchContext iSearchContext, By locator, int expectedCount, int waitTimeInSeconds = 10)
+        {
+            return iSearchContext.WaitUntil(ExpectedCondition.ElementCountIs(locator, expectedCount), waitTimeInSeconds);
+        }
+
         #endregion
+
+        #region "Experimental "
+
+        public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)
+        {
+            var ticks = DateTime.Now.Ticks;
+            while (true)
+            {
+                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= timeoutseconds)
+                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", timeoutseconds));
+                try
+                {
+                    return func(list());
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Console.WriteLine("caught stale element reference exception, retrying..");
+                    Thread.Sleep(500);
+                }
+            }
+        }
+
+        public static T2 trythis<T, T2>(this ISearchContext iSearchContext, Func<T, T2> action, T s)
+        {
+            return action(s);
+        }
+
+        public static Func<IWebDriver, IWebElement> fe(By locator, Action<string> action)
+        {
+            while (true)
+            {
+                try
+                {
+                    return (driver) => { return driver.FindElement(locator); };
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Console.WriteLine("caught stale element reference exception, retrying..");
+                    Thread.Sleep(500);
+                }
+            }
+        }
+
+        public static void Rrefrain(Action<string> action, string text)
+        {
+            while (true)
+            {
+                try
+                {
+                    action.Invoke(text);
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Console.WriteLine("caught stale element reference exception, retrying..");
+                    Thread.Sleep(500);
+                }
+            }
+        }
+
+        public static void Riprova(this ISearchContext iSearchContext, Action action, int maxTimeoutInSeconds = 10)
+        {
+            var ticks = DateTime.Now.Ticks;
+            while (true)
+            {
+                try
+                {
+                    action.Invoke();
+                    return;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Console.WriteLine("caught stale element reference exception, retrying..");
+                    Thread.Sleep(500);
+                }
+                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= maxTimeoutInSeconds)
+                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", maxTimeoutInSeconds));
+            }
+        }
+
+        public static void warap(this ISearchContext iSearchContext)
+        {
+            iSearchContext.Riprova(() => iSearchContext.FindElement(By.ClassName("tableRow")).SendKeys("val"));
+        }
+
+        #endregion 
     }
 }
