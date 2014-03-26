@@ -57,8 +57,6 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
         }
 
-<<<<<<< HEAD
-=======
         [TestCase(true, "TestIsPageLoaded", 10)]
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
         public void TestWaitUntilTextEquals(bool expected, string text, int waitTime)
@@ -160,7 +158,6 @@ namespace SeleniumExtension.Tests.Extensions
             Driver.SwitchTo().Alert().Accept();
         }
 
->>>>>>> 02aa651a8b7cfc91cc411ab145cef804d891131c
         #endregion
 
         #region click
