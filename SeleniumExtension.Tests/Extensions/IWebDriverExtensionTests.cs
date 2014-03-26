@@ -57,6 +57,110 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
         }
 
+<<<<<<< HEAD
+=======
+        [TestCase(true, "TestIsPageLoaded", 10)]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
+        public void TestWaitUntilTextEquals(bool expected, string text, int waitTime)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextEquals(AjaxyControlPage.ByLabelsDiv, text, waitTime));
+        }
+
+        [TestCase(false, "TestIsPageLoaded")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
+        public void TestWaitUntilTextNotEquals(bool expected, string text)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextNotEquals(AjaxyControlPage.ByLabelsDiv, text, 10));
+        }
+
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
+        public void TestWaitUntilTextNotEqualsForNoneExistingElement(bool expected, string text)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextNotEquals(By.Id(text), text, 10));
+        }
+
+        [TestCase(true, "TestIsPageLoaded", 10)]
+        [TestCase(true, "Load", 10)]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
+        public void TestWaitUntilTextContains(bool expected, string text, int waitTime)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextContains(AjaxyControlPage.ByLabelsDiv, text, waitTime));
+        }
+
+        [TestCase(false, "TestIsPageLoaded", 2)]
+        [TestCase(false, "Load", 2)]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt", 10)]
+        public void TestWaitUntilTextNotContains(bool expected, string text, int waitTime)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(AjaxyControlPage.ByLabelsDiv, text, waitTime));
+        }
+
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 10)]
+        public void TestWaitUntilTextNotContainsElementNoneExist(bool expected, string text, int waitTime)
+        {
+            ajaxyControlPage.GreenRadio.Click();
+            ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
+            ajaxyControlPage.SubmitButton.Click();
+            Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(By.Id(text), text, waitTime));
+        }
+
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeEquals(string id, string expectedValue, string htmlTagAttribute)
+        {
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            Assert.AreEqual(true, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
+        }
+
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeEqualsFalse(string id, string expectedValue, string htmlTagAttribute)
+        {
+            Assert.AreEqual(false, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue, 2));
+        }
+
+        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "add", HtmlTagAttribute.Value)]
+        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        public void TestWaitUntilAttributeNotEquals(string id, string expectedValue, string htmlTagAttribute)
+        {
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            string newValue = "newValue";
+            Driver.FindElement(id).SetAttribute(htmlTagAttribute, newValue);
+            Assert.AreEqual(true, Driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
+        }
+
+        [Test]
+        public void TestWaitUntilAlertExists()
+        {
+            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/ThrowAlert.html", Directory.GetCurrentDirectory()));
+            Driver.FindElement("button1").Click();
+            var test = Driver.WaitUntilAlertExists();
+            Assert.AreEqual(true, Driver.WaitUntilAlertExists());
+            Driver.SwitchTo().Alert().Accept();
+        }
+
+>>>>>>> 02aa651a8b7cfc91cc411ab145cef804d891131c
         #endregion
 
         #region click

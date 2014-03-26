@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing.Imaging;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
@@ -58,6 +59,16 @@ namespace OpenQA.Selenium
         public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = 10)
         {
             return iWebDriver.DriverWaitUntil(ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
+        }
+
+        /// <summary>
+        /// Waits for an IAlert
+        /// </summary>
+        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
+        public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int waitTimeInSeconds = 10)
+        {
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertExists(), waitTimeInSeconds);
         }
 
         public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ImageFormat imageFormat)
