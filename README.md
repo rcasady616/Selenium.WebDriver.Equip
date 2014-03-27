@@ -1,5 +1,5 @@
-
 SeleniumExtensions [![Build status](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh)](https://ci.appveyor.com/project/rcasady616/seleniumextensions)
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/u/richardcasady)
 ==================
 This repository contains group of commonly use functionality for Selenium2 WebDriver  
 
