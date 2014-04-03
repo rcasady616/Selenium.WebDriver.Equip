@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using SeleniumExtension.Nunit;
+using SeleniumExtension.SauceLabs;
 using SeleniumExtension.Server;
 
 namespace SeleniumExtension.Tests
@@ -13,9 +17,7 @@ namespace SeleniumExtension.Tests
         [SetUp]
         public void SetupTest()
         {
-            if (SeleniumServer.IsSeleniumServerRunning())
-                throw new Exception("Server is already running, please shut down before running tests again!");
-            SeleniumServer.Start();
+
         }
 
         [TearDown]
@@ -23,11 +25,37 @@ namespace SeleniumExtension.Tests
         {
             if (_driver != null)
             {
+                string sessionId = "";
+                var sessionIdProperty = typeof(RemoteWebDriver).GetProperty("SessionId", BindingFlags.Instance | BindingFlags.NonPublic);
+                if (sessionIdProperty != null)
+                {
+                     sessionId = sessionIdProperty.GetValue(_driver, null).ToString();
+                    if (sessionId == null)
+                    {
+                        Trace.TraceWarning("Could not obtain SessionId.");
+                    }
+                    else
+                    {
+                        Trace.TraceInformation("SessionId is " + sessionId.ToString());
+                    }
+                }
+
+                //var sessionId = ((RemoteWebDriver)_driver).Capabilities.GetCapability("webdriver.remote.sessionid");
+                //var sessionId = ((RemoteWebDriver) (_driver)).sessionId;
+                //string sessionId = ((RemoteWebDriver)_driver).GetSessionId().toString();
+                //var sessionId = _driver.ToString();
+               // ValueType t = _driver..Capabilities.GetCapability("webdriver.remote.sessionid");
                 _driver.Close();
-                _driver.Quit();
+                _driver.Dispose();
+                if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
+                {
+                    Job.UpDateJob(sessionId, false);
+                   // new TestCapture(_driver).CaptureWebPage(GetCleanTestName(TestContext.CurrentContext.Test.FullName) + ".Failed");
+                }
+                Job.UpDateJob(sessionId, true);
+              
+              
             }
-            if (false == SeleniumServer.Stop())
-                throw new Exception("Server wasn't stopped, and will could cause problems running tests");
         }
 
         [Test]
@@ -37,4 +65,7 @@ namespace SeleniumExtension.Tests
             Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
         }
     }
+
+   
+
 }

@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using SeleniumExtension.Server;
+using OpenQA.Selenium.Remote;
 
 namespace SeleniumExtension
 {
@@ -42,21 +43,23 @@ namespace SeleniumExtension
         {
             if (seleniumSettings == null)
                 seleniumSettings = new SeleniumSettings();
-            DesiredCapabilities capabilities = null;
+            DesiredCapabilities capabillities = null;
             RemoteWebDriver driver = null;
             try
             {
                 switch (seleniumSettings.BrowserName)
                 {
                     case "internet explorer":
-                        capabilities = DesiredCapabilities.InternetExplorer();
-                        capabilities.SetCapability(CapabilityType.AcceptSslCertificates, true);
-                        capabilities.SetCapability("nativeEvents", false);
+                        capabillities = DesiredCapabilities.InternetExplorer();
+                        capabillities.SetCapability("nativeEvents", false);
                         break;
                     case "firefox":
-                        var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
+                        capabillities = DesiredCapabilities.Firefox();
+
+
+                        //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
                         //capabilities = new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
-                        capabilities = DesiredCapabilities.Firefox();// new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
+                        //capabilities = DesiredCapabilities.Firefox();// new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
 
                         //capabilities.SetCapability(CapabilityType.AcceptSslCertificates, true);
                         //capabilities.SetCapability("firefox_profile", profile.ToBase64String());
@@ -64,9 +67,18 @@ namespace SeleniumExtension
                     default:
                         throw new Exception("Unhandled browser type");
                 }
-                capabilities.IsJavaScriptEnabled = true;
-                driver = new RemoteWebDriver(new Uri(seleniumSettings.SeleniumServerAddress), capabilities);
+                capabillities.SetCapability(CapabilityType.Version, "10");
+                capabillities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.XP));
+                capabillities.SetCapability("name", "Testing Selenium 2 with C# on Sauce");
+                capabillities.SetCapability("username", "richardcasady");
+                capabillities.SetCapability("accessKey", "a6618920-425d-4f34-b9c2-1576bef9686e");
+                capabillities.SetCapability("build", "Local-1234");
+
+                capabillities.IsJavaScriptEnabled = true;
+                driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
                 driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? seleniumSettings.BrowserUrl : url);
+                
+
             }
             catch (FileLoadException fileLoadEx)
             {
@@ -81,8 +93,8 @@ namespace SeleniumExtension
                 throw;
             }
             driver.Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, 10));
-            driver.Manage().Timeouts().SetPageLoadTimeout(new TimeSpan(0, 0, 30));
-            driver.Manage().Timeouts().SetScriptTimeout(new TimeSpan(0, 0, 15));
+            //driver.Manage().Timeouts().SetPageLoadTimeout(new TimeSpan(0, 0, 30));
+            //driver.Manage().Timeouts().SetScriptTimeout(new TimeSpan(0, 0, 15));
             return driver;
         }
     }

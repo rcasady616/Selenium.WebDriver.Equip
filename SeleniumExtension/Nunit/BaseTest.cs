@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
+using SeleniumExtension.SauceLabs;
 
 namespace SeleniumExtension.Nunit
 {
@@ -33,10 +35,14 @@ namespace SeleniumExtension.Nunit
         {
             if (Driver != null)
             {
+                var sessionId = (string)((RemoteWebDriver)Driver).Capabilities.GetCapability("webdriver.remote.sessionid");
                 if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
                 {
+                    Job.UpDateJob(sessionId,false);
                     new TestCapture(Driver).CaptureWebPage(GetCleanTestName(TestContext.CurrentContext.Test.FullName) + ".Failed");
                 }
+                Job.UpDateJob(sessionId,true);
+
                 Driver.Close();
                 Driver.Quit();
             }

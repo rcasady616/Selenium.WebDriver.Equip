@@ -15,7 +15,7 @@ namespace SeleniumExtension.Tests
         public void SetupTest()
         {
             string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            Driver = WebDriverFactory.GetBrowser(url);
+            
             page = new AjaxyControlPage(Driver);
             Assert.AreEqual(true, page.IsPageLoaded());
         }
