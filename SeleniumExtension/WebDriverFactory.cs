@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using SeleniumExtension.SauceLabs;
 using SeleniumExtension.Server;
 using OpenQA.Selenium.Remote;
 
@@ -37,6 +40,25 @@ namespace SeleniumExtension
         public static IWebDriver GetBrowser(string url = null)
         {
             return GetBrowser<FirefoxDriver>(url);
+        }
+
+        public static RemoteWebDriver GetSauceDriver(string browser = "firefox",string version = "10", Platform platform = null, string url = null)
+        {
+            if(platform == null)
+                platform = new Platform(PlatformType.Windows);
+            var capabillities = new DesiredCapabilities(browser, version, Platform.CurrentPlatform);
+            RemoteWebDriver driver = null;
+            capabillities.SetCapability(CapabilityType.Version, version);
+            capabillities.SetCapability(CapabilityType.Platform, platform);
+            capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
+            capabillities.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME); // supply sauce labs username 
+            capabillities.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);  // supply sauce labs account key
+            capabillities.SetCapability("name", TestContext.CurrentContext.Test.Name); 
+
+            capabillities.IsJavaScriptEnabled = true;
+            driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
+            driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "Rickcasady.com" : url);
+            return driver;
         }
 
         public static RemoteWebDriver GetRemoteWebDriver(SeleniumSettings seleniumSettings = null, string url = null)

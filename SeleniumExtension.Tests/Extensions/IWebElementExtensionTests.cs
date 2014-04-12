@@ -1,5 +1,4 @@
-﻿using System.IO;
-using Medrio.QA.UITestFramework.Pages;
+﻿using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using SeleniumExtension.Nunit;
@@ -8,12 +7,13 @@ using TestWebPages.UIFramework.Pages;
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
-    public class IWebElementExtentionTests : BaseTest
+    public class WebElementExtensionTests : BaseTest
     {
         [SetUp]
         public void SetupTest()
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            var url = string.Format(@"{0}{1}", "http://rickcasady.com/SeleniumExtentions/v1.0", "/TestWebPages/PageA.htm");
+            Driver.Navigate().GoToUrl(url);
         }
         
         #region Mock properties extention
@@ -104,7 +104,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitUntilPost()
         {
             var indexPage = new IndexPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             Assert.That(indexPage.IsPageLoaded());
             Assert.That(indexPage.AjaxyControlLink.ClickWaitUntilPost(Driver));
         }
@@ -113,7 +113,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitUntilPostFlase()
         {
             var ajaxPage = new AjaxyControlPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url));
+            Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
             Assert.That(ajaxPage.IsPageLoaded());
             Assert.That(!ajaxPage.GreenRadio.ClickWaitUntilPost(Driver));
         }

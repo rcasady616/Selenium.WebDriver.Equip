@@ -6,7 +6,7 @@ namespace Medrio.QA.UITestFramework.Pages
 {
     public class IndexPage : BasePage, IPage
     {
-        public static string Url = "/TestWebPages/Index.html";
+        public static string Url = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/Index.html";
 
         #region Static By Selectors
 

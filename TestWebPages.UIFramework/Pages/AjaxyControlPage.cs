@@ -6,7 +6,7 @@ namespace TestWebPages.UIFramework.Pages
 {
     public class AjaxyControlPage : BasePage , IPage
     {
-        public static string Url = "/TestWebPages/AjaxyControl.html";
+        public static string Url = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/AjaxyControl.html";
 
         #region Static By Selectors
 
