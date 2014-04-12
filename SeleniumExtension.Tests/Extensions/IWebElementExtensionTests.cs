@@ -7,13 +7,14 @@ using TestWebPages.UIFramework.Pages;
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
-    public class WebElementExtensionTests : BaseTest
+    public class IWebElementExtensionTests : BaseTest
     {
+        private string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+
         [SetUp]
         public void SetupTest()
         {
-            var url = string.Format(@"{0}{1}", "http://rickcasady.com/SeleniumExtentions/v1.0", "/TestWebPages/PageA.htm");
-            Driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(pageAUrl);
         }
         
         #region Mock properties extention

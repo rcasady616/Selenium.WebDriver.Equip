@@ -9,15 +9,14 @@ namespace SeleniumExtension.Tests
     [TestFixture]
     public class ISearchContextExtentionTests : BasePage
     {
-        private AjaxyControlPage page;
+        public AjaxyControlPage Page;
 
         [SetUp]
         public void SetupTest()
         {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            
-            page = new AjaxyControlPage(Driver);
-            Assert.AreEqual(true, page.IsPageLoaded());
+            Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
+            Page = new AjaxyControlPage(Driver);
+            Assert.AreEqual(true, Page.IsPageLoaded());
         }
 
         [Test]
@@ -32,17 +31,5 @@ namespace SeleniumExtension.Tests
         {
             Assert.AreEqual(expected, Driver.ElementExists(By.Id(id)));
         }
-
-        [Test]
-        public void Testy()
-        {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), FileUploadPage.Url));
-            var fPage = new FileUploadPage(Driver);
-            Assert.That(fPage.IsPageLoaded());
-            fPage.UploadFile(@"C:\Users\rcasady\Documents\automation.gif");
-            Driver.FindElement(FileUploadPage.ByFile);
-            //_driver.Manage().Window.
-        }
-        
     }
 }
