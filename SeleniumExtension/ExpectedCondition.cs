@@ -85,7 +85,12 @@ namespace SeleniumExtension
         /// <returns><see langword="true"/> if the attribute value equals; otherwise, <see langword="false"/></returns>
         public static Func<ISearchContext, bool> ElementAttributeEquals(By locator, string htmlTagAttribute, string attributeValue)
         {
-            return (searchContext) => { return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue; };
+            return (searchContext) =>
+                {
+                    if (!searchContext.ElementExists(locator))
+                        return false;
+                    return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue;
+                };
         }
 
         /// <summary>

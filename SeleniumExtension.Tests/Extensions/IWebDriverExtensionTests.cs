@@ -15,12 +15,13 @@ namespace SeleniumExtension.Tests.Extensions
     public class IWebDriverExtensionTests : BaseTest
     {
         private AjaxyControlPage ajaxyControlPage;
+        private string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+        private string throwAlertUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/ThrowAlert.html";
 
         [SetUp]
         public void SetupTest()
         {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            Driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
             ajaxyControlPage = new AjaxyControlPage(Driver);
             Assert.AreEqual(true, ajaxyControlPage.IsPageLoaded());
         }
@@ -28,7 +29,7 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestSwitchBrowserWindow()
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             var index = new IndexPage(Driver);
 
             index.AjaxyControlNewWindowLink.Click();
@@ -41,7 +42,7 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestSwitchBrowserWindowNull()
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             var index = new IndexPage(Driver);
 
             index.AjaxyControlNewWindowLink.Click();
@@ -123,7 +124,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestWaitUntilAttributeEquals(string id, string expectedValue, string htmlTagAttribute)
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            Driver.Navigate().GoToUrl(pageAUrl);
             Assert.AreEqual(true, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
@@ -133,7 +134,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestWaitUntilAttributeEqualsFalse(string id, string expectedValue, string htmlTagAttribute)
         {
-            Assert.AreEqual(false, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue, 2));
+            Assert.AreEqual(false, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
@@ -142,7 +143,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestWaitUntilAttributeNotEquals(string id, string expectedValue, string htmlTagAttribute)
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory()));
+            Driver.Navigate().GoToUrl(pageAUrl);
             string newValue = "newValue";
             Driver.FindElement(id).SetAttribute(htmlTagAttribute, newValue);
             Assert.AreEqual(true, Driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
@@ -151,7 +152,7 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestWaitUntilAlertExists()
         {
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../../TestWebPages/ThrowAlert.html", Directory.GetCurrentDirectory()));
+            Driver.Navigate().GoToUrl(throwAlertUrl);
             Driver.FindElement("button1").Click();
             var test = Driver.WaitUntilAlertExists();
             Assert.AreEqual(true, Driver.WaitUntilAlertExists());
@@ -194,7 +195,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitUnilVisableFalse(By locator)
         {
             var indexPage = new IndexPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisable(Driver, locator, 2));
             Assert.AreEqual(false, Driver.ElementExists(locator));
         }
@@ -248,7 +249,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitUnilVisablesFalse(List<By> locators)
         {
             var indexPage = new IndexPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
 
             Assert.AreEqual(false, indexPage.PageALink.ClickWaitUnilVisables(Driver, locators, 2));
             foreach (var locator in locators)
@@ -261,7 +262,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitForPage()
         {
             var indexPage = new IndexPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             Assert.That(indexPage.IsPageLoaded());
             Assert.DoesNotThrow(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<AjaxyControlPage>(Driver); });
         }
@@ -270,7 +271,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestClickWaitForPageFalse()
         {
             var indexPage = new IndexPage(Driver);
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             Assert.That(indexPage.IsPageLoaded());
             Assert.Throws<PageNotLoadedException>(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<IndexPage>(Driver); });
         }
@@ -281,7 +282,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestTakeScreenShot()
         {
             string file = "TestTakeScreenShot.jpeg";
-            Driver.Navigate().GoToUrl(string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), IndexPage.Url));
+            Driver.Navigate().GoToUrl(IndexPage.Url);
             Assert.DoesNotThrow(delegate { Driver.TakeScreenShot(file, ImageFormat.Jpeg); });
             Assert.AreEqual(true, File.Exists(file));
             var f = new FileInfo(file);
