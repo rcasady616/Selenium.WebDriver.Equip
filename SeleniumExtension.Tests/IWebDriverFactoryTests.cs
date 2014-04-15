@@ -8,6 +8,7 @@ using OpenQA.Selenium.Safari;
 namespace SeleniumExtension.Tests
 {
     [TestFixture]
+    [Category("LocalDriver")]
     public class IWebDriverFactoryTests
     {
         private IWebDriver _driver;
@@ -30,8 +31,7 @@ namespace SeleniumExtension.Tests
         [Test]
         public void GetFirefoxBrowserTest()
         {
-            _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("file:///C:/temp/New%20folder%20(4)/Medrio%20-%20eClinical%20Overnight.htm");
-            //_driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
 

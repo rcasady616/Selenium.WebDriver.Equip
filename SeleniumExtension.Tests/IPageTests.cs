@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
@@ -11,16 +10,14 @@ namespace SeleniumExtension.Tests
         [Test]
         public void TestIsPageLoaded()
         {
-            string url = string.Format(@"file:///{0}../../../..{1}", Directory.GetCurrentDirectory(), AjaxyControlPage.Url);
-            Driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
             Assert.AreEqual(true, new AjaxyControlPage(Driver).IsPageLoaded());
         }
 
         [Test]
         public void TestIsPageLoadedFalse()
         {
-            string url = string.Format(@"file:///{0}../../../../TestWebPages/PageA.htm", Directory.GetCurrentDirectory());
-            Driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(pageAUrl);
             Assert.AreEqual(false, new AjaxyControlPage(Driver).IsPageLoaded());
         }
     }

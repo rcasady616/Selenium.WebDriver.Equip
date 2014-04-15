@@ -12,6 +12,7 @@ using TestWebPages.UIFramework.Pages;
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
+    [Category("Extension")]
     public class IWebDriverExtensionTests : BaseTest
     {
         private AjaxyControlPage ajaxyControlPage;

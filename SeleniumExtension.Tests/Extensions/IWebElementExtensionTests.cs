@@ -7,10 +7,9 @@ using TestWebPages.UIFramework.Pages;
 namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
+    [Category("Extension")]
     public class IWebElementExtensionTests : BaseTest
     {
-        private string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
-
         [SetUp]
         public void SetupTest()
         {

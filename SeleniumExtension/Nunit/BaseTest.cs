@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using SeleniumExtension.SauceLabs;
 
 namespace SeleniumExtension.Nunit
 {
@@ -12,6 +11,8 @@ namespace SeleniumExtension.Nunit
     [TestFixture]
     public class BaseTest
     {
+        public string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+
         /// <summary>
         /// Instance of the browser used for the test
         /// </summary>

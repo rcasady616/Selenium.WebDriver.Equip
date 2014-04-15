@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests
 {
     [TestFixture]
-    public class ISearchContextExtentionTests : BasePage
+    [Category("Extension")]
+    public class ISearchContextExtentionTests : BaseTest
     {
         public AjaxyControlPage Page;
 
