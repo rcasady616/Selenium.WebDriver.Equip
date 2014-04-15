@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Configuration;
 using System.IO;
 using System.Reflection;
 using NUnit.Framework;
@@ -7,8 +6,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using SeleniumExtension.SauceLabs;
-using SeleniumExtension.Server;
-using OpenQA.Selenium.Remote;
 
 namespace SeleniumExtension
 {
