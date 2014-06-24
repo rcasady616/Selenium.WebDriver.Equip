@@ -178,6 +178,17 @@ namespace SeleniumExtension
             };
         }
 
+        public static Func<IWebDriver, bool> AlertTextEquals(string text)
+        {
+            return (iWebDriver) =>
+            {
+                IAlert alert = iWebDriver.SwitchTo().Alert();
+                if (alert != null)
+                    return (text == alert.Text);
+                return false;
+            };
+        }
+
         private static IWebElement ElementIfVisible(IWebElement element)
         {
             if (element.Displayed)
