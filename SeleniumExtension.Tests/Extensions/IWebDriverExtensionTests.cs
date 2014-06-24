@@ -155,8 +155,16 @@ namespace SeleniumExtension.Tests.Extensions
         {
             Driver.Navigate().GoToUrl(throwAlertUrl);
             Driver.FindElement("button1").Click();
-            var test = Driver.WaitUntilAlertExists();
             Assert.AreEqual(true, Driver.WaitUntilAlertExists());
+            Driver.SwitchTo().Alert().Accept();
+        }
+
+        [Test]
+        public void TestWaitUntilAlertTextEquals()
+        {
+            Driver.Navigate().GoToUrl(throwAlertUrl);
+            Driver.FindElement("button1").Click();
+            Assert.AreEqual(true, Driver.WaitUntilAlertTextEquals("Hello! I am an alert box!"));
             Driver.SwitchTo().Alert().Accept();
         }
 
