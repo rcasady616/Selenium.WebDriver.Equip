@@ -74,7 +74,12 @@ namespace OpenQA.Selenium
         public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = 10)
         {
             return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextEquals(text), waitTimeInSeconds);
-        } 
+        }
+
+        public static bool WaitUntilAlertTextContains(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = 10)
+        {
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextContains(text), waitTimeInSeconds);
+        }
 
         public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ImageFormat imageFormat)
         {
