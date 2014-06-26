@@ -168,6 +168,14 @@ namespace SeleniumExtension.Tests.Extensions
             Driver.SwitchTo().Alert().Accept();
         }
 
+        [Test]
+        public void TestWaitUntilAlertTextContains()
+        {
+            Driver.Navigate().GoToUrl(throwAlertUrl);
+            Driver.FindElement("button1").Click();
+            Assert.True(Driver.WaitUntilAlertTextContains("I am an alert box"));
+        }
+
         #endregion
 
         #region click
