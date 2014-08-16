@@ -84,6 +84,7 @@
     <Content Include="PageA.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Tables.html" />
     <Content Include="ThrowAlert.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

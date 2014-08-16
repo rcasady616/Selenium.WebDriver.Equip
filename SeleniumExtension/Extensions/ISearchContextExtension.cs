@@ -7,7 +7,7 @@ using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
-    public static class ISearchContextExtention
+    public static class ISearchContextExtension
     {
         /// <summary>
         /// Finds the first <see cref="IWebElement"/> using its id

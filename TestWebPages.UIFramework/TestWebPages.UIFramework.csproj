@@ -85,6 +85,7 @@
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\FileUploadPage.cs" />
     <Compile Include="Pages\IndexPage.cs" />
+    <Compile Include="Pages\TablesPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

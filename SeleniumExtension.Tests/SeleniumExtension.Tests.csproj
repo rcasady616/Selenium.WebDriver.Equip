@@ -90,6 +90,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\TableTests.cs" />
     <Compile Include="Extensions\IWebDriverExtensionTests.cs" />
     <Compile Include="IPageTests.cs" />
     <Compile Include="Extensions\ISearchContextExtensionTests.cs" />
