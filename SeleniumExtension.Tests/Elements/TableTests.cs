@@ -90,16 +90,8 @@ namespace SeleniumExtension.Tests.Elements
         #region table with header
 
         [TestCase(1, 1, "ID")]
-        [TestCase(1, 2, "1")]
-        [TestCase(1, 3, "2")]
-        [TestCase(1, 4, "3")]
-        [TestCase(1, 5, "4")]
         [TestCase(1, 6, "5")]
         [TestCase(2, 1, "Subject ID")]
-        [TestCase(2, 2, "1001")]
-        [TestCase(2, 3, "1003")]
-        [TestCase(2, 4, "1002")]
-        [TestCase(2, 5, "1008")]
         [TestCase(2, 6, "1007")]
         public void GetCellByIndexWithHeaderRow(int column, int row, string cell)
         {
@@ -109,16 +101,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase(1, "ID", "ID", 1)]
-        [TestCase(1, "1", "1", 1)]
-        [TestCase(1, "2", "2", 1)]
-        [TestCase(1, "3", "3", 1)]
-        [TestCase(1, "4", "4", 1)]
         [TestCase(1, "5", "5", 1)]
         [TestCase(2, "ID", "Subject ID", 2)]
-        [TestCase(2, "1", "1001", 2)]
-        [TestCase(2, "2", "1003", 2)]
-        [TestCase(2, "3", "1002", 2)]
-        [TestCase(2, "4", "1008", 2)]
         [TestCase(2, "5", "1007", 2)]
         public void GetCellColumnIndexRowlabelWithHeaderRow(int column, string row, string cell, int rowIndex)
         {
@@ -128,16 +112,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase("ID", 1, "ID")]
-        [TestCase("ID", 2, "1")]
-        [TestCase("ID", 3, "2")]
-        [TestCase("ID", 4, "3")]
-        [TestCase("ID", 5, "4")]
         [TestCase("ID", 6, "5")]
         [TestCase("Subject ID", 1, "Subject ID")]
-        [TestCase("Subject ID", 2, "1001")]
-        [TestCase("Subject ID", 3, "1003")]
-        [TestCase("Subject ID", 4, "1002")]
-        [TestCase("Subject ID", 5, "1008")]
         [TestCase("Subject ID", 6, "1007")]
         public void GetCellColumnLabelRowIndexWithheaderRow(string column, int row, string cell, int columnIndex = 1)
         {
@@ -147,16 +123,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase("ID", "ID", "ID")]
-        [TestCase("ID", "1", "1")]
-        [TestCase("ID", "2", "2")]
-        [TestCase("ID", "3", "3")]
-        [TestCase("ID", "4", "4")]
         [TestCase("ID", "5", "5")]
         [TestCase("Subject ID", "Subject ID", "Subject ID")]
-        [TestCase("Subject ID", "1001", "1001")]
-        [TestCase("Subject ID", "1003", "1003")]
-        [TestCase("Subject ID", "1002", "1002")]
-        [TestCase("Subject ID", "1008", "1008")]
         [TestCase("Subject ID", "1007", "1007")]
         public void GetCellColumnLabelRowLabelWithHeaderRow(string column, string row, string cell)
         {
@@ -170,16 +138,8 @@ namespace SeleniumExtension.Tests.Elements
         #region table without header row
 
         [TestCase(1, 1, "ID")]
-        [TestCase(1, 2, "1")]
-        [TestCase(1, 3, "2")]
-        [TestCase(1, 4, "3")]
-        [TestCase(1, 5, "4")]
         [TestCase(1, 6, "5")]
         [TestCase(2, 1, "Subject ID")]
-        [TestCase(2, 2, "1001")]
-        [TestCase(2, 3, "1003")]
-        [TestCase(2, 4, "1002")]
-        [TestCase(2, 5, "1008")]
         [TestCase(2, 6, "1007")]
         public void GetCellByIndexWithOutHeaderRow(int column, int row, string cell)
         {
@@ -189,16 +149,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase(1, "ID", "ID")]
-        [TestCase(1, "1", "1")]
-        [TestCase(1, "2", "2")]
-        [TestCase(1, "3", "3")]
-        [TestCase(1, "4", "4")]
         [TestCase(1, "5", "5")]
         [TestCase(2, "ID", "Subject ID")]
-        [TestCase(2, "1", "1001")]
-        [TestCase(2, "2", "1003")]
-        [TestCase(2, "3", "1002")]
-        [TestCase(2, "4", "1008")]
         [TestCase(2, "5", "1007")]
         public void GetCellColumnIndexRowlabelWithOutheaderRow(int column, string row, string cell)
         {
@@ -208,16 +160,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase("ID", 1, "ID")]
-        [TestCase("ID", 2, "1")]
-        [TestCase("ID", 3, "2")]
-        [TestCase("ID", 4, "3")]
-        [TestCase("ID", 5, "4")]
         [TestCase("ID", 6, "5")]
         [TestCase("Subject ID", 1, "Subject ID")]
-        [TestCase("Subject ID", 2, "1001")]
-        [TestCase("Subject ID", 3, "1003")]
-        [TestCase("Subject ID", 4, "1002")]
-        [TestCase("Subject ID", 5, "1008")]
         [TestCase("Subject ID", 6, "1007")]
         public void GetCellColumnLabelRowIndexWithOutheaderRow(string column, int row, string cell)
         {
@@ -227,16 +171,8 @@ namespace SeleniumExtension.Tests.Elements
         }
 
         [TestCase("ID", "ID", "ID")]
-        [TestCase("ID", "1", "1")]
-        [TestCase("ID", "2", "2")]
-        [TestCase("ID", "3", "3")]
-        [TestCase("ID", "4", "4")]
         [TestCase("ID", "5", "5")]
         [TestCase("Subject ID", "Subject ID", "Subject ID")]
-        [TestCase("Subject ID", "1001", "1001")]
-        [TestCase("Subject ID", "1003", "1003")]
-        [TestCase("Subject ID", "1002", "1002")]
-        [TestCase("Subject ID", "1008", "1008")]
         [TestCase("Subject ID", "1007", "1007")]
         public void GetCellColumnLabelRowLabelWithOutHeaderRow(string column, string row, string cell)
         {
