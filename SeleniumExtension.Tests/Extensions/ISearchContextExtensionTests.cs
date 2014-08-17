@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
-namespace SeleniumExtension.Tests
+namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
     [Category("Extension")]

@@ -3,7 +3,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using OpenQA.Selenium;
 
-namespace SeleniumExtension.Nunit
+namespace SeleniumExtension
 {
     public class TestCapture
     {
