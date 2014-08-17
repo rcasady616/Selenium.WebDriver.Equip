@@ -128,10 +128,10 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
-        [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
-        [TestCase("label1", "label one", HtmlTagAttribute.Title)]
-        [TestCase("add1", "add", HtmlTagAttribute.Value)]
-        [TestCase("add1", "", HtmlTagAttribute.Class)]
+        [TestCase("text1", "notmyinput", HtmlTagAttribute.Class)]
+        [TestCase("label1", "not label one", HtmlTagAttribute.Title)]
+        [TestCase("add1", "not add", HtmlTagAttribute.Value)]
+        [TestCase("text1", "", HtmlTagAttribute.Class)]
         public void TestWaitUntilAttributeEqualsFalse(string id, string expectedValue, string htmlTagAttribute)
         {
             Assert.AreEqual(false, Driver.WaitUntilAttributeEquals(By.Id(id), htmlTagAttribute, expectedValue));
