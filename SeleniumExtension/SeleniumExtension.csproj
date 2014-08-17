@@ -114,7 +114,6 @@
     <Compile Include="Extensions\IWebElementExtension.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Nunit\BaseTest.cs" />
     <Compile Include="TestCapture.cs" />
     <Compile Include="PageNotLoadedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

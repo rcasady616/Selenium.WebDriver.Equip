@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests

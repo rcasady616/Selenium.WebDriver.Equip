@@ -4,7 +4,6 @@ using System.Reflection;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using SeleniumExtension.Nunit;
 using SeleniumExtension.SauceLabs;
 using SeleniumExtension.Server;
 

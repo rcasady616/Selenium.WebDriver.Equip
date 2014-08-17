@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using SeleniumExtension.Nunit;
 using TestWebPages.UIFramework.Pages;
 
 namespace SeleniumExtension.Tests.Extensions

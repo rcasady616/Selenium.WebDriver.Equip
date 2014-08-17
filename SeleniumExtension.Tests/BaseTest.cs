@@ -3,7 +3,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
-namespace SeleniumExtension.Nunit
+namespace SeleniumExtension.Tests
 {
     /// <summary>
     /// A base fixture for Selenium testing single browser per test
