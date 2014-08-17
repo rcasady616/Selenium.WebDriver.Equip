@@ -1,9 +1,11 @@
 ﻿using OpenQA.Selenium;
 
-namespace TestWebPages.UIFramework.Pages
+namespace SeleniumExtension
 {
     public class BasePage
     {
+        public IWebDriver Driver { get; set; }
+     
         public BasePage(IWebDriver driver)
         {
             Driver = driver;
@@ -12,7 +14,5 @@ namespace TestWebPages.UIFramework.Pages
         public BasePage()
         {
         }
-
-        public IWebDriver Driver { get; set; }
     }
 }

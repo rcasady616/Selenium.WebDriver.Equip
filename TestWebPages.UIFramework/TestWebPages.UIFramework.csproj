@@ -82,7 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Pages\AjaxyControlPage.cs" />
-    <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\FileUploadPage.cs" />
     <Compile Include="Pages\IndexPage.cs" />
     <Compile Include="Pages\TablesPage.cs" />

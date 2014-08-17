@@ -99,11 +99,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BasePage.cs" />
     <Compile Include="ExpectedCondition.cs" />
+    <Compile Include="Extensions\ISearchContextExtension.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="HtmlTags.cs" />
     <Compile Include="IPage.cs" />
-    <Compile Include="Extensions\ISearchContextExtention.cs" />
     <Compile Include="Extensions\IWebDriverExtension.cs" />
     <Compile Include="SauceLabs\Constants.cs" />
     <Compile Include="SauceLabs\Job.cs" />
