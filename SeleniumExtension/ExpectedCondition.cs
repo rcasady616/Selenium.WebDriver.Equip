@@ -115,14 +115,26 @@ namespace SeleniumExtension
         {
             return (searchContext) =>
             {
+                bool notVisiable = false;
                 try
                 {
-                    return null != ElementIfVisible(searchContext.FindElement(locator));
+                    if(!searchContext.ElementExists(locator))
+                        return true;
+                    notVisiable = !ElementVisible(searchContext.FindElement(locator));
                 }
                 catch (StaleElementReferenceException)
                 {
                     return true;
                 }
+                catch (NoSuchElementException)
+                {
+                    return true;
+                }
+                catch (WebDriverTimeoutException)
+                {
+                    return true;
+                }
+                return notVisiable;
             };
         }
 
@@ -205,6 +217,13 @@ namespace SeleniumExtension
             if (element.Displayed)
                 return element;
             return null;
+        }
+
+        private static bool ElementVisible(IWebElement element)
+        {
+            if (element.Displayed)
+                return true;
+            return false;
         }
     }
 }

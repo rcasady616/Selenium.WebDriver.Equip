@@ -27,7 +27,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
         public static bool ElementExists(this ISearchContext iSearchContext, By locator)
         {
-            return iSearchContext.FindElements(locator).Count > 0;
+            return iSearchContext.WaitUntilExists(locator, 0);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace OpenQA.Selenium
             }
             return null;
         }
-     
+
         #region Expected conditions to wait
 
         /// <summary>
@@ -138,6 +138,11 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not visible; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = 10)
         {
+            if (!iSearchContext.ElementExists(locator))
+            {
+                Console.WriteLine("Element did not exist, element cannot be visable, by: {0}", locator);
+                return true;
+            }
             return iSearchContext.WaitUntil(ExpectedCondition.ElementNotVisible(locator), maxWaitTimeInSeconds);
         }
 
@@ -363,6 +368,6 @@ namespace OpenQA.Selenium
             iSearchContext.Riprova(() => iSearchContext.FindElement(By.ClassName("tableRow")).SendKeys("val"));
         }
 
-        #endregion 
+        #endregion
     }
 }
