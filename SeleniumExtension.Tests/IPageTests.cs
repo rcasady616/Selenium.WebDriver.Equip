@@ -6,6 +6,8 @@ namespace SeleniumExtension.Tests
     [TestFixture]
     public class IPageTests : BaseTest
     {
+        public string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+
         [Test]
         public void TestIsPageLoaded()
         {

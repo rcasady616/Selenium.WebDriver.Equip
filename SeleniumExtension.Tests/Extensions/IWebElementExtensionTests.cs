@@ -9,6 +9,8 @@ namespace SeleniumExtension.Tests.Extensions
     [Category("Extension")]
     public class IWebElementExtensionTests : BaseTest
     {
+        public string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+
         [SetUp]
         public void SetupTest()
         {
