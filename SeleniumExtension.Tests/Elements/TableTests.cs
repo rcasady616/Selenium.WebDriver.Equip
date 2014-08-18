@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using NUnit.Framework;
-using NUnit.Framework.Constraints;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
 
@@ -64,6 +61,7 @@ namespace SeleniumExtension.Tests.Elements
     //}
 
     [TestFixture]
+    [Category("Elements")]
     public class TableTests : BaseTest
     {
         public TablesPage Page;
