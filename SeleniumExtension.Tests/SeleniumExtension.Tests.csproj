@@ -99,7 +99,6 @@
     <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="Extensions\IWebElementExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\SeleniumServerManagerTests.cs" />
     <Compile Include="Server\SeleniumServerTests.cs" />
   </ItemGroup>
   <ItemGroup>
