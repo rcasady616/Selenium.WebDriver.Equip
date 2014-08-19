@@ -112,10 +112,10 @@ namespace SeleniumExtension.Tests.Elements
         [TestCase("ID", 6, "5")]
         [TestCase("Subject ID", 1, "Subject ID")]
         [TestCase("Subject ID", 6, "1007")]
-        public void GetCellColumnLabelRowIndexWithheaderRow(string column, int row, string cell, int columnIndex = 1)
+        public void GetCellColumnLabelRowIndexWithheaderRow(string column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne));
+            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne), 2, 1);
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
