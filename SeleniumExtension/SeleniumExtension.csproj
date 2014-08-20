@@ -111,7 +111,7 @@
     <Compile Include="SauceLabs\Constants.cs" />
     <Compile Include="SauceLabs\Job.cs" />
     <Compile Include="SearchContextWait.cs" />
-    <Compile Include="TableElement.cs" />
+    <Compile Include="Elements\TableElement.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\IWebElementExtension.cs">
       <SubType>Code</SubType>

@@ -17,10 +17,10 @@ namespace SeleniumExtension.Server
         public static void Start(string seleniumServerFilePath)
         {
             if (!File.Exists(seleniumServerFilePath))
-                throw new Exception(string.Format("Could not find selenium-server, file name: {0}", seleniumServerFilePath));
-            Process.Start("Java.exe", string.Format("-jar \"{0}\" ", seleniumServerFilePath));
+                throw new FileNotFoundException(string.Format("Could not find selenium-server, file name: {0}", seleniumServerFilePath));
+            Process.Start("java", string.Format("-jar \"{0}\"", seleniumServerFilePath));
             if (!WaitUntilSeleniumServerRunning())
-                throw new Exception("");
+                throw new Exception("Server didnt start as expected");
         }
 
         public static void Start()
@@ -28,7 +28,7 @@ namespace SeleniumExtension.Server
             //var se = new SeleniumSettings();
 
             //se.SettingChanging += new SettingChangingEventHandler(MyCustomSettings_SettingChanging);
-            Start(@"C:\Users\rcasady\Downloads\selenium-server-standalone-2.33.0.jar");//se.SeleniumServerStandAlonePath);
+            Start(@"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar");//se.SeleniumServerStandAlonePath);
             //if (!isSeleniumServerRunning())
             //{
             //    var se = new SeleniumSettings();
