@@ -1,11 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
-using SeleniumExtension.SauceLabs;
-using SeleniumExtension.Server;
 
 namespace SeleniumExtension.Tests
 {

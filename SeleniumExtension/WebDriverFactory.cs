@@ -5,7 +5,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-using SeleniumExtension.SauceLabs;
 
 namespace SeleniumExtension
 {
@@ -48,8 +47,8 @@ namespace SeleniumExtension
             capabillities.SetCapability(CapabilityType.Version, version);
             capabillities.SetCapability(CapabilityType.Platform, platform);
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
-            capabillities.SetCapability("username", Constants.SAUCE_LABS_ACCOUNT_NAME); // supply sauce labs username 
-            capabillities.SetCapability("accessKey", Constants.SAUCE_LABS_ACCOUNT_KEY);  // supply sauce labs account key
+            capabillities.SetCapability("username", Environment.GetEnvironmentVariable("SAUCELABS_USERNAME")); // supply sauce labs username 
+            capabillities.SetCapability("accessKey", Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY"));  // supply sauce labs account key
             capabillities.SetCapability("name", TestContext.CurrentContext.Test.Name); 
 
             capabillities.IsJavaScriptEnabled = true;
