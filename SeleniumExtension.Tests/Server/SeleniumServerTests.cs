@@ -1,65 +1,80 @@
 ﻿using System.Threading;
 using NUnit.Framework;
 using SeleniumExtension.Server;
+using SeleniumExtension.Settings;
+using WebDriverProxy.Proxies;
 
 namespace SeleniumExtension.Tests
 {
     [TestFixture]
+    [Category("SeleniumServer")]
     public class SeleniumServerTests
     {
+        public ISeleniumServer SeleniumServer;
+        public SeleniumServerSettings settings;
+
         [SetUp]
         public void Setup()
         {
-            if (SeleniumServer.IsSeleniumServerRunning())
-            {
-                Assert.AreEqual(true, SeleniumServer.Stop());
-                Thread.Sleep(10000);
-            }
+            settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
         }
 
         [TearDown]
         public void TearDown()
         {
             if (SeleniumServer.IsSeleniumServerRunning())
-                Assert.AreEqual(true, SeleniumServer.Stop());
+            {
+                SeleniumServer.Stop();
+                Assert.AreEqual(true, SeleniumServer.WaitUntilStopped());
+            }
+        }
+
+        #region single grid
+
+        [Test]
+        public void SingleGridStartStopWait()
+        {
+            SeleniumServer = new SeleniumServerProxy(settings);
+            SeleniumServer.Start();
+            Assert.AreEqual(true, SeleniumServer.WaitUntilRunning());
+
+            SeleniumServer.Stop();
+            Assert.AreEqual(true, SeleniumServer.WaitUntilStopped());
+        }
+
+        #endregion
+
+        #region Hub
+
+        [Test]
+        public void HubStartStopWait()
+        {
+            SeleniumServer = new SeleniumServerHubProxy(settings);
+            SeleniumServer.Start();
+            Assert.AreEqual(true, SeleniumServer.WaitUntilRunning());
+            SeleniumServer.Stop();
+            Assert.AreEqual(true, SeleniumServer.WaitUntilStopped());
         }
 
         [Test]
-        [Category("SeleniumServer")]
-        public void TestStart()
+        public void RegisterNodeToHub()
         {
+            var hubSettings = new SeleniumServerSettings { HostName = "localhost", Port = "5555", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
+            
+            SeleniumServer = new SeleniumServerHubProxy(hubSettings);
             SeleniumServer.Start();
-            Assert.AreEqual(true, SeleniumServer.IsSeleniumServerRunning());
+            Assert.That(SeleniumServer.WaitUntilRunning());
+
+            var node = new SeleniumServerProxy(settings);
+            node.Start("-role node -hub http://localhost:5555/grid/register");
+            Assert.That(node.WaitUntilRunning());
+
+            //node.
+
+            node.Stop();
+            Assert.That(node.WaitUntilStopped());
         }
 
-        [Test]
-        [Category("SeleniumServer")]
-        public void TestStop()
-        {
-            SeleniumServer.Start();
-            Thread.Sleep(10000);
-            Assert.AreEqual(true, SeleniumServer.WaitUntilSeleniumServerRunning());
-            Assert.AreEqual(true, SeleniumServer.Stop());
-        }
-
-        [TestCase(true)]
-        [TestCase(false)]
-        [Category("SeleniumServer")]
-        public void TestWaitUntilSeleniumServerRunning(bool running)
-        {
-            if (running)
-                SeleniumServer.Start();
-            Assert.AreEqual(running, SeleniumServer.WaitUntilSeleniumServerRunning());
-        }
-
-        [TestCase(true)]
-        [TestCase(false)]
-        [Category("SeleniumServer")]
-        public void TestIsSeleniumServerRunning(bool running)
-        {
-            if (running)
-                SeleniumServer.Start();
-            Assert.AreEqual(running, SeleniumServer.IsSeleniumServerRunning());
-        }
+        #endregion
     }
 }

@@ -58,15 +58,14 @@ namespace SeleniumExtension
             return driver;
         }
 
-        public static RemoteWebDriver GetRemoteWebDriver(SeleniumSettings seleniumSettings = null, string url = null)
+        public static RemoteWebDriver GetRemoteWebDriver(string browserName = "firefox", string version = "10", string url = null)
         {
-            if (seleniumSettings == null)
-                seleniumSettings = new SeleniumSettings();
+           
             DesiredCapabilities capabillities = null;
             RemoteWebDriver driver = null;
             try
             {
-                switch (seleniumSettings.BrowserName)
+                switch (browserName)
                 {
                     case "internet explorer":
                         capabillities = DesiredCapabilities.InternetExplorer();
@@ -95,7 +94,7 @@ namespace SeleniumExtension
 
                 capabillities.IsJavaScriptEnabled = true;
                 driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
-                driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? seleniumSettings.BrowserUrl : url);
+                driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "http://rickcasady.blogspot.com/" : url);
                 
 
             }
