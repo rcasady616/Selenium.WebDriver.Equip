@@ -42,9 +42,8 @@ namespace SeleniumExtension
         {
             var capabillities = new DesiredCapabilities(browser, version, new Platform(platform));
             RemoteWebDriver driver = null;
-            //capabillities.SetCapability(CapabilityType.Version, version);
-            //capabillities.SetCapability(CapabilityType.Platform, platform);
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
+            // add these two enviorment variables and there values to use Sauce Labs
             capabillities.SetCapability("username", Environment.GetEnvironmentVariable("SAUCELABS_USERNAME")); // supply sauce labs username 
             capabillities.SetCapability("accessKey", Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY"));  // supply sauce labs account key
             capabillities.SetCapability("name", TestContext.CurrentContext.Test.Name);
