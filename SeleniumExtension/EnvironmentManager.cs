@@ -10,11 +10,13 @@ namespace SeleniumExtension
     public class EnvironmentManager
     {
         public static readonly EnvironmentManager instance = new EnvironmentManager();
-        private Type driverType;
+        private Type webDriverType;
         private Browser browser;
         private IWebDriver driver;
         //private UrlBuilder urlBuilder;
-        private string remoteCapabilities;
+        private string remoteBrowserName;
+        private string remoteBrowserVersion;
+        private PlatformType remoteOsPlatform;
 
         public Browser Browser
         {
@@ -23,13 +25,15 @@ namespace SeleniumExtension
 
         private EnvironmentManager()
         {
-            string driverClassName = GetSettingValue("Driver");
+            string driverClassName = GetSettingValue("Driver.Class");
             string assemblyName = GetSettingValue("Assembly");
-            Assembly assembly = Assembly.Load(assemblyName);
-            driverType = assembly.GetType(driverClassName);
-            browser = (Browser)Enum.Parse(typeof(Browser), GetSettingValue("DriverName"));
-            remoteCapabilities = GetSettingValue("RemoteCapabilities");
-
+            var assembly = Assembly.Load(assemblyName);
+            webDriverType = assembly.GetType(driverClassName);
+            browser = (Browser)Enum.Parse(typeof(Browser), GetSettingValue("Drivertype"));
+            remoteBrowserName = GetSettingValue("RemoteBrowserName");
+            remoteBrowserVersion = GetSettingValue("RemoteBrowserVersion");
+            
+            remoteOsPlatform = (PlatformType)Enum.Parse(typeof(PlatformType), GetSettingValue("RemoteOsPlatform"));
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             string assemblyLocation = executingAssembly.Location;
 
@@ -42,11 +46,11 @@ namespace SeleniumExtension
 
             //info = info.Parent;
             //bool autoStartRemoteServer = false;
-            //if (browser == Browser.Remote)
-            //{
-            //    autoStartRemoteServer = bool.Parse(GetSettingValue("AutoStartRemoteServer"));
-            //}
-            
+            if (browser == Browser.Remote)
+            {
+
+            }
+
 
         }
 
@@ -72,8 +76,10 @@ namespace SeleniumExtension
         public IWebDriver CreateDriverInstance()
         {
             if (browser == Browser.SauceLabs)
-                return WebDriverFactory.GetSauceDriver();
-            return (IWebDriver)Activator.CreateInstance(driverType);
+                return WebDriverFactory.GetSauceDriver(remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
+            if (browser == Browser.Remote)
+                throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
+            return (IWebDriver)Activator.CreateInstance(webDriverType);
         }
 
         public IWebDriver CreateFreshDriver()
