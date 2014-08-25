@@ -117,6 +117,10 @@
     <Compile Include="SearchContextWait.cs" />
     <Compile Include="Elements\TableElement.cs" />
     <Compile Include="Server\ISeleniumServer.cs" />
+    <Compile Include="Server\Json\CapabilitiesContract.cs" />
+    <Compile Include="Server\Json\ConfigurationContract.cs" />
+    <Compile Include="Server\Json\JsonSerializer.cs" />
+    <Compile Include="Server\Json\NodeContract.cs" />
     <Compile Include="Server\SeleniumServerHubProxy.cs" />
     <Compile Include="Server\SeleniumServerProxyBase.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />

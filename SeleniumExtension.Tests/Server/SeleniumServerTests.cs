@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using NUnit.Framework;
 using SeleniumExtension.Server;
+using SeleniumExtension.Server.Json;
 using SeleniumExtension.Settings;
 using WebDriverProxy.Proxies;
 
@@ -41,6 +42,31 @@ namespace SeleniumExtension.Tests
             SeleniumServer.Stop();
             Assert.AreEqual(true, SeleniumServer.WaitUntilStopped());
         }
+        
+        #endregion
+
+        #region node
+
+        [Test]
+        public void StartNodeByJsonFile()
+        {
+            var hubSettings = new SeleniumServerSettings { HostName = "localhost", Port = "5555", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
+
+            SeleniumServer = new SeleniumServerHubProxy(hubSettings);
+            SeleniumServer.Start();
+            Assert.That(SeleniumServer.WaitUntilRunning());
+            
+            var node = new SeleniumServerProxy(settings);
+            JsonSerializer.Serialize(new NodeContract(), "DefaultConfiguration.json");
+            string config = string.Format("-role node -hub http://localhost:5555/grid/register -nodeConfig \"{0}\"", "DefaultConfiguration.json");
+            node.Start(config);
+            Assert.That(node.WaitUntilRunning());
+
+            //assert configuration
+
+            node.Stop();
+            Assert.That(node.WaitUntilStopped());
+        }
 
         #endregion
 
@@ -60,7 +86,7 @@ namespace SeleniumExtension.Tests
         public void RegisterNodeToHub()
         {
             var hubSettings = new SeleniumServerSettings { HostName = "localhost", Port = "5555", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
-            
+
             SeleniumServer = new SeleniumServerHubProxy(hubSettings);
             SeleniumServer.Start();
             Assert.That(SeleniumServer.WaitUntilRunning());
@@ -69,7 +95,7 @@ namespace SeleniumExtension.Tests
             node.Start("-role node -hub http://localhost:5555/grid/register");
             Assert.That(node.WaitUntilRunning());
 
-            //node.
+            // assert node is registered on hub
 
             node.Stop();
             Assert.That(node.WaitUntilStopped());
