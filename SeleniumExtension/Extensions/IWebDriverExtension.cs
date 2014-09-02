@@ -8,6 +8,11 @@ namespace OpenQA.Selenium
     public static class IWebDriverExtention
     {
 
+        public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)
+        {
+            return iWebDriver.SwitchBrowserWindow(driver => driver.WaitUntilTitleIs(title));
+        }
+
         /// <summary>
         /// Switches to the first browser that meets the <see cref="ExpectedConditions"/>
         /// </summary>

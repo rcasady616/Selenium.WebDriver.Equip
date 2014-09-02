@@ -51,27 +51,6 @@ namespace OpenQA.Selenium
             return true;
         }
 
-        /// <summary>
-        /// Switches to the first browser that meets the <see cref="ExpectedConditions"/>
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="condition">The <see cref="ExpectedConditions"/> criteria to <see cref="WebDriverWait"/> for</param>
-        /// <returns>An instance of the <see cref="IWebDriver"/></returns>
-        public static IWebDriver SwitchBrowserWindow<T>(this IWebDriver iWebDriver, Func<ISearchContext, T> condition)
-        {
-            var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
-            IWebDriver newWindowDriver = null;
-            var windowIterator = iWebDriver.WindowHandles;
-            foreach (var window in windowIterator)
-            {
-                var handel = window;
-                newWindowDriver = iWebDriver.SwitchTo().Window(window);
-                if (newWindowDriver.WaitUntil(condition, 2))
-                    return newWindowDriver;
-            }
-            return null;
-        }
-
         #region Expected conditions to wait
 
         /// <summary>
@@ -343,7 +322,27 @@ namespace OpenQA.Selenium
             }
         }
 
-        public static void Riprova(this ISearchContext iSearchContext, Action action, int maxTimeoutInSeconds = 10)
+        public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)
+        {
+            var ticks = DateTime.Now.Ticks;
+            while (true)
+            {
+                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= timeoutseconds)
+                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", timeoutseconds));
+                try
+                {
+                    return func(list());
+                }
+                catch (StaleElementReferenceException)
+                {
+                    Console.WriteLine("caught stale element reference exception, retrying..");
+                    Thread.Sleep(500);
+                }
+            }
+        }
+
+        // action dosent return
+        public static void RetryActionOnStaleElement(this ISearchContext iSearchContext, Action action, int maxTimeoutInSeconds = 10)
         {
             var ticks = DateTime.Now.Ticks;
             while (true)
@@ -365,7 +364,13 @@ namespace OpenQA.Selenium
 
         public static void warap(this ISearchContext iSearchContext)
         {
-            iSearchContext.Riprova(() => iSearchContext.FindElement(By.ClassName("tableRow")).SendKeys("val"));
+            iSearchContext.RetryActionOnStaleElement(() => iSearchContext.FindElement(By.ClassName("tableRow")).Click());
+            //IWebElement i = iSearchContext.RetryActionOnStaleElement(() => iSearchContext.FindElements(By.ClassName("tableRow")));
+
+            //() => iSearchContext.FindElement(By.ClassName("tableRow")).SendKeys("val"));
+            //var e = Driver.RetryOnStaleElements(() => Driver.FindElement(By.ClassName("tableRow")), element => element.FindElement(By.ClassName("tableRow")), 10);
+            //Driver.Riprova(() => Driver.FindElement(By.ClassName("tableRow")).SendKeys("val"), 10);
+            //Driver.re(() => Driver.FindElement(By.ClassName("tableRow")).SendKeys("val"), 10);
         }
 
         #endregion
