@@ -47,7 +47,6 @@ namespace SeleniumExtension
             capabillities.SetCapability("username", Environment.GetEnvironmentVariable("SAUCELABS_USERNAME")); // supply sauce labs username 
             capabillities.SetCapability("accessKey", Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY"));  // supply sauce labs account key
             capabillities.SetCapability("name", TestContext.CurrentContext.Test.Name);
-
             capabillities.IsJavaScriptEnabled = true;
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
             driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "Rickcasady.com" : url);

@@ -44,7 +44,7 @@ namespace SeleniumExtension.Tests.Extensions
         {
             Driver.Navigate().GoToUrl(IndexPage.Url);
             var index = new IndexPage(Driver);
-
+             
             index.AjaxyControlNewWindowLink.Click();
             Assert.IsNull(Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("false")));
         }
@@ -56,7 +56,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilTitleIs(bool expected, string title)
         {
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
-        }
+       }
 
         [TestCase(true, "TestIsPageLoaded", 10)]
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]

@@ -322,25 +322,6 @@ namespace OpenQA.Selenium
             }
         }
 
-        public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)
-        {
-            var ticks = DateTime.Now.Ticks;
-            while (true)
-            {
-                if (new TimeSpan(DateTime.Now.Ticks - ticks).TotalSeconds >= timeoutseconds)
-                    throw new TimeoutException(string.Format("operation exceeded {0} seconds.", timeoutseconds));
-                try
-                {
-                    return func(list());
-                }
-                catch (StaleElementReferenceException)
-                {
-                    Console.WriteLine("caught stale element reference exception, retrying..");
-                    Thread.Sleep(500);
-                }
-            }
-        }
-
         // action dosent return
         public static void RetryActionOnStaleElement(this ISearchContext iSearchContext, Action action, int maxTimeoutInSeconds = 10)
         {

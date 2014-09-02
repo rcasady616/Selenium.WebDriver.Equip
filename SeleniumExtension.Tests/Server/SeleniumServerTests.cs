@@ -1,9 +1,7 @@
-﻿using System.Threading;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using SeleniumExtension.Server;
 using SeleniumExtension.Server.Json;
 using SeleniumExtension.Settings;
-using WebDriverProxy.Proxies;
 
 namespace SeleniumExtension.Tests
 {
