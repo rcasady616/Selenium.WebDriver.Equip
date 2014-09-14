@@ -5,7 +5,7 @@ using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
-    public static class IWebDriverExtention
+    public static class WebDriverExtention
     {
 
         public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)

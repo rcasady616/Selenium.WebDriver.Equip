@@ -7,14 +7,14 @@ namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
     [Category("Extension")]
-    public class IWebElementExtensionTests : BaseTest
+    public class WebElementExtensionTests : BaseTest
     {
-        public string pageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
+        public string PageAUrl = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/PageA.htm";
 
         [SetUp]
-        public void SetupTest()
+        public void SetupWebElementExtensionTests()
         {
-            Driver.Navigate().GoToUrl(pageAUrl);
+            Driver.Navigate().GoToUrl(PageAUrl);
         }
         
         #region Mock properties extention
@@ -82,6 +82,7 @@ namespace SeleniumExtension.Tests.Extensions
 
         #endregion
 
+        [Category("Unit")]
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
         [TestCase("label1", "label one", HtmlTagAttribute.Title)]
         [TestCase("add1", "add", HtmlTagAttribute.Value)]
@@ -91,12 +92,13 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expectedValue, Driver.FindElement(By.Id(id)).GetAttribute(htmlTagAttribute));
         }
 
+        [Category("Unit")]
         [TestCase("text1", HtmlTagAttribute.Class)]
         [TestCase("label1", HtmlTagAttribute.Title)]
         [TestCase("add1", HtmlTagAttribute.Value)]
         public void TestSetAttribute(string id, string htmlTagAttribute)
         {
-            string expectedValue = "newValue";
+            const string expectedValue = "newValue";
             Driver.FindElement(By.Id(id)).SetAttribute(htmlTagAttribute, expectedValue);
             Assert.AreEqual(expectedValue, Driver.FindElement(By.Id(id)).GetAttribute(htmlTagAttribute));
         }

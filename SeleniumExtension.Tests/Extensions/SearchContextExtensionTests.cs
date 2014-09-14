@@ -6,12 +6,12 @@ namespace SeleniumExtension.Tests.Extensions
 {
     [TestFixture]
     [Category("Extension")]
-    public class ISearchContextExtentionTests : BaseTest
+    public class SearchContextExtentionTests : BaseTest
     {
         public AjaxyControlPage Page;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupSearchContextExtentionTests()
         {
             Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
             Page = new AjaxyControlPage(Driver);

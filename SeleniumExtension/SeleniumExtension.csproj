@@ -109,11 +109,11 @@
     <Compile Include="Browser.cs" />
     <Compile Include="EnvironmentManager.cs" />
     <Compile Include="ExpectedCondition.cs" />
-    <Compile Include="Extensions\ISearchContextExtension.cs" />
+    <Compile Include="Extensions\SearchContextExtension.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="HtmlTags.cs" />
     <Compile Include="IPage.cs" />
-    <Compile Include="Extensions\IWebDriverExtension.cs" />
+    <Compile Include="Extensions\WebDriverExtention.cs" />
     <Compile Include="SearchContextWait.cs" />
     <Compile Include="Elements\TableElement.cs" />
     <Compile Include="Server\ISeleniumServer.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="Server\SeleniumServerProxyBase.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="WebDriverFactory.cs" />
-    <Compile Include="Extensions\IWebElementExtension.cs">
+    <Compile Include="Extensions\WebElementExtension.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="TestCapture.cs" />

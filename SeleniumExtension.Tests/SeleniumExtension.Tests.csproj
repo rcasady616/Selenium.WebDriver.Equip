@@ -97,12 +97,12 @@
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
     <Compile Include="Elements\TableTests.cs" />
-    <Compile Include="Extensions\IWebDriverExtensionTests.cs" />
+    <Compile Include="Extensions\WebDriverExtensionTests.cs" />
     <Compile Include="IPageTests.cs" />
-    <Compile Include="Extensions\ISearchContextExtensionTests.cs" />
+    <Compile Include="Extensions\SearchContextExtensionTests.cs" />
     <Compile Include="IWebDriverFactoryRemoteTests.cs" />
     <Compile Include="IWebDriverFactoryTests.cs" />
-    <Compile Include="Extensions\IWebElementExtensionTests.cs" />
+    <Compile Include="Extensions\WebElementExtensionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\SeleniumServerTests.cs" />
   </ItemGroup>

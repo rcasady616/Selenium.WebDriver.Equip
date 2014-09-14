@@ -5,7 +5,7 @@ using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
-    public static class IWebElementExtention
+    public static class WebElementExtention
     {
         #region Mock properties extention
 

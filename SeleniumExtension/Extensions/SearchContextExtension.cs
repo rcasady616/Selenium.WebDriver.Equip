@@ -7,7 +7,7 @@ using SeleniumExtension;
 
 namespace OpenQA.Selenium
 {
-    public static class ISearchContextExtension
+    public static class SearchContextExtension
     {
        /// <summary>
         /// Check is a <see cref="IWebElement"/> to be exists in the page DOM
