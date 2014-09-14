@@ -26,6 +26,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, ajaxyControlPage.IsPageLoaded());
         }
 
+        [Category("Unit")]
         [Test]
         public void TestSwitchBrowserWindow()
         {
@@ -39,6 +40,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.That(ajaxyControl.IsPageLoaded());
         }
 
+        [Category("Unit")]
         [Test]
         public void TestSwitchBrowserWindowNull()
         {
@@ -58,6 +60,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
        }
 
+        [Category("Unit")]
         [TestCase(true, "TestIsPageLoaded", 10)]
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt", 2)]
         public void TestWaitUntilTextEquals(bool expected, string text, int waitTime)
@@ -118,6 +121,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(expected, Driver.WaitUntilTextNotContains(By.Id(text), text, waitTime));
         }
 
+        [Category("Unit")]
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
         [TestCase("label1", "label one", HtmlTagAttribute.Title)]
         [TestCase("add1", "add", HtmlTagAttribute.Value)]
@@ -158,6 +162,7 @@ namespace SeleniumExtension.Tests.Extensions
             Driver.SwitchTo().Alert().Accept();
         }
 
+        [Category("Unit")]
         [Test]
         public void TestWaitUntilAlertTextEquals()
         {
@@ -179,6 +184,7 @@ namespace SeleniumExtension.Tests.Extensions
 
         #region click
 
+        [Category("Unit")]
         [Test, TestCaseSource("GetLocators")]
         public void TestClickWaitForCondition(By locator)
         {
@@ -188,6 +194,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, Driver.ElementExists(locator));
         }
 
+        [Category("Unit")]
         [Test]
         public void TestClickWaitForConditionFalse()
         {
@@ -274,6 +281,7 @@ namespace SeleniumExtension.Tests.Extensions
             }
         }
 
+        [Category("Unit")]
         [Test]
         public void TestClickWaitForPage()
         {
@@ -283,6 +291,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.DoesNotThrow(delegate { indexPage.AjaxyControlLink.ClickWaitForPage<AjaxyControlPage>(Driver); });
         }
 
+        [Category("Unit")]
         [Test]
         public void TestClickWaitForPageFalse()
         {
@@ -294,6 +303,7 @@ namespace SeleniumExtension.Tests.Extensions
 
         #endregion
 
+        [Category("Unit")]
         [Test]
         public void TestTakeScreenShot()
         {
