@@ -18,12 +18,7 @@ namespace SeleniumExtension.Tests.Extensions
             Assert.AreEqual(true, Page.IsPageLoaded());
         }
 
-        [Test]
-        public void TestFindElementExtention()
-        {
-            Assert.AreEqual(Driver.FindElement(By.Id("red")), Driver.FindElement("red"));
-        }
-
+        [Category("unit")]
         [TestCase(true, "red")]
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestElementExists(bool expected, string id)

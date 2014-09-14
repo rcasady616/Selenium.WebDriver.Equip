@@ -145,7 +145,7 @@ namespace SeleniumExtension.Tests.Extensions
         {
             Driver.Navigate().GoToUrl(pageAUrl);
             string newValue = "newValue";
-            Driver.FindElement(id).SetAttribute(htmlTagAttribute, newValue);
+            Driver.FindElement(By.Id(id)).SetAttribute(htmlTagAttribute, newValue);
             Assert.AreEqual(true, Driver.WaitUntilAttributeNotEquals(By.Id(id), htmlTagAttribute, expectedValue));
         }
 
@@ -153,7 +153,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilAlertExists()
         {
             Driver.Navigate().GoToUrl(throwAlertUrl);
-            Driver.FindElement("button1").Click();
+            Driver.FindElement(By.Id("button1")).Click();
             Assert.AreEqual(true, Driver.WaitUntilAlertExists());
             Driver.SwitchTo().Alert().Accept();
         }
@@ -162,7 +162,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilAlertTextEquals()
         {
             Driver.Navigate().GoToUrl(throwAlertUrl);
-            Driver.FindElement("button1").Click();
+            Driver.FindElement(By.Id("button1")).Click();
             Assert.AreEqual(true, Driver.WaitUntilAlertTextEquals("Hello! I am an alert box!"));
             Driver.SwitchTo().Alert().Accept();
         }
@@ -171,7 +171,7 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestWaitUntilAlertTextContains()
         {
             Driver.Navigate().GoToUrl(throwAlertUrl);
-            Driver.FindElement("button1").Click();
+            Driver.FindElement(By.Id("button1")).Click();
             Assert.True(Driver.WaitUntilAlertTextContains("I am an alert box"));
         }
 
@@ -312,9 +312,6 @@ namespace SeleniumExtension.Tests.Extensions
             var ret = new List<List<By>>();
             ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv });
             ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio });
-            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio });
-            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio });
-            ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton });
             ret.Add(new List<By>() { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton, AjaxyControlPage.ByNewLableText });
             return ret;
         }

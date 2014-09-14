@@ -22,62 +22,62 @@ namespace SeleniumExtension.Tests.Extensions
         [Test]
         public void TestClassNameExtention()
         {
-            Assert.AreEqual("myinput", Driver.FindElement("text1").ClassName());
+            Assert.AreEqual("myinput", Driver.FindElement(By.Id("text1")).ClassName());
         }
 
         [Test]
         public void TestIdExtention()
         {
-            Assert.AreEqual("text1", Driver.FindElement("text1").Id());
+            Assert.AreEqual("text1", Driver.FindElement(By.Id("text1")).Id());
         }
 
         [Test]
         public void TestNameExtention()
         {
-            Assert.AreEqual("text1", Driver.FindElement("text1").Name());
+            Assert.AreEqual("text1", Driver.FindElement(By.Id("text1")).Name());
         }
 
         [Test]
         public void TestNextSiblingExtention()
         {
-            Assert.AreEqual(Driver.FindElement("tdthree"), Driver.FindElement("tdtwo").NextSibling());
+            Assert.AreEqual(Driver.FindElement(By.Id("tdthree")), Driver.FindElement(By.Id("tdtwo")).NextSibling());
         }
 
         [Test]
         public void TestParentExtention()
         {
-            Assert.AreEqual(Driver.FindElement("tdone"), Driver.FindElement("text1").Parent());
+            Assert.AreEqual(Driver.FindElement(By.Id("tdone")), Driver.FindElement(By.Id("text1")).Parent());
         }
 
         [Test]
         public void TestPreviousSiblingExtention()
         {
-            Assert.AreEqual(Driver.FindElement("tdone"), Driver.FindElement("tdtwo").PreviousSibling());
+            Assert.AreEqual(Driver.FindElement(By.Id("tdone")), Driver.FindElement(By.Id("tdtwo")).PreviousSibling());
         }
 
         [Test]
         public void TestStyleExtention()
         {
-            string style = Driver.FindElement("label1").Style().Replace(" ", "");
+            string style = Driver.FindElement(By.Id("label1")).Style().Replace(" ", "");
             Assert.AreEqual("background-color:red;", style);
         }
 
         [Test]
         public void TestTitleExtention()
         {
-            Assert.AreEqual("label one", Driver.FindElement("label1").Title());
+            Assert.AreEqual("label one", Driver.FindElement(By.Id("label1")).Title());
         }
 
         [Test]
         public void TestTypeExtention()
         {
-            Assert.AreEqual("button", Driver.FindElement("add1").Type());
+            Assert.AreEqual("button", Driver.FindElement(By.Id("add1")).Type());
         }
 
         [Test]
         public void TestValueExtention()
         {
-            Assert.AreEqual("add", Driver.FindElement("add1").Value());
+            Assert.AreEqual("add", Driver.FindElement(By.Id("add1")).Value());
         }
 
         #endregion
@@ -88,7 +88,7 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase("add1", "", HtmlTagAttribute.Class)]
         public void TestGetAttribute(string id, string expectedValue, string htmlTagAttribute)
         {
-            Assert.AreEqual(expectedValue, Driver.FindElement(id).GetAttribute(htmlTagAttribute));
+            Assert.AreEqual(expectedValue, Driver.FindElement(By.Id(id)).GetAttribute(htmlTagAttribute));
         }
 
         [TestCase("text1", HtmlTagAttribute.Class)]
@@ -97,8 +97,8 @@ namespace SeleniumExtension.Tests.Extensions
         public void TestSetAttribute(string id, string htmlTagAttribute)
         {
             string expectedValue = "newValue";
-            Driver.FindElement(id).SetAttribute(htmlTagAttribute, expectedValue);
-            Assert.AreEqual(expectedValue, Driver.FindElement(id).GetAttribute(htmlTagAttribute));
+            Driver.FindElement(By.Id(id)).SetAttribute(htmlTagAttribute, expectedValue);
+            Assert.AreEqual(expectedValue, Driver.FindElement(By.Id(id)).GetAttribute(htmlTagAttribute));
         }
 
         [Test]
