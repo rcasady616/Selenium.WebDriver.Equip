@@ -3,19 +3,19 @@ using SeleniumExtension.Server;
 using SeleniumExtension.Server.Json;
 using SeleniumExtension.Settings;
 
-namespace SeleniumExtension.Tests
+namespace SeleniumExtension.Tests.Server
 {
     [TestFixture]
     [Category("SeleniumServer")]
     public class SeleniumServerTests
     {
         public ISeleniumServer SeleniumServer;
-        public SeleniumServerSettings settings;
+        public SeleniumServerSettings Settings;
 
         [SetUp]
         public void Setup()
         {
-            settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
+            Settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\rcasady\Downloads\selenium-server-standalone-2.42.2.jar" };
         }
 
         [TearDown]
@@ -33,7 +33,7 @@ namespace SeleniumExtension.Tests
         [Test]
         public void SingleGridStartStopWait()
         {
-            SeleniumServer = new SeleniumServerProxy(settings);
+            SeleniumServer = new SeleniumServerProxy(Settings);
             SeleniumServer.Start();
             Assert.AreEqual(true, SeleniumServer.WaitUntilRunning());
 
@@ -54,13 +54,13 @@ namespace SeleniumExtension.Tests
             SeleniumServer.Start();
             Assert.That(SeleniumServer.WaitUntilRunning());
             
-            var node = new SeleniumServerProxy(settings);
+            var node = new SeleniumServerProxy(Settings);
             JsonSerializer.Serialize(new NodeContract(), "DefaultConfiguration.json");
             string config = string.Format("-role node -hub http://localhost:5555/grid/register -nodeConfig \"{0}\"", "DefaultConfiguration.json");
             node.Start(config);
             Assert.That(node.WaitUntilRunning());
 
-            //assert configuration
+            // todo assert configuration
 
             node.Stop();
             Assert.That(node.WaitUntilStopped());
@@ -73,7 +73,7 @@ namespace SeleniumExtension.Tests
         [Test]
         public void HubStartStopWait()
         {
-            SeleniumServer = new SeleniumServerHubProxy(settings);
+            SeleniumServer = new SeleniumServerHubProxy(Settings);
             SeleniumServer.Start();
             Assert.AreEqual(true, SeleniumServer.WaitUntilRunning());
             SeleniumServer.Stop();
@@ -89,11 +89,11 @@ namespace SeleniumExtension.Tests
             SeleniumServer.Start();
             Assert.That(SeleniumServer.WaitUntilRunning());
 
-            var node = new SeleniumServerProxy(settings);
+            var node = new SeleniumServerProxy(Settings);
             node.Start("-role node -hub http://localhost:5555/grid/register");
             Assert.That(node.WaitUntilRunning());
 
-            // assert node is registered on hub
+            // todo assert node is registered on hub
 
             node.Stop();
             Assert.That(node.WaitUntilStopped());
