@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
@@ -34,7 +35,7 @@ namespace SeleniumExtension.Tests
         {
             if (Driver != null)
             {
-                if (TestContext.CurrentContext.Result.Status == TestStatus.Failed)
+                if (TestContext.CurrentContext.Result.Outcome == ResultState.Success)
                     new TestCapture(Driver).CaptureWebPage(GetCleanTestName(TestContext.CurrentContext.Test.FullName) + ".Failed");
                 
                 EnvironmentManager.instance.CloseCurrentDriver();
