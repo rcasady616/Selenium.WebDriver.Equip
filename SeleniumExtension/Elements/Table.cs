@@ -6,19 +6,18 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumExtension.Elements
 {
-    public class TableElement
+    public class Table : BaseElement
     {
-        public IWebElement WrappedElement { get; set; }
         public int RowLabelIndex { get; set; }
         public int ColumnLabelIndex { get; set; }
         public bool HeaderRow { get { return WrappedElement.ElementExists(By.CssSelector("th")); } }
 
-        public TableElement(IWebElement iWebElement, int columnLabelIndex, int rowLabelIndex)
+        public Table(IWebElement iWebElement, int columnLabelIndex, int rowLabelIndex)
         {
             InitTable(iWebElement, columnLabelIndex, rowLabelIndex);
         }
 
-        public TableElement(IWebElement iWebElement)
+        public Table(IWebElement iWebElement)
         {
             InitTable(iWebElement, 1, 1);
         }

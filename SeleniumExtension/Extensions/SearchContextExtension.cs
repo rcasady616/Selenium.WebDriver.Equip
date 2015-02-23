@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Threading;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtension;
+using SeleniumExtension.Elements;
 
 namespace OpenQA.Selenium
 {
@@ -252,7 +253,7 @@ namespace OpenQA.Selenium
         }
 
         #endregion
-
+ 
         #region "Experimental "
 
         public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using OpenQA.Selenium.Internal;
 using SeleniumExtension;
+using SeleniumExtension.Elements;
 
 namespace OpenQA.Selenium
 {
@@ -192,6 +193,12 @@ namespace OpenQA.Selenium
                 throw new ArgumentException("element", "Element must wrap a web driver that supports javascript execution");
 
             javascript.ExecuteScript("arguments[0].setAttribute(arguments[1], arguments[2])", element, attributeName, value);
+        }
+
+        public static T Element<T>(this IWebElement iWebElement) where T : IHtmlElement, new()
+        {
+            var htmlElement = (T)Activator.CreateInstance(typeof(T), iWebElement);
+            return htmlElement;
         }
 
         #region experimental

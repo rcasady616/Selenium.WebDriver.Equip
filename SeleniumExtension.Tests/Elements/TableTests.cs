@@ -94,7 +94,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellByIndexWithHeaderRow(int column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -105,7 +105,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnIndexRowlabelWithHeaderRow(int column, string row, string cell, int rowIndex)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne), 1, rowIndex);
+            var table = new Table(Driver.FindElement(TablesPage.ByTableOne), 1, rowIndex);
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -116,7 +116,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnLabelRowIndexWithheaderRow(string column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne), 2, 1);
+            var table = new Table(Driver.FindElement(TablesPage.ByTableOne), 2, 1);
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -127,7 +127,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnLabelRowLabelWithHeaderRow(string column, string row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableOne));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -142,7 +142,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellByIndexWithOutHeaderRow(int column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableTwo));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -153,7 +153,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnIndexRowlabelWithOutheaderRow(int column, string row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableTwo));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -164,7 +164,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnLabelRowIndexWithOutheaderRow(string column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableTwo));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
 
@@ -175,7 +175,7 @@ namespace SeleniumExtension.Tests.Elements
         public void GetCellColumnLabelRowLabelWithOutHeaderRow(string column, string row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new TableElement(Driver.FindElement(TablesPage.ByTableTwo));
+            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
         #endregion

@@ -18,7 +18,7 @@ namespace TheInternet.UIFramework.Pages
 
         public void SortTable()
         {
-            var t = new TableElement(Driver.FindElement(ByExample1Table));
+            var t = new Table(Driver.FindElement(ByExample1Table));
             var start = t.GetCell(2, 2);
             t.GetCell(4, 1).Click();
             var end = t.GetCell(2, 2);
