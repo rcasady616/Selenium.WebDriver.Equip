@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace SeleniumExtension.Elements
 {
-    public class Table : BaseElement
+    public class Table : BaseElement, IHtmlElement
     {
         public int RowLabelIndex { get; set; }
         public int ColumnLabelIndex { get; set; }

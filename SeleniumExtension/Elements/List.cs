@@ -5,7 +5,7 @@ namespace SeleniumExtension.Elements
     /// <summary>
     /// HTML List element
     /// </summary>
-    public class List : BaseElement
+    public class List : BaseElement, IHtmlElement
     {
         /// <summary>
         /// 

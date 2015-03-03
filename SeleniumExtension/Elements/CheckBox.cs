@@ -8,6 +8,11 @@ namespace SeleniumExtension.Elements
     public class CheckBox : BaseElement, IHtmlElement
     {
         /// <summary>
+        /// Gets a value indicating whether or not this element is selected.
+        /// </summary>
+        public bool Selected { get { return WrappedElement.Selected; } }
+
+        /// <summary>
         /// 
         /// </summary>
         public CheckBox()
