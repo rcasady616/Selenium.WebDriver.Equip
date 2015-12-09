@@ -104,7 +104,7 @@ namespace SeleniumExtension
         {
             var sessionId = (string)((RemoteWebDriver)driver).Capabilities.GetCapability("webdriver.remote.sessionid");
             // get the status of the current test
-            bool passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
+            bool passed = (TestContext.CurrentContext.Result.Status == TestStatus.Passed);
             try
             {
                 // log the result to sauce labs

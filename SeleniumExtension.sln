@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumExtension", "SeleniumExtension\SeleniumExtension.csproj", "{941863E2-933B-482C-9DAA-8CC81069B2F6}"
 EndProject
@@ -21,10 +21,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheInternet.UIFramework", "TheInternet.UIFramework\TheInternet.UIFramework.csproj", "{596596CC-8D64-4D5A-B93C-15A384A8A0FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverProxy", "WebDriverProxy\WebDriverProxy.csproj", "{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{147AA873-65A8-4B94-91AC-1D08380BDE0B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumExtension.Tests.Unit", "Tests\SeleniumExtension.Tests.Unit\SeleniumExtension.Tests.Unit.csproj", "{3CA6127C-330E-476C-BF90-C6902B1A4D4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,17 +76,8 @@ Global
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x86.ActiveCfg = Release|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{3CA6127C-330E-476C-BF90-C6902B1A4D4C} = {147AA873-65A8-4B94-91AC-1D08380BDE0B}
 	EndGlobalSection
 EndGlobal

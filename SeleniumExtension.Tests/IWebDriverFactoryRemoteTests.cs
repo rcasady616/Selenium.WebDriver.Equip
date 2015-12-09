@@ -19,7 +19,7 @@ namespace SeleniumExtension.Tests
         {
             if (_driver != null)
             {
-                var passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
+                var passed = (TestContext.CurrentContext.Result.Status == TestStatus.Passed); 
                 try
                 {
                     ((IJavaScriptExecutor) _driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));

@@ -44,8 +44,8 @@ namespace SeleniumExtension
             RemoteWebDriver driver = null;
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
             // add these two enviorment variables and there values to use Sauce Labs
-            capabillities.SetCapability("username", Environment.GetEnvironmentVariable("SAUCELABS_USERNAME")); // supply sauce labs username 
-            capabillities.SetCapability("accessKey", Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY"));  // supply sauce labs account key
+            capabillities.SetCapability("username", Environment.GetEnvironmentVariable("SAUCELABS_USERNAME",EnvironmentVariableTarget.User)); // supply sauce labs username 
+            capabillities.SetCapability("accessKey", Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY",EnvironmentVariableTarget.User));  // supply sauce labs account key
             capabillities.SetCapability("name", TestContext.CurrentContext.Test.Name);
             capabillities.IsJavaScriptEnabled = true;
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
