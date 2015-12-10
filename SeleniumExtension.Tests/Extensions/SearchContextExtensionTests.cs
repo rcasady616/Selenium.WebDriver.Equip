@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
 
@@ -23,6 +24,11 @@ namespace SeleniumExtension.Tests.Extensions
         [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
         public void TestElementExists(bool expected, string id)
         {
+            var sw = new Stopwatch();
+            sw.Start();
+            var ret = Driver.ElementExists(By.Id(id));
+            sw.Stop();
+            Assert.Less(sw.Elapsed.Seconds, 1);
             Assert.AreEqual(expected, Driver.ElementExists(By.Id(id)));
         }
     }
