@@ -1,4 +1,5 @@
-﻿using Medrio.QA.UITestFramework.Pages;
+﻿using System.Diagnostics;
+using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
@@ -16,7 +17,7 @@ namespace SeleniumExtension.Tests.Extensions
         {
             Driver.Navigate().GoToUrl(PageAUrl);
         }
-        
+
         #region Mock properties extention
 
         [Test]
@@ -119,6 +120,46 @@ namespace SeleniumExtension.Tests.Extensions
             Driver.Navigate().GoToUrl(AjaxyControlPage.Url);
             Assert.That(ajaxPage.IsPageLoaded());
             Assert.That(!ajaxPage.GreenRadio.ClickWaitUntilPost(Driver));
+        }
+
+        [Category("unit")]
+        [TestCase(true, "add1")]
+        [TestCase(false, "NeverGonnaGetItNeverGonnaGetIt")]
+        public void TestWaitUntilExist(bool expected, string id)
+        {
+            var WaitTime = 2;
+            var sw = new Stopwatch();
+            sw.Start();
+            var actual = Driver.WaitUntilExists(By.Id(id), WaitTime);
+            sw.Stop();
+            if (expected)
+                Assert.Less(sw.Elapsed.Seconds, WaitTime);
+            else
+            {
+                Assert.LessOrEqual(sw.Elapsed.Seconds, WaitTime + 1);
+                Assert.GreaterOrEqual(sw.Elapsed.Seconds, WaitTime);
+            }
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Category("unit")]
+        [TestCase(false, "add1")]
+        [TestCase(true, "NeverGonnaGetItNeverGonnaGetIt")]
+        public void TestWaitUntilNotExist(bool expected, string id)
+        {
+            var WaitTime = 2;
+            var sw = new Stopwatch();
+            sw.Start();
+            var actual = Driver.WaitUntilNotExists(By.Id(id), WaitTime);
+            sw.Stop();
+            if (expected)
+                Assert.Less(sw.Elapsed.Seconds, WaitTime);
+            else
+            {
+                Assert.LessOrEqual(sw.Elapsed.Seconds, WaitTime + 1);
+                Assert.GreaterOrEqual(sw.Elapsed.Seconds, WaitTime);
+            }
+            Assert.AreEqual(expected, actual);
         }
     }
 }

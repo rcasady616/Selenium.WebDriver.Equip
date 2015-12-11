@@ -10,7 +10,7 @@ namespace OpenQA.Selenium
 {
     public static class SearchContextExtension
     {
-       /// <summary>
+        /// <summary>
         /// Check is a <see cref="IWebElement"/> to be exists in the page DOM
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
@@ -253,7 +253,7 @@ namespace OpenQA.Selenium
         }
 
         #endregion
- 
+
         #region "Experimental "
 
         public static T2 RetryOnStaleElements<T1, T2>(this ISearchContext iSearchContext, Func<T1> list, Func<T1, T2> func, int timeoutseconds = 10)

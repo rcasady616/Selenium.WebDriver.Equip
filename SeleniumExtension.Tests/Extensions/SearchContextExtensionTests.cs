@@ -26,10 +26,10 @@ namespace SeleniumExtension.Tests.Extensions
         {
             var sw = new Stopwatch();
             sw.Start();
-            var ret = Driver.ElementExists(By.Id(id));
+            var actual = Driver.ElementExists(By.Id(id));
             sw.Stop();
             Assert.Less(sw.Elapsed.Seconds, 1);
-            Assert.AreEqual(expected, Driver.ElementExists(By.Id(id)));
+            Assert.AreEqual(expected, actual);
         }
     }
 }
