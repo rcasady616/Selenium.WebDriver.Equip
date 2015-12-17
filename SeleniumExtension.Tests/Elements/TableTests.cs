@@ -68,7 +68,7 @@ namespace SeleniumExtension.Tests.Elements
         public TablesPage Page;
 
         [SetUp]
-        public void SetupTest()
+        public void SetupTableTests()
         {
             Driver.Navigate().GoToUrl(TablesPage.Url);
             Page = new TablesPage(Driver);
