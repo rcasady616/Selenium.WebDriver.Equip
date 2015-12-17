@@ -118,6 +118,7 @@
     <Compile Include="HtmlTags.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\WebDriverExtention.cs" />
+    <Compile Include="SauceLabs\SauceDriverKeys.cs" />
     <Compile Include="SearchContextWait.cs" />
     <Compile Include="Elements\Table.cs" />
     <Compile Include="Server\ISeleniumServer.cs" />
