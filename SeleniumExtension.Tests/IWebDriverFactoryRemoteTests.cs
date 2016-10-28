@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 
@@ -19,7 +20,7 @@ namespace SeleniumExtension.Tests
         {
             if (_driver != null)
             {
-                var passed = (TestContext.CurrentContext.Result.Status == TestStatus.Passed); 
+                var passed = (TestContext.CurrentContext.Result.Outcome == ResultState.Success); 
                 try
                 {
                     ((IJavaScriptExecutor) _driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
