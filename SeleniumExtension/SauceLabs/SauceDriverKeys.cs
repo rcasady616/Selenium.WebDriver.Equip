@@ -19,10 +19,10 @@ namespace SeleniumExtension.SauceLabs
         {
             get
             {
-                var userName = Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY");
-                if (string.IsNullOrEmpty(userName))
+                var userKey = Environment.GetEnvironmentVariable("SAUCELABS_ACCESSKEY");
+                if (string.IsNullOrEmpty(userKey))
                     throw new Exception("Missing environment variable, name: SAUCELABS_ACCESSKEY");
-                return userName; 
+                return userKey; 
             }
         }
     }
