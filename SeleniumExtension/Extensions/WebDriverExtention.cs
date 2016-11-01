@@ -73,7 +73,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int waitTimeInSeconds = 10)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertExists(), waitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), waitTimeInSeconds);
         }
 
         public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = 10)
