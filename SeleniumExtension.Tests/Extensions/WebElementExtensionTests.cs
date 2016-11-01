@@ -3,6 +3,7 @@ using Medrio.QA.UITestFramework.Pages;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using TestWebPages.UIFramework.Pages;
+using NMock2;
 
 namespace SeleniumExtension.Tests.Extensions
 {
@@ -16,26 +17,6 @@ namespace SeleniumExtension.Tests.Extensions
         public void SetupWebElementExtensionTests()
         {
             Driver.Navigate().GoToUrl(PageAUrl);
-        }
-
-        #region Mock properties extention
-
-        [Test]
-        public void TestClassNameExtention()
-        {
-            Assert.AreEqual("myinput", Driver.FindElement(By.Id("text1")).ClassName());
-        }
-
-        [Test]
-        public void TestIdExtention()
-        {
-            Assert.AreEqual("text1", Driver.FindElement(By.Id("text1")).Id());
-        }
-
-        [Test]
-        public void TestNameExtention()
-        {
-            Assert.AreEqual("text1", Driver.FindElement(By.Id("text1")).Name());
         }
 
         [Test]
@@ -55,33 +36,6 @@ namespace SeleniumExtension.Tests.Extensions
         {
             Assert.AreEqual(Driver.FindElement(By.Id("tdone")), Driver.FindElement(By.Id("tdtwo")).PreviousSibling());
         }
-
-        [Test]
-        public void TestStyleExtention()
-        {
-            string style = Driver.FindElement(By.Id("label1")).Style().Replace(" ", "");
-            Assert.AreEqual("background-color:red;", style);
-        }
-
-        [Test]
-        public void TestTitleExtention()
-        {
-            Assert.AreEqual("label one", Driver.FindElement(By.Id("label1")).Title());
-        }
-
-        [Test]
-        public void TestTypeExtention()
-        {
-            Assert.AreEqual("button", Driver.FindElement(By.Id("add1")).Type());
-        }
-
-        [Test]
-        public void TestValueExtention()
-        {
-            Assert.AreEqual("add", Driver.FindElement(By.Id("add1")).Value());
-        }
-
-        #endregion
 
         [Category("Unit")]
         [TestCase("text1", "myinput", HtmlTagAttribute.Class)]
@@ -160,6 +114,78 @@ namespace SeleniumExtension.Tests.Extensions
                 Assert.GreaterOrEqual(sw.Elapsed.Seconds, WaitTime);
             }
             Assert.AreEqual(expected, actual);
+        }
+    }
+
+    [TestFixture]
+    public class HeadLessWebElementExtensionTests
+    {
+        private Mockery mocks;
+        private IWebElement webElement;
+
+        public IWebElement WebElement { get { return webElement; } set { webElement = value; } }
+
+        [SetUp]
+        public void SetUp()
+        {
+            mocks = new Mockery();
+            webElement = mocks.NewMock<IWebElement>();
+        }
+
+        [Test]
+        public void TestClassNameExtention()
+        {
+            string className = "r2d2";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Class).Will(Return.Value(className));
+            StringAssert.AreEqualIgnoringCase(className, WebElement.ClassName());
+        }
+
+        [Test]
+        public void TestIdExtention()
+        {
+            string id = "3133";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Id).Will(Return.Value(id));
+            StringAssert.AreEqualIgnoringCase(id, WebElement.Id());
+        }
+
+        [Test]
+        public void TestNameExtention()
+        {
+            string name = "Lola";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Name).Will(Return.Value(name));
+            Assert.AreEqual(name, WebElement.Name());
+        }
+        
+        [Test]
+        public void TestStyleExtention()
+        {
+            string style = "background-color:red;";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Style).Will(Return.Value(style));
+            Assert.AreEqual( style,WebElement.Style());
+        }
+
+        [Test]
+        public void TestTitleExtention()
+        {
+            string title = "MR MRS SR JR";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Title).Will(Return.Value(title));
+            Assert.AreEqual(title, WebElement.Title());
+        }
+
+        [Test]
+        public void TestTypeExtention()
+        {
+            string type = "compact";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Type).Will(Return.Value(type));
+            Assert.AreEqual(type, WebElement.Type());
+        }
+
+        [Test]
+        public void TestValueExtention()
+        {
+            string val = "max";
+            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Value).Will(Return.Value(val));
+            Assert.AreEqual(val, WebElement.Value());
         }
     }
 }
