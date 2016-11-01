@@ -1,5 +1,8 @@
 ﻿namespace SeleniumExtension
 {
+    /// <summary>
+    /// Enumeration of all possiable browsers
+    /// </summary>
     public enum Browser
     {
         All,
