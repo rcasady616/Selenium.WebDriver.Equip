@@ -142,14 +142,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chromedriver.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IEDriverServer.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\WebDriverProxy\WebDriverProxy.csproj">
       <Project>{b854c1ac-860e-45e8-8fd2-85bc191acc9d}</Project>
       <Name>WebDriverProxy</Name>
