@@ -97,40 +97,7 @@ namespace SeleniumExtension.Tests.Elements
             var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
-
-        [TestCase(1, "ID", "ID", 1)]
-        [TestCase(1, "5", "5", 1)]
-        [TestCase(2, "ID", "Subject ID", 2)]
-        [TestCase(2, "5", "1007", 2)]
-        public void GetCellColumnIndexRowlabelWithHeaderRow(int column, string row, string cell, int rowIndex)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableOne), 1, rowIndex);
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
-        [TestCase("ID", 1, "ID")]
-        [TestCase("ID", 6, "5")]
-        [TestCase("Subject ID", 1, "Subject ID")]
-        [TestCase("Subject ID", 6, "1007")]
-        public void GetCellColumnLabelRowIndexWithheaderRow(string column, int row, string cell)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableOne), 2, 1);
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
-        [TestCase("ID", "ID", "ID")]
-        [TestCase("ID", "5", "5")]
-        [TestCase("Subject ID", "Subject ID", "Subject ID")]
-        [TestCase("Subject ID", "1007", "1007")]
-        public void GetCellColumnLabelRowLabelWithHeaderRow(string column, string row, string cell)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
+       
         #endregion
 
         #region table without header row
@@ -140,39 +107,6 @@ namespace SeleniumExtension.Tests.Elements
         [TestCase(2, 1, "Subject ID")]
         [TestCase(2, 6, "1007")]
         public void GetCellByIndexWithOutHeaderRow(int column, int row, string cell)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
-        [TestCase(1, "ID", "ID")]
-        [TestCase(1, "5", "5")]
-        [TestCase(2, "ID", "Subject ID")]
-        [TestCase(2, "5", "1007")]
-        public void GetCellColumnIndexRowlabelWithOutheaderRow(int column, string row, string cell)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
-        [TestCase("ID", 1, "ID")]
-        [TestCase("ID", 6, "5")]
-        [TestCase("Subject ID", 1, "Subject ID")]
-        [TestCase("Subject ID", 6, "1007")]
-        public void GetCellColumnLabelRowIndexWithOutheaderRow(string column, int row, string cell)
-        {
-            Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
-            Assert.AreEqual(cell, table.GetCell(column, row).Text);
-        }
-
-        [TestCase("ID", "ID", "ID")]
-        [TestCase("ID", "5", "5")]
-        [TestCase("Subject ID", "Subject ID", "Subject ID")]
-        [TestCase("Subject ID", "1007", "1007")]
-        public void GetCellColumnLabelRowLabelWithOutHeaderRow(string column, string row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
             var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));

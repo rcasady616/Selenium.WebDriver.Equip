@@ -12,10 +12,10 @@ namespace SeleniumExtension.Elements
         public int ColumnLabelIndex { get; set; }
         public bool HeaderRow { get { return WrappedElement.ElementExists(By.CssSelector("th")); } }
 
-        public Table(IWebElement iWebElement, int columnLabelIndex, int rowLabelIndex)
-        {
-            InitTable(iWebElement, columnLabelIndex, rowLabelIndex);
-        }
+        //public Table(IWebElement iWebElement, int columnLabelIndex, int rowLabelIndex)
+        //{
+        //    InitTable(iWebElement, columnLabelIndex, rowLabelIndex);
+        //}
 
         public Table(IWebElement iWebElement)
         {
@@ -63,32 +63,6 @@ namespace SeleniumExtension.Elements
             return WrappedElement.FindElement(By.CssSelector(string.Format("tr:nth-child({0})", rowNumber))).FindElements(By.CssSelector("td")).ToList();
         }
 
-        public int GetRowNumber(string rowLabel)
-        {
-            int addToIndex = 1;
-            if (WrappedElement.ElementExists(By.CssSelector("th")))
-            {
-                if (RowLabelIndex == 1)
-                    return 1;
-                addToIndex++;
-            }
-            var rows = GetColumn(RowLabelIndex);
-            for (int i = 0; i < rows.Count; i++)
-                if (rows[i].Text == rowLabel)
-                    return i + addToIndex;
-            throw new NotFoundException(string.Format("Row label not found, label name: {0}", rowLabel));
-        }
-
-        public int GetColumnNumber(string columnLabel)
-        {
-            int addToIndex = 1;
-            var cols = GetRow(ColumnLabelIndex);
-            for (int i = 0; i <= cols.Count; i++)
-                if (cols[i].Text == columnLabel)
-                    return i + addToIndex;
-            throw new NotFoundException(string.Format("Column label not found, label name: {0}", columnLabel));
-        }
-
         public IWebElement GetCell(int columnNumber, int rowNumber)
         {
             if (rowNumber == 1)
@@ -98,19 +72,45 @@ namespace SeleniumExtension.Elements
             return WrappedElement.FindElement(By.CssSelector(string.Format("tr:nth-child({0}) td:nth-child({1})", rowNumber, columnNumber)));
         }
 
-        public IWebElement GetCell(int columnNumber, string rowLabel)
-        {
-            return GetCell(columnNumber, GetRowNumber(rowLabel));
-        }
+        //public int GetRowNumber(string rowLabel)
+        //{
+        //    int addToIndex = 1;
+        //    if (WrappedElement.ElementExists(By.CssSelector("th")))
+        //    {
+        //        if (RowLabelIndex == 1)
+        //            return 1;
+        //        addToIndex++;
+        //    }
+        //    var rows = GetColumn(RowLabelIndex);
+        //    for (int i = 0; i < rows.Count; i++)
+        //        if (rows[i].Text == rowLabel)
+        //            return i + addToIndex;
+        //    throw new NotFoundException(string.Format("Row label not found, label name: {0}", rowLabel));
+        //}
 
-        public IWebElement GetCell(string columnLabel, string rowLabel)
-        {
-            return GetCell(GetColumnNumber(columnLabel), GetRowNumber(rowLabel));
-        }
+        //public int GetColumnNumber(string columnLabel)
+        //{
+        //    int addToIndex = 1;
+        //    var cols = GetRow(ColumnLabelIndex);
+        //    for (int i = 0; i <= cols.Count; i++)
+        //        if (cols[i].Text == columnLabel)
+        //            return i + addToIndex;
+        //    throw new NotFoundException(string.Format("Column label not found, label name: {0}", columnLabel));
+        //}
 
-        public IWebElement GetCell(string columnLabel, int rowNumber)
-        {
-            return GetCell(GetColumnNumber(columnLabel), rowNumber);
-        }
+        //public IWebElement GetCell(int columnNumber, string rowLabel)
+        //{
+        //    return GetCell(columnNumber, GetRowNumber(rowLabel));
+        //}
+
+        //public IWebElement GetCell(string columnLabel, string rowLabel)
+        //{
+        //    return GetCell(GetColumnNumber(columnLabel), GetRowNumber(rowLabel));
+        //}
+
+        //public IWebElement GetCell(string columnLabel, int rowNumber)
+        //{
+        //    return GetCell(GetColumnNumber(columnLabel), rowNumber);
+        //}
     }
 }
