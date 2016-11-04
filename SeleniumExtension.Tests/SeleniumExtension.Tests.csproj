@@ -102,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseTest.cs" />
+    <Compile Include="Elements\CheckBoxTests.cs" />
     <Compile Include="Elements\TableTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionTests.cs" />
     <Compile Include="IPageTests.cs" />
