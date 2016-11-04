@@ -10,6 +10,7 @@ namespace SeleniumExtension.Tests.Elements
     }
 
     [TestFixture]
+    [Category(TestCategories.HeadLess)]
     public class HeadLessCheckBoxTests
     {
         private Mockery mocks;

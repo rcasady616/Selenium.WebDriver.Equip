@@ -119,6 +119,7 @@ namespace SeleniumExtension.Tests.Extensions
 
     [TestFixture]
     [Category("Extension")]
+    [Category(TestCategories.HeadLess)]
     public class HeadLessWebElementExtensionTests
     {
         private Mockery mocks;
