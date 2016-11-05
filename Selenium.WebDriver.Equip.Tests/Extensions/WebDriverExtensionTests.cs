@@ -356,14 +356,6 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             mocks = new Mockery();
             driver = mocks.NewMock<IWebDriver>();
         }
-
-        [Test]
-        public void TestClassNameExtention()
-        {
-            string className = "r2d2";
-            Stub.On(driver).Method("FindElement").With("ii").Will(Return.Value(""));
-            StringAssert.AreEqualIgnoringCase(className, driver.FindElement(By.Id("")).ClassName());
-        }
         
     }
 }
