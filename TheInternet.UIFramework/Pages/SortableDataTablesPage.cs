@@ -1,6 +1,6 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtension;
-using SeleniumExtension.Elements;
+using Selenium.WebDriver.Equip;
+using Selenium.WebDriver.Equip.Elements;
 
 namespace TheInternet.UIFramework.Pages
 {

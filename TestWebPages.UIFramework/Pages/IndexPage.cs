@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtension;
+using Selenium.WebDriver.Equip;
 using TestWebPages.UIFramework.Pages;
 
 namespace Medrio.QA.UITestFramework.Pages

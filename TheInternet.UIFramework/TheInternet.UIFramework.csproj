@@ -73,13 +73,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SeleniumExtension\SeleniumExtension.csproj">
-      <Project>{941863e2-933b-482c-9daa-8cc81069b2f6}</Project>
-      <Name>SeleniumExtension</Name>
-    </ProjectReference>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Selenium.WebDriver.Equip\Selenium.WebDriver.Equip.csproj">
+      <Project>{c31da8a4-9d65-4d4f-9e0c-feeb44add258}</Project>
+      <Name>Selenium.WebDriver.Equip</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

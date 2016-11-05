@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium;
-using SeleniumExtension;
+using Selenium.WebDriver.Equip;
 
 namespace TestWebPages.UIFramework.Pages
 {
