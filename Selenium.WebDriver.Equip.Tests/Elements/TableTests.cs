@@ -132,6 +132,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
         }
 
         [Test]
+        [Ignore("work in progress")]
         public void TestClassNameExtention()
         {
             string className = "r2d2";
