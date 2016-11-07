@@ -38,9 +38,12 @@ namespace Selenium.WebDriver.Equip
             return GetBrowser<FirefoxDriver>(url);
         }
 
-        public static RemoteWebDriver GetSauceDriver(string testName, string browser = "firefox", string version = "10", PlatformType platform = PlatformType.XP, string url = null)
+        public static RemoteWebDriver GetSauceDriver(string testName, string browser = "firefox", string version = "10", string platform = "Windows 10", string url = null)
         {
-            var capabillities = new DesiredCapabilities(browser, version, new Platform(platform));
+            var capabillities = new DesiredCapabilities();
+            capabillities.SetCapability(CapabilityType.BrowserName, browser);
+            capabillities.SetCapability(CapabilityType.Platform, platform);
+            capabillities.SetCapability("version", version);
             RemoteWebDriver driver = null;
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
             // add these two enviorment variables and there values to use Sauce Labs

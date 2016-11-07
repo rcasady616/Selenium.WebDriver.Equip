@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using Selenium.WebDriver.Equip.SauceLabs;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -15,7 +16,7 @@ namespace Selenium.WebDriver.Equip
         //private UrlBuilder urlBuilder;
         private string remoteBrowserName;
         private string remoteBrowserVersion;
-        private PlatformType remoteOsPlatform;
+        private string remoteOsPlatform;
 
         public Browser Browser
         {
@@ -32,7 +33,7 @@ namespace Selenium.WebDriver.Equip
             remoteBrowserName = GetSettingValue("RemoteBrowserName");
             remoteBrowserVersion = GetSettingValue("RemoteBrowserVersion");
 
-            remoteOsPlatform = (PlatformType)Enum.Parse(typeof(PlatformType), GetSettingValue("RemoteOsPlatform"));
+            remoteOsPlatform = GetSettingValue("RemoteOsPlatform");
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             string assemblyLocation = executingAssembly.Location;
 
