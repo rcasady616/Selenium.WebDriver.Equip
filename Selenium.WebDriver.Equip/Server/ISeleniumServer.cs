@@ -1,5 +1,4 @@
-﻿using WebDriverProxy.DTO;
-
+﻿
 namespace Selenium.WebDriver.Equip.Server
 {
     public interface ISeleniumServer

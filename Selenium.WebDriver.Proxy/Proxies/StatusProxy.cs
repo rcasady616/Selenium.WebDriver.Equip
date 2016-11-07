@@ -1,7 +1,7 @@
 ﻿using RestSharp;
-using WebDriverProxy.DTO;
+using Selenium.WebDriver.Proxy.DTO;
 
-namespace WebDriverProxy.Proxies
+namespace Selenium.WebDriver.Proxy.Proxies
 {
     public class StatusProxy
     {

@@ -1,4 +1,4 @@
-﻿namespace WebDriverProxy.DTO
+﻿namespace Selenium.WebDriver.Proxy.DTO
 {
     public class StatusDto
     {
