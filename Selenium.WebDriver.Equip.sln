@@ -7,13 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebPages", "TestWebPage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebPages.UIFramework", "TestWebPages.UIFramework\TestWebPages.UIFramework.csproj", "{5D63DA78-6414-4A71-A94E-B0394A2DA09F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A91CE967-1FD7-4E17-B18C-3756FE0084F0}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheInternet.UIFramework", "TheInternet.UIFramework\TheInternet.UIFramework.csproj", "{596596CC-8D64-4D5A-B93C-15A384A8A0FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDriverProxy", "WebDriverProxy\WebDriverProxy.csproj", "{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}"
