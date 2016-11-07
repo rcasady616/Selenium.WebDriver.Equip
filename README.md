@@ -5,6 +5,8 @@ Selenium.WebDriver.Equip
 
 Selenium.WebDriver.Equip or Equip for short is a project that contains commonly use functionality that is missing in Selenium WebDriver. The functionalities in this project are not specific to any single web application. 
 
+Try it your self with the NuGet package at https://www.nuget.org/packages/Selenium.WebDriver.Equip/
+
 ## Key Features ##
 * IWebElements 
  * WaitUntil conditions like: WaitUntilExists, WaitUntilVisible
