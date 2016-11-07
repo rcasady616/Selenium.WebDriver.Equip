@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using Selenium.WebDriver.Equip.Settings;
-using Selenium.WebDriver.Proxy.DTO;
 
 namespace Selenium.WebDriver.Equip.Server
 {
