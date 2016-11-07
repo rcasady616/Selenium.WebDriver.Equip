@@ -127,10 +127,6 @@
       <Project>{c31da8a4-9d65-4d4f-9e0c-feeb44add258}</Project>
       <Name>Selenium.WebDriver.Equip</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestWebPages.UIFramework\TestWebPages.UIFramework.csproj">
-      <Project>{5D63DA78-6414-4A71-A94E-B0394A2DA09F}</Project>
-      <Name>TestWebPages.UIFramework</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
