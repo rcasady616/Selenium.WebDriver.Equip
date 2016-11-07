@@ -5,7 +5,12 @@ Selenium.WebDriver.Equip
 
 Selenium.WebDriver.Equip or Equip for short is a project that contains commonly use functionality that is missing in Selenium WebDriver. The functionalities in this project are not specific to any single web application. 
 
-Try it your self with the NuGet package at https://www.nuget.org/packages/Selenium.WebDriver.Equip/
+## NuGet ##
+NuGet package URL https://www.nuget.org/packages/Selenium.WebDriver.Equip/
+To install the lastest Selenium.WebDriver.Equip , run the following command in the Package Manager Console
+```powershell
+PM> Install-Package Selenium.WebDriver.Equip
+```
 
 ## Key Features ##
 * IWebElements 
