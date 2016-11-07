@@ -144,6 +144,5 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
             //Assert.AreEqual(cell, table.GetCell(column, row).Text);
 
         }
-
     }
 }

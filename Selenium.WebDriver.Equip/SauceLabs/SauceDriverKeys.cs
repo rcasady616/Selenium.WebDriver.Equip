@@ -2,8 +2,14 @@
 
 namespace Selenium.WebDriver.Equip.SauceLabs
 {
+    /// <summary>
+    /// Sauce Driver Username and access key
+    /// </summary>
     public class SauceDriverKeys
     {
+        /// <summary>
+        /// The Sauce Labs username, should be in save as enviorment variable 
+        /// </summary>
         public static string SAUCELABS_USERNAME
         {
             get 
@@ -15,6 +21,9 @@ namespace Selenium.WebDriver.Equip.SauceLabs
             }
         }
 
+        /// <summary>
+        /// The Sauce Labs access key, should be in save as enviorment variable 
+        /// </summary>
         public static string SAUCELABS_ACCESSKEY
         {
             get
