@@ -1,13 +1,13 @@
-SeleniumExtensions
+Selenium.WebDriver.Equip
 ==================
 
 [![Build status](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh)](https://ci.appveyor.com/project/rcasady616/seleniumextensions) [![Selenium Test Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/u/richardcasady)
 
-Selenium Extensions is a project that contains commonly use functionality that is missing in Selenium2 WebDriver. The functionalities in this project are not specific to any single web application. 
+Selenium.WebDriver.Equip or Equip for short is a project that contains commonly use functionality that is missing in Selenium WebDriver. The functionalities in this project are not specific to any single web application. 
 
 ## Key Features ##
 * IWebElements 
- * 14 WaitUntil conditions like: WaitUntilExists, WaitUntilVisible
+ * WaitUntil conditions like: WaitUntilExists, WaitUntilVisible
  * ElementExists method 
 * IWebDriver 
  * Switching browser windows
@@ -20,15 +20,16 @@ Selenium Extensions is a project that contains commonly use functionality that i
  * SauceLabs 
 
 ## Description ##
-These Selenium Extensions contains commonly use functionality for any web site 
+These Selenium.WebDriver.Equip contains commonly use functionality for any web site 
 
 ## Requirements ##
-* Visual Studio 2008
-* .NET Framework 4
+* Visual Studio 2015 free Community Edition 
+* .NET Framework 4.6
 * NuGet
 
 ## Build ##
 To build you will need to get the NuGet packages for the project and build in the Visual Studio
 
 ## Tests ##
+To run Sauace Labs account you need to add you userName and access keys to t he enviroment varables 
 You will need to download the Selenium Server witch you can get from here http://docs.seleniumhq.org/download/ Its required for running some of the tests
