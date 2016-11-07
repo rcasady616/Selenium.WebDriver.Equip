@@ -7,8 +7,8 @@
     <ProjectGuid>{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebDriverProxy</RootNamespace>
-    <AssemblyName>WebDriverProxy</AssemblyName>
+    <RootNamespace>Selenium.WebDriver.Proxy</RootNamespace>
+    <AssemblyName>Selenium.WebDriver.Proxy</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
