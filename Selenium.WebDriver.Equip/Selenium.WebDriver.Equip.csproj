@@ -124,7 +124,7 @@
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="Elements\CheckBox.cs" />
     <Compile Include="Elements\IHtmlElement.cs" />
-    <Compile Include="Elements\List.cs" />
+    <Compile Include="Elements\HtmlList.cs" />
     <Compile Include="EnvironmentManager.cs" />
     <Compile Include="ExpectedCondition.cs" />
     <Compile Include="Extensions\SearchContextExtension.cs" />

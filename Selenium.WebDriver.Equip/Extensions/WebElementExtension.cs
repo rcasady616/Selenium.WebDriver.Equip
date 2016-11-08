@@ -151,7 +151,7 @@ namespace OpenQA.Selenium
         /// Click the current <see cref="IWebElement"/> and then waits for the another <see cref="IWebElement"/> to be visible in the page DOM
         /// </summary>
         /// <param name="iWebDriver">to use for waiting</param>
-        /// <param name="bys">The <see cref="List"/>&lt;<see cref="By"/>&gt; locator of the <see cref="IWebElement"/>s to wait for</param>
+        /// <param name="bys">The <see cref="HtmlList"/>&lt;<see cref="By"/>&gt; locator of the <see cref="IWebElement"/>s to wait for</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/>s are visible; otherwise, <see langword="false"/></returns>
         public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys, int maxWaitTimeInSeconds = 10)

@@ -5,7 +5,7 @@ using Selenium.WebDriver.Equip.Elements;
 
 namespace Selenium.WebDriver.Equip.Tests.Elements
 {
-    class CheckBoxTests
+    public class CheckBoxTests
     {
     }
 

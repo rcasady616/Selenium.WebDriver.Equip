@@ -5,13 +5,13 @@ namespace Selenium.WebDriver.Equip.Elements
     /// <summary>
     /// HTML List element
     /// </summary>
-    public class List : BaseElement, IHtmlElement
+    public class HtmlList : BaseElement, IHtmlElement
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="iWebElement"></param>
-        public List(IWebElement iWebElement)
+        public HtmlList(IWebElement iWebElement)
         {
             WrappedElement = iWebElement;
         }
