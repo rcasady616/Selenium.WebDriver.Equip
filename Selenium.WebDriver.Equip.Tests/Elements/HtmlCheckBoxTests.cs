@@ -5,25 +5,25 @@ using Selenium.WebDriver.Equip.Elements;
 
 namespace Selenium.WebDriver.Equip.Tests.Elements
 {
-    public class CheckBoxTests
+    public class HtmlCheckBoxTests
     {
     }
 
     [TestFixture]
     [Category(TestCategories.HeadLess)]
     [Category(TestCategories.Elements)]
-    public class HeadLessCheckBoxTests
+    public class HeadLessHtmlCheckBoxTests
     {
         private Mockery mocks;
         private IWebElement iWebElement;
-        private CheckBox checkBox;
+        private HtmlCheckBox checkBox;
 
         [SetUp]
         public void SetUp()
         {
             mocks = new Mockery();
             iWebElement = mocks.NewMock<IWebElement>();
-            checkBox = new CheckBox(iWebElement);
+            checkBox = new HtmlCheckBox(iWebElement);
         }
 
         [TestCase(true)]

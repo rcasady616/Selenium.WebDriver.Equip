@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Selenium.WebDriver.Equip.Elements
 {
-    public class Table : BaseElement, IHtmlElement
+    public class HtmlTable : BaseElement, IHtmlElement
     {
         public int RowLabelIndex { get; set; }
         public int ColumnLabelIndex { get; set; }
@@ -17,7 +17,7 @@ namespace Selenium.WebDriver.Equip.Elements
         //    InitTable(iWebElement, columnLabelIndex, rowLabelIndex);
         //}
 
-        public Table(IWebElement iWebElement)
+        public HtmlTable(IWebElement iWebElement)
         {
             InitTable(iWebElement, 1, 1);
         }

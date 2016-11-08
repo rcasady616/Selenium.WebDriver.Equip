@@ -64,7 +64,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
 
     [TestFixture]
     [Category(TestCategories.Elements)]
-    public class TableTests : BaseTest
+    public class HtmlTableTests : BaseTest
     {
         public TablesPage Page;
 
@@ -95,7 +95,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
         public void GetCellByIndexWithHeaderRow(int column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
+            var table = new HtmlTable(Driver.FindElement(TablesPage.ByTableOne));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
        
@@ -110,7 +110,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
         public void GetCellByIndexWithOutHeaderRow(int column, int row, string cell)
         {
             Assume.That(Driver.ElementExists(TablesPage.ByTableTwo));
-            var table = new Table(Driver.FindElement(TablesPage.ByTableTwo));
+            var table = new HtmlTable(Driver.FindElement(TablesPage.ByTableTwo));
             Assert.AreEqual(cell, table.GetCell(column, row).Text);
         }
         #endregion
@@ -119,7 +119,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
     [TestFixture]
     [Category(TestCategories.HeadLess)]
     [Category(TestCategories.Elements)]
-    public class HeadLessTests
+    public class HeadLessHtmlTableTests
     {
         private Mockery mocks;
         private IWebDriver driver;

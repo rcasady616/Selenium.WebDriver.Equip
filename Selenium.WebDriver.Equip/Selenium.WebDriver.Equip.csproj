@@ -122,7 +122,7 @@
     <Compile Include="BasePage.cs" />
     <Compile Include="Browser.cs" />
     <Compile Include="Elements\BaseElement.cs" />
-    <Compile Include="Elements\CheckBox.cs" />
+    <Compile Include="Elements\HtmlCheckBox.cs" />
     <Compile Include="Elements\IHtmlElement.cs" />
     <Compile Include="Elements\HtmlList.cs" />
     <Compile Include="EnvironmentManager.cs" />
@@ -134,7 +134,7 @@
     <Compile Include="Extensions\WebDriverExtention.cs" />
     <Compile Include="SauceLabs\SauceDriverKeys.cs" />
     <Compile Include="SearchContextWait.cs" />
-    <Compile Include="Elements\Table.cs" />
+    <Compile Include="Elements\HtmlTable.cs" />
     <Compile Include="Server\ISeleniumServer.cs" />
     <Compile Include="Server\Json\CapabilitiesContract.cs" />
     <Compile Include="Server\Json\ConfigurationContract.cs" />
