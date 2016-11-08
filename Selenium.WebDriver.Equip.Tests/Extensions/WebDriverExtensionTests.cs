@@ -313,7 +313,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             Assert.DoesNotThrow(() => Driver.TakeScreenShot(file, ImageFormat.Jpeg));
             Assert.AreEqual(true, File.Exists(file));
             var f = new FileInfo(file);
-            Assert.GreaterOrEqual(f.Length, 9000, "Check to see if the file is around expected size");
+            Assert.GreaterOrEqual(f.Length, 5000, "Check to see if the file is around expected size");
         }
 
         #region testdata
