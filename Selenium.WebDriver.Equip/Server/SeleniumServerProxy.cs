@@ -3,8 +3,6 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using Selenium.WebDriver.Equip.Settings;
-using Selenium.WebDriver.Proxy.DTO;
-using Selenium.WebDriver.Proxy.Proxies;
 
 namespace Selenium.WebDriver.Equip.Server
 {
@@ -72,17 +70,17 @@ namespace Selenium.WebDriver.Equip.Server
             return !WaitUntilRunning();
         }
 
-        public StatusDto GetStatus()
-        {
-            var client = new StatusProxy(string.Format("http://{0}:{1}/wd/hub/", HostName, Port));
-            return client.GetStatus();
-        }
+        //public StatusDto GetStatus()
+        //{
+        //    var client = new StatusProxy(string.Format("http://{0}:{1}/wd/hub/", HostName, Port));
+        //    return client.GetStatus();
+        //}
 
-        public SessionDTO GetSession()
-        {
-            var client = new SessionProxy(string.Format("http://{0}:{1}/wd/hub/", HostName, Port));
-            return client.GetSession();
-        }
+        //public SessionDTO GetSession()
+        //{
+        //    var client = new SessionProxy(string.Format("http://{0}:{1}/wd/hub/", HostName, Port));
+        //    return client.GetSession();
+        //}
 
         public void GetConfig()
         {

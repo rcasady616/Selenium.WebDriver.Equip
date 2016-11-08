@@ -158,12 +158,6 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Selenium.WebDriver.Proxy\Selenium.WebDriver.Proxy.csproj">
-      <Project>{b854c1ac-860e-45e8-8fd2-85bc191acc9d}</Project>
-      <Name>Selenium.WebDriver.Proxy</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>
