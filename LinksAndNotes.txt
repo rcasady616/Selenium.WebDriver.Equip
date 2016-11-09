@@ -1,0 +1,2 @@
+Sauce Labs Platform configurator
+https://wiki.saucelabs.com/display/DOCS/Platform+Configurator#/
