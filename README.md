@@ -1,7 +1,8 @@
-Selenium.WebDriver.Equip
+![Equip Logo](http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo.svg) [![Build Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/beta/builds/0592bfbc727a45ae9562cc25319ce9f6)
+Selenium.WebDriver.Equip 
 ==================
 
-[![Build status](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh)](https://ci.appveyor.com/project/rcasady616/seleniumextensions) [![Selenium Test Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/u/richardcasady)
+[![Build status](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh)](https://ci.appveyor.com/project/rcasady616/seleniumextensions) [![NuGet Badge](https://buildstats.info/nuget/Selenium.WebDriver.Equip)](https://www.nuget.org/packages/Selenium.WebDriver.Equip/) [![Build Status](https://saucelabs.com/buildstatus/richardcasady?saucy)](https://saucelabs.com/beta/builds/0592bfbc727a45ae9562cc25319ce9f6) 
 
 Selenium.WebDriver.Equip or Equip for short is a project that contains commonly use functionality that is missing in Selenium WebDriver. The functionalities in this project are not specific to any single web application. 
 
@@ -20,7 +21,7 @@ PM> Install-Package Selenium.WebDriver.Equip
  * Switching browser windows
  * Alert handling 
 * HTML typed Elements
- * TableElement, takes the complexity out of tables
+ * Table, List, Checkbox
 * Easy Browser and WebDriver management
  * Local Drivers
  * Selenium Grid
