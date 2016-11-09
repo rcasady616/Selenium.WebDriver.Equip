@@ -6,5 +6,6 @@
         public const string Elements = "Elements";
         public const string Extension = "Extension";
         public const string SeleniumServer = "SeleniumServer";
+        public const string LocalDriver = "LocalDriver";
     }
 }

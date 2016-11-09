@@ -7,14 +7,13 @@ using OpenQA.Selenium.IE;
 namespace Selenium.WebDriver.Equip.Tests
 {
     [TestFixture]
-    [Category("LocalDriver")]
+    [Category(TestCategories.LocalDriver)]
     public class IWebDriverFactoryTests
     {
         private IWebDriver _driver;
         [SetUp]
         public void SetupTest()
         {
-
         }
 
         [TearDown]
@@ -27,6 +26,7 @@ namespace Selenium.WebDriver.Equip.Tests
             }
         }
 
+        [Ignore("")]
         [Test]
         public void GetFirefoxBrowserTest()
         {
@@ -37,6 +37,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetInternetExplorerBrowserTest()
         {
+            _driver.NuGetIEDriver();
             _driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(InternetExplorerDriver), _driver.GetType());
         }
@@ -44,6 +45,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetChromeBrowserTest()
         {
+            _driver.NuGetChromeDriver();
             _driver = WebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(ChromeDriver), _driver.GetType());
         }

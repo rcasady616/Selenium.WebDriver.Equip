@@ -4,6 +4,7 @@ using System.Reflection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.SauceLabs;
+using OpenQA.Selenium.Chrome;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -65,12 +66,23 @@ namespace Selenium.WebDriver.Equip
             return System.Configuration.ConfigurationManager.AppSettings.GetValues(key)[0];
         }
 
+
         public IWebDriver CreateDriverInstance(string testName)
         {
             if (browser == Browser.SauceLabs)
                 return WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
             if (browser == Browser.Remote)
                 throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
+            if (browser == Browser.Chrome)
+            {
+                driver.NuGetChromeDriver();
+                return WebDriverFactory.GetBrowser<ChromeDriver>();
+            }
+            if (browser == Browser.Firefox)
+            {
+                driver.NuGetChromeDriver();
+                return WebDriverFactory.GetBrowser<ChromeDriver>();
+            }
             return (IWebDriver)Activator.CreateInstance(webDriverType);
         }
 

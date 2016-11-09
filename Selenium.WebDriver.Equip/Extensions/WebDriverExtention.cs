@@ -1,12 +1,46 @@
-﻿using System;
-using System.Drawing.Imaging;
+﻿using NuGet;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
+using System;
+using System.Drawing.Imaging;
+using System.IO;
 
 namespace OpenQA.Selenium
 {
     public static class WebDriverExtention
     {
+        public static void NuGetChromeDriver(this IWebDriver iWebDriver)
+        {
+            if (!File.Exists("chromedriver.exe"))
+            {
+                string packageID = "Selenium.WebDriver.ChromeDriver";
+
+                //Connect to the official package repository
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+
+                //Initialize the package manager
+                string path = Directory.GetCurrentDirectory();
+                PackageManager packageManager = new PackageManager(repo, path);
+
+                //Download and unzip the package
+                packageManager.InstallPackage(packageID);
+            }
+        }
+
+        public static void NuGetIEDriver(this IWebDriver iWebDriver)
+        {
+            string fileName = "IEDriverServer.exe";
+            if (!File.Exists(fileName))
+            {
+                string packageID = "Selenium.WebDriver.IEDriver";
+                string path = Directory.GetCurrentDirectory();
+
+                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+                PackageManager packageManager = new PackageManager(repo, path);
+                packageManager.InstallPackage(packageID);
+                File.Copy(string.Format(@"{0}\Selenium.WebDriver.IEDriver.3.0.0.0\driver\{1}", path, fileName), string.Format("{0}\\{1}", path, fileName));
+            }
+        }
 
         public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)
         {

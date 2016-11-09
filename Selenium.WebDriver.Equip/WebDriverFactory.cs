@@ -1,10 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.SauceLabs;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -47,8 +47,8 @@ namespace Selenium.WebDriver.Equip
             RemoteWebDriver driver = null;
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
             // add these two enviorment variables and there values to use Sauce Labs
-            capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME); 
-            capabillities.SetCapability("accessKey",SauceDriverKeys.SAUCELABS_ACCESSKEY);
+            capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
+            capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
             capabillities.SetCapability("name", testName);
             capabillities.IsJavaScriptEnabled = true;
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
