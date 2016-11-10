@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Proxy", "Selenium.WebDriver.Proxy\Selenium.WebDriver.Proxy.csproj", "{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip.Package.Tests", "Selenium.WebDriver.Equip.Package.Tests\Selenium.WebDriver.Equip.Package.Tests.csproj", "{E3AC7B2C-D543-40A5-8883-F295208137DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,18 @@ Global
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x64.Build.0 = Release|x64
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x86.ActiveCfg = Release|Any CPU
 		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x86.Build.0 = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|x64.Build.0 = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|x86.Build.0 = Debug|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|x64.ActiveCfg = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|x64.Build.0 = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|x86.ActiveCfg = Release|Any CPU
+		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
