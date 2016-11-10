@@ -171,7 +171,7 @@
     </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>ECHO NuGet pack $(ProjectDir)\Selenium.WebDriver.Equip.Package.nuspec -IncludeReferencedProjects
+    <PostBuildEvent>NuGet pack $(ProjectDir)\Selenium.WebDriver.Equip.Package.nuspec -IncludeReferencedProjects
 ECHO if "$(ConfigurationName)" == "Debug" copy "$(ProjectDir)$(OutDir)Selenium.WebDriver.Equip.1.0.0.nupkg" "C:\Program Files (x86)\Microsoft SDKs\NuGetPackages\Selenium.WebDriver.Equip.1.0.0.nupkg" /Y</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
