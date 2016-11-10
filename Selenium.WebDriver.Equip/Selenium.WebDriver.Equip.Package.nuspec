@@ -21,6 +21,6 @@
   </metadata>
   <files>
     <file src="bin\Release\Selenium.WebDriver.Equip.dll" target="lib\Selenium.WebDriver.Equip.dll" />
-    <file src="bin\Release\Selenium.WebDriver.Equip.xml" target="lib\Selenium.WebDriver.Equip.xml" />
+    <file src="bin\Release\Selenium.WebDriver.Equip.pdb" target="lib\Selenium.WebDriver.Equip.pdb" />
   </files>
 </package>
