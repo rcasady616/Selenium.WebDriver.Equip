@@ -20,7 +20,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Debug\Selenium.WebDriver.Equip.dll" target="lib\Selenium.WebDriver.Equip.dll" />
-    <file src="bin\Debug\Selenium.WebDriver.Equip.xml" target="lib\Selenium.WebDriver.Equip.xml" />
+    <file src="bin\Release\Selenium.WebDriver.Equip.dll" target="lib\Selenium.WebDriver.Equip.dll" />
+    <file src="bin\Release\Selenium.WebDriver.Equip.xml" target="lib\Selenium.WebDriver.Equip.xml" />
   </files>
 </package>
