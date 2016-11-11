@@ -41,10 +41,10 @@ namespace Selenium.WebDriver.Equip
         public static RemoteWebDriver GetSauceDriver(string testName, string browser = "firefox", string version = "10", string platform = "Windows 10", string url = null)
         {
             var capabillities = new DesiredCapabilities();
+            RemoteWebDriver driver = null;
             capabillities.SetCapability(CapabilityType.BrowserName, browser);
             capabillities.SetCapability(CapabilityType.Platform, platform);
             capabillities.SetCapability("version", version);
-            RemoteWebDriver driver = null;
             capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
             // add these two enviorment variables and there values to use Sauce Labs
             capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
@@ -58,7 +58,6 @@ namespace Selenium.WebDriver.Equip
 
         public static RemoteWebDriver GetRemoteWebDriver(string browserName = "firefox", string version = "10", string url = null)
         {
-
             DesiredCapabilities capabillities = null;
             RemoteWebDriver driver = null;
             try
@@ -71,9 +70,7 @@ namespace Selenium.WebDriver.Equip
                         break;
                     case "firefox":
                         capabillities = DesiredCapabilities.Firefox();
-
-
-                        //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
+                                            //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
                         //capabilities = new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
                         //capabilities = DesiredCapabilities.Firefox();// new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
 
@@ -83,18 +80,15 @@ namespace Selenium.WebDriver.Equip
                     default:
                         throw new Exception("Unhandled browser type");
                 }
-                capabillities.SetCapability(CapabilityType.Version, "10");
+                capabillities.SetCapability(CapabilityType.Version, version);
                 capabillities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.XP));
                 capabillities.SetCapability("name", "Testing Selenium 2 with C# on Sauce");
-                capabillities.SetCapability("username", "richardcasady");
-                capabillities.SetCapability("accessKey", "a6618920-425d-4f34-b9c2-1576bef9686e");
-                capabillities.SetCapability("build", "Local-1234");
-
+                capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
+                capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
+                capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
                 capabillities.IsJavaScriptEnabled = true;
                 driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
                 driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "http://rickcasady.blogspot.com/" : url);
-
-
             }
             catch (FileLoadException fileLoadEx)
             {

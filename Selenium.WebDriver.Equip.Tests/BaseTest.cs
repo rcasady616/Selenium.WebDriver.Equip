@@ -36,19 +36,10 @@ namespace Selenium.WebDriver.Equip.Tests
             {
                 var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
                 if (!outcome)
-                    new TestCapture(Driver).CaptureWebPage(GetCleanTestName(TestContext.CurrentContext.Test.FullName) + ".Failed");
-
+                    new TestCapture(Driver).CaptureWebPage(TestContext.CurrentContext.Test.GetCleanName() + ".Failed");
                 EnvironmentManager.instance.CloseCurrentDriver(outcome);
                 Driver = null;
             }
-        }
-
-        private static string GetCleanTestName(string fullName)
-        {
-            if (fullName.Contains("("))
-                fullName = fullName.Substring(0, fullName.LastIndexOf("("));
-            var justName = fullName.Split('.').Last();
-            return justName;
         }
     }
 }

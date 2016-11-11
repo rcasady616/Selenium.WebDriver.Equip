@@ -71,26 +71,27 @@ namespace Selenium.WebDriver.Equip
         public IWebDriver CreateDriverInstance(string testName)
         {
             if (browser == Browser.SauceLabs)
-                return WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
+                driver = WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
             if (browser == Browser.Remote)
                 throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
             if (browser == Browser.Chrome)
             {
                 if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
-                return WebDriverFactory.GetBrowser<ChromeDriver>();
+                driver = WebDriverFactory.GetBrowser<ChromeDriver>();
             }
             if (browser == Browser.Firefox)
             {
                 throw new NotImplementedException();
                 //if(!driveBr.GetNuGetFirefoxChromeDriver()) throw new DriverServiceNotFoundException();
-                return WebDriverFactory.GetBrowser<FirefoxDriver>();
+                driver = WebDriverFactory.GetBrowser<FirefoxDriver>();
             }
             if (browser == Browser.IE)
             {
                 if (!driver.GetNuGetIEDriver()) throw new DriverServiceNotFoundException();
-                return WebDriverFactory.GetBrowser<InternetExplorerDriver>();
+                driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>();
             }
-            return (IWebDriver)Activator.CreateInstance(webDriverType);
+            //driver = (IWebDriver)Activator.CreateInstance(webDriverType);
+            return driver;
         }
 
         public void CloseCurrentDriver(bool? outcome = null)
