@@ -68,7 +68,6 @@ namespace Selenium.WebDriver.Equip
             return System.Configuration.ConfigurationManager.AppSettings.GetValues(key)[0];
         }
 
-
         public IWebDriver CreateDriverInstance(string testName)
         {
             if (browser == Browser.SauceLabs)
@@ -77,13 +76,13 @@ namespace Selenium.WebDriver.Equip
                 throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
             if (browser == Browser.Chrome)
             {
-                if(!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
+                if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
                 return WebDriverFactory.GetBrowser<ChromeDriver>();
             }
             if (browser == Browser.Firefox)
             {
                 throw new NotImplementedException();
-                //if(!driveBr.GetNuGetFirfoxChromeDriver()) throw new DriverServiceNotFoundException();
+                //if(!driveBr.GetNuGetFirefoxChromeDriver()) throw new DriverServiceNotFoundException();
                 return WebDriverFactory.GetBrowser<FirefoxDriver>();
             }
             if (browser == Browser.IE)
@@ -92,13 +91,6 @@ namespace Selenium.WebDriver.Equip
                 return WebDriverFactory.GetBrowser<InternetExplorerDriver>();
             }
             return (IWebDriver)Activator.CreateInstance(webDriverType);
-        }
-
-        public IWebDriver CreateFreshDriver(string testName)
-        {
-            CloseCurrentDriver();
-            driver = CreateDriverInstance(testName);
-            return driver;
         }
 
         public void CloseCurrentDriver(bool? outcome = null)

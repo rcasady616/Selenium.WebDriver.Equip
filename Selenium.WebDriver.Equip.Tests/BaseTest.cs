@@ -22,7 +22,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            Driver = EnvironmentManager.instance.CreateFreshDriver(TestContext.CurrentContext.Test.Name);
+            Driver = EnvironmentManager.instance.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
         }
 
         /// <summary>
