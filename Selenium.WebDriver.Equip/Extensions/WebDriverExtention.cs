@@ -9,37 +9,40 @@ namespace OpenQA.Selenium
 {
     public static class WebDriverExtention
     {
-        public static void NuGetChromeDriver(this IWebDriver iWebDriver)
+        public static bool GetNuGetChromeDriver(this IWebDriver iWebDriver)
         {
-            if (!File.Exists("chromedriver.exe"))
-            {
-                string packageID = "Selenium.WebDriver.ChromeDriver";
-
-                //Connect to the official package repository
-                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-
-                //Initialize the package manager
-                string path = Directory.GetCurrentDirectory();
-                PackageManager packageManager = new PackageManager(repo, path);
-
-                //Download and unzip the package
-                packageManager.InstallPackage(packageID);
-            }
-        }
-
-        public static void NuGetIEDriver(this IWebDriver iWebDriver)
-        {
-            string fileName = "IEDriverServer.exe";
+            string fileName = "chromedriver.exe";
+            string packageID = "Selenium.WebDriver.ChromeDriver";
+            var version = "2.25.0.0";
             if (!File.Exists(fileName))
             {
-                string packageID = "Selenium.WebDriver.IEDriver";
-                string path = Directory.GetCurrentDirectory();
-
-                IPackageRepository repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-                PackageManager packageManager = new PackageManager(repo, path);
-                packageManager.InstallPackage(packageID);
-                File.Copy(string.Format(@"{0}\Selenium.WebDriver.IEDriver.3.0.0.0\driver\{1}", path, fileName), string.Format("{0}\\{1}", path, fileName));
+                var path = Directory.GetCurrentDirectory();
+                GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path,packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
             }
+            return File.Exists(fileName);
+        }
+
+        private static void GetNuGetPackage(string packageID, string path, SemanticVersion version)
+        {
+            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            var packageManager = new PackageManager(repo, path);
+            packageManager.InstallPackage(packageID, version);
+
+        }
+
+        public static bool GetNuGetIEDriver(this IWebDriver iWebDriver)
+        {
+            string fileName = "IEDriverServer.exe";
+            string packageID = "Selenium.WebDriver.IEDriver";
+            var version = "3.0.0.0";
+            if (!File.Exists(fileName))
+            {
+                var path = Directory.GetCurrentDirectory();
+                GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path,packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+            }
+            return File.Exists(fileName);
         }
 
         public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)

@@ -37,7 +37,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetInternetExplorerBrowserTest()
         {
-            _driver.NuGetIEDriver();
+            Assume.That(_driver.GetNuGetIEDriver());
             _driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(InternetExplorerDriver), _driver.GetType());
         }
@@ -45,7 +45,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetChromeBrowserTest()
         {
-            _driver.NuGetChromeDriver();
+            Assume.That(_driver.GetNuGetChromeDriver());
             _driver = WebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(ChromeDriver), _driver.GetType());
         }

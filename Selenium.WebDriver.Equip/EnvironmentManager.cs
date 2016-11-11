@@ -5,6 +5,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.SauceLabs;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.IE;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -75,13 +77,19 @@ namespace Selenium.WebDriver.Equip
                 throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
             if (browser == Browser.Chrome)
             {
-                driver.NuGetChromeDriver();
+                if(!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
                 return WebDriverFactory.GetBrowser<ChromeDriver>();
             }
             if (browser == Browser.Firefox)
             {
-                driver.NuGetChromeDriver();
-                return WebDriverFactory.GetBrowser<ChromeDriver>();
+                throw new NotImplementedException();
+                //if(!driveBr.GetNuGetFirfoxChromeDriver()) throw new DriverServiceNotFoundException();
+                return WebDriverFactory.GetBrowser<FirefoxDriver>();
+            }
+            if (browser == Browser.IE)
+            {
+                if (!driver.GetNuGetIEDriver()) throw new DriverServiceNotFoundException();
+                return WebDriverFactory.GetBrowser<InternetExplorerDriver>();
             }
             return (IWebDriver)Activator.CreateInstance(webDriverType);
         }
