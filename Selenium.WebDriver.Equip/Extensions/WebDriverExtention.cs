@@ -54,12 +54,7 @@ namespace OpenQA.Selenium
             var gecko64 = "https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win64.zip";
             var gecko32 = "https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win32.zip";
             if (!File.Exists(fileName))
-            {
-                //new WebClient().DownloadFile("https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win32.zip", zipFileName);
-                //new WebClient().DownloadFile("https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win64.zip", zipFileName);
                 file.DownloadUrl(gecko64).UnZip(Directory.GetCurrentDirectory());
-                //new FileInfo(zipFileName).UnZip(Directory.GetCurrentDirectory());
-            }
             return File.Exists(fileName);
         }
 
