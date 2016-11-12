@@ -4,6 +4,7 @@ using Selenium.WebDriver.Equip;
 using System;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 
 namespace OpenQA.Selenium
 {
@@ -41,6 +42,19 @@ namespace OpenQA.Selenium
                 var path = Directory.GetCurrentDirectory();
                 GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
                 File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path,packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+            }
+            return File.Exists(fileName);
+        }
+
+        public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver)
+        {
+            string fileName = "geckodriver.exe";
+            string zipFileName = "geckodriver.zip";
+            if (!File.Exists(fileName))
+            {
+                //new WebClient().DownloadFile("https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win32.zip", zipFileName);
+                new WebClient().DownloadFile("https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win64.zip", zipFileName);
+                new FileInfo(zipFileName).UnZip(Directory.GetCurrentDirectory());
             }
             return File.Exists(fileName);
         }

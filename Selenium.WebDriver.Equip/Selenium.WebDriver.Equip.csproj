@@ -165,6 +165,12 @@
   <ItemGroup>
     <Folder Include="Attributes\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Equip\Equip.csproj">
+      <Project>{c1f15ede-0ac7-4f6b-ad04-29e63d1864b1}</Project>
+      <Name>Equip</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

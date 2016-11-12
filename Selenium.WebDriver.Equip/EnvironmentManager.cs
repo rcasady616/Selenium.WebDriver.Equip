@@ -81,8 +81,7 @@ namespace Selenium.WebDriver.Equip
             }
             if (browser == Browser.Firefox)
             {
-                throw new NotImplementedException();
-                //if(!driveBr.GetNuGetFirefoxChromeDriver()) throw new DriverServiceNotFoundException();
+                if (!driver.DownloadUrlGeckoDriver()) throw new DriverServiceNotFoundException();
                 driver = WebDriverFactory.GetBrowser<FirefoxDriver>();
             }
             if (browser == Browser.IE)
