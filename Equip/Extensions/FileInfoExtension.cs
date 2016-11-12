@@ -1,6 +1,7 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
 using System.IO;
 using System.IO.Compression;
+using System.Net;
 
 namespace System.IO
 {
@@ -65,5 +66,10 @@ namespace System.IO
             }
         }
 
+        public static FileInfo DownloadUrl(this FileInfo fileInfo, string url)
+        {
+            new WebClient().DownloadFile(url, fileInfo.FullName);
+            return fileInfo;
+        }
     }
 }

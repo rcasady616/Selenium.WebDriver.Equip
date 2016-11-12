@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Equip</id>
+    <version>0.1.0</version>
+    <authors>rcasady616</authors>
+    <owners>rcasady616</owners>
+    <licenseUrl>https://raw.githubusercontent.com/rcasady616/Selenium.WeDriver.Equip/master/License</licenseUrl>
+    <projectUrl>https://www.nuget.org/packages/Selenium.WebDriver.Equip</projectUrl>
+    <iconUrl>http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo64x64.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Equip is a group of useful functionality and tools to make writing code easier.</description>
+    <releaseNotes></releaseNotes>
+    <summary></summary>
+    <copyright>Copyright 2016</copyright>
+    <tags>zip tools</tags>
+    <dependencies>
+      <dependency id="SharpZipLib" version="0.86.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\Equip.dll" target="lib\Equip.dll" />
+    <file src="bin\Release\Equip.pdb" target="lib\Equip.pdb" />
+  </files>
+</package>
