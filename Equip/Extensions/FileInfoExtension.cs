@@ -1,5 +1,4 @@
 ﻿using ICSharpCode.SharpZipLib.Zip;
-using System.IO;
 using System.IO.Compression;
 using System.Net;
 
@@ -9,31 +8,33 @@ namespace System.IO
     {
         public static void UnZip(this FileInfo fileInfo, string destiantionFolder)
         {
-            string sourceFile = fileInfo.FullName;
-            var fileStreamIn = new FileStream(sourceFile, FileMode.Open, FileAccess.Read);
-            var zipInStream = new ZipInputStream(fileStreamIn);
-            var entry = zipInStream.GetNextEntry();
-            FileStream fileStreamOut = null;
-            while (entry != null)
+            using (var fileStreamIn = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read))
             {
-                fileStreamOut = new FileStream(destiantionFolder + @"\" + entry.Name, FileMode.Create, FileAccess.Write);
-                int size;
-                byte[] buffer = new byte[4096];
-                do
+                using (var zipInStream = new ZipInputStream(fileStreamIn))
                 {
-                    size = zipInStream.Read(buffer, 0, buffer.Length);
-                    fileStreamOut.Write(buffer, 0, size);
-                } while (size > 0);
+                    var entry = zipInStream.GetNextEntry();
+                    FileStream fileStreamOut = null;
+                    while (entry != null)
+                    {
+                        fileStreamOut = new FileStream(destiantionFolder + @"\" + entry.Name, FileMode.Create, FileAccess.Write);
+                        int size;
+                        byte[] buffer = new byte[4096];
+                        do
+                        {
+                            size = zipInStream.Read(buffer, 0, buffer.Length);
+                            fileStreamOut.Write(buffer, 0, size);
+                        } while (size > 0);
 
-                fileStreamOut.Close();
-                entry = zipInStream.GetNextEntry();
+                        fileStreamOut.Close();
+                        entry = zipInStream.GetNextEntry();
+                    }
+
+                    if (fileStreamOut != null)
+                        fileStreamOut.Close();
+                    zipInStream.Close();
+                }
+                fileStreamIn.Close();
             }
-
-            if (fileStreamOut != null)
-                fileStreamOut.Close();
-
-            zipInStream.Close();
-            fileStreamIn.Close();
         }
 
         /// <summary>
@@ -66,6 +67,11 @@ namespace System.IO
             }
         }
 
+        /// <summary>
+        /// Download a specific URL to a file
+        /// </summary>
+        /// <param name="url">The URL to be downloaded</param>
+        /// <returns></returns>
         public static FileInfo DownloadUrl(this FileInfo fileInfo, string url)
         {
             new WebClient().DownloadFile(url, fileInfo.FullName);
