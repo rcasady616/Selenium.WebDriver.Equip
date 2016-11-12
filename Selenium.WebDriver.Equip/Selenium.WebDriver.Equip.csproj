@@ -125,6 +125,7 @@
   <ItemGroup>
     <Compile Include="BasePage.cs" />
     <Compile Include="Browser.cs" />
+    <Compile Include="DriversConfiguration.cs" />
     <Compile Include="Elements\BaseElement.cs" />
     <Compile Include="Elements\HtmlCheckBox.cs" />
     <Compile Include="Elements\IHtmlElement.cs" />

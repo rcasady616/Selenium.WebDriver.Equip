@@ -46,15 +46,23 @@ namespace OpenQA.Selenium
             return File.Exists(fileName);
         }
 
+        /// <summary>
+        /// Download the Gecko Driver from Mozilla Github https://github.com/mozilla/geckodriver
+        /// Uses the 64 bit driver unless otherwise configured 
+        /// </summary>
+        /// <returns><see langword="true"/> if the driver is present in the working directory; otherwise, <see langword="false"/>.</returns>
         public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver)
         {
-            string fileName = "geckodriver.exe";
+            return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL64);
+        }
+
+        public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver, string GeockoDriverURL)
+        {
+            string fileName = DriversConfiguration.GeockoDriverFileName;
             string zipFileName = "geckodriver.zip";
             var file = new FileInfo(zipFileName);
-            var gecko64 = "https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win64.zip";
-            var gecko32 = "https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-win32.zip";
             if (!File.Exists(fileName))
-                file.DownloadUrl(gecko64).UnZip(Directory.GetCurrentDirectory());
+                file.DownloadUrl(GeockoDriverURL).UnZip(Directory.GetCurrentDirectory());
             return File.Exists(fileName);
         }
 
