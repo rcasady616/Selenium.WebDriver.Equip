@@ -21,40 +21,45 @@ namespace Selenium.WebDriver.Equip
         private string remoteBrowserVersion;
         private string remoteOsPlatform;
 
-        public Browser Browser
-        {
-            get { return browser; }
-        }
-
         private EnvironmentManager()
         {
-            string driverClassName = GetSettingValue("Driver.Class");
-            string assemblyName = GetSettingValue("Assembly");
-            var assembly = Assembly.Load(assemblyName);
-            webDriverType = assembly.GetType(driverClassName);
             browser = (Browser)Enum.Parse(typeof(Browser), GetSettingValue("Drivertype"));
-            remoteBrowserName = GetSettingValue("RemoteBrowserName");
-            remoteBrowserVersion = GetSettingValue("RemoteBrowserVersion");
+            switch (browser)
+            {
+                case Browser.Remote:
+                    // todo get config
+                    // todo validate config
+                    var assembly = Assembly.Load(GetSettingValue("Assembly"));
+                    webDriverType = assembly.GetType(GetSettingValue("Driver.Class"));
+                    ReadRemoteConfiguration();
+                    throw new NotImplementedException();
+                    break;
+                case Browser.SauceLabs:
+                    // todo get config
+                    // todo validate config
+                    ReadRemoteConfiguration();
 
-            remoteOsPlatform = GetSettingValue("RemoteOsPlatform");
+                    break;
+                case Browser.IPhone:
+                case Browser.Android:
+                case Browser.WindowsPhone:
+                    throw new NotImplementedException("No mobile support at this time");
+                default: //all other cases are local drivers
+                    // todo get config
+                    // todo validate config
+                    break;
+            }
+           
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
             string assemblyLocation = executingAssembly.Location;
-
             string currentDirectory = Path.GetDirectoryName(assemblyLocation);
-            //DirectoryInfo info = new DirectoryInfo(currentDirectory);
-            //while (info != info.Root && string.Compare(info.Name, "build", StringComparison.OrdinalIgnoreCase) != 0)
-            //{
-            //    info = info.Parent;
-            //}
+        }
 
-            //info = info.Parent;
-            //bool autoStartRemoteServer = false;
-            if (browser == Browser.Remote)
-            {
-
-            }
-
-
+        private void ReadRemoteConfiguration()
+        {
+            remoteBrowserName = GetSettingValue("RemoteBrowserName");
+            remoteBrowserVersion = GetSettingValue("RemoteBrowserVersion");
+            remoteOsPlatform = GetSettingValue("RemoteOsPlatform");
         }
 
         ~EnvironmentManager()
@@ -95,7 +100,7 @@ namespace Selenium.WebDriver.Equip
 
         public void CloseCurrentDriver(bool? outcome = null)
         {
-            if (Browser == Browser.SauceLabs)
+            if (browser == Browser.SauceLabs)
                 if (outcome != null)
                     UpDateJob(Boolean.Parse(outcome.ToString()));
             if (driver != null) driver.Quit();
