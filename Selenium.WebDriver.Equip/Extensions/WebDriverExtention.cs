@@ -53,7 +53,12 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the driver is present in the working directory; otherwise, <see langword="false"/>.</returns>
         public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver)
         {
-            return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL64);
+            if (IntPtr.Size == 4)
+                return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL32);
+            else if (IntPtr.Size == 8)
+                return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL64);
+            else
+                throw new NotImplementedException("Unknow processor mode");
         }
 
         public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver, string GeockoDriverURL)

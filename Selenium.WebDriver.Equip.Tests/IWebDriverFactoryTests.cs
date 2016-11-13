@@ -29,15 +29,8 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetFirefoxBrowser64Test()
         {
-            Assume.That(_driver.DownloadUrlGeckoDriver());
-            _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
-            Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
-        }
 
-        [Test]
-        public void GetFirefoxBrowser32Test()
-        {
-            Assume.That(_driver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL32));
+            Assume.That(_driver.DownloadUrlGeckoDriver());
             _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
