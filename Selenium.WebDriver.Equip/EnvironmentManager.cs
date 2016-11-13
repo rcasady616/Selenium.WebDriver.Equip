@@ -38,21 +38,17 @@ namespace Selenium.WebDriver.Equip
                     // todo get config
                     // todo validate config
                     ReadRemoteConfiguration();
-
+                    Assembly executingAssembly = Assembly.GetExecutingAssembly();
+                    string assemblyLocation = executingAssembly.Location;
+                    string currentDirectory = Path.GetDirectoryName(assemblyLocation);
                     break;
                 case Browser.IPhone:
                 case Browser.Android:
                 case Browser.WindowsPhone:
                     throw new NotImplementedException("No mobile support at this time");
                 default: //all other cases are local drivers
-                    // todo get config
-                    // todo validate config
                     break;
             }
-           
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            string assemblyLocation = executingAssembly.Location;
-            string currentDirectory = Path.GetDirectoryName(assemblyLocation);
         }
 
         private void ReadRemoteConfiguration()
@@ -79,6 +75,7 @@ namespace Selenium.WebDriver.Equip
                 driver = WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
             if (browser == Browser.Remote)
                 throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
+            //driver = (IWebDriver)Activator.CreateInstance(webDriverType);
             if (browser == Browser.Chrome)
             {
                 if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
@@ -94,7 +91,6 @@ namespace Selenium.WebDriver.Equip
                 if (!driver.GetNuGetIEDriver()) throw new DriverServiceNotFoundException();
                 driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>();
             }
-            //driver = (IWebDriver)Activator.CreateInstance(webDriverType);
             return driver;
         }
 
@@ -116,7 +112,6 @@ namespace Selenium.WebDriver.Equip
             }
             finally
             {
-
             }
         }
     }
