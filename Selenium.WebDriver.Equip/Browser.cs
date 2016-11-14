@@ -19,4 +19,18 @@
         PhantomJS,
         SauceLabs
     }
+
+    public enum BrowserName
+    {
+        HtmlUnit,
+        IE,
+        Firefox,
+        Safari,
+        Chrome,
+        Opera,
+        IPhone,
+        Android,
+        WindowsPhone,
+        PhantomJS,
+    }
 }

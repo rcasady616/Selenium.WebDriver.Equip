@@ -13,24 +13,23 @@ namespace Selenium.WebDriver.Equip
     public class EnvironmentManager
     {
         public static readonly EnvironmentManager instance = new EnvironmentManager();
-        private Type webDriverType;
         private Browser browser;
         private IWebDriver driver;
         //private UrlBuilder urlBuilder;
         private string remoteBrowserName;
+        private BrowserName browserName;
         private string remoteBrowserVersion;
         private string remoteOsPlatform;
 
         private EnvironmentManager()
         {
             browser = (Browser)Enum.Parse(typeof(Browser), GetSettingValue("Drivertype"));
+            browserName = (BrowserName)Enum.Parse(typeof(BrowserName), GetSettingValue("BrowserName"));
             switch (browser)
             {
                 case Browser.Remote:
                     // todo get config
                     // todo validate config
-                    var assembly = Assembly.Load(GetSettingValue("Assembly"));
-                    webDriverType = assembly.GetType(GetSettingValue("Driver.Class"));
                     ReadRemoteConfiguration();
                     throw new NotImplementedException();
                     break;
@@ -71,25 +70,29 @@ namespace Selenium.WebDriver.Equip
 
         public IWebDriver CreateDriverInstance(string testName)
         {
-            if (browser == Browser.SauceLabs)
-                driver = WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
-            if (browser == Browser.Remote)
-                throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
-            //driver = (IWebDriver)Activator.CreateInstance(webDriverType);
-            if (browser == Browser.Chrome)
+            switch (browser)
             {
-                if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
-                driver = WebDriverFactory.GetBrowser<ChromeDriver>();
-            }
-            if (browser == Browser.Firefox)
-            {
-                if (!driver.DownloadUrlGeckoDriver()) throw new DriverServiceNotFoundException();
-                driver = WebDriverFactory.GetBrowser<FirefoxDriver>();
-            }
-            if (browser == Browser.IE)
-            {
-                if (!driver.GetNuGetIEDriver()) throw new DriverServiceNotFoundException();
-                driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>();
+                case Browser.SauceLabs:
+                    driver = WebDriverFactory.GetSauceDriver(testName, remoteBrowserName, remoteBrowserVersion, remoteOsPlatform);
+                    break;
+                case Browser.Remote:
+                    //Todo start localy if not already running
+                    throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
+                    break;
+                case Browser.Chrome:
+                    if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
+                    driver = WebDriverFactory.GetBrowser<ChromeDriver>();
+                    break;
+                case Browser.Firefox:
+                    if (!driver.DownloadUrlGeckoDriver()) throw new DriverServiceNotFoundException();
+                    driver = WebDriverFactory.GetBrowser<FirefoxDriver>();
+                    break;
+                case Browser.IE:
+                    if (!driver.GetNuGetIEDriver()) throw new DriverServiceNotFoundException();
+                    driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>();
+                    break;
+                default:
+                    throw new NotSupportedException();
             }
             return driver;
         }
