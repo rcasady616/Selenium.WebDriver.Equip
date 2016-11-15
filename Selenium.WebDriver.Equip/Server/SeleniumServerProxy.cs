@@ -3,6 +3,8 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading;
 using Selenium.WebDriver.Equip.Settings;
+using System.ComponentModel;
+using Equip.Java;
 
 namespace Selenium.WebDriver.Equip.Server
 {
@@ -11,7 +13,7 @@ namespace Selenium.WebDriver.Equip.Server
     /// </summary>
     public class SeleniumServerProxy : SeleniumServerProxyBase, ISeleniumServer
     {
-
+        public Process ServerProcess;
         private static string commandUrl = "http://{0}:{1}/selenium-server/driver/?cmd=";
         public string CommandUrl
         {
@@ -50,13 +52,18 @@ namespace Selenium.WebDriver.Equip.Server
         public void Start(string configurationArgs = "")
         {
             configurationArgs = string.Format("-port {0} {1}", Port, configurationArgs);
-            Process.Start("java", string.Format("-jar \"{0}\" {1}", StandAlonePath, configurationArgs));
+            if (string.IsNullOrEmpty(Java.GetJreVersion()))
+                throw new Exception("Java JRE not installed, go to https://www.java.com/en/download/");
+            ServerProcess = Process.Start("java", string.Format("-jar \"{0}\" {1}", StandAlonePath, configurationArgs));
             if (!WaitUntilRunning())
                 throw new Exception("Server didnt start as expected");
         }
 
         public bool Stop()
         {
+            ServerProcess.Kill();
+            return true;
+            //todo fix none of the url's stop selenium server are routing correctly in selenium server3.0
             HttpWebResponse response;
             try
             {
