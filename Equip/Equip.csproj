@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\FileInfoExtension.cs" />
+    <Compile Include="Extensions\RegistryKeyExtension.cs" />
+    <Compile Include="Java\Java.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
