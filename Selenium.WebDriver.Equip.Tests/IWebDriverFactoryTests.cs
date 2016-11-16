@@ -27,16 +27,16 @@ namespace Selenium.WebDriver.Equip.Tests
         }
 
         [Test]
-        public void GetFirefoxBrowser64Test()
+        public void GetFirefoxBrowser64()
         {
 
-            Assume.That(_driver.DownloadUrlGeckoDriver());
+            Assume.That(_driver.DownloadGeckoDriver());
             _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
 
         [Test]
-        public void GetInternetExplorerBrowserTest()
+        public void GetInternetExplorerBrowser()
         {
             Assume.That(_driver.GetNuGetIEDriver());
             _driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
@@ -44,11 +44,22 @@ namespace Selenium.WebDriver.Equip.Tests
         }
 
         [Test]
-        public void GetChromeBrowserTest()
+        public void GetChromeBrowser()
         {
             Assume.That(_driver.GetNuGetChromeDriver());
             _driver = WebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(ChromeDriver), _driver.GetType());
+        }
+
+        [Test]
+        public void GetChromeBrowserWithOptions()
+        {
+            var options = new ChromeOptions();
+            options.AddArgument("-incognito");
+
+            Assume.That(_driver.GetNuGetChromeDriver());
+            _driver = WebDriverFactory.GetBrowser<ChromeDriver, ChromeOptions>(options, "http://rickcasady.blogspot.com/");
+           
         }
     }
 }
