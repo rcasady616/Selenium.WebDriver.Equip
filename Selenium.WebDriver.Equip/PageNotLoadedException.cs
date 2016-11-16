@@ -32,5 +32,10 @@ namespace Selenium.WebDriver.Equip
             : base(message, exception)
         {
         }
+
+        public PageNotLoadedException(IPage page)
+           : base(string.Format("Page name: {0}", page.ToString()))
+        {
+        }
     }
 }
