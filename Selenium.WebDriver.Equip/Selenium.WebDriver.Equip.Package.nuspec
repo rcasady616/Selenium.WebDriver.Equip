@@ -15,6 +15,7 @@
     <copyright>Copyright 2016</copyright>
     <tags>Selenium WebDriver automation browser tools Server SauceLabs HTMLElements Selenium.WebDriver</tags>
     <dependencies>
+      <dependency id="Equip" version="1.0.0"/>
       <dependency id="NuGet.Core" version="2.12"/>
       <dependency id="Selenium.WebDriver" version="3.0"/>
       <dependency id="Selenium.Support" version="3.0"/>

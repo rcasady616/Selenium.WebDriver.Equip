@@ -120,6 +120,7 @@
     <Compile Include="Elements\HtmlCheckBoxTests.cs" />
     <Compile Include="Elements\HtmlListTests.cs" />
     <Compile Include="Elements\HtmlTableTests.cs" />
+    <Compile Include="EnvironmentManagerTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionTests.cs" />
     <Compile Include="IPageTests.cs" />
     <Compile Include="Extensions\SearchContextExtensionTests.cs" />

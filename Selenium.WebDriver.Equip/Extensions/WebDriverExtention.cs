@@ -18,7 +18,7 @@ namespace OpenQA.Selenium
             {
                 var path = Directory.GetCurrentDirectory();
                 GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
-                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path,packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path, packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
             }
             return File.Exists(fileName);
         }
@@ -40,7 +40,7 @@ namespace OpenQA.Selenium
             {
                 var path = Directory.GetCurrentDirectory();
                 GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
-                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path,packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path, packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
             }
             return File.Exists(fileName);
         }
@@ -50,25 +50,37 @@ namespace OpenQA.Selenium
         /// Uses the 64 bit driver unless otherwise configured 
         /// </summary>
         /// <returns><see langword="true"/> if the driver is present in the working directory; otherwise, <see langword="false"/>.</returns>
-        public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver)
+        public static bool DownloadGeckoDriver(this IWebDriver iwebDriver)
         {
             if (IntPtr.Size == 4)
-                return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL32);
+                return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL32);
             else if (IntPtr.Size == 8)
-                return iwebDriver.DownloadUrlGeckoDriver(DriversConfiguration.GeockoDriverURL64);
+                return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL64);
             else
                 throw new NotImplementedException("Unknow processor mode");
         }
 
-        public static bool DownloadUrlGeckoDriver(this IWebDriver iwebDriver, string GeockoDriverURL)
+        public static bool DownloadGeckoDriver(this IWebDriver iwebDriver, string geockoDriverURL)
         {
             string fileName = DriversConfiguration.GeockoDriverFileName;
             string zipFileName = "geckodriver.zip";
             var file = new FileInfo(zipFileName);
             if (!File.Exists(fileName))
-                file.DownloadUrl(GeockoDriverURL).UnZip(Directory.GetCurrentDirectory());
+                file.DownloadUrl(geockoDriverURL).UnZip(Directory.GetCurrentDirectory());
             return File.Exists(fileName);
         }
+
+        public static bool DownloadChromeDriver(this IWebDriver iwebDriver, string chromeDriverURL)
+        {
+            string fileName = DriversConfiguration.GeockoDriverFileName;
+            string zipFileName = "chromedriver.zip";
+            var file = new FileInfo(zipFileName);
+            if (!File.Exists(fileName))
+                file.DownloadUrl(chromeDriverURL).UnZip(Directory.GetCurrentDirectory());
+            return File.Exists(fileName);
+        }
+
+
 
         public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)
         {
@@ -102,7 +114,7 @@ namespace OpenQA.Selenium
         /// <param name="condition">The <see cref="ExpectedConditions"/> criteria to <see cref="WebDriverWait"/> for</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the condition</param>
         /// <returns><see langword="true"/> if the condition is meet; otherwise, <see langword="false"/>.</returns>
-        public static bool DriverWaitUntil<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition, int maxWaitTimeInSeconds = 10)
+        public static bool DriverWaitUntil<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             var driver = (IWebDriver)iWebDriver;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(maxWaitTimeInSeconds));
@@ -123,7 +135,7 @@ namespace OpenQA.Selenium
         /// <param name="title">The title of the page</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the title is a match; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iWebDriver.DriverWaitUntil(ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
         }
@@ -133,17 +145,17 @@ namespace OpenQA.Selenium
         /// </summary>
         /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int waitTimeInSeconds = 10)
+        public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), waitTimeInSeconds);
         }
 
-        public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = 10)
+        public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextEquals(text), waitTimeInSeconds);
         }
 
-        public static bool WaitUntilAlertTextContains(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = 10)
+        public static bool WaitUntilAlertTextContains(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextContains(text), waitTimeInSeconds);
         }

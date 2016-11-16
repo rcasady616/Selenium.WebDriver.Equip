@@ -23,12 +23,12 @@ namespace OpenQA.Selenium
         /// Waits for a <see cref="IWebElement"/> to meet specific conditions
         /// </summary>
         /// <param name="condition">The <see cref="ExpectedConditions"/> criteria to <see cref="SearchContextWait"/> for</param>
-        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the condition</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the condition</param>
         /// <returns><see langword="true"/> if the condition is meet; otherwise, <see langword="false"/>.</returns>
-        public static bool WaitUntil<T>(this ISearchContext iSearchContext, Func<ISearchContext, T> condition, int waitTimeInSeconds = 10)
+        public static bool WaitUntil<T>(this ISearchContext iSearchContext, Func<ISearchContext, T> condition, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             var searchContext = (ISearchContext)iSearchContext;
-            var wait = new SearchContextWait(searchContext, TimeSpan.FromSeconds(waitTimeInSeconds));
+            var wait = new SearchContextWait(searchContext, TimeSpan.FromSeconds(maxWaitTimeInSeconds));
             try
             {
                 wait.Until(condition);
@@ -48,7 +48,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilExists(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilExists(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementExists(locator), maxWaitTimeInSeconds);
         }
@@ -59,7 +59,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilNotExists(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilNotExists(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementNotExists(locator), maxWaitTimeInSeconds);
         }
@@ -70,7 +70,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilVisible(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilVisible(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementIsVisible(locator), maxWaitTimeInSeconds);
         }
@@ -81,7 +81,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="List"/>/<<see cref="By"/>/> locators of the <see cref="IWebElement"/>s</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilVisible(this ISearchContext iSearchContext, List<By> locators, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilVisible(this ISearchContext iSearchContext, List<By> locators, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             var failedLocs = new List<By>();
             foreach (var loc in locators)
@@ -104,7 +104,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become not visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not visible; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             if (!iSearchContext.ElementExists(locator))
             {
@@ -120,7 +120,7 @@ namespace OpenQA.Selenium
         /// <param name="locators">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become not visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is not visible; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, List<By> locators, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilNotVisible(this ISearchContext iSearchContext, List<By> locators, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             var failedLocs = new List<By>();
             foreach (var loc in locators)
@@ -144,7 +144,7 @@ namespace OpenQA.Selenium
         /// <param name="text">The text it should equal</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> text is a match; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilTextEquals(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilTextEquals(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementTextEquals(locator, text), maxWaitTimeInSeconds);
         }
@@ -156,7 +156,7 @@ namespace OpenQA.Selenium
         /// <param name="text">The text it should equal</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> text is not a match; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilTextNotEquals(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilTextNotEquals(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             if (!iSearchContext.WaitUntilExists(locator, maxWaitTimeInSeconds))
             {
@@ -173,7 +173,7 @@ namespace OpenQA.Selenium
         /// <param name="text">The text it should contain</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> contains the text; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilTextContains(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilTextContains(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementTextContains(locator, text), maxWaitTimeInSeconds);
         }
@@ -186,7 +186,7 @@ namespace OpenQA.Selenium
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> attribute value is a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilAttributeEquals(this ISearchContext iSearchContext, By locator, string htmlTagAttribute,
-                                                    string attributeValue, int maxWaitTimeInSeconds = 10)
+                                                    string attributeValue, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             return iSearchContext.WaitUntil(ExpectedCondition.ElementAttributeEquals(locator, htmlTagAttribute, attributeValue), maxWaitTimeInSeconds);
         }
@@ -199,7 +199,7 @@ namespace OpenQA.Selenium
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> attribute value is not a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilAttributeNotEquals(this ISearchContext iSearchContext, By locator, string htmlTagAttribute,
-                                                     string attributeValue, int maxWaitTimeInSeconds = 10)
+                                                     string attributeValue, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             if (!iSearchContext.WaitUntilExists(locator, maxWaitTimeInSeconds))
                 return false;
@@ -213,7 +213,7 @@ namespace OpenQA.Selenium
         /// <param name="text">The text it should contain</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> not contains the text; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilTextNotContains(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilTextNotContains(this ISearchContext iSearchContext, By locator, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             if (!iSearchContext.WaitUntilExists(locator, maxWaitTimeInSeconds))
             {
@@ -223,7 +223,7 @@ namespace OpenQA.Selenium
             return iSearchContext.WaitUntil(ExpectedCondition.ElementTextNotContains(locator, text), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilRested(this ISearchContext iSearchContext, Func<ISearchContext, bool> condition, int restTimeInSeconds, int maxWaitTimeInSeconds = 10)
+        public static bool WaitUntilRested(this ISearchContext iSearchContext, Func<ISearchContext, bool> condition, int restTimeInSeconds, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             if (restTimeInSeconds > maxWaitTimeInSeconds)
                 throw new ArgumentException("The restTimeInSeconds cannot be greater than the maxWaitTimeInSeconds");
@@ -245,10 +245,11 @@ namespace OpenQA.Selenium
         /// </summary>
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/></param>
         /// <param name="expectedCount">The expected number of <see cref="IWebElement"/> that are found from the <see cref="By"/> locator</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> count is</param>
         /// <returns><see langword="true"/> there are the expected number of <see cref="IWebElement"/>'s; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilElementCountIs(this ISearchContext iSearchContext, By locator, int expectedCount, int waitTimeInSeconds = 10)
+        public static bool WaitUntilElementCountIs(this ISearchContext iSearchContext, By locator, int expectedCount, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return iSearchContext.WaitUntil(ExpectedCondition.ElementCountIs(locator, expectedCount), waitTimeInSeconds);
+            return iSearchContext.WaitUntil(ExpectedCondition.ElementCountIs(locator, expectedCount), maxWaitTimeInSeconds);
         }
 
         #endregion

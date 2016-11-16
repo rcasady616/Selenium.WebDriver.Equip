@@ -111,7 +111,7 @@ namespace OpenQA.Selenium
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns></returns>
         /// <returns><see langword="true"/> if the DOM is cleared or empty; otherwise, <see langword="false"/></returns>
-        public static bool ClickWaitUntilPost(this IWebElement iWebElement, IWebDriver iWebDriver, int maxWaitTimeInSeconds = 10)
+        public static bool ClickWaitUntilPost(this IWebElement iWebElement, IWebDriver iWebDriver, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             By wait = By.CssSelector(string.Format("[{0}=\"true\"]", HtmlTagAttribute.WaitForPost));
             iWebElement.SetAttribute(HtmlTagAttribute.WaitForPost, "true");
@@ -141,7 +141,7 @@ namespace OpenQA.Selenium
         /// <param name="locator">The <see cref="By"/> locator of the <see cref="IWebElement"/> to wait for</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> is visible; otherwise, <see langword="false"/></returns>
-        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = 10)
+        public static bool ClickWaitUnilVisable(this IWebElement iWebElement, IWebDriver iWebDriver, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             iWebElement.Click();
             return iWebDriver.WaitUntilVisible(locator, maxWaitTimeInSeconds);
@@ -154,7 +154,7 @@ namespace OpenQA.Selenium
         /// <param name="bys">The <see cref="HtmlList"/>&lt;<see cref="By"/>&gt; locator of the <see cref="IWebElement"/>s to wait for</param>
         /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to exist</param>
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/>s are visible; otherwise, <see langword="false"/></returns>
-        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys, int maxWaitTimeInSeconds = 10)
+        public static bool ClickWaitUnilVisables(this IWebElement iWebElement, IWebDriver driver, List<By> bys, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
             iWebElement.Click();
             foreach (var by in bys)

@@ -84,7 +84,7 @@ namespace Selenium.WebDriver.Equip
                     driver = WebDriverFactory.GetBrowser<ChromeDriver>();
                     break;
                 case Browser.Firefox:
-                    if (!driver.DownloadUrlGeckoDriver()) throw new DriverServiceNotFoundException();
+                    if (!driver.DownloadGeckoDriver()) throw new DriverServiceNotFoundException();
                     driver = WebDriverFactory.GetBrowser<FirefoxDriver>();
                     break;
                 case Browser.IE:
