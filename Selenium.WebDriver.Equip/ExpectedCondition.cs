@@ -202,9 +202,7 @@ namespace Selenium.WebDriver.Equip
 
         private static IWebElement ElementIfVisible(IWebElement element)
         {
-            if (element.Displayed)
-                return element;
-            return null;
+            return element.Displayed ? element : null;
         }
 
         private static bool ElementVisible(IWebElement element)
