@@ -28,6 +28,15 @@ namespace Selenium.WebDriver.Equip
             return browser;
         }
 
+        public static TBrowser GetBrowser<TBrowser, T>(T options, string url = null) where TBrowser : IWebDriver, new()
+        {
+            var browser = (TBrowser)Activator.CreateInstance(typeof(TBrowser), options);
+
+            if (url != null)
+                browser.Navigate().GoToUrl(url);
+            return browser;
+        }
+
         /// <summary>
         /// Gets a <see cref="FirefoxDriver"/> and navigates to a url
         /// </summary>
@@ -70,7 +79,7 @@ namespace Selenium.WebDriver.Equip
                         break;
                     case "firefox":
                         capabillities = DesiredCapabilities.Firefox();
-                                            //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
+                        //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
                         //capabilities = new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
                         //capabilities = DesiredCapabilities.Firefox();// new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
 
