@@ -6,10 +6,12 @@ namespace Selenium.WebDriver.Equip.Tests
     public class PageNotLoadedExceptionTests
     {
         [Test]
-        
-        public void test()
+        [Category(TestCategories.HeadLess)]
+        public void PageNotLoadedExceptionPageName()
         {
             var ajaxyControlPage = new AjaxyControlPage();
+            var pageException = Assert.Throws<PageNotLoadedException>(() => { throw new PageNotLoadedException(ajaxyControlPage); });
+            Assert.AreEqual("Page name: TestWebPages.UIFramework.Pages.AjaxyControlPage", pageException.Message);
         }
     }
 }
