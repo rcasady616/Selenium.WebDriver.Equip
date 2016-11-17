@@ -16,13 +16,28 @@ namespace Selenium.WebDriver.Equip.Tests
         /// </summary>
         public IWebDriver Driver;
 
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
+        {
+            if (EnvironmentManager.Instance.Browser == Browser.Remote)
+                EnvironmentManager.Instance.RemoteServer.Start();
+        }
+
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            EnvironmentManager.Instance.CloseCurrentDriver();
+            if (EnvironmentManager.Instance.Browser == Browser.Remote)
+                EnvironmentManager.Instance.RemoteServer.Stop();
+        }
+
         /// <summary>
         /// Initialize the browser before the test starts
         /// </summary>
         [SetUp]
         public void SetupTest()
         {
-            Driver = EnvironmentManager.instance.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
+            Driver = EnvironmentManager.Instance.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
         }
 
         /// <summary>
@@ -37,7 +52,7 @@ namespace Selenium.WebDriver.Equip.Tests
                 var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
                 if (!outcome)
                     new TestCapture(Driver).CaptureWebPage(TestContext.CurrentContext.Test.GetCleanName() + ".Failed");
-                EnvironmentManager.instance.CloseCurrentDriver(outcome);
+                EnvironmentManager.Instance.CloseCurrentDriver(outcome);
                 Driver = null;
             }
         }

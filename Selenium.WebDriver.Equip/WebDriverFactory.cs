@@ -65,19 +65,21 @@ namespace Selenium.WebDriver.Equip
             return driver;
         }
 
-        public static RemoteWebDriver GetRemoteWebDriver(string browserName = "firefox", string version = "10", string url = null)
+        public static RemoteWebDriver GetRemoteWebDriver(string browserName = "Chrome", string version = "49", string url = null)
         {
+            var browser = (BrowserName)Enum.Parse(typeof(BrowserName), browserName);
+
             DesiredCapabilities capabillities = null;
             RemoteWebDriver driver = null;
             try
             {
-                switch (browserName)
+                switch (browser)
                 {
-                    case "internet explorer":
+                    case BrowserName.IE:
                         capabillities = DesiredCapabilities.InternetExplorer();
                         capabillities.SetCapability("nativeEvents", false);
                         break;
-                    case "firefox":
+                    case BrowserName.Firefox:
                         capabillities = DesiredCapabilities.Firefox();
                         //var profile = new FirefoxProfile { EnableNativeEvents = seleniumSettings.EnableNativeEvents };
                         //capabilities = new DesiredCapabilities(seleniumSettings.BrowserName, seleniumSettings.BrowserVersion, new Platform(PlatformType.Windows));
@@ -86,17 +88,20 @@ namespace Selenium.WebDriver.Equip
                         //capabilities.SetCapability(CapabilityType.AcceptSslCertificates, true);
                         //capabilities.SetCapability("firefox_profile", profile.ToBase64String());
                         break;
+                    case BrowserName.Chrome:
+                        capabillities = DesiredCapabilities.Chrome();
+                        break;
                     default:
                         throw new Exception("Unhandled browser type");
                 }
                 capabillities.SetCapability(CapabilityType.Version, version);
                 capabillities.SetCapability(CapabilityType.Platform, new Platform(PlatformType.XP));
-                capabillities.SetCapability("name", "Testing Selenium 2 with C# on Sauce");
-                capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
-                capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
-                capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
+                //capabillities.SetCapability("name", "Testing Selenium 2 with C# on Sauce");
+                //capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
+                //capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
+                //capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
                 capabillities.IsJavaScriptEnabled = true;
-                driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
+                driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), capabillities);
                 driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "http://rickcasady.blogspot.com/" : url);
             }
             catch (FileLoadException fileLoadEx)

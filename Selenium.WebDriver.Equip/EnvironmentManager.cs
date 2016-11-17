@@ -7,12 +7,14 @@ using Selenium.WebDriver.Equip.SauceLabs;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using Selenium.WebDriver.Equip.Server;
+using Selenium.WebDriver.Equip.Settings;
 
 namespace Selenium.WebDriver.Equip
 {
     public class EnvironmentManager
     {
-        public static readonly EnvironmentManager instance = new EnvironmentManager();
+        private static EnvironmentManager instance = new EnvironmentManager();
         private Browser browser;
         private IWebDriver driver;
         //private UrlBuilder urlBuilder;
@@ -20,6 +22,27 @@ namespace Selenium.WebDriver.Equip
         private BrowserName browserName;
         private string remoteBrowserVersion;
         private string remoteOsPlatform;
+        private SeleniumServerProxy remoteServer;
+
+        public Browser Browser
+        {
+            get { return browser; }
+        }
+
+        public static EnvironmentManager Instance
+        {
+            get
+            {
+                if (instance == null)
+                    instance = new EnvironmentManager();
+                return instance;
+            }
+        }
+
+        public SeleniumServerProxy RemoteServer
+        {
+            get { return remoteServer; }
+        }
 
         private EnvironmentManager()
         {
@@ -31,7 +54,12 @@ namespace Selenium.WebDriver.Equip
                     // todo get config
                     // todo validate config
                     ReadRemoteConfiguration();
-                    throw new NotImplementedException();
+                    //if(GetSettingValue("AutoStart"))
+
+                    //throw new NotImplementedException();
+                    var settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\Rick\Documents\GitHub\SeleniumExtensions\selenium-server-standalone-3.0.1.jar" };
+
+                    remoteServer = new SeleniumServerProxy(settings);
                     break;
                 case Browser.SauceLabs:
                     // todo get config
@@ -77,7 +105,8 @@ namespace Selenium.WebDriver.Equip
                     break;
                 case Browser.Remote:
                     //Todo start localy if not already running
-                    throw new NotImplementedException();// return WebDriverFactory.GetRemoteWebDriver();
+                    //throw new NotImplementedException();
+                    driver = WebDriverFactory.GetRemoteWebDriver();
                     break;
                 case Browser.Chrome:
                     if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();
