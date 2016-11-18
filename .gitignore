@@ -81,6 +81,9 @@ publish
 # NuGet Packages Directory
 packages
 
+#Cake tools directory
+tools
+
 # Windows Azure Build Output
 csx
 *.build.csdef

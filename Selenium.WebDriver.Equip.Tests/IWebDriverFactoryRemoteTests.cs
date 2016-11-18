@@ -35,28 +35,6 @@ namespace Selenium.WebDriver.Equip.Tests
         }
 
         [Test]
-        public void GetRemoteWebDriverFirefoxTest()
-        {
-            try
-            {
-                EnvironmentManager.Instance.RemoteServer.Start();
-
-                _driver = WebDriverFactory.GetRemoteWebDriver("Firefox", "http://rickcasady.blogspot.com/");
-                Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                _driver.Quit();
-                EnvironmentManager.Instance.RemoteServer.Stop();
-
-            }
-
-        }
-        [Test]
         public void GetSauceTest()
         {
             _driver = WebDriverFactory.GetSauceDriver(TestContext.CurrentContext.Test.Name, url: "http://rickcasady.blogspot.com/");
