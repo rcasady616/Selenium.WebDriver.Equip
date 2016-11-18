@@ -2,6 +2,7 @@
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Remote;
+using System;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -20,10 +21,10 @@ namespace Selenium.WebDriver.Equip.Tests
         {
             if (_driver != null)
             {
-                var passed = (TestContext.CurrentContext.Result.Outcome == ResultState.Success); 
+                var passed = (TestContext.CurrentContext.Result.Outcome == ResultState.Success);
                 try
                 {
-                    ((IJavaScriptExecutor) _driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
+                    ((IJavaScriptExecutor)_driver).ExecuteScript("sauce:job-result=" + (passed ? "passed" : "failed"));
                 }
                 finally
                 {
@@ -36,8 +37,24 @@ namespace Selenium.WebDriver.Equip.Tests
         [Test]
         public void GetRemoteWebDriverFirefoxTest()
         {
-            _driver = WebDriverFactory.GetRemoteWebDriver("firefox", "http://rickcasady.blogspot.com/");
-            Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
+            try
+            {
+                EnvironmentManager.Instance.RemoteServer.Start();
+
+                _driver = WebDriverFactory.GetRemoteWebDriver("Firefox", "http://rickcasady.blogspot.com/");
+                Assert.AreEqual(typeof(RemoteWebDriver), _driver.GetType());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _driver.Quit();
+                EnvironmentManager.Instance.RemoteServer.Stop();
+
+            }
+
         }
         [Test]
         public void GetSauceTest()
