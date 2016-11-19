@@ -35,6 +35,7 @@ namespace Selenium.WebDriver.Equip.Tests
         }
 
         [Test]
+        [Ignore("")]
         public void GetSauceTest()
         {
             _driver = WebDriverFactory.GetSauceDriver(TestContext.CurrentContext.Test.Name, url: "http://rickcasady.blogspot.com/");

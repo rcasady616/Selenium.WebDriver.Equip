@@ -51,7 +51,7 @@ namespace Selenium.WebDriver.Equip.Tests
             {
                 var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
                 if (!outcome)
-                    new TestCapture(Driver).CaptureWebPage(TestContext.CurrentContext.Test.GetCleanName() + ".Failed");
+                    new TestCapture(Driver, TestContext.CurrentContext.Test.GetCleanName() + ".Failed").CaptureWebPage();
                 EnvironmentManager.Instance.CloseCurrentDriver(outcome);
                 Driver = null;
             }

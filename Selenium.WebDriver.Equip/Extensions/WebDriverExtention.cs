@@ -166,5 +166,10 @@ namespace OpenQA.Selenium
             var screenShot = tempDriver.GetScreenshot();
             screenShot.SaveAsFile(fileName, imageFormat);
         }
+
+        public static IAlert Alert(this IWebDriver iWebDriver)
+        {
+            return iWebDriver.SwitchTo().Alert();
+        }
     }
 }
