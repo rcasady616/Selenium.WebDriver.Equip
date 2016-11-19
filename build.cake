@@ -3,6 +3,8 @@
 var configuration="Debug";
 var solution="./Selenium.WebDriver.Equip.sln";
 var testProjectDir="./Selenium.WebDriver.Equip.Tests/bin/" + configuration;
+var projProjectDir="./Selenium.WebDriver.Equip/bin/" + configuration;
+var dirNugetPackage="./nuget";
 
 var target = Argument("target", "Default");
 
@@ -46,4 +48,30 @@ Task("Test_BuildServer")
     WorkingDirectory = testProjectDir
     });
 });
+
+Task("Package")
+  .Does(()=>{
+
+    if (!DirectoryExists(dirNugetPackage))
+    {
+        CreateDirectory(dirNugetPackage);
+    }
+    
+    var assemblyInfo = ParseAssemblyInfo("./Selenium.WebDriver.Equip/Properties/AssemblyInfo.cs");
+    var nuGetPackSettings   = new NuGetPackSettings {                              
+                                Version                 = assemblyInfo.AssemblyFileVersion,
+                                Copyright               = "EQUIP 2016",
+                               // ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+                                OutputDirectory         = "./nuget"
+                                };
+            
+    NuGetPack("./Selenium.WebDriver.Equip/Selenium.WebDriver.Equip.Package.nuspec", nuGetPackSettings);
+    NuGetPack("./Equip/Equip.Package.nuspec", nuGetPackSettings);
+  });
+
+Task("Clean")
+  .Does(()=>{
+    CleanDirectories(dirNugetPackage);
+  });
+
 RunTarget(target);
