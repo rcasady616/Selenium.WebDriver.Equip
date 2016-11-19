@@ -143,21 +143,21 @@ namespace OpenQA.Selenium
         /// <summary>
         /// Waits for an IAlert
         /// </summary>
-        /// <param name="waitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
+        /// <param name="maxWaitTimeInSeconds">Maximum amount of seconds as <see cref="int"/> to wait for the <see cref="IWebElement"/> to become visible</param>
         /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
-        public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
+        public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), waitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
+        public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextEquals(text), waitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextEquals(text), maxWaitTimeInSeconds);
         }
 
-        public static bool WaitUntilAlertTextContains(this IWebDriver iWebDriver, string text, int waitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
+        public static bool WaitUntilAlertTextContains(this IWebDriver iWebDriver, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextContains(text), waitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextContains(text), maxWaitTimeInSeconds);
         }
 
         public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ImageFormat imageFormat)
