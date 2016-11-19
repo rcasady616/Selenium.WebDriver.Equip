@@ -1,6 +1,6 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
 
-var configuration="Debug";
+var configuration="Release";
 var solution="./Selenium.WebDriver.Equip.sln";
 var testProjectDir="./Selenium.WebDriver.Equip.Tests/bin/" + configuration;
 var projProjectDir="./Selenium.WebDriver.Equip/bin/" + configuration;
@@ -35,7 +35,7 @@ Task("Test_s")
 .Does(()=>{
   NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "GetSauceTest",
+    Test = "CheckBoxUnChecked",
     WorkingDirectory = testProjectDir
     });
 });
@@ -61,7 +61,7 @@ Task("Package")
     var nuGetPackSettings   = new NuGetPackSettings {                              
                                 Version                 = assemblyInfo.AssemblyFileVersion,
                                 Copyright               = "EQUIP 2016",
-                               // ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
+                                // ReleaseNotes            = new [] {"Bug fixes", "Issue fixes", "Typos"},
                                 OutputDirectory         = "./nuget"
                                 };
             
