@@ -6,6 +6,7 @@ var solution="./Selenium.WebDriver.Equip.sln";
 var testProjectDir="./Selenium.WebDriver.Equip.Tests/bin/" + configuration;
 var projProjectDir="./Selenium.WebDriver.Equip/bin/" + configuration;
 var dirNugetPackage="./nuget";
+var dirTestResults="./TestResults";
 
 var target = Argument("target", "Default");
 
@@ -34,20 +35,37 @@ Task("Test_all")
 
 Task("Test_s")
 .Does(()=>{
-  NUnit3(testProjectDir + "/*.Tests.dll",
+    if (!DirectoryExists(dirTestResults))
+    {
+        CreateDirectory(dirTestResults);
+    }
+    OpenCover(tool => {
+  tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "CheckBoxUnChecked",
-    WorkingDirectory = testProjectDir
+    Test = "GetFirefoxBrowser64",
+    WorkingDirectory = testProjectDir,
+    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
+  },
+  new FilePath("./OcResult.xml"),
+  new OpenCoverSettings()
+    .WithFilter("+[Selenium.WebDriver.Equip]*")
+    .WithFilter("+[Selenium.WebDriver]*")
+    .WithFilter("+[Equip]*"));
 });
 
 Task("Test_BuildServer")
 .Does(()=>{
+  if (!DirectoryExists(dirTestResults))
+    {
+        CreateDirectory(dirTestResults);
+    }
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
     Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
-    WorkingDirectory = testProjectDir
+    WorkingDirectory = testProjectDir,
+    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
   },
   new FilePath("./OcResult.xml"),
@@ -80,6 +98,7 @@ Task("Package")
 Task("Clean")
   .Does(()=>{
     CleanDirectories(dirNugetPackage);
+    CleanDirectories(dirTestResults);
   });
 
 RunTarget(target);
