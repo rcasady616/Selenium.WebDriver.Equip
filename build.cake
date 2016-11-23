@@ -1,4 +1,5 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
+#tool "nuget:?package=OpenCover"
 
 var configuration="Release";
 var solution="./Selenium.WebDriver.Equip.sln";
@@ -42,11 +43,18 @@ Task("Test_s")
 
 Task("Test_BuildServer")
 .Does(()=>{
-  NUnit3(testProjectDir + "/*.Tests.dll",
+OpenCover(tool => {
+  tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
     Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     WorkingDirectory = testProjectDir
     });
+  },
+  new FilePath("./OcResult.xml"),
+  new OpenCoverSettings()
+    .WithFilter("+[Selenium.WebDriver.Equip]*")
+    .WithFilter("+[Selenium.WebDriver]*")
+    .WithFilter("+[Equip]*"));
 });
 
 Task("Package")
