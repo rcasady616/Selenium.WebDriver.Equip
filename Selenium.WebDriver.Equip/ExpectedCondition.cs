@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Equip
     /// </summary>
     public static class ExpectedCondition
     {
-      
+
         /// <summary>
         /// An expectation for checking that an element is not present on the DOM of a page.
         /// This method returns faster than <see cref="ElementExists"/> when the <see cref="IWebElement"/> is expected to not be present
@@ -117,7 +117,7 @@ namespace Selenium.WebDriver.Equip
                 bool notVisiable = false;
                 try
                 {
-                    if(!searchContext.ElementExists(locator))
+                    if (!searchContext.ElementExists(locator))
                         return true;
                     notVisiable = !ElementVisible(searchContext.FindElement(locator));
                 }
@@ -154,9 +154,18 @@ namespace Selenium.WebDriver.Equip
 
         public static Func<ISearchContext, IWebElement> ElementExists(By locator)
         {
-            return (iSearchContext) => iSearchContext.FindElement(locator);
+            return (iSearchContext) =>
+            {
+                try
+                {
+                    iSearchContext.FindElement(locator);
+                }catch(NoSuchElementException)
+                {
+                }
+                return null;
+            };
         }
-        
+
         public static Func<ISearchContext, bool> ElementCountIs(By locator, int expectedCount)
         {
             return (iSearchContext) => iSearchContext.FindElements(locator).Count == expectedCount;
@@ -182,9 +191,16 @@ namespace Selenium.WebDriver.Equip
         {
             return (iWebDriver) =>
             {
-                IAlert alert = iWebDriver.SwitchTo().Alert();
-                if (alert != null)
-                    return (text == alert.Text);
+                try
+                {
+                    IAlert alert = iWebDriver.SwitchTo().Alert();
+                    if (alert != null)
+                        return (text == alert.Text);
+
+                }
+                catch (NoAlertPresentException)
+                {
+                }
                 return false;
             };
         }
@@ -193,9 +209,15 @@ namespace Selenium.WebDriver.Equip
         {
             return (iWebDriver) =>
             {
-                IAlert alert = iWebDriver.SwitchTo().Alert();
-                if (alert != null)
-                    return (alert.Text.Contains(text));
+                try
+                {
+                    IAlert alert = iWebDriver.SwitchTo().Alert();
+                    if (alert != null)
+                        return (alert.Text.Contains(text));
+                }
+                catch (NoAlertPresentException)
+                {
+                }
                 return false;
             };
         }

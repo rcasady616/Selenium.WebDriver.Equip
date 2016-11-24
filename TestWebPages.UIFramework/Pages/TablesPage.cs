@@ -3,7 +3,7 @@ using Selenium.WebDriver.Equip;
 
 namespace TestWebPages.UIFramework.Pages
 {
-   public class TablesPage : BasePage, IPage
+    public class TablesPage : BasePage, IPage
     {
         public static string Url = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/Tables.html";
 
@@ -13,7 +13,7 @@ namespace TestWebPages.UIFramework.Pages
         public static By ByTableTwo = By.Id("2");
 
         #endregion
-       
+
         public TablesPage(IWebDriver driver)
             : base(driver)
         {
@@ -24,9 +24,9 @@ namespace TestWebPages.UIFramework.Pages
         {
         }
 
-       public bool IsPageLoaded()
-       {
-          return Driver.WaitUntilVisible(ByTableOne);
-       }
+        public bool IsPageLoaded()
+        {
+            return Driver.WaitUntilVisible(ByTableOne);
+        }
     }
 }
