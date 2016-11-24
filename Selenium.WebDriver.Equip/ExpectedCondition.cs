@@ -154,16 +154,7 @@ namespace Selenium.WebDriver.Equip
 
         public static Func<ISearchContext, IWebElement> ElementExists(By locator)
         {
-            return (iSearchContext) =>
-            {
-                try
-                {
-                    iSearchContext.FindElement(locator);
-                }catch(NoSuchElementException)
-                {
-                }
-                return null;
-            };
+            return (iSearchContext) => iSearchContext.FindElement(locator);
         }
 
         public static Func<ISearchContext, bool> ElementCountIs(By locator, int expectedCount)
