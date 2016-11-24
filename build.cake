@@ -1,5 +1,7 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
 #tool "nuget:?package=OpenCover"
+#tool coveralls.net
+#addin Cake.Coveralls
 
 var configuration="Release";
 var solution="./Selenium.WebDriver.Equip.sln";
@@ -7,6 +9,7 @@ var testProjectDir="./Selenium.WebDriver.Equip.Tests/bin/" + configuration;
 var projProjectDir="./Selenium.WebDriver.Equip/bin/" + configuration;
 var dirNugetPackage="./nuget";
 var dirTestResults="./TestResults";
+var envVars = EnvironmentVariables();
 
 var target = Argument("target", "Default");
 
@@ -27,10 +30,22 @@ Task("Build")
 
 Task("Test_all")
 .Does(()=>{
-  NUnit3(testProjectDir + "/*.Tests.dll",
+   if (!DirectoryExists(dirTestResults))
+    {
+        CreateDirectory(dirTestResults);
+    }
+    OpenCover(tool => {
+  tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    WorkingDirectory = testProjectDir
+    WorkingDirectory = testProjectDir,
+    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
+  },
+  new FilePath("./OcResult.xml"),
+  new OpenCoverSettings()
+    .WithFilter("+[Selenium.WebDriver.Equip]*")
+    .WithFilter("+[Selenium.WebDriver]*")
+    .WithFilter("+[Equip]*"));
 });
 
 Task("Test_s")
@@ -42,7 +57,7 @@ Task("Test_s")
     OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "GetFirefoxBrowser64",
+    Test = "Selenium.WebDriver.Equip.Tests.IPageTests.TestIsPageLoaded",
     WorkingDirectory = testProjectDir,
     Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
@@ -93,6 +108,16 @@ Task("Package")
             
     NuGetPack("./Selenium.WebDriver.Equip/Selenium.WebDriver.Equip.Package.nuspec", nuGetPackSettings);
     NuGetPack("./Equip/Equip.Package.nuspec", nuGetPackSettings);
+  });
+
+  Task("LoadCoverage")
+  .Does(()=>{
+    string key;
+    envVars.TryGetValue("COVERALLS_ACCESSKEY", out key);
+    CoverallsIo("./OcResult.xml", new CoverallsIoSettings()
+    {
+        RepoToken = key
+    });
   });
 
 Task("Clean")
