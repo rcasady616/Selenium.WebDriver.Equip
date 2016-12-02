@@ -1,7 +1,8 @@
-![Equip Logo](http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo.svg) [![Build Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/beta/builds/0592bfbc727a45ae9562cc25319ce9f6)
+![Equip Logo](http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo.svg) [![Sauce Test Status](https://saucelabs.com/browser-matrix/richardcasady.svg)](https://saucelabs.com/u/richardcasady)
 Selenium.WebDriver.Equip 
 ==================
-![Appveyor](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh?svg=true) [![NuGet Badge](https://buildstats.info/nuget/Selenium.WebDriver.Equip)](https://www.nuget.org/packages/Selenium.WebDriver.Equip/) [![Build Status](https://saucelabs.com/buildstatus/richardcasady?saucy)](https://saucelabs.com/beta/builds/0592bfbc727a45ae9562cc25319ce9f6)  [![Coverage Status](https://coveralls.io/repos/github/rcasady616/Selenium.WeDriver.Equip/badge.svg?branch=master)](https://coveralls.io/github/rcasady616/Selenium.WeDriver.Equip?branch=master)
+![Appveyor](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh?svg=true) [![NuGet Badge](https://buildstats.info/nuget/Selenium.WebDriver.Equip)](https://www.nuget.org/packages/Selenium.WebDriver.Equip/) [![Sauce Test Status](https://saucelabs.com/buildstatus/richardcasady)](https://saucelabs.com/u/richardcasady)
+  [![Coverage Status](https://coveralls.io/repos/github/rcasady616/Selenium.WeDriver.Equip/badge.svg?branch=master)](https://coveralls.io/github/rcasady616/Selenium.WeDriver.Equip?branch=master)
 
 Selenium.WebDriver.Equip or Equip for short is a project that contains commonly use functionality that is missing in Selenium WebDriver. The functionalities in this project are not specific to any single web application. 
 
