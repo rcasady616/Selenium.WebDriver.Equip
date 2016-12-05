@@ -114,7 +114,7 @@ UpgradeLog*.XML
 *.exe
 *.jar
 *.zip
-teststage/
 ReleaseBinaries/
 ReleaseTesting/
 testrun/
+TestStage/
