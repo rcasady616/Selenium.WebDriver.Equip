@@ -132,7 +132,7 @@ Task("TestRelease")
     
     CopyFiles(testProjectDir+"/*",  dirReleaseTesting);
     // replace the binaries
-    CopyFiles("./Release Binaries/*",  dirReleaseTesting);
+    CopyFiles("./ReleaseBinaries/*",  dirReleaseTesting);
      // run the tests chrome
     var file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "chrome");
@@ -147,18 +147,6 @@ Task("TestRelease")
 
     // run the tests ie
     file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "MicrosoftEdge");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "14.14393");
-    NUnit3(dirReleaseTesting + "/*.Tests.dll",
-      new NUnit3Settings {
-      Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
-      WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.14.xml",
-      StopOnError = false      
-    });
-  
-    // run the tests ie
-    file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "internet explorer");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "11.103");
     NUnit3(dirReleaseTesting + "/*.Tests.dll",
@@ -169,11 +157,36 @@ Task("TestRelease")
       StopOnError = false      
     });
 
-      // run the tests safari
+     // run the tests ie
+    file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "MicrosoftEdge");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "14.14393");
+    NUnit3(dirReleaseTesting + "/*.Tests.dll",
+      new NUnit3Settings {
+      Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+      WorkingDirectory = dirReleaseTesting,
+      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.14.xml",
+      StopOnError = false      
+    });
+
+        // run the tests safari
     file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "Safari");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "10.0");
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteOsPlatform']/@value", "OS X 10.11");
+    NUnit3(dirReleaseTesting + "/*.Tests.dll",
+      new NUnit3Settings {
+      Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+      WorkingDirectory = dirReleaseTesting,
+      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
+      StopOnError = false      
+    });
+
+        // run the tests safari
+    file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "Firefox");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "45.0");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteOsPlatform']/@value", "Linux");
     NUnit3(dirReleaseTesting + "/*.Tests.dll",
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
@@ -188,6 +201,36 @@ Task("Clean")
     CleanDirectories(dirNugetPackage);
     CleanDirectories(dirTestResults);
     CleanDirectories(dirReleaseTesting);    
+  });
+
+Task("TryThis")
+  .IsDependentOn("Build")
+  .Does(()=>{
+    //copy testProjectDir
+    if (!DirectoryExists(dirReleaseTesting))
+    {
+        CreateDirectory(dirReleaseTesting);
+    }
+    // copy tests
+    //CopyFiles(testProjectDir+"/*",  dirReleaseTesting);
+    // replace the binaries
+    //CopyFiles("./ReleaseBinaries/*",  dirReleaseTesting);
+    
+    var os="Windows 10";
+    var browser = "Firefox";
+    var version = "47";
+    var testFolder = "./testrun/" + "Win10" + "/" + browser + "/" + version;
+    //CreateDirectory(testFolder);
+    //CopyFiles(dirReleaseTesting+"/*", testFolder);
+     // run the tests chrome
+    var file = File(testFolder +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", version);
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteOsPlatform']/@value", os);
+    StartAndReturnProcess("ping 127.0.0.1");
+    //StartAndReturnProcess("./tools/NUnit.ConsoleRunner/tools/nunit3-console.exe", 
+    //  new ProcessSettings{ Arguments = "'" + testFolder+"/Selenium.WebDriver.Equip.Tests.dll' --test='Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests'"}
+    //);
   });
 
 RunTarget(target);
