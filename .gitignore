@@ -117,4 +117,4 @@ UpgradeLog*.XML
 ReleaseBinaries/
 ReleaseTesting/
 testrun/
-teststage/
+TestStage/
