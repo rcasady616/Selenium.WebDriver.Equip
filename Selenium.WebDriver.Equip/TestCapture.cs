@@ -17,7 +17,7 @@ namespace Selenium.WebDriver.Equip
 
         public void CaptureWebPage()
         {
-            Alert();
+            WebDriverLogsLogs();
             PageSource();
             ScreenShot();
         }
@@ -34,12 +34,12 @@ namespace Selenium.WebDriver.Equip
             _browser.TakeScreenShot(fileName + ".jpeg", ImageFormat.Jpeg);
         }
 
-        public void Alert()
+        public void WebDriverLogsLogs()
         {
-            if (_browser.WaitUntilAlertExists(0))
-                using (var sw = new StreamWriter(string.Format(@"{0}.Alert", fileName), false))
-                    sw.Write(_browser.Alert().Text);
+            foreach (var log in _browser.Manage().Logs.AvailableLogTypes)
+                using (var sw = new StreamWriter(string.Format(@"{0}.{1}.log", fileName, log), false))
+                    foreach (var logentry in _browser.Manage().Logs.GetLog(log))
+                        sw.WriteLine(logentry);
         }
-
     }
 }

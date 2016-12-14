@@ -1,10 +1,13 @@
-﻿namespace Selenium.WebDriver.Equip
+﻿using OpenQA.Selenium;
+
+namespace Selenium.WebDriver.Equip
 {
     /// <summary>
     /// Defines an interface through which a web page is controlled 
     /// </summary>
     public interface IPage
     {
+        IWebDriver Driver { get; set; }
         /// <summary>
         /// Gets the value indicating whether or not this <see cref="IPage"/> has loaded
         /// </summary>
