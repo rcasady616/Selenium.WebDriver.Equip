@@ -1,4 +1,4 @@
-![Equip Logo](http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo.svg) [![Sauce Test Status](https://saucelabs.com/browser-matrix/EquipBuildServer.svg)](https://saucelabs.com/u/EquipBuildServer)
+![Equip Logo](https://github.com/rcasady616/Selenium.WeDriver.Equip/blob/master/Assets/Images/EquipLogo.png) [![Sauce Test Status](https://saucelabs.com/browser-matrix/EquipBuildServer.svg)](https://saucelabs.com/u/EquipBuildServer)
 Selenium.WebDriver.Equip 
 ==================
 ![Appveyor](https://ci.appveyor.com/api/projects/status/5ll4qq8v24c6cvjh?svg=true) [![NuGet Badge](https://buildstats.info/nuget/Selenium.WebDriver.Equip)](https://www.nuget.org/packages/Selenium.WebDriver.Equip/) [![Sauce Test Status](https://saucelabs.com/buildstatus/EquipBuildServer)](https://saucelabs.com/u/EquipBuildServer)
