@@ -160,7 +160,7 @@ namespace OpenQA.Selenium
             return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertTextContains(text), maxWaitTimeInSeconds);
         }
 
-        public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ImageFormat imageFormat)
+        public static void TakeScreenShot(this IWebDriver iWebDriver, string fileName, ScreenshotImageFormat imageFormat)
         {
             var tempDriver = (ITakesScreenshot)iWebDriver;
             var screenShot = tempDriver.GetScreenshot();

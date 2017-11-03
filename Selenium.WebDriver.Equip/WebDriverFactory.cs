@@ -59,7 +59,6 @@ namespace Selenium.WebDriver.Equip
             capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
             capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
             capabillities.SetCapability("name", testName);
-            capabillities.IsJavaScriptEnabled = true;
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
             driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "Rickcasady.com" : url);
             return driver;
@@ -100,7 +99,6 @@ namespace Selenium.WebDriver.Equip
                 //capabillities.SetCapability("build", Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString());
                 //capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
                 //capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
-                capabillities.IsJavaScriptEnabled = true;
                 driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), capabillities);
                 driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "http://rickcasady.blogspot.com/" : url);
             }
@@ -116,7 +114,7 @@ namespace Selenium.WebDriver.Equip
                 }
                 throw;
             }
-            driver.Manage().Timeouts().ImplicitlyWait(new TimeSpan(0, 0, 10));
+            driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 10);
             //driver.Manage().Timeouts().SetPageLoadTimeout(new TimeSpan(0, 0, 30));
             //driver.Manage().Timeouts().SetScriptTimeout(new TimeSpan(0, 0, 15));
             return driver;
