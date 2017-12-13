@@ -162,6 +162,16 @@ namespace Selenium.WebDriver.Equip
             return (iSearchContext) => iSearchContext.FindElements(locator).Count == expectedCount;
         }
 
+	public static Func<ISearchContext, bool> ElementCountIsGreaterThanExpected(By locator, int expectedCount)
+	{
+	    return (Func<ISearchContext, bool>)(iSearchContext => iSearchContext.FindElements(locator).Count > expectedCount);
+	}          
+	
+	public static Func<ISearchContext, bool> ElementCountIsLesserThanExpected(By locator, int expectedCount)
+	{             
+	    return (Func<ISearchContext, bool>)(iSearchContext => iSearchContext.FindElements(locator).Count < expectedCount);
+	}
+
         public static Func<ISearchContext, bool> ElementRested(Func<ISearchContext, bool> condition, int restTimeInSeconds)
         {
             int restCtr = 0;
