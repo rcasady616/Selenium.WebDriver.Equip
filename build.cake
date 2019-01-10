@@ -1,7 +1,7 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
 #tool "nuget:?package=OpenCover"
-#tool coveralls.net
-#addin Cake.Coveralls
+//#tool coveralls.net
+//#addin Cake.Coveralls
 
 var configuration="Release";
 var solution="./Selenium.WebDriver.Equip.sln";
@@ -39,7 +39,7 @@ Task("Test_all")
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
     WorkingDirectory = testProjectDir,
-    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
   },
   new FilePath("./OcResult.xml"),
@@ -60,7 +60,7 @@ Task("Test_s")
   new NUnit3Settings {
     Test = "Selenium.WebDriver.Equip.Tests.IPageTests.TestIsPageLoaded",
     WorkingDirectory = testProjectDir,
-    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
   },
   new FilePath("./OcResult.xml"),
@@ -81,7 +81,7 @@ OpenCover(tool => {
   new NUnit3Settings {
     Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     WorkingDirectory = testProjectDir,
-    Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
   },
   new FilePath("./OcResult.xml"),
@@ -115,10 +115,10 @@ Task("Package")
   .Does(()=>{
     string key;
     envVars.TryGetValue("COVERALLS_ACCESSKEY", out key);
-    CoverallsIo("./OcResult.xml", new CoverallsIoSettings()
-    {
-        RepoToken = key
-    });
+    //CoverallsIo("./OcResult.xml", new CoverallsIoSettings()
+    //{
+    //    RepoToken = key
+    // #});
   });
 
 Task("TestRelease")
@@ -141,7 +141,7 @@ Task("TestRelease")
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
       WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Chrome.54.xml",
+      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Chrome.54.xml",
       StopOnError = false
     });
 
@@ -153,7 +153,7 @@ Task("TestRelease")
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
       WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.11.xml",
+      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.11.xml",
       StopOnError = false      
     });
 
@@ -165,7 +165,7 @@ Task("TestRelease")
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
       WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.14.xml",
+      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.14.xml",
       StopOnError = false      
     });
 
@@ -178,7 +178,7 @@ Task("TestRelease")
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
       WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
+      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
       StopOnError = false      
     });
 
@@ -191,7 +191,7 @@ Task("TestRelease")
       new NUnit3Settings {
       Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
       WorkingDirectory = dirReleaseTesting,
-      Results = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
+      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
       StopOnError = false      
     });
 });
