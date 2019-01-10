@@ -31,7 +31,7 @@ namespace Selenium.WebDriver.Equip
 
         public void ScreenShot()
         {
-            _browser.TakeScreenShot(fileName + ".jpeg", ImageFormat.Jpeg);
+            _browser.TakeScreenShot(fileName + ".jpeg", ScreenshotImageFormat.Jpeg);
         }
 
         public void WebDriverLogsLogs()
