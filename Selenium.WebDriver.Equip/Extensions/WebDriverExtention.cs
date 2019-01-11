@@ -51,14 +51,34 @@ namespace OpenQA.Selenium
         {
             string fileName = "IEDriverServer.exe";
             string packageID = "Selenium.WebDriver.IEDriver";
-            var version = "3.0.0.0";
-            if (!File.Exists(fileName))
+            var version = DriversConfiguration.NugetIEDriverVersion;
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var fileNamePath = Path.Combine(path, fileName);
+            if (!File.Exists(fileNamePath))
             {
-                var path = Directory.GetCurrentDirectory();
                 GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
-                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path, packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path, packageID, version, fileName), fileNamePath);
             }
-            return File.Exists(fileName);
+            return File.Exists(fileNamePath);
+        }
+
+        public static bool GetNuGetGeckoDriver(this IWebDriver iWebDriver)
+        {
+            string fileName = "geckodriver.exe";
+            string packageID = "Selenium.WebDriver.GeckoDriver";
+            var version = DriversConfiguration.NugetGeckoDriverVersion;
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var fileNamePath = Path.Combine(path, fileName);
+            if (!File.Exists(fileNamePath))
+            {
+                GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
+                if (IntPtr.Size == 4)
+                    File.Copy(string.Format(@"{0}\{1}.{2}\driver\win32\{3}", path, packageID, version, fileName), fileNamePath);
+                else if (IntPtr.Size == 8)
+                    File.Copy(string.Format(@"{0}\{1}.{2}\driver\win64\{3}", path, packageID, version, fileName), fileNamePath);
+
+            }
+            return File.Exists(fileNamePath);
         }
 
         /// <summary>
