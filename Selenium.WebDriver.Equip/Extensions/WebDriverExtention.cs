@@ -2,25 +2,41 @@
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using System;
-using System.Drawing.Imaging;
 using System.IO;
+using System.Reflection;
 
 namespace OpenQA.Selenium
 {
     public static class WebDriverExtention
     {
+
+        /// <summary>
+        /// Casts the driver into a IJavaScriptExecutor
+        /// </summary>
+        /// <returns>IJavaScriptExecutor</returns>
+        public static IJavaScriptExecutor Scripts(this IWebDriver driver)
+        {
+            return (IJavaScriptExecutor)driver;
+        }
+
+        /// <summary>
+        /// Using nuget to retrieve the Selenium.WebDriver.ChromeDriver specified in the app.config
+        /// https://www.nuget.org/packages/Selenium.WebDriver.ChromeDriver/
+        /// </summary>
+        /// <returns>Weather the file path exists</returns>
         public static bool GetNuGetChromeDriver(this IWebDriver iWebDriver)
         {
             string fileName = "chromedriver.exe";
             string packageID = "Selenium.WebDriver.ChromeDriver";
-            var version = "2.25.0.0";
-            if (!File.Exists(fileName))
+            var version = DriversConfiguration.NugetChromeDriverVersion;
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var fileNamePath = Path.Combine(path, fileName);
+            if (!File.Exists(fileNamePath))
             {
-                var path = Directory.GetCurrentDirectory();
                 GetNuGetPackage(packageID, path, SemanticVersion.Parse(version));
-                File.Copy(string.Format(@"{0}\{1}.{2}\driver\{3}", path, packageID, version, fileName), string.Format("{0}\\{1}", path, fileName));
+                File.Copy(string.Format(@"{0}\{1}.{2}\driver\win32\{3}", path, packageID, version, fileName), fileNamePath);
             }
-            return File.Exists(fileName);
+            return File.Exists(fileNamePath);
         }
 
         private static void GetNuGetPackage(string packageID, string path, SemanticVersion version)
