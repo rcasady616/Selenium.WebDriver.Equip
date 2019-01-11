@@ -58,7 +58,7 @@ Task("Test_s")
     OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.IPageTests.TestIsPageLoaded",
+    Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     WorkingDirectory = testProjectDir,
     OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
@@ -79,7 +79,7 @@ Task("Test_BuildServer")
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Test = "Selenium.WebDriver.Equip.Tests.IWebDriverFactoryTests",
     WorkingDirectory = testProjectDir,
     OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });
