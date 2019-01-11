@@ -31,7 +31,7 @@ namespace Selenium.WebDriver.Equip.Tests
         {
 
             Assume.That(_driver.GetNuGetGeckoDriver());
-            _driver = WebDriverFactory.GetBrowser<FirefoxDriver>("http://rickcasady.blogspot.com/");
+            _driver = WebDriverFactory.FirefoxBrowser("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
 

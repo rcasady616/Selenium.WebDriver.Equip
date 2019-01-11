@@ -42,9 +42,14 @@ namespace Selenium.WebDriver.Equip
         /// </summary>
         /// <param name="url">The url to start the browser at, not required</param>
         /// <returns>A <see cref="FirefoxDriver"/></returns>
-        public static IWebDriver GetBrowser(string url = null)
+        public static IWebDriver FirefoxBrowser(string url = null)
         {
-            return GetBrowser<FirefoxDriver>(url);
+            var service = FirefoxDriverService.CreateDefaultService(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            service.FirefoxBinaryPath = DriversConfiguration.FireFoxBinaryPath;
+            var browser = new FirefoxDriver(service);
+            if (url != null)
+                browser.Navigate().GoToUrl(url);
+            return browser;
         }
 
         public static RemoteWebDriver GetSauceDriver(string testName, string browser = "firefox", string version = "10", string platform = "Windows 10", string url = null)
