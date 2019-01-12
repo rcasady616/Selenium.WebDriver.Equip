@@ -52,8 +52,8 @@ namespace Selenium.WebDriver.Equip.Server
         public void Start(string configurationArgs = "")
         {
             configurationArgs = string.Format("-port {0} {1}", Port, configurationArgs);
-            if (string.IsNullOrEmpty(Java.GetJreVersion()))
-                throw new Exception("Java JRE not installed, go to https://www.java.com/en/download/");
+            //if (string.IsNullOrEmpty(Java.GetJreVersion()))
+            //    throw new Exception("Java JRE not installed, go to https://www.java.com/en/download/");
             ServerProcess = Process.Start("java", string.Format("-jar \"{0}\" {1}", StandAlonePath, configurationArgs));
             if (!WaitUntilRunning())
                 throw new Exception("Server didnt start as expected");
@@ -108,7 +108,7 @@ namespace Selenium.WebDriver.Equip.Server
         public bool WaitUntilRunning()
         {
             int ctr = 0;
-            while (!IsSeleniumServerRunning() && ctr < 10)
+            while (!IsSeleniumServerRunning() && ctr < 20)
             {
                 Thread.Sleep(500);
                 ctr++;

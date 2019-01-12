@@ -7,7 +7,7 @@ using OpenQA.Selenium.IE;
 namespace Selenium.WebDriver.Equip.Tests
 {
     [TestFixture]
-    [Category(TestCategories.LocalDriver)]
+    [Category(TestCategories.LocalOnly)]
     public class IWebDriverFactoryTests
     {
         private IWebDriver _driver;

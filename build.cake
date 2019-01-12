@@ -70,6 +70,27 @@ Task("Test_s")
     .WithFilter("+[Equip]*"));
 });
 
+Task("Test_LocalOnly")
+.Does(()=>{
+    if (!DirectoryExists(dirTestResults))
+    {
+        CreateDirectory(dirTestResults);
+    }
+    OpenCover(tool => {
+  tool.NUnit3(testProjectDir + "/*.Tests.dll",
+  new NUnit3Settings {
+    Test = "Selenium.WebDriver.Equip.Tests.IWebDriverFactoryTests",
+    WorkingDirectory = testProjectDir,
+    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+    });
+  },
+  new FilePath("./OcResult.xml"),
+  new OpenCoverSettings()
+    .WithFilter("+[Selenium.WebDriver.Equip]*")
+    .WithFilter("+[Selenium.WebDriver]*")
+    .WithFilter("+[Equip]*"));
+});
+
 Task("Test_BuildServer")
 .Does(()=>{
   if (!DirectoryExists(dirTestResults))
@@ -79,7 +100,8 @@ Task("Test_BuildServer")
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.IWebDriverFactoryTests",
+    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Where = "cat != LocalOnly and cat != HeadLess", // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
     OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
     });

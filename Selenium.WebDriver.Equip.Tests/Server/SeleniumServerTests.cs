@@ -15,7 +15,7 @@ namespace Selenium.WebDriver.Equip.Tests.Server
         [SetUp]
         public void Setup()
         {
-            Settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\Rick\Documents\GitHub\SeleniumExtensions\selenium-server-standalone-3.0.1.jar" };
+            Settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\Rick\Documents\GitHub2\Selenium.WeDriver.Equip\selenium-server-standalone-3.141.59.jar" };
             SeleniumServer = new SeleniumServerProxy(Settings);
         }
 
