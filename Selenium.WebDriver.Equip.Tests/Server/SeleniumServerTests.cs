@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Equip.Tests.Server
 {
     [TestFixture]
     [Category(TestCategories.SeleniumServer)]
+    [Category(TestCategories.LocalOnly)]
     public class SeleniumServerTests
     {
         public SeleniumServerProxy SeleniumServer;

@@ -100,7 +100,7 @@ Task("Test_BuildServer")
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests,Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     Where = "cat != LocalOnly and cat != HeadLess", // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
     OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
