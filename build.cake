@@ -97,13 +97,14 @@ Task("Test_BuildServer")
     {
         CreateDirectory(dirTestResults);
     }
+var resultFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml";    
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests,Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",//,Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     Where = "cat != LocalOnly and cat != HeadLess", // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
-    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+    OutputFile = resultsFile
     });
   },
   new FilePath("./OcResult.xml"),
@@ -111,6 +112,10 @@ OpenCover(tool => {
     .WithFilter("+[Selenium.WebDriver.Equip]*")
     .WithFilter("+[Selenium.WebDriver]*")
     .WithFilter("+[Equip]*"));
+
+if (AppVeyor.IsRunningOnAppVeyor) {
+  AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
+}
 });
 
 Task("Package")
