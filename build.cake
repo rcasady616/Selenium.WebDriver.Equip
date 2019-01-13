@@ -113,9 +113,9 @@ OpenCover(tool => {
     .WithFilter("+[Selenium.WebDriver]*")
     .WithFilter("+[Equip]*"));
 
-if (AppVeyor.IsRunningOnAppVeyor) {
-  AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
-}
+//if (AppVeyor.IsRunningOnAppVeyor) {
+//  AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
+//}
 });
 
 Task("Package")
