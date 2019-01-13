@@ -104,7 +104,8 @@ OpenCover(tool => {
     Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",//,Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     Where = "cat != LocalOnly and cat != HeadLess", // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
-    OutputFile = resultFile
+    //OutputFile = resultFile,
+    Results = new[] {new NUnit3Result { FileName = resultFile }}
     });
   },
   new FilePath("./OcResult.xml"),
@@ -113,9 +114,9 @@ OpenCover(tool => {
     .WithFilter("+[Selenium.WebDriver]*")
     .WithFilter("+[Equip]*"));
 
-//if (AppVeyor.IsRunningOnAppVeyor) {
-//  AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
-//}
+if (AppVeyor.IsRunningOnAppVeyor) {
+  AppVeyor.UploadTestResults(resultFile, AppVeyorTestResultsType.NUnit3);
+}
 });
 
 Task("Package")
