@@ -62,6 +62,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
     //    //}
     //}
 
+    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.Elements)]
     public class HtmlTableTests : BaseTest
@@ -116,6 +117,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
         #endregion
     }
 
+    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.HeadLess)]
     [Category(TestCategories.Elements)]

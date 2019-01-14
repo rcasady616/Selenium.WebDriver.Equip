@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
     {
     }
 
+    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.HeadLess)]
     [Category(TestCategories.Elements)]

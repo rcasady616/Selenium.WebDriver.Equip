@@ -7,6 +7,7 @@ using NMock2;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {
+    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.Extension)]
     public class WebElementExtensionTests : BaseTest
@@ -117,6 +118,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         }
     }
 
+    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.Extension)]
     [Category(TestCategories.HeadLess)]
