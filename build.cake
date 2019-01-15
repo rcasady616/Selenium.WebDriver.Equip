@@ -107,6 +107,7 @@ OpenCover(tool => {
     WorkingDirectory = testProjectDir,
     //OutputFile = resultFile,
     Results = new[] {new NUnit3Result { FileName = resultFile }}
+    Workers = 5
     });
   },
   new FilePath("./OcResult.xml"),
