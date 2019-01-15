@@ -3,7 +3,7 @@
     /// <summary>
     /// Enumeration of all possiable browsers
     /// </summary>
-    public enum Browser
+    public enum DriverType
     {
         All,
         HtmlUnit,

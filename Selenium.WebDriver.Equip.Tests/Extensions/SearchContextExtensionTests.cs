@@ -5,7 +5,6 @@ using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {
-    [Parallelizable]
     [TestFixture]
     [Category(TestCategories.Extension)]
     public class SearchContextExtentionTests : BaseTest

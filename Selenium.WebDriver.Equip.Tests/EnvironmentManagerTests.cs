@@ -12,11 +12,13 @@ namespace Selenium.WebDriver.Equip.Tests
     public class EnvironmentManagerTests
     {
         public IWebDriver Driver;
+        public EnvironmentManager EnvManager;
 
         [SetUp]
         public void SetupTest()
         {
-            Driver = EnvironmentManager.Instance.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
+            EnvManager = new EnvironmentManager();
+            Driver = EnvManager.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
         }
     }
 }

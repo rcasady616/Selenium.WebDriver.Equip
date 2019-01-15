@@ -102,12 +102,11 @@ var resultFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml";
 OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests,Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
     Where = WhereNotLocalTests, // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
     //OutputFile = resultFile,
-    Results = new[] {new NUnit3Result { FileName = resultFile }},
-    Workers = 5
+    Results = new[] {new NUnit3Result { FileName = resultFile }}
     });
   },
   new FilePath("./OcResult.xml"),
