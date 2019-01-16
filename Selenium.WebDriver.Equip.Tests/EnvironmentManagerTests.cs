@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -12,6 +13,7 @@ namespace Selenium.WebDriver.Equip.Tests
     public class EnvironmentManagerTests
     {
         public IWebDriver Driver;
+
         public EnvironmentManager EnvManager;
 
         [SetUp]

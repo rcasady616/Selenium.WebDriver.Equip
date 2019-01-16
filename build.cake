@@ -106,8 +106,7 @@ OpenCover(tool => {
     Where = WhereNotLocalTests, // this removes all test catagories that cant run on build server
     WorkingDirectory = testProjectDir,
     //OutputFile = resultFile,
-    Results = new[] {new NUnit3Result { FileName = resultFile }},
-    Workers = 5
+    Results = new[] {new NUnit3Result { FileName = resultFile }}
     });
   },
   new FilePath("./OcResult.xml"),

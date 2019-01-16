@@ -65,7 +65,8 @@ namespace Selenium.WebDriver.Equip
             capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
             capabillities.SetCapability("name", testName);
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), capabillities);
-            driver.Navigate().GoToUrl(string.IsNullOrEmpty(url) ? "https://www.nuget.org/packages/Selenium.WebDriver.Equip" : url);
+            if (!string.IsNullOrEmpty(url))
+                driver.Navigate().GoToUrl(url);
             return driver;
         }
 

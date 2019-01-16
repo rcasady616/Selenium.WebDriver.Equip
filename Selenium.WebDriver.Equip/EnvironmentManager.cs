@@ -15,7 +15,7 @@ namespace Selenium.WebDriver.Equip
     public class EnvironmentManager
     {
         private DriverType driverType;
-        private ThreadLocal<IWebDriver> threadLoaclDriver = new ThreadLocal<IWebDriver>();
+        //private static ThreadLocal<IWebDriver> threadLoaclDriver = new ThreadLocal<IWebDriver>();
         private IWebDriver driver;
         private string remoteBrowserName;
         private BrowserName browserName;
@@ -27,7 +27,7 @@ namespace Selenium.WebDriver.Equip
         {
             get { return driverType; }
         }
-               
+
         public SeleniumServerProxy RemoteServer
         {
             get { return remoteServer; }
@@ -104,7 +104,6 @@ namespace Selenium.WebDriver.Equip
                 default:
                     throw new NotSupportedException();
             }
-            threadLoaclDriver.Value = driver;
             return driver;
         }
 
@@ -115,7 +114,7 @@ namespace Selenium.WebDriver.Equip
                     UpDateJob(Boolean.Parse(outcome.ToString()));
             if (driver != null) driver.Quit();
             driver = null;
-            threadLoaclDriver.Dispose();
+            //threadLoaclDriver.Dispose();
         }
 
         public void UpDateJob(bool outcome)

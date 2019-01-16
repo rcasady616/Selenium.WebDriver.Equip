@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using NUnit.Framework.Interfaces;
+using System.Threading;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -15,7 +16,6 @@ namespace Selenium.WebDriver.Equip.Tests
         /// Instance of the browser used for the test
         /// </summary>
         public IWebDriver Driver;
-
         public EnvironmentManager EnvManager;
 
         [OneTimeSetUp]
