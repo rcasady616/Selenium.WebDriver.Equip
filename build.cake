@@ -5,6 +5,7 @@
 
 var configuration="Release";
 var solution="./Selenium.WebDriver.Equip.sln";
+var testPackageDir="./TestPackage";
 var testProjectDir="./Selenium.WebDriver.Equip.Tests/bin/" + configuration;
 var projProjectDir="./Selenium.WebDriver.Equip/bin/" + configuration;
 var dirNugetPackage="./nuget";
@@ -154,37 +155,103 @@ Task("TestRelease")
   .IsDependentOn("Build")
   .Does(()=>{
     //copy testProjectDir
-     if (!DirectoryExists(dirReleaseTesting))
+    if (!DirectoryExists(dirReleaseTesting))
     {
         CreateDirectory(dirReleaseTesting);
     }
+    CleanDirectories(dirReleaseTesting);
+
     var testList = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests";
     CopyFiles(testProjectDir+"/*",  dirReleaseTesting);
+    DeleteFile($"{dirReleaseTesting}/Selenium.WebDriver.Equip.dll");
+    DeleteFile($"{dirReleaseTesting}/Selenium.WebDriver.Equip.pdb");
+    DeleteFile($"{dirReleaseTesting}/Equip.dll");
+    DeleteFile($"{dirReleaseTesting}/Equip.pdb");
     // replace the binaries
-    CopyFiles("./ReleaseBinaries/*",  dirReleaseTesting);
+    CopyFiles($"{testPackageDir}/*",  dirReleaseTesting);
+
+    var browser = "chrome";
+    var temTestDir = $"{dirTestResults}/{browser}";
+    if (DirectoryExists(temTestDir))
+    {
+      CreateDirectory(temTestDir);
+    }
+    CleanDirectories(temTestDir);
+    CopyFiles(dirReleaseTesting+"/*", temTestDir);
+
      // run the tests chrome
-    var file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "chrome");
+    var file = File($"{temTestDir}/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "54");
-    NUnit3(dirReleaseTesting + "/*.Tests.dll",
+   /* NUnit3(temTestDir + "/*.Tests.dll",
       new NUnit3Settings {
       Test = testList,
-      WorkingDirectory = dirReleaseTesting,
-      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Chrome.54.xml",
+      WorkingDirectory = temTestDir,
+      OutputFile = $"{temTestDir}/Selenium.WebDriver.Equip.Tests.{browser}.54.xml",
+      StopOnError = false
+    }); */
+
+    browser = "MicrosoftEdge";
+    temTestDir = $"{dirTestResults}/{browser}";
+    if (!DirectoryExists(temTestDir))
+    {
+      CreateDirectory(temTestDir);
+    }
+    CleanDirectories(temTestDir);
+    CopyFiles(dirReleaseTesting+"/*", temTestDir);
+    file = File(temTestDir +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "14.14393");
+
+
+    browser = "internet explorer";
+    temTestDir = $"{dirTestResults}/{browser}";
+    if (!DirectoryExists(temTestDir))
+    {
+      CreateDirectory(temTestDir);
+    }
+    CleanDirectories(temTestDir);
+    CopyFiles(dirReleaseTesting+"/*", temTestDir);
+    file = File(temTestDir +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "11.103");
+
+    // firefox
+    browser = "firefox";
+    temTestDir = $"{dirTestResults}/{browser}";
+    if (!DirectoryExists(temTestDir))
+    {
+      CreateDirectory(temTestDir);
+    }
+    CleanDirectories(temTestDir);
+    CopyFiles(dirReleaseTesting+"/*", temTestDir);
+    file = File(temTestDir +"/Selenium.WebDriver.Equip.Tests.dll.config");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "Firefox");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "64.0");
+
+
+    // run
+    var testAssemblies = GetFiles(dirTestResults + "/*/*.Tests.dll");
+    NUnit3(testAssemblies,
+      new NUnit3Settings {
+      Test = testList,
+      //WorkingDirectory = temTestDir,
+      OutputFile = $"{dirReleaseTesting}/Selenium.WebDriver.Equip.Tests.xml",
       StopOnError = false
     });
-
+/*
+    browser = "internet explorer";
+    temTestDir = $"{dirTestResults}/{browser}";
+    if (DirectoryExists(temTestDir))
+    {
+      CreateDirectory(temTestDir);
+    }
+    CleanDirectories(temTestDir);
+    CopyFiles(dirReleaseTesting+"/*", temTestDir);
     // run the tests ie
     file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", "internet explorer");
+    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
     XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "11.103");
-    NUnit3(dirReleaseTesting + "/*.Tests.dll",
-      new NUnit3Settings {
-      Test = testList,
-      WorkingDirectory = dirReleaseTesting,
-      OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.IE.11.xml",
-      StopOnError = false      
-    });
 
      // run the tests edge
     file = File(dirReleaseTesting +"/Selenium.WebDriver.Equip.Tests.dll.config");
@@ -223,6 +290,8 @@ Task("TestRelease")
       OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.Mac.Safari.10.xml",
       StopOnError = false      
     });
+
+     */
 });
 
 Task("Clean")
