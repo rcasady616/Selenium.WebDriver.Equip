@@ -1,28 +1,27 @@
-<?xml version="1.0"?>
-<package >
-  <metadata>
-    <id>Selenium.WebDriver.Equip</id>
-    <version>1.0.0</version>
-    <authors>rcasady616</authors>
-    <owners>rcasady616</owners>
-    <licenseUrl>https://raw.githubusercontent.com/rcasady616/Selenium.WeDriver.Equip/master/License</licenseUrl>
-    <projectUrl>https://www.nuget.org/packages/Selenium.WebDriver.Equip</projectUrl>
-    <iconUrl>http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo64x64.png</iconUrl>
-    <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <description>Selenium.WedDriver.Equip is a group of highly useful functionality not currently in Selenium.WebDriver. Extension of the Selenium WebDriver project. These API's are geared to make writing tests and code quicker and easier.</description>
-    <releaseNotes></releaseNotes>
-    <summary>Support tools, API's, Extensions and highly useful functionality not currently in Selenium.WebDriver</summary>
-    <copyright>Copyright 2016</copyright>
-    <tags>Selenium WebDriver automation browser tools Server SauceLabs HTMLElements Selenium.WebDriver</tags>
-    <dependencies>
-      <dependency id="Equip" version="1.0.0"/>
-      <dependency id="NuGet.Core" version="2.12"/>
-      <dependency id="Selenium.WebDriver" version="3.0"/>
-      <dependency id="Selenium.Support" version="3.0"/>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="bin\Release\Selenium.WebDriver.Equip.dll" target="lib\Selenium.WebDriver.Equip.dll" />
-    <file src="bin\Release\Selenium.WebDriver.Equip.pdb" target="lib\Selenium.WebDriver.Equip.pdb" />
-  </files>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Selenium.WebDriver.Equip</id>
+        <version>1.0.0</version>
+        <authors>rcasady616</authors>
+        <owners>rcasady616</owners>
+        <licenseUrl>https://raw.githubusercontent.com/rcasady616/Selenium.WeDriver.Equip/master/License</licenseUrl>
+        <projectUrl>https://www.nuget.org/packages/Selenium.WebDriver.Equip</projectUrl>
+        <iconUrl>http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/EquipLogo64x64.png</iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Selenium.WedDriver.Equip is a group of highly useful functionality not currently in Selenium.WebDriver. Extension of the Selenium WebDriver project. These API's are geared to make writing tests and code quicker and easier.</description>
+        <summary>Support tools, API's, Extensions and highly useful functionality not currently in Selenium.WebDriver</summary>
+        <releaseNotes />
+        <copyright>Copyright 2016</copyright>
+        <tags>Selenium WebDriver automation browser tools Server SauceLabs HTMLElements Selenium.WebDriver</tags>
+        <dependencies>
+            <dependency id="NuGet.Core" version="2.14" />
+            <dependency id="Selenium.WebDriver" version="3.141" />
+            <dependency id="Selenium.Support" version="3.141" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Selenium.WebDriver.Equip.dll" target="lib\Selenium.WebDriver.Equip.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Equip.pdb" target="lib\Selenium.WebDriver.Equip.pdb" />
+    </files>
 </package>
