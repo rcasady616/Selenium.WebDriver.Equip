@@ -22,6 +22,7 @@ namespace Selenium.WebDriver.Equip
         private string remoteBrowserVersion;
         private string remoteOsPlatform;
         private SeleniumServerProxy remoteServer;
+        private SeleniumSettings seleniumSettings;
 
         public DriverType DriverType
         {
@@ -35,8 +36,10 @@ namespace Selenium.WebDriver.Equip
 
         public EnvironmentManager()
         {
-            driverType = (DriverType)Enum.Parse(typeof(DriverType), GetSettingValue("Drivertype"));
-            browserName = (BrowserName)Enum.Parse(typeof(BrowserName), GetSettingValue("BrowserName"));
+            seleniumSettings = new SeleniumSettings().Deserialize();
+
+            driverType = seleniumSettings.DriverType;
+            browserName = seleniumSettings.BrowserName;
             switch (driverType)
             {
                 case DriverType.Remote:
@@ -67,9 +70,9 @@ namespace Selenium.WebDriver.Equip
 
         private void ReadRemoteConfiguration()
         {
-            remoteBrowserName = GetSettingValue("RemoteBrowserName");
-            remoteBrowserVersion = GetSettingValue("RemoteBrowserVersion");
-            remoteOsPlatform = GetSettingValue("RemoteOsPlatform");
+            remoteBrowserName =seleniumSettings.RemoteBrowserName;
+            remoteBrowserVersion = seleniumSettings.RemoteBrowserVersion;
+            remoteOsPlatform = seleniumSettings.RemoteOsPlatform;
         }
 
         public string GetSettingValue(string key)

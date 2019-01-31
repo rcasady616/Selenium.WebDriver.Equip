@@ -43,7 +43,7 @@ namespace OpenQA.Selenium
         {
             var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             var packageManager = new PackageManager(repo, path);
-            packageManager.InstallPackage(packageID, version);
+            packageManager.InstallPackage(packageID);//, version);
 
         }
 

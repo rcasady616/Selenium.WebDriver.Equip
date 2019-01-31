@@ -136,3 +136,12 @@ OcResult.xml
 TestTakeScreenShot.jpeg
 FireFox.OcResult.xml
 Chrome.OcResult.xml
+TestPackage/Equip.dll
+TestPackage/ICSharpCode.SharpZipLib.dll
+TestPackage/Microsoft.Web.XmlTransform.dll
+TestPackage/NuGet.Core.dll
+TestPackage/Selenium.WebDriver.Equip.dll
+TestPackage/WebDriver.dll
+TestPackage/WebDriver.Support.dll
+TestPackage/WebDriver.Support.xml
+TestPackage/WebDriver.xml

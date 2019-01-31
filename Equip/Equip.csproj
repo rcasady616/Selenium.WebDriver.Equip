@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\EnumExtension.cs" />
     <Compile Include="Extensions\FileInfoExtension.cs" />
     <Compile Include="Extensions\RegistryKeyExtension.cs" />
     <Compile Include="Java\Java.cs" />
