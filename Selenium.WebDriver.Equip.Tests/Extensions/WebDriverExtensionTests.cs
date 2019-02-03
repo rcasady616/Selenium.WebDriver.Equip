@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using Medrio.QA.UITestFramework.Pages;
+﻿using NMock2;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using TestWebPages.UIFramework.Pages;
-using NMock2;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {

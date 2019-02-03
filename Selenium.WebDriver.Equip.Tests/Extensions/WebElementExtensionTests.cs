@@ -1,9 +1,8 @@
-﻿using System.Diagnostics;
-using Medrio.QA.UITestFramework.Pages;
+﻿using NMock2;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using System.Diagnostics;
 using TestWebPages.UIFramework.Pages;
-using NMock2;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {

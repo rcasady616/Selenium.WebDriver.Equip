@@ -201,8 +201,6 @@ namespace OpenQA.Selenium
             return htmlElement;
         }
 
-        #region experimental
-
         public static bool ClickWaitForCondition<T>(this IWebElement iWebElement, IWebDriver driver, Func<IWebDriver, T> condition)
         {
             iWebElement.Click();
@@ -220,6 +218,72 @@ namespace OpenQA.Selenium
             return true;
         }
 
+
+        public static string CreateCssSelector(this IWebElement iWebElement)
+        {
+            string cssString = null;
+            var id = iWebElement.Id();
+            if (!string.IsNullOrEmpty(id))
+                return $"#{id}";
+
+            switch (iWebElement.TagName)
+            {
+                case HtmlTags.A:
+                    var href = iWebElement.GetAttribute(HtmlTagAttribute.Href);
+                    if (!string.IsNullOrEmpty(href))
+                    {
+                        cssString = $"a[href='{href}']";
+                        break;
+                    }
+                    var text = iWebElement.Text;
+                    if (!string.IsNullOrEmpty(text))
+                        cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
+                    break;
+                case HtmlTags.Button:
+                    cssString = "";
+                    break;
+                case HtmlTags.Input:
+                    var inputType = iWebElement.Type();
+                    switch (inputType)
+                    {
+                        case Input.Button:
+                        case Input.Checkbox:
+                        case Input.Password:
+                        case Input.Radio:
+                        case Input.Submit:
+                        case Input.Text:
+                            // todo investigate weather we can lose this block and just depend on id
+                            //throw new NotImplementedException("Case not handeled, Input with out Id");
+                            cssString = "";
+                            break;
+                        default:
+                            throw new NotImplementedException($"Input type not unkown, input type='{inputType}'");
+                            cssString = null;
+                            break;
+                    }
+                    break;
+                case HtmlTags.Label:
+                    var labelText = iWebElement.Text;
+                    if (!string.IsNullOrEmpty(labelText))
+                        cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
+                    break;
+                case HtmlTags.Select:
+                    break;
+                case HtmlTags.Option:
+                    // todo
+                    // value ???
+                    // label
+                    // text
+                    break;
+                default:
+                    cssString = null;
+                    break;
+            }
+            return cssString;
+        }
+
+        #region experimental
+
         public static string CreateLocatorName(this IWebElement iWebElement)
         {
             if (!string.IsNullOrEmpty(iWebElement.Id()))
@@ -234,45 +298,6 @@ namespace OpenQA.Selenium
                     return null;
             }
             return null;
-        }
-
-        public static string CreateCssSelector(this IWebElement iWebElement)
-        {
-            string cssString = null;
-            if (!string.IsNullOrEmpty(iWebElement.Id()))
-            {
-                cssString = string.Format("#{0}", iWebElement.Id());
-            }
-            switch (iWebElement.TagName)
-            {
-                case HtmlTags.A:
-                    if (!string.IsNullOrEmpty(iWebElement.Text))
-                        cssString = string.Format("a[href='{0}']", iWebElement.GetAttribute(HtmlTagAttribute.Href));
-                    break;
-                case HtmlTags.Input:
-                    switch (iWebElement.Type())
-                    {
-                        case "text":
-                            break;
-                        default:
-                            cssString = null;
-                            break;
-                    }
-                    //checkbox
-                    //radio
-                    //password
-                    break;
-                case HtmlTags.Button:
-                    break;
-                case HtmlTags.Select:
-                    break;
-                case HtmlTags.Option:
-                    break;
-                default:
-                    cssString = null;
-                    break;
-            }
-            return cssString;
         }
 
         #endregion

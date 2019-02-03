@@ -1,9 +1,8 @@
-﻿using System;
+﻿using OpenQA.Selenium.Support.UI;
+using Selenium.WebDriver.Equip;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
-using OpenQA.Selenium.Support.UI;
-using Selenium.WebDriver.Equip;
 
 namespace OpenQA.Selenium
 {

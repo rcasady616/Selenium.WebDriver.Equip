@@ -130,6 +130,7 @@
     <Compile Include="Elements\HtmlCheckBox.cs" />
     <Compile Include="Elements\IHtmlElement.cs" />
     <Compile Include="Elements\HtmlList.cs" />
+    <Compile Include="Elements\Input.cs" />
     <Compile Include="EnvironmentManager.cs" />
     <Compile Include="ExpectedCondition.cs" />
     <Compile Include="Extensions\SearchContextExtension.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Settings\DriverSettings.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="Settings\SeleniumSettings.cs" />
+    <Compile Include="Tools\LinkChecker.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\WebElementExtension.cs">
       <SubType>Code</SubType>

@@ -133,6 +133,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server\SeleniumServerTests.cs" />
     <Compile Include="TestCategories.cs" />
+    <Compile Include="Tools\LinkCheckerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

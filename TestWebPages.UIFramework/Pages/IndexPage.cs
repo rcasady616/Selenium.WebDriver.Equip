@@ -1,12 +1,11 @@
 ﻿using OpenQA.Selenium;
 using Selenium.WebDriver.Equip;
-using TestWebPages.UIFramework.Pages;
 
-namespace Medrio.QA.UITestFramework.Pages
+namespace TestWebPages.UIFramework.Pages
 {
     public class IndexPage : BasePage, IPage
     {
-        public static string Url = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/Index.html";
+        public static string Url = "http://rickcasady.com/SeleniumExtentions/v1.0/TestWebPages/index.html";
 
         #region Static By Selectors
 
