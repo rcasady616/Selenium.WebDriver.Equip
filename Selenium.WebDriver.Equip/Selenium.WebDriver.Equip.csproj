@@ -152,7 +152,7 @@
     <Compile Include="Settings\DriverSettings.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="Settings\SeleniumSettings.cs" />
-    <Compile Include="Tools\LinkChecker.cs" />
+    <Compile Include="LinkChecker.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\WebElementExtension.cs">
       <SubType>Code</SubType>
