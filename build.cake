@@ -29,6 +29,11 @@ Task("Build")
     Configuration = configuration,
     PlatformTarget = PlatformTarget.MSIL
     });
+    var file = File($"{testProjectDir}/SeleniumSettings.config");
+    XmlPoke(file, "/SeleniumSettings/DriverType", "SauceLabs");
+    XmlPoke(file, "/SeleniumSettings/BrowserName", "Chrome");
+    XmlPoke(file, "/SeleniumSettings/RemoteBrowserName", "Chrome");
+    XmlPoke(file, "/SeleniumSettings/RemoteBrowserVersion", "71.0");
 });
 
 Task("Test_all")
@@ -180,9 +185,11 @@ Task("TestRelease")
     CopyFiles(dirReleaseTesting+"/*", temTestDir);
 
      // run the tests chrome
-    var file = File($"{temTestDir}/Selenium.WebDriver.Equip.Tests.dll.config");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", "54");
+    var file = File($"{temTestDir}/SeleniumSettings.config");
+    XmlPoke(file, "/SeleniumSettings/DriverType", "SauceLabs");
+    XmlPoke(file, "/SeleniumSettings/BrowserName", browser);
+    XmlPoke(file, "/SeleniumSettings/RemoteBrowserName", browser);
+    XmlPoke(file, "/SeleniumSettings/RemoteBrowserVersion", "71.0");
    /* NUnit3(temTestDir + "/*.Tests.dll",
       new NUnit3Settings {
       Test = testList,
