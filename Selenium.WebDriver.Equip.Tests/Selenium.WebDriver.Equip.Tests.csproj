@@ -92,6 +92,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.14.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.14\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="NMock2">
       <HintPath>..\externals\nmock\NMock2.dll</HintPath>
     </Reference>
@@ -128,6 +131,7 @@
     <Compile Include="IWebDriverFactoryRemoteTests.cs" />
     <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="Extensions\WebElementExtensionTests.cs" />
+    <Compile Include="MockTool.cs" />
     <Compile Include="Nunit\TestAdapter.cs" />
     <Compile Include="PageNotLoadedExceptionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

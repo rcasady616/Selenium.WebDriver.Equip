@@ -23,6 +23,7 @@ namespace Selenium.WebDriver.Equip.Tools
             var links = GetLinks();
             foreach(var link in links)
             {
+                var t = link.Id();
                 var name = link.CreateCssSelector();
             }
         }
@@ -33,4 +34,5 @@ namespace Selenium.WebDriver.Equip.Tools
             
         }
     }
+
 }

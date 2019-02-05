@@ -3,7 +3,6 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.WebDriver.Equip.Elements;
 using Selenium.WebDriver.Equip.Tools;
-using System;
 using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Tools
@@ -22,18 +21,18 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             _ajaxyControlPage = new AjaxyControlPage(Driver);
             Assert.AreEqual(true, _ajaxyControlPage.IsPageLoaded());
         }
+        [Category("Unit")]
+        [Test]
+        public void TestSwitchBrowserWindow()
+        {
+            Driver.Navigate().GoToUrl(IndexPage.Url);
+            var index = new IndexPage(Driver);
 
-        //[Category("Unit")]
-        //[Test]
-        //public void TestSwitchBrowserWindow()
-        //{
-        //    Driver.Navigate().GoToUrl(IndexPage.Url);
-        //    var index = new IndexPage(Driver);
+            var linkChecker = new LinkChecker(Driver);
+            linkChecker.HammerLinks();
 
-        //    var linkChecker = new LinkChecker(Driver);
-        //    linkChecker.HammerLinks();
+        }
 
-        //}
     }
 
     [TestFixture]
@@ -96,40 +95,37 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             return LinkChecker.MakeMap(iWebElement);
         }
 
-        /*
-        [TestCase(true)]
-        [TestCase(false)]
-        public void CheckBoxSelected(bool selected)
+        [TestCase("<div ></div>", "div", "", null, "")]
+        [TestCase("<span />", "span", "", null, null)]
+        [TestCase("<a >Link Text</a>", "a", "Link Text", null, null)]
+        [TestCase("<a href='www.RickCasady.com'>Link Text</a>", "a", "Link Text", "www.RickCasady.com", null)]
+        [TestCase("<a id='101' href='www.RickCasady.com'>Link Text</a>", "a", "Link Text", "www.RickCasady.com", "101")]
+        public void TestsConvertHtmlToMock(string html, string tag, string text, string href, string id)
         {
-            Stub.On(iWebElement).GetProperty("Selected").Will(Return.Value(selected));
-            Assert.AreEqual(selected, checkBox.Selected);
+            var mockTool = new MockTool(mocks);
+            var mockElement = mockTool.ConvertHtmlToMock(html);
+
+            Assert.AreEqual(tag, mockElement.TagName);
+            Assert.AreEqual(text, mockElement.Text);
+            if (!string.IsNullOrEmpty(href)) Assert.AreEqual(href, mockElement.GetAttribute("href"));
+            if (!string.IsNullOrEmpty(id)) Assert.AreEqual(id, mockElement.Id());
         }
 
-        [Test]
-        public void CheckBoxUnChecked()
+        [TestCase("<form id='search'><input id='filter' type='text' /></form>", "form", "search", "","input", "filter")]
+        [TestCase("<form id='search'>txt1<input id='filter' type='text' /><div>txt2</div></form>", "form", "search", "txt1","input", "filter")]
+        public void TestsConvertHtmlToMockWithchildElements(string html, string tag, string id, string text,string childTag, string childId)
         {
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(true));
-            Assume.That(true == checkBox.Selected);
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(true));
-            Expect.Once.On(iWebElement).Method("Click");
-            checkBox.UnCheck();
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(false));
-            Assert.AreEqual(false, checkBox.Selected);
-            mocks.VerifyAllExpectationsHaveBeenMet();
+            var mockTool = new MockTool(mocks);
+            var mockElement = mockTool.ConvertHtmlToMock(html);
+
+            Assert.AreEqual(tag, mockElement.TagName);
+            Assert.AreEqual(text, mockElement.Text);
+            if (!string.IsNullOrEmpty(id)) Assert.AreEqual(id, mockElement.Id());
+
+            var childWebElement = mockElement.FindElement(By.Id(childId));
+            Assert.AreEqual(childTag, childWebElement.TagName);
+            Assert.AreEqual(text, mockElement.Text);
         }
 
-        [Test]
-        public void CheckBoxChecked()
-        {
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(false));
-            Assume.That(false == checkBox.Selected);
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(false));
-            Expect.Once.On(iWebElement).Method("Click");
-            checkBox.Check();
-            Expect.Once.On(iWebElement).GetProperty("Selected").Will(Return.Value(true));
-            Assert.AreEqual(true, checkBox.Selected);
-            mocks.VerifyAllExpectationsHaveBeenMet();
-        }
-        */
     }
 }
