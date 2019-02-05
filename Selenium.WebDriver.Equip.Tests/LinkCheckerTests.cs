@@ -21,24 +21,24 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             _ajaxyControlPage = new AjaxyControlPage(Driver);
             Assert.AreEqual(true, _ajaxyControlPage.IsPageLoaded());
         }
-        [Category("Unit")]
-        [Test]
-        public void TestSwitchBrowserWindow()
-        {
-            Driver.Navigate().GoToUrl(IndexPage.Url);
-            var index = new IndexPage(Driver);
 
-            var linkChecker = new LinkChecker(Driver);
-            linkChecker.HammerLinks();
+        //[Category("Unit")]
+        //[Test]
+        //public void TestSwitchBrowserWindow()
+        //{
+        //    Driver.Navigate().GoToUrl(IndexPage.Url);
+        //    var index = new IndexPage(Driver);
 
-        }
+        //    var linkChecker = new LinkChecker(Driver);
+        //    linkChecker.HammerLinks();
+
+        //}
 
     }
 
     [TestFixture]
-    [Category(TestCategories.HeadLess)]
     [Category(TestCategories.Tools)]
-    public class HeadLessLinkCheckerTests
+    public class LinkCheckerMockTests
     {
         private Mockery mocks;
         private IWebElement iWebElement;
