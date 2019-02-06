@@ -1,6 +1,7 @@
 ﻿using NMock2;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using Selenium.WebDriver.Equip.Tools;
 using System.Diagnostics;
 using TestWebPages.UIFramework.Pages;
 
@@ -156,13 +157,13 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Name).Will(Return.Value(name));
             Assert.AreEqual(name, WebElement.Name());
         }
-        
+
         [Test]
         public void TestStyleExtention()
         {
             string style = "background-color:red;";
             Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Style).Will(Return.Value(style));
-            Assert.AreEqual( style,WebElement.Style());
+            Assert.AreEqual(style, WebElement.Style());
         }
 
         [Test]
@@ -187,6 +188,16 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             string val = "max";
             Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Value).Will(Return.Value(val));
             Assert.AreEqual(val, WebElement.Value());
+        }
+
+        [TestCase("<div id='101' />", ExpectedResult = "By.CssSelector: #101")]
+        [TestCase("<a href='www.RickCasady.com' >Link Text</a>", ExpectedResult = "By.CssSelector: a[href='www.RickCasady.com']")]
+        [TestCase("<a href='' >Link Text</a>", ExpectedResult = "By.XPath: //a[text() = 'Link Text']")]
+        public string TestMakeLocatorExtention(string html)
+        {
+            var mockElement = new MockTool(mocks).ConvertHtmlToMock(html);
+            var locator = mockElement.MakeLocator();
+            return locator.ToString();
         }
     }
 }

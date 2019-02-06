@@ -219,7 +219,7 @@ namespace OpenQA.Selenium
         }
 
 
-        public static string CreateCssSelector(this IWebElement iWebElement)
+        public static string CreateCssSelectorString(this IWebElement iWebElement)
         {
             string cssString = null;
             var id = iWebElement.Id();
@@ -280,6 +280,86 @@ namespace OpenQA.Selenium
                     break;
             }
             return cssString;
+        }
+
+        public static string CreateXPathString(this IWebElement iWebElement)
+        {
+            string xPathString = null;
+            var id = iWebElement.Id();
+            if (!string.IsNullOrEmpty(id))
+                return $"//*[@id='{id}']";
+
+            switch (iWebElement.TagName)
+            {
+                case HtmlTags.A:
+                    var href = iWebElement.GetAttribute(HtmlTagAttribute.Href);
+                    if (!string.IsNullOrEmpty(href))
+                    {
+                        xPathString = $"//a[@href='{href}']";
+                        break;
+                    }
+                    var text = iWebElement.Text;
+                    if (!string.IsNullOrEmpty(text))
+                        xPathString = $"//a[text() = '{text}']";
+                    break;
+                case HtmlTags.Button:
+                    xPathString = "";
+                    break;
+                case HtmlTags.Input:
+                    var inputType = iWebElement.Type();
+                    switch (inputType)
+                    {
+                        case Input.Button:
+                        case Input.Checkbox:
+                        case Input.Password:
+                        case Input.Radio:
+                        case Input.Submit:
+                        case Input.Text:
+                            // todo investigate weather we can lose this block and just depend on id
+                            //throw new NotImplementedException("Case not handeled, Input with out Id");
+                            xPathString = "";
+                            break;
+                        default:
+                            throw new NotImplementedException($"Input type not unkown, input type='{inputType}'");
+                            xPathString = null;
+                            break;
+                    }
+                    break;
+                case HtmlTags.Label:
+                    var labelText = iWebElement.Text;
+                    if (!string.IsNullOrEmpty(labelText))
+                        xPathString = "//label[text() = '{text}']"; 
+                    break;
+                case HtmlTags.Select:
+                    break;
+                case HtmlTags.Option:
+                    // todo
+                    // value ???
+                    // label
+                    // text
+                    break;
+                default:
+                    xPathString = null;
+                    break;
+            }
+            return xPathString;
+        }
+
+        public static By MakeLocator(this IWebElement iWebElement)
+        {
+            By byLocator = null;
+
+            var locatorString = iWebElement.CreateCssSelectorString();
+            if (!string.IsNullOrEmpty(locatorString))
+                byLocator = By.CssSelector(locatorString);
+            if (string.IsNullOrEmpty(locatorString))
+            {
+                locatorString = iWebElement.CreateXPathString();
+                if (!string.IsNullOrEmpty(locatorString))
+                    byLocator = By.XPath(locatorString);
+            }
+
+            return byLocator;
         }
 
         #region experimental

@@ -21,18 +21,20 @@ namespace Selenium.WebDriver.Equip.Tools
         public void HammerLinks()
         {
             var links = GetLinks();
-            foreach(var link in links)
+            foreach (var link in links)
             {
                 var t = link.Id();
-                var name = link.CreateCssSelector();
+                var name = link.CreateCssSelectorString();
             }
         }
 
         public static string MakeMap(IWebElement iWebElement)
         {
-            return iWebElement.CreateCssSelector();
-            
+            return iWebElement.CreateCssSelectorString();
+
         }
+
+       
     }
 
 }

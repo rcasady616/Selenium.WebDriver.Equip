@@ -38,6 +38,9 @@ namespace Selenium.WebDriver.Equip.Tests
         private static void ConvertHtmlNodeToMock(IWebElement mockIWebElement, HtmlNode node)
         {
             var attributes = node.Attributes;
+            if (attributes["id"] == null)
+                Stub.On(mockIWebElement).Method("GetAttribute").With("id").Will(Return.Value(""));
+
             foreach (var att in attributes)
                 Stub.On(mockIWebElement).Method("GetAttribute").With(att.Name).Will(Return.Value(att.Value));
 
@@ -47,6 +50,7 @@ namespace Selenium.WebDriver.Equip.Tests
                 Stub.On(mockIWebElement).GetProperty("Text").Will(Return.Value(text.InnerText));
             else
                 Stub.On(mockIWebElement).GetProperty("Text").Will(Return.Value(""));
+
         }
     }
 }
