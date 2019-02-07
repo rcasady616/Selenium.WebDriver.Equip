@@ -14,43 +14,22 @@ namespace Selenium.WebDriver.Equip.Tests
 
         public IWebElement ConvertHtmlToMock(string html)
         {
-            var mockIWebElement = mock.NewMock<IWebElement>();
             var htmlDoc = $"<html>{html}</html>";
             var doc = new HtmlDocument();
             doc.LoadHtml(htmlDoc);
             var node = doc.DocumentNode.SelectSingleNode("./html/*");
-            ConvertHtmlNodeToMock(mockIWebElement, node);
-
+            var mockIWebElement = node.ToNMock2IWebElement();
+            
             if (node.HasChildNodes)
             {
                 foreach (var child in node.ChildNodes)
                 {
-                    var tempElement = mock.NewMock<IWebElement>();
-                    ConvertHtmlNodeToMock(tempElement, child);
+                    var tempElement = child.ToNMock2IWebElement();
                     var byID = By.Id(child.Id);
                     Stub.On(mockIWebElement).Method("FindElement").With(byID).Will(Return.Value(tempElement));
                 }
             }
-
             return mockIWebElement;
-        }
-
-        private static void ConvertHtmlNodeToMock(IWebElement mockIWebElement, HtmlNode node)
-        {
-            var attributes = node.Attributes;
-            if (attributes["id"] == null)
-                Stub.On(mockIWebElement).Method("GetAttribute").With("id").Will(Return.Value(""));
-
-            foreach (var att in attributes)
-                Stub.On(mockIWebElement).Method("GetAttribute").With(att.Name).Will(Return.Value(att.Value));
-
-            Stub.On(mockIWebElement).GetProperty("TagName").Will(Return.Value(node.Name));
-            var text = node.SelectSingleNode("text()");
-            if (text != null)
-                Stub.On(mockIWebElement).GetProperty("Text").Will(Return.Value(text.InnerText));
-            else
-                Stub.On(mockIWebElement).GetProperty("Text").Will(Return.Value(""));
-
         }
     }
 }

@@ -146,6 +146,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Equip\Equip.csproj">
+      <Project>{c1f15ede-0ac7-4f6b-ad04-29e63d1864b1}</Project>
+      <Name>Equip</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Selenium.WebDriver.Equip\Selenium.WebDriver.Equip.csproj">
       <Project>{c31da8a4-9d65-4d4f-9e0c-feeb44add258}</Project>
       <Name>Selenium.WebDriver.Equip</Name>

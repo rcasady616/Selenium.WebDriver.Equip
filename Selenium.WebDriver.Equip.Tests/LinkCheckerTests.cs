@@ -126,6 +126,5 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             Assert.AreEqual(childTag, childWebElement.TagName);
             Assert.AreEqual(text, mockElement.Text);
         }
-
     }
 }
