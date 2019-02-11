@@ -95,6 +95,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.14.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.14\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
       <Private>True</Private>
@@ -139,6 +142,8 @@
     <Compile Include="HtmlTags.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\WebDriverExtention.cs" />
+    <Compile Include="PageObjectGenerator\PageObjectGenerator.cs" />
+    <Compile Include="PageObjectGenerator\VirtualElement.cs" />
     <Compile Include="SauceLabs\SauceDriverKeys.cs" />
     <Compile Include="SearchContextWait.cs" />
     <Compile Include="Elements\HtmlTable.cs" />
@@ -153,6 +158,7 @@
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="Settings\SeleniumSettings.cs" />
     <Compile Include="LinkChecker.cs" />
+    <Compile Include="PageObjectGenerator\VirtualPage.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\WebElementExtension.cs">
       <SubType>Code</SubType>

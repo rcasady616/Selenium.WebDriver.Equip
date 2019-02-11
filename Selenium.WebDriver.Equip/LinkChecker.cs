@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System.Collections.ObjectModel;
 
-namespace Selenium.WebDriver.Equip.Tools
+namespace Selenium.WebDriver.Equip
 {
 
     public class LinkChecker

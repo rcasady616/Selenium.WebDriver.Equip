@@ -32,13 +32,63 @@ namespace HtmlAgilityPack
                 foreach (var child in htmlNode.ChildNodes)
                 {
                     var tempElement = new Mockery().NewMock<IWebElement>();
-                    tempElement = CreateNMock2IWebElement( child);
+                    tempElement = CreateNMock2IWebElement(child);
                     var byID = By.Id(child.Id);
                     Stub.On(mockIWebElement).Method("FindElement").With(byID).Will(Return.Value(tempElement));
                 }
             }
-
             return mockIWebElement;
+        }
+
+        private static string GetAttributeValue(HtmlAttributeCollection attributes, string attributeName)
+        {
+            var attribute = attributes[attributeName];
+            if (attribute != null)
+                return attribute.Value;
+            return "";
+        }
+
+        public static string ToCssSelectorString(this HtmlNode htmlNode)
+        {
+            string cssString = null;
+
+            var attributes = htmlNode.Attributes;
+            var id = GetAttributeValue(attributes, "id");
+            if (!string.IsNullOrEmpty(id))
+                return $"#{id}";
+
+            switch (htmlNode.Name)
+            {
+                case "a":
+                case "A":
+                    var href = GetAttributeValue(attributes, "href");
+                    if (!string.IsNullOrEmpty(href))
+                    {
+                        cssString = $"a[href='{href}']";
+                        break;
+                    }
+                    var text = "";
+                    var textNode = htmlNode.SelectSingleNode("text()");
+                    if (textNode != null)
+                       text = textNode.InnerText;
+
+                    if (!string.IsNullOrEmpty(text))
+                        cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
+                    break;
+                case "label":
+                case "Label":
+                    var labelText = "";
+                    var labelTextNode = htmlNode.SelectSingleNode("text()");
+                    if (labelTextNode != null)
+                        text = labelTextNode.InnerText;
+                    if (!string.IsNullOrEmpty(labelText))
+                        cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
+                    break;
+                default:
+                    cssString = null;
+                    break;
+            }
+            return cssString;
         }
     }
 }

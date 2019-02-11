@@ -45,7 +45,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         {
             Driver.Navigate().GoToUrl(IndexPage.Url);
             var index = new IndexPage(Driver);
-             
+
             index.AjaxyControlNewWindowLink.Click();
             Assert.IsNull(Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("false")));
         }
@@ -57,7 +57,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         public void TestWaitUntilTitleIs(bool expected, string title)
         {
             Assert.AreEqual(expected, Driver.WaitUntilTitleIs(title));
-       }
+        }
 
         [Category("Unit")]
         [TestCase(true, "TestIsPageLoaded", 10)]
@@ -338,6 +338,17 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         }
 
         #endregion
+
+        [Test]
+        public void TestPageObjectGeneratorLink()
+        {
+            Driver.Navigate().GoToUrl(IndexPage.Url);
+            var virualIndexPage = Driver.PageObjectGenerator().GeneratePage();
+            var pageA = virualIndexPage.Descendants().Where(l => l.LocatorText == "a[href='PageA.htm']").First();
+            Assert.AreEqual("a", pageA.TagName);
+            Assert.AreEqual("PageA", Driver.FindElement(pageA.Locator).Text);
+        }
+
     }
 
     [TestFixture]
@@ -354,6 +365,6 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             mocks = new Mockery();
             driver = mocks.NewMock<IWebDriver>();
         }
-        
+
     }
 }

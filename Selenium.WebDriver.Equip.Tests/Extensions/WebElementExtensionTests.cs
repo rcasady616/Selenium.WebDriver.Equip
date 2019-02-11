@@ -1,7 +1,6 @@
 ﻿using NMock2;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using Selenium.WebDriver.Equip.Tools;
 using System.Diagnostics;
 using TestWebPages.UIFramework.Pages;
 

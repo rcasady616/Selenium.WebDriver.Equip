@@ -1,6 +1,7 @@
 ﻿using NuGet;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
+using Selenium.WebDriver.Equip.PageObjectGenerator;
 using System;
 using System.IO;
 using System.Reflection;
@@ -206,6 +207,11 @@ namespace OpenQA.Selenium
         public static IAlert Alert(this IWebDriver iWebDriver)
         {
             return iWebDriver.SwitchTo().Alert();
+        }
+
+        public static PageObjectGenerator PageObjectGenerator(this IWebDriver iWebDriver)
+        {
+            return new PageObjectGenerator(iWebDriver);
         }
     }
 }

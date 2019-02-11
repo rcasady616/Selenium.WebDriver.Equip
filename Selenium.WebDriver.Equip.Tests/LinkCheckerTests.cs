@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.WebDriver.Equip.Elements;
-using Selenium.WebDriver.Equip.Tools;
 using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Tools
