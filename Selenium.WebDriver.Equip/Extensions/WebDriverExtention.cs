@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
+using Selenium.WebDriver.Equip.Settings;
 using System;
 using System.IO;
 using System.Reflection;
@@ -27,9 +28,10 @@ namespace OpenQA.Selenium
         /// <returns>Weather the file path exists</returns>
         public static bool GetNuGetChromeDriver(this IWebDriver iWebDriver)
         {
+            var config = new SeleniumDriverExeSettings();
             string fileName = "chromedriver.exe";
             string packageID = "Selenium.WebDriver.ChromeDriver";
-            var version = DriversConfiguration.NugetChromeDriverVersion;
+            var version = config.NugetChromeDriverVersion;
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var fileNamePath = Path.Combine(path, fileName);
             if (!File.Exists(fileNamePath))
@@ -44,15 +46,16 @@ namespace OpenQA.Selenium
         {
             var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
             var packageManager = new PackageManager(repo, path);
-            packageManager.InstallPackage(packageID);//, version);
+            packageManager.InstallPackage(packageID, version);
 
         }
 
         public static bool GetNuGetIEDriver(this IWebDriver iWebDriver)
         {
+            var config = new SeleniumDriverExeSettings().Deserialize();
             string fileName = "IEDriverServer.exe";
             string packageID = "Selenium.WebDriver.IEDriver";
-            var version = DriversConfiguration.NugetIEDriverVersion;
+            var version = config.NugetIEDriverVersion;
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var fileNamePath = Path.Combine(path, fileName);
             if (!File.Exists(fileNamePath))
@@ -65,9 +68,10 @@ namespace OpenQA.Selenium
 
         public static bool GetNuGetGeckoDriver(this IWebDriver iWebDriver)
         {
+            var config = new SeleniumDriverExeSettings();
             string fileName = "geckodriver.exe";
             string packageID = "Selenium.WebDriver.GeckoDriver";
-            var version = DriversConfiguration.NugetGeckoDriverVersion;
+            var version = config.NugetGeckoDriverVersion;
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var fileNamePath = Path.Combine(path, fileName);
             if (!File.Exists(fileNamePath))

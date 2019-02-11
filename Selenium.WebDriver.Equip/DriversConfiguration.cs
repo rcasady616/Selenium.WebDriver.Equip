@@ -11,9 +11,6 @@ namespace Selenium.WebDriver.Equip
 
         public static string FireFoxBinaryPath = new SeleniumSettings().FireFoxBinaryPath;
         
-        public static string NugetChromeDriverVersion = System.Configuration.ConfigurationManager.AppSettings.GetValues("NugetChromeDriverVersion")[0];
-        public static string NugetIEDriverVersion = System.Configuration.ConfigurationManager.AppSettings.GetValues("NugetIEDriverVersion")[0];
-        public static string NugetGeckoDriverVersion = System.Configuration.ConfigurationManager.AppSettings.GetValues("NugetGeckoDriverVersion")[0];
         #endregion
     }
 }

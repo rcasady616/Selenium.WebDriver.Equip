@@ -154,6 +154,8 @@
     <Compile Include="Server\Json\NodeContract.cs" />
     <Compile Include="Server\SeleniumServerHubProxy.cs" />
     <Compile Include="Server\SeleniumServerProxyBase.cs" />
+    <Compile Include="Settings\BaseSettings.cs" />
+    <Compile Include="Settings\SeleniumDriverExeSettings.cs" />
     <Compile Include="Settings\DriverSettings.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="Settings\SeleniumSettings.cs" />
@@ -170,6 +172,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SeleniumDriverExeSettings.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="SeleniumSettings.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

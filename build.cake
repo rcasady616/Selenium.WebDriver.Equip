@@ -1,6 +1,8 @@
 #tool "nuget:?package=NUnit.ConsoleRunner"
 #tool "nuget:?package=OpenCover"
 //#tool coveralls.net
+//#tool coveralls.io
+
 //#addin Cake.Coveralls
 
 var configuration="Release";
@@ -151,9 +153,9 @@ Task("Package")
     string key;
     envVars.TryGetValue("COVERALLS_ACCESSKEY", out key);
     //CoverallsIo("./OcResult.xml", new CoverallsIoSettings()
-    //{
+   // {
     //    RepoToken = key
-    // #});
+    // });
   });
 
 Task("TestRelease")
