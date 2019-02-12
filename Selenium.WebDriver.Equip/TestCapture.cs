@@ -1,7 +1,7 @@
-﻿using System;
-using System.Drawing.Imaging;
+﻿using OpenQA.Selenium;
+using System;
 using System.IO;
-using OpenQA.Selenium;
+using System.Reflection;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -11,7 +11,7 @@ namespace Selenium.WebDriver.Equip
         private string fileName;
         public TestCapture(IWebDriver iWebDriver, string type = "Failed")
         {
-            fileName = string.Format(@"{0}\{1}.{2}", Directory.GetCurrentDirectory(), DateTime.Now.Ticks, type);
+            fileName = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\{DateTime.Now.Ticks}.{type}";
             _browser = iWebDriver;
         }
 
@@ -24,7 +24,7 @@ namespace Selenium.WebDriver.Equip
 
         public void PageSource()
         {
-            string htmlFile = string.Format(@"{0}.html", fileName);
+            string htmlFile = $"{fileName}.html";
             using (var sw = new StreamWriter(htmlFile, false))
                 sw.Write(_browser.PageSource);
         }
@@ -37,7 +37,7 @@ namespace Selenium.WebDriver.Equip
         public void WebDriverLogsLogs()
         {
             foreach (var log in _browser.Manage().Logs.AvailableLogTypes)
-                using (var sw = new StreamWriter(string.Format(@"{0}.{1}.log", fileName, log), false))
+                using (var sw = new StreamWriter($"{fileName}.{log}.log", false))
                     foreach (var logentry in _browser.Manage().Logs.GetLog(log))
                         sw.WriteLine(logentry);
         }
