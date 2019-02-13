@@ -154,7 +154,6 @@
     <Compile Include="Server\Json\NodeContract.cs" />
     <Compile Include="Server\SeleniumServerHubProxy.cs" />
     <Compile Include="Server\SeleniumServerProxyBase.cs" />
-    <Compile Include="Settings\BaseSettings.cs" />
     <Compile Include="Settings\SeleniumDriverExeSettings.cs" />
     <Compile Include="Settings\DriverSettings.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />

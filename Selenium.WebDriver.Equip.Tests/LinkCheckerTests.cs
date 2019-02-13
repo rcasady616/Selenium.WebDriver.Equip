@@ -21,17 +21,16 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             Assert.AreEqual(true, _ajaxyControlPage.IsPageLoaded());
         }
 
-        //[Category("Unit")]
-        //[Test]
-        //public void TestSwitchBrowserWindow()
-        //{
-        //    Driver.Navigate().GoToUrl(IndexPage.Url);
-        //    var index = new IndexPage(Driver);
+        [Category("Unit")]
+        [Test]
+        public void TestSwitchBrowserWindow()
+        {
+            Driver.Navigate().GoToUrl(IndexPage.Url);
+            var index = new IndexPage(Driver);
 
-        //    var linkChecker = new LinkChecker(Driver);
-        //    linkChecker.HammerLinks();
-
-        //}
+            var linkChecker = new LinkChecker(Driver);
+            linkChecker.HammerLinks();
+        }
 
     }
 

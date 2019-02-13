@@ -34,5 +34,10 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                 foreach (var n in node.ChildElements) nodes.Push(n);
             }
         }
+
+        public IEnumerable<VirtualElement> GetLinks()
+        {
+            return this.Descendants().Where(element => element.TagName == "a");
+        }
     }
 }

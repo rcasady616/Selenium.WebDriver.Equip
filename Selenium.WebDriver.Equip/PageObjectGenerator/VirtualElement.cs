@@ -18,7 +18,7 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                 return text != null ? text.InnerText : "";
             }
         }
-        public string Name { set; get; }
+        public string Name { get { return HtmlNode.ToNameString(); } }
         public By Locator { get { return By.CssSelector(LocatorText); } }
         public string LocatorText { get { return HtmlNode.ToCssSelectorString(); } }
         public HtmlAttributeCollection Attributes { get { return HtmlNode.Attributes; } }
@@ -28,8 +28,6 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
         public VirtualElement(HtmlNode htmlNode)
         {
             HtmlNode = htmlNode;
-            CreateVirtualElement(htmlNode);
-
             if (htmlNode.HasChildNodes)
             {
                 foreach (var child in htmlNode.ChildNodes)

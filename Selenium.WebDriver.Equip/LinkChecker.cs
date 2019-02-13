@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
-using System.Collections.ObjectModel;
+using Selenium.WebDriver.Equip.PageObjectGenerator;
+using System.Collections.Generic;
 
 namespace Selenium.WebDriver.Equip
 {
@@ -13,9 +14,9 @@ namespace Selenium.WebDriver.Equip
             Driver = driver;
         }
 
-        public ReadOnlyCollection<IWebElement> GetLinks()
+        public IEnumerable<VirtualElement> GetLinks()
         {
-            return Driver.FindElements(By.TagName("a"));
+            return Driver.PageObjectGenerator().GeneratePage().GetLinks();
         }
 
         public void HammerLinks()
@@ -23,8 +24,8 @@ namespace Selenium.WebDriver.Equip
             var links = GetLinks();
             foreach (var link in links)
             {
-                var t = link.Id();
-                var name = link.CreateCssSelectorString();
+                Driver.FindElement(link.Locator).Click();
+                Driver.Navigate().Back();
             }
         }
 

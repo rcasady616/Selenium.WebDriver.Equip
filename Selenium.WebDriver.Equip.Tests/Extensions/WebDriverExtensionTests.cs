@@ -338,17 +338,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         }
 
         #endregion
-
-        [Test]
-        public void TestPageObjectGeneratorLink()
-        {
-            Driver.Navigate().GoToUrl(IndexPage.Url);
-            var virualIndexPage = Driver.PageObjectGenerator().GeneratePage();
-            var pageA = virualIndexPage.Descendants().Where(l => l.LocatorText == "a[href='PageA.htm']").First();
-            Assert.AreEqual("a", pageA.TagName);
-            Assert.AreEqual("PageA", Driver.FindElement(pageA.Locator).Text);
-        }
-
+        
     }
 
     [TestFixture]

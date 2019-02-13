@@ -1,5 +1,6 @@
 ﻿using NMock2;
 using OpenQA.Selenium;
+using System.Text.RegularExpressions;
 
 namespace HtmlAgilityPack
 {
@@ -70,7 +71,7 @@ namespace HtmlAgilityPack
                     var text = "";
                     var textNode = htmlNode.SelectSingleNode("text()");
                     if (textNode != null)
-                       text = textNode.InnerText;
+                        text = textNode.InnerText;
 
                     if (!string.IsNullOrEmpty(text))
                         cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
@@ -80,7 +81,7 @@ namespace HtmlAgilityPack
                     var labelText = "";
                     var labelTextNode = htmlNode.SelectSingleNode("text()");
                     if (labelTextNode != null)
-                        text = labelTextNode.InnerText;
+                        labelText = labelTextNode.InnerText;
                     if (!string.IsNullOrEmpty(labelText))
                         cssString = ""; // todo return a differnt type of locator (by xpath or by linktext)
                     break;
@@ -89,6 +90,54 @@ namespace HtmlAgilityPack
                     break;
             }
             return cssString;
+        }
+
+        public static string ToNameString(this HtmlNode htmlNode)
+        {
+            string nameString = null;
+
+            var attributes = htmlNode.Attributes;
+            var id = GetAttributeValue(attributes, "id");
+            if (!string.IsNullOrEmpty(id))
+                nameString = id;
+
+            switch (htmlNode.Name)
+            {
+                case "a":
+                case "A":
+                    if (string.IsNullOrEmpty(nameString))
+                    {
+                        var text = "";
+                        var textNode = htmlNode.SelectSingleNode("text()");
+                        if (textNode != null)
+                            text = textNode.InnerText;
+                        if (!string.IsNullOrEmpty(text))
+                        {
+                            nameString = text.Replace(" ", "");
+                        }
+                    }
+                    if (string.IsNullOrEmpty(nameString))
+                    {
+                        var href = GetAttributeValue(attributes, "href");
+                        if (!string.IsNullOrEmpty(href))
+                            nameString = Regex.Match(href, @".*\/([^/]*)$").Groups[1].Value.ToString();
+                    }
+                    nameString = $"{nameString}Link";
+                    break;
+                case "label":
+                case "Label":
+                    var labelText = "";
+                    var labelTextNode = htmlNode.SelectSingleNode("text()");
+                    if (labelTextNode != null)
+                        labelText = labelTextNode.InnerText;
+                    if (!string.IsNullOrEmpty(labelText))
+                        nameString = ""; // todo return a differnt type of locator (by xpath or by linktext)
+                    break;
+                default:
+                    nameString = null;
+                    break;
+            }
+            return nameString;
         }
     }
 }
