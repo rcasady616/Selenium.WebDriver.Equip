@@ -40,57 +40,17 @@ Task("Build")
 
 Task("Test_all")
 .Does(()=>{
-   if (!DirectoryExists(dirTestResults))
-    {
-        CreateDirectory(dirTestResults);
-    }
-    OpenCover(tool => {
-  tool.NUnit3(testProjectDir + "/*.Tests.dll",
-  new NUnit3Settings {
-    WorkingDirectory = testProjectDir,
-    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
-    });
-  },
-  new FilePath("./OcResult.xml"),
-  new OpenCoverSettings()
-    .WithFilter("+[Selenium.WebDriver.Equip]*")
-    .WithFilter("+[Selenium.WebDriver]*")
-    .WithFilter("+[Equip]*"));
-});
-
-Task("Test_s")
-.Does(()=>{
     if (!DirectoryExists(dirTestResults))
     {
         CreateDirectory(dirTestResults);
     }
+    var resultFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml";    
     OpenCover(tool => {
   tool.NUnit3(testProjectDir + "/*.Tests.dll",
   new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.Elements,Selenium.WebDriver.Equip.Tests.Extensions,Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests",
+    Test = "Selenium.WebDriver.Equip.Tests",
     WorkingDirectory = testProjectDir,
-    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
-    });
-  },
-  new FilePath("./OcResult.xml"),
-  new OpenCoverSettings()
-    .WithFilter("+[Selenium.WebDriver.Equip]*")
-    .WithFilter("+[Selenium.WebDriver]*")
-    .WithFilter("+[Equip]*"));
-});
-
-Task("Test_LocalOnly")
-.Does(()=>{
-    if (!DirectoryExists(dirTestResults))
-    {
-        CreateDirectory(dirTestResults);
-    }
-    OpenCover(tool => {
-  tool.NUnit3(testProjectDir + "/*.Tests.dll",
-  new NUnit3Settings {
-    Test = "Selenium.WebDriver.Equip.Tests.IWebDriverFactoryTests",
-    WorkingDirectory = testProjectDir,
-    OutputFile = dirTestResults + "/Selenium.WebDriver.Equip.Tests.xml"
+     Results = new[] {new NUnit3Result { FileName = resultFile }}
     });
   },
   new FilePath("./OcResult.xml"),
@@ -308,36 +268,6 @@ Task("Clean")
     CleanDirectories(dirNugetPackage);
     CleanDirectories(dirTestResults);
     CleanDirectories(dirReleaseTesting);    
-  });
-
-Task("TryThis")
-  .IsDependentOn("Build")
-  .Does(()=>{
-    //copy testProjectDir
-    if (!DirectoryExists(dirReleaseTesting))
-    {
-        CreateDirectory(dirReleaseTesting);
-    }
-    // copy tests
-    //CopyFiles(testProjectDir+"/*",  dirReleaseTesting);
-    // replace the binaries
-    //CopyFiles("./ReleaseBinaries/*",  dirReleaseTesting);
-    
-    var os="Windows 10";
-    var browser = "Firefox";
-    var version = "47";
-    var testFolder = "./testrun/" + "Win10" + "/" + browser + "/" + version;
-    //CreateDirectory(testFolder);
-    //CopyFiles(dirReleaseTesting+"/*", testFolder);
-     // run the tests chrome
-    var file = File(testFolder +"/Selenium.WebDriver.Equip.Tests.dll.config");
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserName']/@value", browser);
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteBrowserVersion']/@value", version);
-    XmlPoke(file, "/configuration/appSettings/add[@key = 'RemoteOsPlatform']/@value", os);
-    StartAndReturnProcess("ping 127.0.0.1");
-    //StartAndReturnProcess("./tools/NUnit.ConsoleRunner/tools/nunit3-console.exe", 
-    //  new ProcessSettings{ Arguments = "'" + testFolder+"/Selenium.WebDriver.Equip.Tests.dll' --test='Selenium.WebDriver.Equip.Tests.PageNotLoadedExceptionTests'"}
-    //);
   });
 
 RunTarget(target);
