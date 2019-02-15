@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.PageObjects;
 using Selenium.WebDriver.Equip;
 
 namespace TheInternet.UIFramework.Pages
@@ -19,7 +20,6 @@ namespace TheInternet.UIFramework.Pages
         public HomePage(IWebDriver driver)
             : base(driver)
         {
-
         }
 
         public HomePage()

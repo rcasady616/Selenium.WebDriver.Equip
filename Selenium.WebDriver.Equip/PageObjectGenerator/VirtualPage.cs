@@ -18,12 +18,6 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                 ChildElements.Add(new VirtualElement(node));
         }
 
-        public HtmlNodeCollection GetAllElements()
-        {
-            var nodes = HtmlDoc.DocumentNode.SelectNodes("./html/*");
-            return nodes;
-        }
-
         public IEnumerable<VirtualElement> Descendants()
         {
             var nodes = new Stack<VirtualElement>(ChildElements);

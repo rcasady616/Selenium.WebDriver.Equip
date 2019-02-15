@@ -1,5 +1,6 @@
 ﻿using NMock2;
 using OpenQA.Selenium;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace HtmlAgilityPack

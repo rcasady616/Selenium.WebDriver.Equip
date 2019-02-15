@@ -2,19 +2,19 @@
 
 namespace Selenium.WebDriver.Equip.PageObjectGenerator
 {
-    public class PageObjectGenerator
+    public class POG
     {
         public string PageSource { set; get; }
         public string Name { set; get; }
         public string Url { set; get; }
 
-        public PageObjectGenerator(IWebDriver driver)
+        public POG(IWebDriver driver)
         {
             PageSource = driver.PageSource;
             Url = driver.Url;
         }
 
-        public PageObjectGenerator(IWebDriver driver, string name)
+        public POG(IWebDriver driver, string name)
         {
             PageSource = driver.PageSource;
             Name = name;

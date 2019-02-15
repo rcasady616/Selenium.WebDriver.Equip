@@ -26,12 +26,9 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
         public void TestSwitchBrowserWindow()
         {
             Driver.Navigate().GoToUrl(IndexPage.Url);
-            var index = new IndexPage(Driver);
-
             var linkChecker = new LinkChecker(Driver);
             linkChecker.HammerLinks();
         }
-
     }
 
     [TestFixture]
@@ -47,7 +44,6 @@ namespace Selenium.WebDriver.Equip.Tests.Tools
             mocks = new Mockery();
             iWebElement = mocks.NewMock<IWebElement>();
         }
-
 
         [Test]
         public void Test()

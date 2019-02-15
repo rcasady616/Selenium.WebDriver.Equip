@@ -131,6 +131,7 @@
     <Compile Include="IWebDriverFactoryRemoteTests.cs" />
     <Compile Include="IWebDriverFactoryTests.cs" />
     <Compile Include="Extensions\WebElementExtensionTests.cs" />
+    <Compile Include="LinkChecker.cs" />
     <Compile Include="MockTool.cs" />
     <Compile Include="Nunit\TestAdapter.cs" />
     <Compile Include="PageNotLoadedExceptionTests.cs" />

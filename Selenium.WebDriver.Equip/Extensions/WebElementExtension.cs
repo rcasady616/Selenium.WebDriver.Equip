@@ -328,7 +328,7 @@ namespace OpenQA.Selenium
                 case HtmlTags.Label:
                     var labelText = iWebElement.Text;
                     if (!string.IsNullOrEmpty(labelText))
-                        xPathString = "//label[text() = '{text}']"; 
+                        xPathString = $"//label[text() = '{labelText}']"; 
                     break;
                 case HtmlTags.Select:
                     break;

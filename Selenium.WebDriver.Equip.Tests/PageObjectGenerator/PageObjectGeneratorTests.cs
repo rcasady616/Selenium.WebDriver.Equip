@@ -26,7 +26,7 @@ namespace Selenium.WebDriver.Equip.Tests.PageObjectGenerator
         public void TestPageObjectGeneratorLink()
         {
             var virualIndexPage = Driver.PageObjectGenerator().GeneratePage();
-            var pageALink = virualIndexPage.Descendants().Where(element => element.LocatorText == "a[href='PageA.htm']").First();
+            var pageALink = virualIndexPage.Descendants().Where(element => element.LocatorText == "PageA").First();
             Assert.AreEqual("a", pageALink.TagName);
             Assert.AreEqual("PageA", Driver.FindElement(pageALink.Locator).Text);
         }
@@ -45,13 +45,5 @@ namespace Selenium.WebDriver.Equip.Tests.PageObjectGenerator
             }
         }
 
-        [Test]
-        public void te()
-        {
-            var virualIndexPage = Driver.PageObjectGenerator().GeneratePage();
-            var pageALink = virualIndexPage.Descendants().Where(element => element.LocatorText == "a[href='PageA.htm']").First();
-            Assert.AreEqual("a", pageALink.TagName);
-            Assert.AreEqual("PageA", Driver.FindElement(pageALink.Locator).Text);
-        }
     }
 }

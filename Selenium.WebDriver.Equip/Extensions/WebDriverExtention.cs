@@ -149,6 +149,19 @@ namespace OpenQA.Selenium
             return null;
         }
 
+        public static IWebDriver PopBrowser(this IWebDriver iWebDriver)
+        {
+            var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
+            IWebDriver newWindowDriver = null;
+            var windowIterator = iWebDriver.WindowHandles;
+            if (windowIterator.Count > 1)
+                foreach (var window in windowIterator)
+                    if (window != CurrentWindowHandle)
+                        return iWebDriver.SwitchTo().Window(window);
+            return null;
+        }
+
+
         /// <summary>
         /// Waits for a <see cref="IWebElement"/> to meet specific conditions
         /// </summary>
@@ -213,9 +226,9 @@ namespace OpenQA.Selenium
             return iWebDriver.SwitchTo().Alert();
         }
 
-        public static PageObjectGenerator PageObjectGenerator(this IWebDriver iWebDriver)
+        public static POG PageObjectGenerator(this IWebDriver iWebDriver)
         {
-            return new PageObjectGenerator(iWebDriver);
+            return new POG(iWebDriver);
         }
     }
 }

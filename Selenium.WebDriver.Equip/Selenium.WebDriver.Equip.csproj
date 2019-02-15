@@ -142,8 +142,9 @@
     <Compile Include="HtmlTags.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\WebDriverExtention.cs" />
-    <Compile Include="PageObjectGenerator\PageObjectGenerator.cs" />
+    <Compile Include="PageObjectGenerator\POG.cs" />
     <Compile Include="PageObjectGenerator\VirtualElement.cs" />
+    <Compile Include="PageObjectGenerator\VirtualLocator.cs" />
     <Compile Include="SauceLabs\SauceDriverKeys.cs" />
     <Compile Include="SearchContextWait.cs" />
     <Compile Include="Elements\HtmlTable.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="Settings\DriverSettings.cs" />
     <Compile Include="Settings\SeleniumServerSettings.cs" />
     <Compile Include="Settings\SeleniumSettings.cs" />
-    <Compile Include="LinkChecker.cs" />
     <Compile Include="PageObjectGenerator\VirtualPage.cs" />
     <Compile Include="WebDriverFactory.cs" />
     <Compile Include="Extensions\WebElementExtension.cs">
