@@ -34,6 +34,7 @@ namespace Selenium.WebDriver.Equip.Tests.Server
         #region single grid
 
         [Test]
+        [Ignore("Server poxy need to be updated")]
         public void SingleGridStartStopWait()
         {
             SeleniumServer.Start();
