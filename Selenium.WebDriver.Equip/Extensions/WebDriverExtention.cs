@@ -28,7 +28,7 @@ namespace OpenQA.Selenium
         /// <returns>Weather the file path exists</returns>
         public static bool GetNuGetChromeDriver(this IWebDriver iWebDriver)
         {
-            var config = new SeleniumDriverExeSettings();
+            var config = new SeleniumDriverExeSettings().Deserialize();
             string fileName = "chromedriver.exe";
             string packageID = "Selenium.WebDriver.ChromeDriver";
             var version = config.NugetChromeDriverVersion;
@@ -68,7 +68,7 @@ namespace OpenQA.Selenium
 
         public static bool GetNuGetGeckoDriver(this IWebDriver iWebDriver)
         {
-            var config = new SeleniumDriverExeSettings();
+            var config = new SeleniumDriverExeSettings().Deserialize();
             string fileName = "geckodriver.exe";
             string packageID = "Selenium.WebDriver.GeckoDriver";
             var version = config.NugetGeckoDriverVersion;

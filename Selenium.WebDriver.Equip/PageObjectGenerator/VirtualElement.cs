@@ -24,6 +24,7 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
         public string Name { get { return VLocator.Name; } }
         public By Locator { get { return GetLocator(); } }
         public string LocatorText { get { return VLocator.LocatorText; } }
+        public string LocatorTypeMethod { get; set; }
         public VirtualLocator VLocator { get; set; }
 
         // Attributes
@@ -58,15 +59,19 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
             switch (VLocator.LocatorType)
             {
                 case LocatorType.Id:
+                    LocatorTypeMethod = "Id";
                     loc = By.Id(LocatorText);
                     break;
                 case LocatorType.Css:
+                    LocatorTypeMethod = "CssSelector";
                     loc = By.CssSelector(LocatorText);
                     break;
                 case LocatorType.LinkText:
+                    LocatorTypeMethod = "LinkText";
                     loc = By.LinkText(LocatorText);
                     break;
                 case LocatorType.XPath:
+                    LocatorTypeMethod = "XPath";
                     loc = By.XPath(LocatorText);
                     break;
                 default:

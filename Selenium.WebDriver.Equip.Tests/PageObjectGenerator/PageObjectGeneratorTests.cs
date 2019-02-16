@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using Selenium.WebDriver.Equip.PageObjectGenerator;
 using System.Collections.Generic;
 using System.Linq;
 using TestWebPages.UIFramework.Pages;
@@ -44,6 +43,5 @@ namespace Selenium.WebDriver.Equip.Tests.PageObjectGenerator
                 CollectionAssert.Contains(actuals, link.Name);
             }
         }
-
     }
 }

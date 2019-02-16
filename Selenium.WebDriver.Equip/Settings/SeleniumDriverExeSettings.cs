@@ -47,24 +47,12 @@ namespace Selenium.WebDriver.Equip.Settings
             return obj;
         }
 
-        public string Serialize()
+        public void Serialize()
         {
             var ser = new XmlSerializer(this.GetType());
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            var writer = new StringWriter(sb);
-            ser.Serialize(writer, this);
-            var doc = new XmlDocument();
-            return sb.ToString();
-        }
-
-        public void CreateXMl()
-        {
-            using (XmlWriter xw = XmlWriter.Create(fileName))
+            using (XmlWriter writer = XmlWriter.Create(fileName, new XmlWriterSettings() { OmitXmlDeclaration = true }))
             {
-                var doc = new XmlDocument();
-                doc.LoadXml(this.Serialize());
-                doc.WriteTo(xw);
-                xw.Flush();
+                ser.Serialize(writer, this);
             }
         }
     }
