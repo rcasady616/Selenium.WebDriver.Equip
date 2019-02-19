@@ -31,7 +31,17 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
 
         public IEnumerable<VirtualElement> GetLinks()
         {
-            return this.Descendants().Where(element => element.TagName == "a");
+            return this.Descendants().Where(element => element.TagName == "a" && !string.IsNullOrEmpty(element.Name) );
+        }
+
+        public IEnumerable<VirtualElement> GetInput()
+        {
+            return this.Descendants().Where(element => element.TagName == "input" && !string.IsNullOrEmpty(element.Id));
+        }
+
+        public IEnumerable<VirtualElement> GetDistinctIds()
+        {
+            return this.Descendants().Where(element => !string.IsNullOrEmpty(element.Name)).GroupBy(p => p.Id).Select(grp => grp.FirstOrDefault());
         }
     }
 }

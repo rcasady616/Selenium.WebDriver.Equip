@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Selenium.WebDriver.Equip.PageObjectGenerator
@@ -82,16 +83,29 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
 
         }
 
+        private string ToAlphaNumeric(string str)
+        {
+            return Regex.Replace(str, "[^A-Za-z0-9 _]", "").Replace(" ", "");
+        }
+
+        public string CapitalizeFirstLetter(string s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return s;
+            if (s.Length == 1)
+                return s.ToUpper();
+            return s.Remove(1).ToUpper() + s.Substring(1);
+        }
+
         public VirtualLocator ToVirtualLocatorString()
         {
             var vLocator = new VirtualLocator();
             var id = GetAttribute("id");
             if (!string.IsNullOrEmpty(id))
             {
-                vLocator.Name = $"{id}";
+                vLocator.Name = ToAlphaNumeric($"{id}");
                 vLocator.LocatorType = LocatorType.Id;
                 vLocator.LocatorText = id;
-                return vLocator;
             }
             switch (HtmlNode.Name)
             {
@@ -105,7 +119,7 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                             text = textNode.InnerText;
                         if (!string.IsNullOrEmpty(text))
                         {
-                            vLocator.Name = text.Replace(" ", "");
+                            vLocator.Name = ToAlphaNumeric(text);//.Replace(" ", "");
                             vLocator.LocatorType = LocatorType.LinkText;
                             vLocator.LocatorText = text;
                         }
@@ -115,11 +129,16 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                         var href = GetAttribute("href");
                         if (!string.IsNullOrEmpty(href))
                         {
-                            vLocator.Name = Regex.Match(href, @".*\/([^/]*)$").Groups[1].Value.ToString();
+                            var name1 = ToAlphaNumeric(Regex.Match(href, @".*\/([^/]*)$").Groups[1].Value.ToString());
+                            var uri = new Uri(href);
+                            var name2 = ToAlphaNumeric(uri.Host).Replace("www","");
+                            vLocator.Name = $"{name1}_{name2}";
                             vLocator.LocatorType = LocatorType.Css;
                             vLocator.LocatorText = $"a[href='{href}']";
                         }
                     }
+                    if (string.IsNullOrEmpty(vLocator.Name))
+                        return vLocator;
                     vLocator.Name = $"{vLocator.Name}Link";
                     break;
                 case "label":
@@ -138,6 +157,14 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                         }
                     }
                     vLocator.Name = $"{vLocator.Name}Label";
+                    break;
+                case "input":
+                case "Input":
+                    if (!string.IsNullOrEmpty(vLocator.Name))
+                    {
+                        var inputType = CapitalizeFirstLetter(GetAttribute("type"));
+                        vLocator.Name = $"{vLocator.Name}{inputType}";
+                    }
                     break;
                 default:
                     vLocator.Name = null;
