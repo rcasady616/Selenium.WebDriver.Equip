@@ -28,7 +28,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             sw.Start();
             var actual = Driver.ElementExists(By.Id(id));
             sw.Stop();
-            Assert.Less(sw.Elapsed.Seconds, 1);
+            Assert.Less(sw.Elapsed.Seconds, 1, $"Time taken was {sw.Elapsed.Seconds}");
             Assert.AreEqual(expected, actual);
         }
     }
