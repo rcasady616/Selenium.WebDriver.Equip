@@ -143,6 +143,34 @@
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\WebDriverExtention.cs" />
     <Compile Include="PageObjectGenerator\POG.cs" />
+    <Compile Include="PageObjectGenerator\Template\AjaxyControlPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\FileUploadPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\IndexPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\MultipleOutputHelper.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultipleOutputHelper.ttinclude</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\PageAPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\saeedgatsonPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\StandardPageTemplate.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageObjectGenerator\Template\TablesPage.cs">
+      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
+    </Compile>
     <Compile Include="PageObjectGenerator\VirtualElement.cs" />
     <Compile Include="PageObjectGenerator\VirtualLocator.cs" />
     <Compile Include="SauceLabs\SauceDriverKeys.cs" />
@@ -171,6 +199,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="PageObjectGenerator\Template\MultipleOutputHelper.ttinclude">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MultipleOutputHelper.cs</LastGenOutput>
+    </None>
     <None Include="SeleniumDriverExeSettings.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -190,6 +222,15 @@
       <Project>{c1f15ede-0ac7-4f6b-ad04-29e63d1864b1}</Project>
       <Name>Equip</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PageObjectGenerator\Template\StandardPageTemplate.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>StandardPageTemplate.cs</LastGenOutput>
+    </Content>
+    <Content Include="PageObjectGenerator\Template\UrlList.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

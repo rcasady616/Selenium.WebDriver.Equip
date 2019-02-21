@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
         public HtmlDocument HtmlDoc;
         public List<VirtualElement> ChildElements = new List<VirtualElement>();
         public string Name { get; set; }
+        public string NameSpace { get; set; }
 
         public VirtualPage(string htmlString)
         {

@@ -1,0 +1,95 @@
+﻿<#@ template debug="true" hostspecific="true" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="$(ProjectDir)\$(OutDir)\Selenium.WebDriver.Equip.dll" #>
+<#@ assembly name="$(ProjectDir)\$(OutDir)\WebDriver.dll" #>
+<#@ assembly name="$(ProjectDir)\$(OutDir)\Equip.dll" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="OpenQA.Selenium" #>
+<#@ import namespace="Selenium.WebDriver.Equip" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+
+<#@ output extension=".cs" #>
+<#@include file="$(ProjectDir)\$(OutDir)\PageObjectGenerator\Template\MultipleOutputHelper.ttinclude" #>
+
+<# 
+	//https://damieng.com/blog/2009/11/06/multiple-outputs-from-t4-made-easy-revisited
+	var manager = Manager.Create(Host, GenerationEnvironment);
+	List<string> list = File.ReadAllLines(@"C:\Users\Rick\source\repos\LearnT4\LearnT4\List.txt").ToList();
+	//var urlList = $@"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\PageObjectGenerator\Template\UrlList.txt";
+	//List<string> list = File.ReadAllLines(urlList).ToList()};
+	foreach(var Path in list )
+	{
+		string name = Regex.Match(Path, @".*\/([^/]*)$").Groups[1].Value.ToString().Split('.')[0]; //url
+		if(string.IsNullOrEmpty(name))
+			name = Regex.Match(Path, @".*\\([^\\]+$)").Groups[1].Value.ToString().Split('.')[0]; //file
+
+		var EnvManager = new EnvironmentManager();
+		var Driver = EnvManager.CreateDriverInstance(name);
+		Driver.Navigate().GoToUrl(Path);
+		var url = Driver.Url;
+		var vPage = Driver.PageObjectGenerator().GeneratePage();
+
+		manager.StartNewFile($"{name}Page.cs"); 
+	
+#>
+
+using System;
+using OpenQA.Selenium;
+using Selenium.WebDriver.Equip;
+
+namespace Pages
+{
+    public class <#= name #>Page : BasePage, IPage
+	{
+		public static string Url = "<#= url #>";
+		#region Static By Selectors
+		<# 
+		foreach (var el in vPage.GetDistinctIds())
+		{ 
+			var t = el.Locator;#>
+public static By By<#= el.Name #> = By.<#= el.LocatorTypeMethod #>("<#= el.LocatorText #>");
+		<# } #>
+#endregion
+
+		#region IWebElement Properites
+		<# 
+		foreach (var el in vPage.GetDistinctIds())
+		{ 
+			#>
+public IWebElement <#= el.Name #> { get { return Driver.FindElement(By<#= el.Name #>); } }
+		<# } #>
+#endregion
+
+		#region constructors
+
+        public <#= name #>Page(IWebDriver driver)
+            : base(driver)
+        {
+        }
+
+        public <#= name #>Page()
+        {
+        }
+
+        #endregion
+
+        public bool IsPageLoaded()
+        {
+            throw new NotImplementedException("");
+        }
+	}
+}
+<#
+		Driver.Close();
+		Driver.Quit();
+	}
+
+#>
+
+<# manager.EndBlock(); #>
+
+<# manager.Process(true); #>

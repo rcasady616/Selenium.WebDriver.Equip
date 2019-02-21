@@ -25,5 +25,12 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
         {
             return new VirtualPage(PageSource);
         }
+
+        public VirtualPage GeneratePage(string nameSpace)
+        {
+            var vPage = new VirtualPage(PageSource);
+            vPage.NameSpace = nameSpace;
+            return vPage;
+        }
     }
 }
