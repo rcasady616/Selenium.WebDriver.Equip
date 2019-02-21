@@ -106,10 +106,10 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             var actual = Driver.WaitUntilNotExists(By.Id(id), WaitTime);
             sw.Stop();
             if (expected)
-                Assert.Less(sw.Elapsed.Seconds, WaitTime);
+                Assert.Less(sw.Elapsed.Seconds, WaitTime, $"Time taken was {sw.Elapsed.ToString()}");
             else
             {
-                Assert.LessOrEqual(sw.Elapsed.Seconds, WaitTime + 1);
+                Assert.LessOrEqual(sw.Elapsed.Seconds, WaitTime + 1, $"Time taken was {sw.Elapsed.ToString()}");
                 Assert.GreaterOrEqual(sw.Elapsed.Seconds, WaitTime);
             }
             Assert.AreEqual(expected, actual);
