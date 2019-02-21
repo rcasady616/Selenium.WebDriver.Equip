@@ -143,33 +143,10 @@
     <Compile Include="IPage.cs" />
     <Compile Include="Extensions\WebDriverExtention.cs" />
     <Compile Include="PageObjectGenerator\POG.cs" />
-    <Compile Include="PageObjectGenerator\Template\AjaxyControlPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\FileUploadPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\IndexPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
     <Compile Include="PageObjectGenerator\Template\MultipleOutputHelper.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MultipleOutputHelper.ttinclude</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\PageAPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\saeedgatsonPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\StandardPageTemplate.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PageObjectGenerator\Template\TablesPage.cs">
-      <DependentUpon>StandardPageTemplate.tt</DependentUpon>
     </Compile>
     <Compile Include="PageObjectGenerator\VirtualElement.cs" />
     <Compile Include="PageObjectGenerator\VirtualLocator.cs" />
