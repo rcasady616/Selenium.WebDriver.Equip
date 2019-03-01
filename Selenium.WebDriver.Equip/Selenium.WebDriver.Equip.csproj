@@ -137,6 +137,7 @@
     <Compile Include="EnvironmentManager.cs" />
     <Compile Include="ExpectedCondition.cs" />
     <Compile Include="Extensions\SearchContextExtension.cs" />
+    <Compile Include="Extensions\SelectElementExtension.cs" />
     <Compile Include="GlobalConstants.cs" />
     <Compile Include="HtmlTagAttribute.cs" />
     <Compile Include="HtmlTags.cs" />

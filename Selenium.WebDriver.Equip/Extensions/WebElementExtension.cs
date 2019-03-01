@@ -218,7 +218,7 @@ namespace OpenQA.Selenium
             return true;
         }
 
-
+        #region POG
         public static string CreateCssSelectorString(this IWebElement iWebElement)
         {
             string cssString = null;
@@ -361,6 +361,7 @@ namespace OpenQA.Selenium
 
             return byLocator;
         }
+        #endregion
 
         #region experimental
 
