@@ -33,8 +33,10 @@ namespace Selenium.WebDriver.Equip.Tests.PageObjectGenerator
         [Test]
         public void TestGetLinks()
         {
+            Driver.Navigate().GoToUrl(@"C:\Users\Rick\Documents\GitHub2\Selenium.WeDriver.Equip\TestWebPages\PageA.htm");//http://saeedgatson.com/");
             var virualIndexPage = Driver.PageObjectGenerator().GeneratePage();
-            var virtualLinks = virualIndexPage.GetLinks();
+
+            var virtualLinks = virualIndexPage.GetDistinctIds();
 
             Assert.AreEqual(3, virtualLinks.Count());
             var actuals = new List<string> { "PageALink", "AjaxyControlPageLink","AjaxyControlPageNewwindowLink" };
