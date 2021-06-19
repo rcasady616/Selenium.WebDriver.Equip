@@ -1,4 +1,5 @@
 ﻿using NuGet;
+using NuGet.Versioning;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
@@ -44,9 +45,9 @@ namespace OpenQA.Selenium
 
         private static void GetNuGetPackage(string packageID, string path, SemanticVersion version)
         {
-            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            var packageManager = new PackageManager(repo, path);
-            packageManager.InstallPackage(packageID, version);
+            //var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            //var packageManager = new PackageManager(repo, path);
+            //packageManager.InstallPackage(packageID, version);
 
         }
 
