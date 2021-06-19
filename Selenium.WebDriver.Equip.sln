@@ -5,19 +5,17 @@ VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebPages", "TestWebPages\TestWebPages.csproj", "{CB973E25-E60D-482B-80C5-553484FBF9A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWebPages.UIFramework", "TestWebPages.UIFramework\TestWebPages.UIFramework.csproj", "{5D63DA78-6414-4A71-A94E-B0394A2DA09F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWebPages.UIFramework", "TestWebPages.UIFramework\TestWebPages.UIFramework.csproj", "{5D63DA78-6414-4A71-A94E-B0394A2DA09F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheInternet.UIFramework", "TheInternet.UIFramework\TheInternet.UIFramework.csproj", "{596596CC-8D64-4D5A-B93C-15A384A8A0FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheInternet.UIFramework", "TheInternet.UIFramework\TheInternet.UIFramework.csproj", "{596596CC-8D64-4D5A-B93C-15A384A8A0FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip.Tests", "Selenium.WebDriver.Equip.Tests\Selenium.WebDriver.Equip.Tests.csproj", "{669B13D3-7A8A-4B82-BE1F-4A45ADC97E07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Equip.Tests", "Selenium.WebDriver.Equip.Tests\Selenium.WebDriver.Equip.Tests.csproj", "{669B13D3-7A8A-4B82-BE1F-4A45ADC97E07}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Proxy", "Selenium.WebDriver.Proxy\Selenium.WebDriver.Proxy.csproj", "{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Equip.Package.Tests", "Selenium.WebDriver.Equip.Package.Tests\Selenium.WebDriver.Equip.Package.Tests.csproj", "{E3AC7B2C-D543-40A5-8883-F295208137DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip.Package.Tests", "Selenium.WebDriver.Equip.Package.Tests\Selenium.WebDriver.Equip.Package.Tests.csproj", "{E3AC7B2C-D543-40A5-8883-F295208137DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equip", "Equip\Equip.csproj", "{C1F15EDE-0AC7-4F6B-AD04-29E63D1864B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Equip", "Equip\Equip.csproj", "{C1F15EDE-0AC7-4F6B-AD04-29E63D1864B1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip", "Selenium.WebDriver.Equip\Selenium.WebDriver.Equip.csproj", "{0582ED7B-8FF5-410B-A430-81893D20B5B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Equip", "Selenium.WebDriver.Equip\Selenium.WebDriver.Equip.csproj", "{0582ED7B-8FF5-410B-A430-81893D20B5B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,18 +75,6 @@ Global
 		{669B13D3-7A8A-4B82-BE1F-4A45ADC97E07}.Release|x64.Build.0 = Release|x64
 		{669B13D3-7A8A-4B82-BE1F-4A45ADC97E07}.Release|x86.ActiveCfg = Release|x86
 		{669B13D3-7A8A-4B82-BE1F-4A45ADC97E07}.Release|x86.Build.0 = Release|x86
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|x64.ActiveCfg = Debug|x64
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|x64.Build.0 = Debug|x64
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Debug|x86.Build.0 = Debug|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x64.ActiveCfg = Release|x64
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x64.Build.0 = Release|x64
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x86.ActiveCfg = Release|Any CPU
-		{B854C1AC-860E-45E8-8FD2-85BC191ACC9D}.Release|x86.Build.0 = Release|Any CPU
 		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3AC7B2C-D543-40A5-8883-F295208137DB}.Debug|x64.ActiveCfg = Debug|Any CPU
