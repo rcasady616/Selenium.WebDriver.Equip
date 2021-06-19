@@ -1,4 +1,4 @@
-﻿using ICSharpCode.SharpZipLib.Zip;
+﻿//using ICSharpCode.SharpZipLib.Zip;
 using System.IO.Compression;
 using System.Net;
 
@@ -6,36 +6,36 @@ namespace System.IO
 {
     public static class FileInfoExtension
     {
-        public static void UnZip(this FileInfo fileInfo, string destiantionFolder)
-        {
-            using (var fileStreamIn = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read))
-            {
-                using (var zipInStream = new ZipInputStream(fileStreamIn))
-                {
-                    var entry = zipInStream.GetNextEntry();
-                    FileStream fileStreamOut = null;
-                    while (entry != null)
-                    {
-                        fileStreamOut = new FileStream(destiantionFolder + @"\" + entry.Name, FileMode.Create, FileAccess.Write);
-                        int size;
-                        byte[] buffer = new byte[4096];
-                        do
-                        {
-                            size = zipInStream.Read(buffer, 0, buffer.Length);
-                            fileStreamOut.Write(buffer, 0, size);
-                        } while (size > 0);
+        //public static void UnZip(this FileInfo fileInfo, string destiantionFolder)
+        //{
+        //    using (var fileStreamIn = new FileStream(fileInfo.FullName, FileMode.Open, FileAccess.Read))
+        //    {
+        //        using (var zipInStream = new ZipInputStream(fileStreamIn))
+        //        {
+        //            var entry = zipInStream.GetNextEntry();
+        //            FileStream fileStreamOut = null;
+        //            while (entry != null)
+        //            {
+        //                fileStreamOut = new FileStream(destiantionFolder + @"\" + entry.Name, FileMode.Create, FileAccess.Write);
+        //                int size;
+        //                byte[] buffer = new byte[4096];
+        //                do
+        //                {
+        //                    size = zipInStream.Read(buffer, 0, buffer.Length);
+        //                    fileStreamOut.Write(buffer, 0, size);
+        //                } while (size > 0);
 
-                        fileStreamOut.Close();
-                        entry = zipInStream.GetNextEntry();
-                    }
+        //                fileStreamOut.Close();
+        //                entry = zipInStream.GetNextEntry();
+        //            }
 
-                    if (fileStreamOut != null)
-                        fileStreamOut.Close();
-                    zipInStream.Close();
-                }
-                fileStreamIn.Close();
-            }
-        }
+        //            if (fileStreamOut != null)
+        //                fileStreamOut.Close();
+        //            zipInStream.Close();
+        //        }
+        //        fileStreamIn.Close();
+        //    }
+        //}
 
         /// <summary>
         /// 

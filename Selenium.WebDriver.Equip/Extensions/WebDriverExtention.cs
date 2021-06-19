@@ -94,32 +94,34 @@ namespace OpenQA.Selenium
         public static bool DownloadGeckoDriver(this IWebDriver iwebDriver)
         {
             if (IntPtr.Size == 4)
-                return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL32);
+                throw new NotImplementedException("Unknow processor mode");
+            //return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL32);
             else if (IntPtr.Size == 8)
-                return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL64);
+                throw new NotImplementedException("Unknow processor mode");
+            //return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL64);
             else
                 throw new NotImplementedException("Unknow processor mode");
         }
 
-        public static bool DownloadGeckoDriver(this IWebDriver iwebDriver, string geockoDriverURL)
-        {
-            string fileName = DriversConfiguration.GeockoDriverFileName;
-            string zipFileName = "geckodriver.zip";
-            var file = new FileInfo(zipFileName);
-            if (!File.Exists(fileName))
-                file.DownloadUrl(geockoDriverURL).UnZip(Directory.GetCurrentDirectory());
-            return File.Exists(fileName);
-        }
+        //public static bool DownloadGeckoDriver(this IWebDriver iwebDriver, string geockoDriverURL)
+        //{
+        //    string fileName = DriversConfiguration.GeockoDriverFileName;
+        //    string zipFileName = "geckodriver.zip";
+        //    var file = new FileInfo(zipFileName);
+        //    if (!File.Exists(fileName))
+        //        file.DownloadUrl(geockoDriverURL).UnZip(Directory.GetCurrentDirectory());
+        //    return File.Exists(fileName);
+        //}
 
-        public static bool DownloadChromeDriver(this IWebDriver iwebDriver, string chromeDriverURL)
-        {
-            string fileName = DriversConfiguration.GeockoDriverFileName;
-            string zipFileName = "chromedriver.zip";
-            var file = new FileInfo(zipFileName);
-            if (!File.Exists(fileName))
-                file.DownloadUrl(chromeDriverURL).UnZip(Directory.GetCurrentDirectory());
-            return File.Exists(fileName);
-        }
+        //public static bool DownloadChromeDriver(this IWebDriver iwebDriver, string chromeDriverURL)
+        //{
+        //    string fileName = DriversConfiguration.GeockoDriverFileName;
+        //    string zipFileName = "chromedriver.zip";
+        //    var file = new FileInfo(zipFileName);
+        //    if (!File.Exists(fileName))
+        //        file.DownloadUrl(chromeDriverURL).UnZip(Directory.GetCurrentDirectory());
+        //    return File.Exists(fileName);
+        //}
 
 
 
