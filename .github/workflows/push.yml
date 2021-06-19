@@ -11,8 +11,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        operating-system: [ubuntu-latest, windows-latest, macOS-latest]
-        dotnet-version: [ '5.0']
+        operating-system: [ windows-latest]
+        #, ubuntu-latest, macOS-latest]
+        dotnet-version: [ '3.1', '5.0']
         #'2.1', '2.2', '3.0', '3.1',
     steps:
       - uses: actions/checkout@v2
