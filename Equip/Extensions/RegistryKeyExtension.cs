@@ -1,4 +1,6 @@
-﻿namespace Microsoft.Win32
+﻿using Microsoft.Win32;
+
+namespace Microsoft.Win32
 {
     public static  class RegistryKeyExtension
     {

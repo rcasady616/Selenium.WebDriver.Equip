@@ -1,5 +1,4 @@
-﻿using NMock2;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using Selenium.WebDriver.Equip.Elements;
 using TestWebPages.UIFramework.Pages;
@@ -116,33 +115,33 @@ namespace Selenium.WebDriver.Equip.Tests.Elements
         #endregion
     }
 
-    [TestFixture]
-    [Category(TestCategories.HeadLess)]
-    [Category(TestCategories.Elements)]
-    public class HeadLessHtmlTableTests
-    {
-        private Mockery mocks;
-        private IWebDriver driver;
+    //[TestFixture]
+    //[Category(TestCategories.HeadLess)]
+    //[Category(TestCategories.Elements)]
+    //public class HeadLessHtmlTableTests
+    //{
+    //    private Mockery mocks;
+    //    private IWebDriver driver;
 
-        [SetUp]
-        public void SetUp()
-        {
-            mocks = new Mockery();
-            driver = mocks.NewMock<IWebDriver>();
-        }
+    //    [SetUp]
+    //    public void SetUp()
+    //    {
+    //        mocks = new Mockery();
+    //        driver = mocks.NewMock<IWebDriver>();
+    //    }
 
-        [Test]
-        [Ignore("work in progress")]
-        public void TestClassNameExtention()
-        {
-            string className = "r2d2";
-            Stub.On(driver).Method("FindElement").With("ii").Will(Return.Value(""));
-            StringAssert.AreEqualIgnoringCase(className, driver.FindElement(By.Id("")).ClassName());
+    //    [Test]
+    //    [Ignore("work in progress")]
+    //    public void TestClassNameExtention()
+    //    {
+    //        string className = "r2d2";
+    //        Stub.On(driver).Method("FindElement").With("ii").Will(Return.Value(""));
+    //        StringAssert.AreEqualIgnoringCase(className, driver.FindElement(By.Id("")).ClassName());
 
-            //Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
-            //var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
-            //Assert.AreEqual(cell, table.GetCell(column, row).Text);
+    //        //Assume.That(Driver.ElementExists(TablesPage.ByTableOne));
+    //        //var table = new Table(Driver.FindElement(TablesPage.ByTableOne));
+    //        //Assert.AreEqual(cell, table.GetCell(column, row).Text);
 
-        }
-    }
+    //    }
+    //}
 }

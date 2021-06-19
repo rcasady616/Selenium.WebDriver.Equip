@@ -1,5 +1,4 @@
-﻿using NMock2;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using System.Diagnostics;
 using TestWebPages.UIFramework.Pages;
@@ -116,87 +115,87 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         }
     }
 
-    [TestFixture]
-    [Category(TestCategories.Extension)]
-    [Category(TestCategories.HeadLess)]
-    public class HeadLessWebElementExtensionTests
-    {
-        private Mockery mocks;
-        private IWebElement webElement;
+//    [TestFixture]
+//    [Category(TestCategories.Extension)]
+//    [Category(TestCategories.HeadLess)]
+//    public class HeadLessWebElementExtensionTests
+//    {
+//        private Mockery mocks;
+//        private IWebElement webElement;
 
-        public IWebElement WebElement { get { return webElement; } set { webElement = value; } }
+//        public IWebElement WebElement { get { return webElement; } set { webElement = value; } }
 
-        [SetUp]
-        public void SetUp()
-        {
-            mocks = new Mockery();
-            webElement = mocks.NewMock<IWebElement>();
-        }
+//        [SetUp]
+//        public void SetUp()
+//        {
+//            mocks = new Mockery();
+//            webElement = mocks.NewMock<IWebElement>();
+//        }
 
-        [Test]
-        public void TestClassNameExtention()
-        {
-            string className = "r2d2";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Class).Will(Return.Value(className));
-            StringAssert.AreEqualIgnoringCase(className, WebElement.ClassName());
-        }
+//        [Test]
+//        public void TestClassNameExtention()
+//        {
+//            string className = "r2d2";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Class).Will(Return.Value(className));
+//            StringAssert.AreEqualIgnoringCase(className, WebElement.ClassName());
+//        }
 
-        [Test]
-        public void TestIdExtention()
-        {
-            string id = "3133";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Id).Will(Return.Value(id));
-            StringAssert.AreEqualIgnoringCase(id, WebElement.Id());
-        }
+//        [Test]
+//        public void TestIdExtention()
+//        {
+//            string id = "3133";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Id).Will(Return.Value(id));
+//            StringAssert.AreEqualIgnoringCase(id, WebElement.Id());
+//        }
 
-        [Test]
-        public void TestNameExtention()
-        {
-            string name = "Lola";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Name).Will(Return.Value(name));
-            Assert.AreEqual(name, WebElement.Name());
-        }
+//        [Test]
+//        public void TestNameExtention()
+//        {
+//            string name = "Lola";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Name).Will(Return.Value(name));
+//            Assert.AreEqual(name, WebElement.Name());
+//        }
 
-        [Test]
-        public void TestStyleExtention()
-        {
-            string style = "background-color:red;";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Style).Will(Return.Value(style));
-            Assert.AreEqual(style, WebElement.Style());
-        }
+//        [Test]
+//        public void TestStyleExtention()
+//        {
+//            string style = "background-color:red;";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Style).Will(Return.Value(style));
+//            Assert.AreEqual(style, WebElement.Style());
+//        }
 
-        [Test]
-        public void TestTitleExtention()
-        {
-            string title = "MR MRS SR JR";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Title).Will(Return.Value(title));
-            Assert.AreEqual(title, WebElement.Title());
-        }
+//        [Test]
+//        public void TestTitleExtention()
+//        {
+//            string title = "MR MRS SR JR";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Title).Will(Return.Value(title));
+//            Assert.AreEqual(title, WebElement.Title());
+//        }
 
-        [Test]
-        public void TestTypeExtention()
-        {
-            string type = "compact";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Type).Will(Return.Value(type));
-            Assert.AreEqual(type, WebElement.Type());
-        }
+//        [Test]
+//        public void TestTypeExtention()
+//        {
+//            string type = "compact";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Type).Will(Return.Value(type));
+//            Assert.AreEqual(type, WebElement.Type());
+//        }
 
-        [Test]
-        public void TestValueExtention()
-        {
-            string val = "max";
-            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Value).Will(Return.Value(val));
-            Assert.AreEqual(val, WebElement.Value());
-        }
+//        [Test]
+//        public void TestValueExtention()
+//        {
+//            string val = "max";
+//            Stub.On(WebElement).Method("GetAttribute").With(HtmlTagAttribute.Value).Will(Return.Value(val));
+//            Assert.AreEqual(val, WebElement.Value());
+//        }
 
-        [TestCase("<div id='101' />", ExpectedResult = "By.CssSelector: #101")]
-        [TestCase("<a href='www.RickCasady.com' >Link Text</a>", ExpectedResult = "By.CssSelector: a[href='www.RickCasady.com']")]
-        [TestCase("<a href='' >Link Text</a>", ExpectedResult = "By.XPath: //a[text() = 'Link Text']")]
-        public string TestMakeLocatorExtention(string html)
-        {
-            var mockElement = new MockTool(mocks).ConvertHtmlToMock(html);
-            var locator = mockElement.MakeLocator();
-            return locator.ToString();
-        }
-    }
+//        [TestCase("<div id='101' />", ExpectedResult = "By.CssSelector: #101")]
+//        [TestCase("<a href='www.RickCasady.com' >Link Text</a>", ExpectedResult = "By.CssSelector: a[href='www.RickCasady.com']")]
+//        [TestCase("<a href='' >Link Text</a>", ExpectedResult = "By.XPath: //a[text() = 'Link Text']")]
+//        public string TestMakeLocatorExtention(string html)
+//        {
+//            var mockElement = new MockTool(mocks).ConvertHtmlToMock(html);
+//            var locator = mockElement.MakeLocator();
+//            return locator.ToString();
+//        }
+//    }
 }

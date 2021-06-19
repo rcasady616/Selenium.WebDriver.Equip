@@ -1,5 +1,4 @@
-﻿using NMock2;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
@@ -341,20 +340,20 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         
     }
 
-    [TestFixture]
-    [Category(TestCategories.Extension)]
-    [Category(TestCategories.HeadLess)]
-    public class HeadLessTests
-    {
-        private Mockery mocks;
-        private IWebDriver driver;
+    //[TestFixture]
+    //[Category(TestCategories.Extension)]
+    //[Category(TestCategories.HeadLess)]
+    //public class HeadLessTests
+    //{
+    //    private Mockery mocks;
+    //    private IWebDriver driver;
 
-        [SetUp]
-        public void SetUp()
-        {
-            mocks = new Mockery();
-            driver = mocks.NewMock<IWebDriver>();
-        }
+    //    [SetUp]
+    //    public void SetUp()
+    //    {
+    //        mocks = new Mockery();
+    //        driver = mocks.NewMock<IWebDriver>();
+    //    }
 
-    }
+    //}
 }
