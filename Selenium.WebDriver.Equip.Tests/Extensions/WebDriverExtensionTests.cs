@@ -24,30 +24,30 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             Assert.AreEqual(true, _ajaxyControlPage.IsPageLoaded());
         }
 
-        [Category("Unit")]
-        [Test]
-        public void TestSwitchBrowserWindow()
-        {
-            Driver.Navigate().GoToUrl(IndexPage.Url);
-            var index = new IndexPage(Driver);
+        //[Category("Unit")]
+        //[Test]
+        //public void TestSwitchBrowserWindow()
+        //{
+        //    Driver.Navigate().GoToUrl(IndexPage.Url);
+        //    var index = new IndexPage(Driver);
 
-            index.AjaxyControlNewWindowLink.Click();
-            Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("AjaxyControl"));
+        //    index.AjaxyControlNewWindowLink.Click();
+        //    Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("AjaxyControl"));
 
-            var ajaxyControl = new AjaxyControlPage(Driver);
-            Assert.That(ajaxyControl.IsPageLoaded());
-        }
+        //    var ajaxyControl = new AjaxyControlPage(Driver);
+        //    Assert.That(ajaxyControl.IsPageLoaded());
+        //}
 
-        [Category("Unit")]
-        [Test]
-        public void TestSwitchBrowserWindowNull()
-        {
-            Driver.Navigate().GoToUrl(IndexPage.Url);
-            var index = new IndexPage(Driver);
+        //[Category("Unit")]
+        //[Test]
+        //public void TestSwitchBrowserWindowNull()
+        //{
+        //    Driver.Navigate().GoToUrl(IndexPage.Url);
+        //    var index = new IndexPage(Driver);
 
-            index.AjaxyControlNewWindowLink.Click();
-            Assert.IsNull(Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("false")));
-        }
+        //    index.AjaxyControlNewWindowLink.Click();
+        //    Assert.IsNull(Driver.SwitchBrowserWindow(ExpectedConditions.TitleIs("false")));
+        //}
 
         #region Waits
 

@@ -77,7 +77,6 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
                     break;
                 default:
                     throw new NotImplementedException("Locator type not currently handdeled");
-                    break;
             }
             return loc;
 

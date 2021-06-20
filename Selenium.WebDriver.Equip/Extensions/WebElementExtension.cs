@@ -258,8 +258,6 @@ namespace OpenQA.Selenium
                             break;
                         default:
                             throw new NotImplementedException($"Input type not unkown, input type='{inputType}'");
-                            cssString = null;
-                            break;
                     }
                     break;
                 case HtmlTags.Label:
@@ -321,8 +319,6 @@ namespace OpenQA.Selenium
                             break;
                         default:
                             throw new NotImplementedException($"Input type not unkown, input type='{inputType}'");
-                            xPathString = null;
-                            break;
                     }
                     break;
                 case HtmlTags.Label:
