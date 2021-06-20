@@ -16,15 +16,15 @@ jobs:
         dotnet-version: ['5.0']
         #'2.1', '2.2', '3.0', '3.1',
     steps:
-      - name: Hello world action
-        with: # Set the secret as an input
-          SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
-          SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
       - uses: actions/checkout@v2
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
+      - name: Hello world action
+        with: # Set the secret as an input
+          SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
+          SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
       - name: Install dependencies
         run: dotnet restore
       - name: Build
