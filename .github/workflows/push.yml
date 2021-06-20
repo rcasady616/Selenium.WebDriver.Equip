@@ -5,10 +5,6 @@ on:
       - master
   pull_request:
 
-  env:
-    SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
-    SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
-
 jobs:
   setup-version:
     runs-on: ${{ matrix.operating-system }}
@@ -20,6 +16,13 @@ jobs:
         dotnet-version: ['5.0']
         #'2.1', '2.2', '3.0', '3.1',
     steps:
+      - name: Hello world action
+        with: # Set the secret as an input
+          SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
+          SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
+        env: # Or as an environment variable
+          SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
+          SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
       - uses: actions/checkout@v2
       - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
         uses: actions/setup-dotnet@v1
