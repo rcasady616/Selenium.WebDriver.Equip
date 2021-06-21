@@ -31,7 +31,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Configure Tests
-         uses: microsoft/variable-substitution@v1 
+        uses: microsoft/variable-substitution@v1 
         with:
           files: './Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config'
         env:
