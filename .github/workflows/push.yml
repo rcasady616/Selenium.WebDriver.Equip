@@ -5,6 +5,9 @@ on:
       - master
   pull_request:
 
+env:
+  ResultsDirectory: TestsResults
+
 jobs:
   setup-version:
     runs-on: ${{ matrix.operating-system }}
@@ -21,18 +24,27 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-
       - name: Install dependencies
         run: dotnet restore
-      - name: Build
+
+      - name: Build 
         run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
+
+      - name: Configure Tests
+      - uses: microsoft/variable-substitution@v1 
+      with:
+        files: './Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config'
+      env:
+        SeleniumSettings.RemoteBrowserVersion: "91"
+
+      - name: Run Tests
+        run: dotnet test -r ${{ env.ResultsDirectory }} -logger:"xunit;Selenium.WebDriver.Equip.Tests.xml" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
         env:
           SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
           SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
+      
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          files: TestResults/**/*.xml
+          files: ${{ env.ResultsDirectory }}/Selenium.WebDriver.Equip.Tests.xml
