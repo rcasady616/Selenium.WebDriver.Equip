@@ -24,18 +24,19 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
-      - name: Install dependencies
+
+      - name: Restore
         run: dotnet restore
 
       - name: Build 
         run: dotnet build --configuration Release --no-restore
 
       - name: Configure Tests
-        uses: microsoft/variable-substitution@v1 
+        uses: rvolo/xml-replace-action@v0.2
         with:
-          files: './Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config'
-        env:
-          SeleniumSettings.RemoteBrowserVersion: "91"
+          filepath: "./Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config"
+          xpath: "/SeleniumSettings/DriverType"
+          replace: "SauceLabs"
 
       - name: Run Tests
         run: dotnet test -r ${{ env.ResultsDirectory }} -logger:"xunit;Selenium.WebDriver.Equip.Tests.xml" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
