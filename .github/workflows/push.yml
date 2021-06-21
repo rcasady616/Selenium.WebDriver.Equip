@@ -7,6 +7,7 @@ on:
 
 env:
   ResultsDirectory: TestsResults
+  EQUIP_ENVIRONMENT : ci
 
 jobs:
   setup-version:
@@ -31,13 +32,6 @@ jobs:
 
       - name: Build 
         run: dotnet build --configuration Release --no-restore
-
-      - name: Configure Tests
-        uses: rvolo/xml-replace-action@v0.2
-        with:
-          filepath: "./Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config"
-          xpath: "/SeleniumSettings/DriverType"
-          replace: "SauceLabs"
 
       - name: Run Tests
         run: dotnet test -r ${{ env.ResultsDirectory }} -logger:"xunit;Selenium.WebDriver.Equip.Tests.xml" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
