@@ -125,3 +125,4 @@ Chrome.OcResult.xml
 TestPackage/
 
 .vs
+*Results.xml
