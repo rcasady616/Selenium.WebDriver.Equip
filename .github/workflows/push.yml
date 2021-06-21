@@ -31,11 +31,11 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Configure Tests
-      - uses: microsoft/variable-substitution@v1 
-      with:
-        files: './Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config'
-      env:
-        SeleniumSettings.RemoteBrowserVersion: "91"
+         uses: microsoft/variable-substitution@v1 
+        with:
+          files: './Selenium.WebDriver.Equip.Tests/bin/Release/net*/SeleniumSettings.config'
+        env:
+          SeleniumSettings.RemoteBrowserVersion: "91"
 
       - name: Run Tests
         run: dotnet test -r ${{ env.ResultsDirectory }} -logger:"xunit;Selenium.WebDriver.Equip.Tests.xml" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
