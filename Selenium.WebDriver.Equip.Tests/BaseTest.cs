@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Equip.Tests
     /// <summary>
     /// A base fixture for Selenium testing single browser per test
     /// </summary>
+    [Parallelizable(ParallelScope.All)]
     [TestFixture]
     public class BaseTest
     {
@@ -21,7 +22,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-           
+
         }
 
         [OneTimeTearDown]
