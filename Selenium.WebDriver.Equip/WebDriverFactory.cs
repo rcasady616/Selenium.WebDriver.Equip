@@ -3,6 +3,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.SauceLabs;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 
@@ -60,6 +61,14 @@ namespace Selenium.WebDriver.Equip
             capabillities.SetCapability(CapabilityType.Platform, platform);
             capabillities.SetCapability("version", version);
             var build = Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString();
+            string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Console.WriteLine($"assemblyVersion: {assemblyVersion}");
+            string assemblyVersion2 = Assembly.LoadFile("your assembly file").GetName().Version.ToString();
+            Console.WriteLine($"assemblyVersion2: {assemblyVersion2}");
+            string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
+            Console.WriteLine($"fileVersion: {fileVersion}");
+            string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
+            Console.WriteLine($"productVersion: {productVersion}");
             Console.WriteLine($"build: {build}");
             capabillities.SetCapability("build", build);
             // add these two enviorment variables and there values to use Sauce Labs
