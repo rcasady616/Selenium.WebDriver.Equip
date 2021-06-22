@@ -63,7 +63,7 @@ namespace Selenium.WebDriver.Equip
             var build = Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString();
             string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Console.WriteLine($"assemblyVersion: {assemblyVersion}");
-            string assemblyVersion2 = Assembly.LoadFile("your assembly file").GetName().Version.ToString();
+            string assemblyVersion2 = Assembly.LoadFile("Selenium.WebDriver.Equip").GetName().Version.ToString();
             Console.WriteLine($"assemblyVersion2: {assemblyVersion2}");
             string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
             Console.WriteLine($"fileVersion: {fileVersion}");
