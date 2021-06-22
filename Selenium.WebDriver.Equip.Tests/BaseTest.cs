@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Equip.Tests
     /// <summary>
     /// A base fixture for Selenium testing single browser per test
     /// </summary>
-    [Parallelizable(ParallelScope.All)]
+    [Parallelizable(ParallelScope.Fixtures)]
     [TestFixture]
     public class BaseTest
     {
