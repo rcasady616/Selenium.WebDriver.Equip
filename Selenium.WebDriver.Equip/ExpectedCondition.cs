@@ -10,6 +10,8 @@ namespace Selenium.WebDriver.Equip
     public static class ExpectedCondition
     {
 
+        #region Func<ISearchContext, 
+
         /// <summary>
         /// An expectation for checking that an element is not present on the DOM of a page.
         /// This method returns faster than <see cref="ElementExists"/> when the <see cref="IWebElement"/> is expected to not be present
@@ -19,16 +21,16 @@ namespace Selenium.WebDriver.Equip
         public static Func<ISearchContext, bool> ElementNotExists(By locator)
         {
             return (searchContext) =>
+            {
+                try
                 {
-                    try
-                    {
-                        return !searchContext.ElementExists(locator);
-                    }
-                    catch (StaleElementReferenceException)
-                    {
-                        return true;
-                    }
-                };
+                    return !searchContext.ElementExists(locator);
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return true;
+                }
+            };
         }
 
         /// <summary>
@@ -85,11 +87,11 @@ namespace Selenium.WebDriver.Equip
         public static Func<ISearchContext, bool> ElementAttributeEquals(By locator, string htmlTagAttribute, string attributeValue)
         {
             return (searchContext) =>
-                {
-                    if (!searchContext.ElementExists(locator))
-                        return false;
-                    return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue;
-                };
+            {
+                if (!searchContext.ElementExists(locator))
+                    return false;
+                return searchContext.FindElement(locator).GetAttribute(htmlTagAttribute) == attributeValue;
+            };
         }
 
         /// <summary>
@@ -188,6 +190,25 @@ namespace Selenium.WebDriver.Equip
             };
         }
 
+        #endregion
+
+        #region Func<IWebDriver,
+
+        public static Func<IWebDriver, IAlert> AlertIsPresent()
+        {
+            return (driver) =>
+            {
+                try
+                {
+                    return driver.SwitchTo().Alert();
+                }
+                catch (NoAlertPresentException)
+                {
+                    return null;
+                }
+            };
+        }
+
         public static Func<IWebDriver, bool> AlertTextEquals(string text)
         {
             return (iWebDriver) =>
@@ -222,6 +243,13 @@ namespace Selenium.WebDriver.Equip
                 return false;
             };
         }
+
+        public static Func<IWebDriver, bool> TitleIs(string title)
+        {
+            return (driver) => { return title == driver.Title; };
+        }
+
+        #endregion
 
         private static IWebElement ElementIfVisible(IWebElement element)
         {

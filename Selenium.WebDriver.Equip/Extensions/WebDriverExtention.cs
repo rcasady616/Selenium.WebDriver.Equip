@@ -194,7 +194,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the title is a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return iWebDriver.DriverWaitUntil(ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
+            return iWebDriver.DriverWaitUntil(ExpectedCondition.TitleIs(title), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), maxWaitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertIsPresent(), maxWaitTimeInSeconds);
         }
 
         public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)

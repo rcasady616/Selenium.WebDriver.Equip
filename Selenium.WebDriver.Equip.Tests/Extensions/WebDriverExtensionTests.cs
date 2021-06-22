@@ -188,7 +188,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         {
             _ajaxyControlPage.GreenRadio.Click();
             _ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            _ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedConditions.ElementExists(locator));
+            _ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedCondition.ElementExists(locator));
             Assert.AreEqual(true, Driver.ElementExists(locator));
         }
 
@@ -199,7 +199,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             By locator = By.Id("false");
             _ajaxyControlPage.GreenRadio.Click();
             _ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
-            _ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedConditions.ElementExists(locator));
+            _ajaxyControlPage.SubmitButton.ClickWaitForCondition(Driver, ExpectedCondition.ElementExists(locator));
             Assert.AreEqual(false, Driver.ElementExists(locator));
         }
 
