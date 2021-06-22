@@ -43,4 +43,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          files: ${{ env.ResultsDirectory }}/Selenium.WebDriver.Equip.Tests.Results.xml
+          files: Selenium.WebDriver.Equip.Tests.Results.xml
