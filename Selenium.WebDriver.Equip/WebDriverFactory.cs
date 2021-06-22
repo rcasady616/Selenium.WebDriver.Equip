@@ -60,17 +60,9 @@ namespace Selenium.WebDriver.Equip
             capabillities.SetCapability(CapabilityType.BrowserName, browser);
             capabillities.SetCapability(CapabilityType.Platform, platform);
             capabillities.SetCapability("version", version);
-            var build = Assembly.GetAssembly(typeof(WebDriverFactory)).GetName().Version.ToString();
             string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            Console.WriteLine($"assemblyVersion: {assemblyVersion}");
-            string assemblyVersion2 = Assembly.LoadFile("Selenium.WebDriver.Equip").GetName().Version.ToString();
-            Console.WriteLine($"assemblyVersion2: {assemblyVersion2}");
-            string fileVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
-            Console.WriteLine($"fileVersion: {fileVersion}");
-            string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
-            Console.WriteLine($"productVersion: {productVersion}");
-            Console.WriteLine($"build: {build}");
-            capabillities.SetCapability("build", build);
+            
+            capabillities.SetCapability("build", assemblyVersion);
             // add these two enviorment variables and there values to use Sauce Labs
             capabillities.SetCapability("username", SauceDriverKeys.SAUCELABS_USERNAME);
             capabillities.SetCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY);
