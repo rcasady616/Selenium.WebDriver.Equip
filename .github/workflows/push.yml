@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 #-p:PackageVersion=1.3.141.${{ github.run_number }}
       - name: Run Tests
-        run: dotnet test -r TestResults -p:CollectCoverage=true -p:CoverletOutput=Results/ -p:CoverletOutputFormat=opencover --logger:"trx:LogFilePath=TestsResults.trx" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
+        run: dotnet test -r TestResults -p:CollectCoverage=true -p:CoverletOutput=CoverageResults/ -p:CoverletOutputFormat=opencover --logger:"trx" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
         env:
           SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
           SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
@@ -43,4 +43,4 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          files: ./TestResults/TestResults.xml
+          files: ./TestResults/*.trx
