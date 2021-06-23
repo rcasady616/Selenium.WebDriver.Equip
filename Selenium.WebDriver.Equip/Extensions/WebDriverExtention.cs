@@ -155,7 +155,6 @@ namespace OpenQA.Selenium
         public static IWebDriver PopBrowser(this IWebDriver iWebDriver)
         {
             var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
-            IWebDriver newWindowDriver = null;
             var windowIterator = iWebDriver.WindowHandles;
             if (windowIterator.Count > 1)
                 foreach (var window in windowIterator)

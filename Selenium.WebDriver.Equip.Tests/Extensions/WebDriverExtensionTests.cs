@@ -224,7 +224,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         [Test, TestCaseSource("GetAjaxyControlPageLocators")]
         public void TestClickWaitForConditions(List<By> locators)
         {
-            var ex = locators.Select(ExpectedConditions.ElementExists).ToList();
+            var ex = locators.Select(ExpectedCondition.ElementExists).ToList();
 
             _ajaxyControlPage.GreenRadio.Click();
             _ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
@@ -241,7 +241,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
         {
             var locators = new List<By> { By.Id("false"), By.Id("nothome") };
 
-            var ex = locators.Select(ExpectedConditions.ElementExists).ToList();
+            var ex = locators.Select(ExpectedCondition.ElementExists).ToList();
 
             _ajaxyControlPage.GreenRadio.Click();
             _ajaxyControlPage.NewLabelText.SendKeys("TestIsPageLoaded");
