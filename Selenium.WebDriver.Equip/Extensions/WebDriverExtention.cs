@@ -1,4 +1,5 @@
 ﻿using NuGet;
+using NuGet.Versioning;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
@@ -44,9 +45,9 @@ namespace OpenQA.Selenium
 
         private static void GetNuGetPackage(string packageID, string path, SemanticVersion version)
         {
-            var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
-            var packageManager = new PackageManager(repo, path);
-            packageManager.InstallPackage(packageID, version);
+            //var repo = PackageRepositoryFactory.Default.CreateRepository("https://packages.nuget.org/api/v2");
+            //var packageManager = new PackageManager(repo, path);
+            //packageManager.InstallPackage(packageID, version);
 
         }
 
@@ -154,7 +155,6 @@ namespace OpenQA.Selenium
         public static IWebDriver PopBrowser(this IWebDriver iWebDriver)
         {
             var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
-            IWebDriver newWindowDriver = null;
             var windowIterator = iWebDriver.WindowHandles;
             if (windowIterator.Count > 1)
                 foreach (var window in windowIterator)
@@ -193,7 +193,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the title is a match; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilTitleIs(this IWebDriver iWebDriver, string title, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return iWebDriver.DriverWaitUntil(ExpectedConditions.TitleIs(title), maxWaitTimeInSeconds);
+            return iWebDriver.DriverWaitUntil(ExpectedCondition.TitleIs(title), maxWaitTimeInSeconds);
         }
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the alert exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilAlertExists(this IWebDriver iWebDriver, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return DriverWaitUntil(iWebDriver, ExpectedConditions.AlertIsPresent(), maxWaitTimeInSeconds);
+            return DriverWaitUntil(iWebDriver, ExpectedCondition.AlertIsPresent(), maxWaitTimeInSeconds);
         }
 
         public static bool WaitUntilAlertTextEquals(this IWebDriver iWebDriver, string text, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)

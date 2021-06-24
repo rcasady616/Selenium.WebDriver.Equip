@@ -64,17 +64,17 @@ namespace Selenium.WebDriver.Equip.Server
             ServerProcess.Kill();
             return true;
             //todo fix none of the url's stop selenium server are routing correctly in selenium server3.0
-            HttpWebResponse response;
-            try
-            {
-                response = SeleniumCommand("shutDownSeleniumServer");
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            GetResponseAsString(response).Contains("OKOK");
-            return !WaitUntilRunning();
+            //HttpWebResponse response;
+            //try
+            //{
+            //    response = SeleniumCommand("shutDownSeleniumServer");
+            //}
+            //catch (Exception)
+            //{
+            //    return false;
+            //}
+            //GetResponseAsString(response).Contains("OKOK");
+            //return !WaitUntilRunning();
         }
 
         //public StatusDto GetStatus()

@@ -49,7 +49,7 @@ namespace OpenQA.Selenium
         /// <returns><see langword="true"/> if the <see cref="IWebElement"/> exists; otherwise, <see langword="false"/></returns>
         public static bool WaitUntilExists(this ISearchContext iSearchContext, By locator, int maxWaitTimeInSeconds = GlobalConstants.MaxWaitTimeInSeconds)
         {
-            return iSearchContext.WaitUntil(ExpectedCondition.ElementExists(locator), maxWaitTimeInSeconds);
+            return iSearchContext.WaitUntil(ExpectedCondition.ElementExists2(locator), maxWaitTimeInSeconds);
         }
 
         /// <summary>

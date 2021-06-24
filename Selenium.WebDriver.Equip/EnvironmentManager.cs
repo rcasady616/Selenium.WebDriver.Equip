@@ -90,7 +90,7 @@ namespace Selenium.WebDriver.Equip
                 case DriverType.Remote:
                     //Todo start localy if not already running
                     //throw new NotImplementedException();
-                    driver = WebDriverFactory.GetRemoteWebDriver();
+                   // driver = WebDriverFactory.GetRemoteWebDriver();
                     break;
                 case DriverType.Chrome:
                     if (!driver.GetNuGetChromeDriver()) throw new DriverServiceNotFoundException();

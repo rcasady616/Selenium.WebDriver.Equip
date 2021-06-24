@@ -1,0 +1,55 @@
+name: Selenium.WebDriver.Equip CI
+on: 
+  push:
+    branches:
+      - master
+  pull_request:
+
+env:
+  ResultsDirectory: TestResults
+  EQUIP_ENVIRONMENT : ci
+
+jobs:
+  setup-version:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ ubuntu-latest]
+        #windows-latest]
+        #, ubuntu-latest, macOS-latest]
+        dotnet-version: ['5.0']
+        #'2.1', '2.2', '3.0', '3.1',
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+
+      - name: Restore Nuget packages
+        run: dotnet restore
+
+      - name: Build 
+        run: dotnet build --configuration Release --no-restore
+#-p:PackageVersion=1.3.141.${{ github.run_number }}
+      - name: Run Tests
+        run: dotnet test -r TestResults-${{ matrix.dotnet-version }} -p:CollectCoverage=true -p:CoverletOutput=CoverageResults-${{ matrix.dotnet-version }}/ -p:CoverletOutputFormat=opencover --logger:"trx" --no-restore --verbosity normal --filter "TestCategory!=LocalOnly&TestCategory!=HeadLess&TestCategory!=SeleniumServer"
+        env:
+          SAUCELABS_ACCESSKEY: ${{ secrets.SAUCELABS_ACCESSKEY }}
+          SAUCELABS_USERNAME: ${{ secrets.SAUCELABS_USERNAME }}
+      
+      # - name: Publish Nunit Test Results
+      #   uses: EnricoMi/publish-unit-test-result-action/composite@v1
+      #   if: always()
+      #   with:
+      #     files: ./TestResults/*.trx
+
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: dotnet-results-${{ matrix.dotnet-version }}
+          path: TestResults-${{ matrix.dotnet-version }}
+          # Use always() to always run this step to publish test results when there are test failures
+          

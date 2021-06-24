@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>$(PackageVersion)</Version>
+    <AssemblyVersion>$(PackageVersion)</AssemblyVersion>
+    <FileVersion>$(PackageVersion)</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

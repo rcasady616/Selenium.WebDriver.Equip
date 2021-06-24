@@ -17,9 +17,11 @@ namespace Selenium.WebDriver.Equip.Settings
         private string remoteBrowserVersion;
         private string remoteOsPlatform;
         private string fireFoxBinaryPath;
+        private string environment = "local";
 
         public SeleniumSettings()
         {
+            environment = Environment.GetEnvironmentVariable("EQUIP_ENVIRONMENT");
         }
 
         /// <summary>
@@ -81,11 +83,32 @@ namespace Selenium.WebDriver.Equip.Settings
             return settings;
         }
 
+        private SeleniumSettings GetBuildServer()
+        {
+            var settings = new SeleniumSettings()
+            {
+                DriverType = DriverType.SauceLabs,
+                BrowserName = BrowserName.Chrome,
+                RemoteBrowserName = "Chrome",
+                RemoteBrowserVersion = "91.0",
+                RemoteOsPlatform = "Windows 10",
+                FireFoxBinaryPath = @"C:\Program Files\Mozilla Firefox\firefox.exe"
+            };
+            return settings;
+        }
+
         public SeleniumSettings Deserialize()
         {
             var xmlDoc = new XmlDocument();
             if (!File.Exists(fileName)) // create a default object if the file dosent exist
-                GetDefault().Serialize();
+                if (environment == "ci")
+                    GetBuildServer().Serialize();
+                else
+                {
+                    GetDefault().Serialize();
+                }
+
+
 
             xmlDoc.Load(fileName);
             return Deserialize(xmlDoc);
