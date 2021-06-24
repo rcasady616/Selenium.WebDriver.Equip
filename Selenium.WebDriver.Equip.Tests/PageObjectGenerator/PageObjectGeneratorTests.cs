@@ -30,6 +30,7 @@ namespace Selenium.WebDriver.Equip.Tests.PageObjectGenerator
             Assert.AreEqual("PageA", Driver.FindElement(pageALink.Locator).Text);
         }
 
+        [Ignore("")]
         [Test]
         public void TestGetLinks()
         {

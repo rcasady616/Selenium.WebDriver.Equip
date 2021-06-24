@@ -301,6 +301,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
 
         #endregion
 
+        [Ignore("")]
         [Category("Unit")]
         [Test]
         public void TestTakeScreenShot()
