@@ -6,9 +6,9 @@ using System;
 
 namespace Selenium.WebDriver.Equip.Tests.WebDriver
 {
-    [TestFixture]
+    [TestFixture(typeof(ChromeDriver))]
     [Category(TestCategories.LocalOnly)]
-    public class WebDriverTests
+    public class WebDriverTests<TDriver> : BaseTests<TDriver> where TDriver : IWebDriver, new()
     {
         IWebDriver driver;
         [SetUp]

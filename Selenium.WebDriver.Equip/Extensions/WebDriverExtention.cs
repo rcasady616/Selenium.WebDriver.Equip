@@ -1,5 +1,6 @@
 ﻿using NuGet;
 using NuGet.Versioning;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
@@ -236,7 +237,12 @@ namespace OpenQA.Selenium
         #region Driver Manager
         public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver) where TDriver : IWebDriver, new()
         {
+            var t= typeof(TDriver);
             iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver));
+
+           // if(File.Exists(iWebDriver.Get))
+           
+            // can we even do this?
             return (TDriver)iWebDriver;
         }
         #endregion
