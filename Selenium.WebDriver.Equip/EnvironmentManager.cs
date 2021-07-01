@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Remote;
+﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
+using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.Server;
 using Selenium.WebDriver.Equip.Settings;
-using System.Threading;
+using Selenium.WebDriver.Equip.WebDriver;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Selenium.WebDriver.Equip
 {

@@ -17,6 +17,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Equip", "Equip\Equip.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Equip", "Selenium.WebDriver.Equip\Selenium.WebDriver.Equip.csproj", "{0582ED7B-8FF5-410B-A430-81893D20B5B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{10C70CCB-828C-4A03-91C6-B3D34DA28E8B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{0A7B94F2-DB04-4074-8FB5-EDBD5386AB16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Equip.Manager.Tests", "Tests\Selenium.WebDriver.Equip.Manager.Tests\Selenium.WebDriver.Equip.Manager.Tests.csproj", "{0585A914-C086-4650-892C-5D1D2E5C8220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,9 +120,24 @@ Global
 		{0582ED7B-8FF5-410B-A430-81893D20B5B4}.Release|x64.Build.0 = Release|Any CPU
 		{0582ED7B-8FF5-410B-A430-81893D20B5B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{0582ED7B-8FF5-410B-A430-81893D20B5B4}.Release|x86.Build.0 = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|x64.Build.0 = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Debug|x86.Build.0 = Debug|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|x64.ActiveCfg = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|x64.Build.0 = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|x86.ActiveCfg = Release|Any CPU
+		{0585A914-C086-4650-892C-5D1D2E5C8220}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0585A914-C086-4650-892C-5D1D2E5C8220} = {0A7B94F2-DB04-4074-8FB5-EDBD5386AB16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2196CF32-D856-4FB0-B15A-B4B6E4FE3F79}

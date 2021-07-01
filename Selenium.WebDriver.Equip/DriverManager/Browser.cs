@@ -1,7 +1,15 @@
 ﻿using System.ComponentModel;
 
-namespace Selenium.WebDriver.Equip
+namespace Selenium.WebDriver.Equip.WebDriver
 {
+    public class Browser
+    {
+        internal string Name { get; set; }
+        internal string Path { get; set; }
+        internal string IconPath { get; set; }
+        internal string Version { get; set; }
+    }
+
     /// <summary>
     /// Enumeration of all possiable browsers
     /// </summary>

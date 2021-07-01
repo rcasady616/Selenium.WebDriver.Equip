@@ -232,5 +232,13 @@ namespace OpenQA.Selenium
         {
             return new POG(iWebDriver);
         }
+
+        #region Driver Manager
+        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver) where TDriver : IWebDriver, new()
+        {
+            iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver));
+            return (TDriver)iWebDriver;
+        }
+        #endregion
     }
 }
