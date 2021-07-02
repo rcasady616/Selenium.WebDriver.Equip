@@ -1,10 +1,13 @@
 ﻿using NuGet;
 using NuGet.Versioning;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
+using Selenium.WebDriver.Equip.DriverManager;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
 using Selenium.WebDriver.Equip.Settings;
+using Selenium.WebDriver.Equip.WebDriver;
 using System;
 using System.IO;
 using System.Reflection;
@@ -237,12 +240,30 @@ namespace OpenQA.Selenium
         #region Driver Manager
         public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver) where TDriver : IWebDriver, new()
         {
-            var t= typeof(TDriver);
-            iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver));
+            dynamic options = null;
+            switch (typeof(TDriver).Name)
+            {
+                case "ChromeDriver":
+                    if (File.Exists(new ChromeDriverBinary().BrowserExePath))
+                        if (!File.Exists(new ChromeDriverBinary().FileName))
+                            new Manager().GetAndUnpack(new ChromeDriverBinary());
+                    break;
+                case "FirefoxDriver":
+                    if (File.Exists(new FirefoxDriverBinary().BrowserExePath))
+                        if (!File.Exists(new FirefoxDriverBinary().FileName))
+                            new Manager().GetAndUnpack(new FirefoxDriverBinary());
+                    options = new FirefoxOptions();
+                    options.BrowserExecutableLocation = new FirefoxDriverBinary().BrowserExePath;
+                    break;
+                default:
+                    throw new NotImplementedException("unknown Driver");
+            }
 
-           // if(File.Exists(iWebDriver.Get))
-           
+            //if (File.Exists(iWebDriver.GetBrowserExePath()))
+            //    iWebDriver.
+
             // can we even do this?
+            iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver), options);
             return (TDriver)iWebDriver;
         }
         #endregion

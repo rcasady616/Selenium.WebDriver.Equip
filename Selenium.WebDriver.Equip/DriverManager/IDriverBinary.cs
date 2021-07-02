@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Equip.WebDriver
+﻿namespace Selenium.WebDriver.Equip.DriverManager
 {
     public interface IDriverBinary
     {

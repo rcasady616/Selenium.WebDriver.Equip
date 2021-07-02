@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
 using Selenium.WebDriver.Equip.Tests;
-using Selenium.WebDriver.Equip.WebDriver;
+using Selenium.WebDriver.Equip.DriverManager;
 using System;
 using System.IO;
 
@@ -12,12 +12,12 @@ namespace Selenium.WebDriver.Equip.Manager.Tests
     public class DriverManagerTests
     {
         public string TestFolder = @$"{AppDomain.CurrentDomain.BaseDirectory}\TestFolder-{DateTime.Now.ToPath()}";
-        DriverManager driverManager;
+        public DriverManager.Manager driverManager;
 
         [SetUp]
         public void SetupTest()
         {
-            driverManager = new DriverManager();
+            driverManager = new DriverManager.Manager();
             if (!Directory.Exists(TestFolder))
                 Directory.CreateDirectory(TestFolder);
         }
@@ -35,6 +35,13 @@ namespace Selenium.WebDriver.Equip.Manager.Tests
         {
             driverManager.GetAndUnpack(new ChromeDriverBinary(), TestFolder);
             Assert.AreEqual(true, File.Exists(@$"{TestFolder}\{new ChromeDriverBinary().FileName}"));
+        }
+
+        [Test]
+        public void DownloadFirefoxDriverBinary()
+        {
+            driverManager.GetAndUnpack(new FirefoxDriverBinary(), TestFolder);
+            Assert.AreEqual(true, File.Exists(@$"{TestFolder}\{new FirefoxDriverBinary().FileName}"));
         }
     }
 }

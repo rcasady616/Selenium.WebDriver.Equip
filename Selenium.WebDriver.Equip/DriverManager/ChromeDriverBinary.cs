@@ -1,9 +1,10 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Runtime.InteropServices;
 
-namespace Selenium.WebDriver.Equip.WebDriver
+namespace Selenium.WebDriver.Equip.DriverManager
 {
     public class ChromeDriverBinary : IDriverBinary
     {
@@ -63,7 +64,9 @@ namespace Selenium.WebDriver.Equip.WebDriver
         {
             get
             {
-                return "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_" + MajorVersion;
+                // return "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_" + MajorVersion;
+                var driverVersion = new WebClient().DownloadString("https://chromedriver.storage.googleapis.com/LATEST_RELEASE_" + MajorVersion);
+                return @$"https://chromedriver.storage.googleapis.com/{driverVersion}/chromedriver_win32.zip";
             }
         }
     }

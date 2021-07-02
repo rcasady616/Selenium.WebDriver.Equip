@@ -1,45 +1,45 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Selenium.WebDriver.Equip.WebDriver;
+using Selenium.WebDriver.Equip.DriverManager;
 using System;
 
 namespace Selenium.WebDriver.Equip.Tests.WebDriver
 {
-    [TestFixture(typeof(ChromeDriver))]
+   // [TestFixture(typeof(ChromeDriver))]
     [Category(TestCategories.LocalOnly)]
     public class WebDriverTests<TDriver> : BaseTests<TDriver> where TDriver : IWebDriver, new()
     {
-        IWebDriver driver;
         [SetUp]
         public void SetupTest()
         {
-            DriverManager m = new DriverManager();
+            Manager m = new Manager();
             string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
-            m.GetAndUnpack(new ChromeDriverBinary(), "");
+          //  m.GetAndUnpack(new ChromeDriverBinary(), "");
 
-            driver = driver.GetDriver<ChromeDriver>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (driver != null)
+            if (Driver != null)
             {
-                driver.Close();
-                driver.Quit();
+                Driver.Close();
+                Driver.Quit();
             }
         }
 
 
         [Test]
-        public void GetChromeBrowser()
+        public void GetDriverGetBrowser()
         {
             var url = "http://rickcasady.blogspot.com/";
-            //var _driver = new ChromeDriver();
-            driver.Navigate().GoToUrl(url);
-            Assert.AreEqual(typeof(ChromeDriver), driver.GetType());
-            Assert.AreEqual(url, driver.Url);
+
+           // driver = driver.GetDriver<TDriver>();
+
+            Driver.Navigate().GoToUrl(url);
+            Assert.AreEqual(typeof(TDriver), Driver.GetType());
+            Assert.AreEqual(url, Driver.Url);
         }
     }
 }
