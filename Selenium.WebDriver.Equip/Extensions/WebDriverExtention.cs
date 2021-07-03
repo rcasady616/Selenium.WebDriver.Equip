@@ -2,10 +2,12 @@
 using NuGet.Versioning;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
 using Selenium.WebDriver.Equip.DriverManager;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
+using Selenium.WebDriver.Equip.SauceLabs;
 using Selenium.WebDriver.Equip.Settings;
 using Selenium.WebDriver.Equip.WebDriver;
 using System;
@@ -238,9 +240,8 @@ namespace OpenQA.Selenium
         }
 
         #region Driver Manager
-        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver) where TDriver : IWebDriver, new()
+        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver, dynamic options = null) where TDriver : IWebDriver, new()
         {
-            dynamic options = null;
             switch (typeof(TDriver).Name)
             {
                 case "ChromeDriver":
@@ -259,13 +260,46 @@ namespace OpenQA.Selenium
                     throw new NotImplementedException("unknown Driver");
             }
 
-            //if (File.Exists(iWebDriver.GetBrowserExePath()))
-            //    iWebDriver.
-
-            // can we even do this?
             iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver), options);
             return (TDriver)iWebDriver;
         }
+
+        public static RemoteWebDriver GetRDriver<TDriver>(this IWebDriver iWebDriver, string testName) where TDriver : IWebDriver, new()
+        {
+            dynamic options = null;
+            string version = "10";
+            string platform = "Windows 10";
+            string url = null;
+
+            switch (typeof(TDriver).Name)
+            {
+                case "ChromeDriver":
+                    if (options == null) options = new ChromeOptions();
+                    break;
+                case "FirefoxDriver":
+                    if (options == null) options = new FirefoxOptions();
+                    //options.AddAdditionalCapability(CapabilityType.Platform, platform);
+                    break;
+                default:
+                    throw new NotImplementedException("unknown Driver");
+            }
+            // //options.AcceptInsecureCertificates = true;
+            // sauce
+            string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            options.AddAdditionalCapability("build", assemblyVersion, true);
+            options.AddAdditionalCapability("username", SauceDriverKeys.SAUCELABS_USERNAME, true);
+            options.AddAdditionalCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY, true);
+            options.AddAdditionalCapability("name", testName, true);
+
+            //iWebDriver = (RemoteWebDriver)Activator.CreateInstance(typeof(RemoteWebDriver),
+            //    args: new object[] { new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities() });
+            iWebDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities());
+
+            if (!string.IsNullOrEmpty(url))
+                iWebDriver.Navigate().GoToUrl(url);
+            return (RemoteWebDriver)iWebDriver;
+        }
+
         #endregion
     }
 }
