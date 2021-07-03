@@ -3,6 +3,9 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using NUnit.Framework.Interfaces;
 using System.Threading;
+using OpenQA.Selenium.Chrome;
+using System;
+using OpenQA.Selenium.Remote;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -17,7 +20,7 @@ namespace Selenium.WebDriver.Equip.Tests
         /// Instance of the browser used for the test
         /// </summary>
         public IWebDriver Driver;
-        public EnvironmentManager EnvManager;
+       // public EnvironmentManager EnvManager;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -36,8 +39,9 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            EnvManager = new EnvironmentManager();
-            Driver = EnvManager.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
+            Driver = Driver.GetSauceDriver<ChromeDriver>(TestContext.CurrentContext.Test.Name);
+            // EnvManager = new EnvironmentManager();
+            // Driver = EnvManager.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
         }
 
         /// <summary>
@@ -51,9 +55,25 @@ namespace Selenium.WebDriver.Equip.Tests
             {
                 var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
                 if (!outcome)
+                {
                     new TestCapture(Driver, TestContext.CurrentContext.Test.GetCleanName() + ".Failed").CaptureWebPage();
-                EnvManager.CloseCurrentDriver(outcome);
+                    UpDateJob(bool.Parse(outcome.ToString()));
+                }
+                    if (Driver != null) Driver.Quit();
                 Driver = null;
+            }
+        }
+
+
+        public void UpDateJob(bool outcome)
+        {
+            var sessionId = (string)((RemoteWebDriver)Driver).Capabilities.GetCapability("webdriver.remote.sessionid");
+            try
+            {
+                ((IJavaScriptExecutor)Driver).ExecuteScript("sauce:job-result=" + (outcome ? "passed" : "failed"));
+            }
+            finally
+            {
             }
         }
     }

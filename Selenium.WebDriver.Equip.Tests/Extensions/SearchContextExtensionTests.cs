@@ -7,7 +7,8 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
 {
     [TestFixture]
     [Category(TestCategories.Extension)]
-    public class SearchContextExtentionTests : BaseTest
+    [Category("lol")]
+    public class SearchContextExtentionTests<TDriver> : BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public AjaxyControlPage Page;
 

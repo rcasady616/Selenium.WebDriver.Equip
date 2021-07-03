@@ -240,8 +240,79 @@ namespace OpenQA.Selenium
         }
 
         #region Driver Manager
-        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver, dynamic options = null) where TDriver : IWebDriver, new()
+        //private void ReadRemoteConfiguration()
+        //{
+        //    remoteBrowserName = seleniumSettings.RemoteBrowserName;
+        //    remoteBrowserVersion = seleniumSettings.RemoteBrowserVersion;
+        //    remoteOsPlatform = seleniumSettings.RemoteOsPlatform;
+        //}
+        //public static IWebDriver GetADriver(this IWebDriver iWebDriver, string testName)
+        //{
+        //    var seleniumSettings = new SeleniumSettings().Deserialize();
+
+        //   var driverType = seleniumSettings.DriverType;
+        //   var browserName = seleniumSettings.BrowserName;
+        //    switch (driverType)
+        //    {
+        //        case DriverType.Remote:
+        //            //ReadRemoteConfiguration();
+        //            //var settings = new SeleniumServerSettings { HostName = "localhost", Port = "4444", StandAlonePath = @"C:\Users\Rick\Documents\GitHub\SeleniumExtensions\selenium-server-standalone-3.0.1.jar" };
+        //            //remoteServer = new SeleniumServerProxy(settings);
+        //            break;
+        //        case DriverType.SauceLabs:
+        //            // todo get config
+        //            // todo validate config
+        //           // ReadRemoteConfiguration();
+        //            //Assembly executingAssembly = Assembly.GetExecutingAssembly();
+        //            //string assemblyLocation = executingAssembly.Location;
+        //            //string currentDirectory = Path.GetDirectoryName(assemblyLocation);
+        //            break;
+        //        case DriverType.IPhone:
+        //        case DriverType.Android:
+        //        case DriverType.WindowsPhone:
+        //            throw new NotImplementedException("No mobile support at this time");
+        //        default: //all other cases are local drivers
+        //            break;
+        //    }
+
+
+        //    dynamic options = null;
+        //    string version = "10";
+        //    string platform = "Windows 10";
+        //    string url = null;
+
+        //    switch (driverType)
+        //    {
+        //        case DriverType.Chrome:
+        //            if (options == null) options = new ChromeOptions();
+        //            break;
+        //        case DriverType.Firefox:
+        //            if (options == null) options = new FirefoxOptions();
+        //            //options.AddAdditionalCapability(CapabilityType.Platform, platform);
+        //            break;
+        //        default:
+        //            throw new NotImplementedException("unknown Driver");
+        //    }
+        //    // //options.AcceptInsecureCertificates = true;
+        //    // sauce
+        //    string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        //    options.AddAdditionalCapability("build", assemblyVersion, true);
+        //    options.AddAdditionalCapability("username", SauceDriverKeys.SAUCELABS_USERNAME, true);
+        //    options.AddAdditionalCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY, true);
+        //    options.AddAdditionalCapability("name", testName, true);
+
+        //    iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver),
+        //        args: new object[] { new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities() });
+        //    //iWebDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities());
+
+        //    if (!string.IsNullOrEmpty(url))
+        //        iWebDriver.Navigate().GoToUrl(url);
+        //    return (TDriver)iWebDriver;
+        //}
+
+        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver) where TDriver : IWebDriver, new()
         {
+            dynamic options = null;
             switch (typeof(TDriver).Name)
             {
                 case "ChromeDriver":

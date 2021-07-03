@@ -4,7 +4,12 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
+using Selenium.WebDriver.Equip.Server;
+using Selenium.WebDriver.Equip.Settings;
+using Selenium.WebDriver.Equip.WebDriver;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -15,11 +20,21 @@ namespace Selenium.WebDriver.Equip.Tests
     {
         public IWebDriver Driver;
 
+        private DriverType driverType;
+        private string remoteBrowserName;
+        private BrowserName browserName;
+        private string remoteBrowserVersion;
+        private string remoteOsPlatform;
+        private SeleniumServerProxy remoteServer;
+        private SeleniumSettings seleniumSettings;
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+          
 
         }
+             
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
