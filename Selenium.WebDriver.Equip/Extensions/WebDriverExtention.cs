@@ -264,7 +264,7 @@ namespace OpenQA.Selenium
             return (TDriver)iWebDriver;
         }
 
-        public static RemoteWebDriver GetRDriver<TDriver>(this IWebDriver iWebDriver, string testName) where TDriver : IWebDriver, new()
+        public static RemoteWebDriver GetSauceDriver<TDriver>(this IWebDriver iWebDriver, string testName) where TDriver : IWebDriver, new()
         {
             dynamic options = null;
             string version = "10";

@@ -1,57 +1,19 @@
 ﻿using NUnit.Framework;
-using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Remote;
-using System;
+using Selenium.WebDriver.Equip.Tests;
 
 namespace Selenium.WebDriver.Equip.Manager.Tests
 {
     [TestFixture]
-    public class SauceServerTests
+    public class SauceServerTests<TDriver> : BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
-        IWebDriver driver;
-
-        [SetUp]
-        public void SetupTest()
-        {
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
-
-            if (outcome != null)
-                UpDateJob(Boolean.Parse(outcome.ToString()));
-            driver.Quit();
-        }
-
         [Test]
-        public void FirefoxDriver()
+        public void GetDriver()
         {
-           // var options =new  DriverOptions();
-            driver = driver.GetRDriver<FirefoxDriver>(TestContext.CurrentContext.Test.Name);
-        }
-
-        [Test]
-        public void ChromeDriver()
-        {
-            // var options =new  DriverOptions();
-            driver = driver.GetRDriver<ChromeDriver>(TestContext.CurrentContext.Test.Name);
-        }
-
-        public void UpDateJob(bool outcome)
-        {
-            var sessionId = (string)((RemoteWebDriver)driver).Capabilities.GetCapability("webdriver.remote.sessionid");
-            try
-            {
-                ((IJavaScriptExecutor)driver).ExecuteScript("sauce:job-result=" + (outcome ? "passed" : "failed"));
-            }
-            finally
-            {
-            }
+            var url = "http://rickcasady.blogspot.com/";
+            Driver.Navigate().GoToUrl(url);
+            Assert.AreEqual(typeof(TDriver), Driver.GetType());
+            Assert.AreEqual(url, Driver.Url);
         }
     }
 }
