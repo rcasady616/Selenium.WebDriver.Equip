@@ -54,7 +54,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name, OS);
+            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name,os: OS);
         }
 
         [TearDown]
