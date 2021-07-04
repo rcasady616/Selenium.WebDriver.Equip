@@ -13,6 +13,7 @@ using Selenium.WebDriver.Equip.WebDriver;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace OpenQA.Selenium
 {
@@ -370,6 +371,43 @@ namespace OpenQA.Selenium
                 iWebDriver.Navigate().GoToUrl(url);
             return (RemoteWebDriver)iWebDriver;
         }
+
+        public static RemoteWebDriver GetSauceDriver<TDriver>(this IWebDriver iWebDriver, string testName, OSType os = OSType.LINUX) where TDriver : IWebDriver, new()
+        {
+            dynamic options = null;
+            string version = "10";
+            string platform = "Windows 10";
+            string url = null;
+            
+            switch (typeof(TDriver).Name)
+            {
+                case "ChromeDriver":
+                    if (options == null) options = new ChromeOptions();
+                    break;
+                case "FirefoxDriver":
+                    if (options == null) options = new FirefoxOptions();
+                    break;
+                default:
+                    throw new NotImplementedException("unknown Driver");
+            }
+            options.AddAdditionalCapability(CapabilityType.Platform, os.GetDescription(), true);
+            // //options.AcceptInsecureCertificates = true;
+            // sauce
+            string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            options.AddAdditionalCapability("build", assemblyVersion, true);
+            options.AddAdditionalCapability("username", SauceDriverKeys.SAUCELABS_USERNAME, true);
+            options.AddAdditionalCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY, true);
+            options.AddAdditionalCapability("name", testName, true);
+
+            //iWebDriver = (RemoteWebDriver)Activator.CreateInstance(typeof(RemoteWebDriver),
+            //    args: new object[] { new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities() });
+            iWebDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities());
+
+            if (!string.IsNullOrEmpty(url))
+                iWebDriver.Navigate().GoToUrl(url);
+            return (RemoteWebDriver)iWebDriver;
+        }
+
 
         #endregion
     }

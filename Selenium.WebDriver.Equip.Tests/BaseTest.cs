@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using NUnit.Framework;
-using OpenQA.Selenium;
+﻿using NUnit.Framework;
 using NUnit.Framework.Interfaces;
-using System.Threading;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using System;
 using OpenQA.Selenium.Remote;
+using Selenium.WebDriver.Equip.Settings;
+using Selenium.WebDriver.Equip.WebDriver;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -20,7 +19,6 @@ namespace Selenium.WebDriver.Equip.Tests
         /// Instance of the browser used for the test
         /// </summary>
         public IWebDriver Driver;
-       // public EnvironmentManager EnvManager;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -39,9 +37,18 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            Driver = Driver.GetSauceDriver<ChromeDriver>(TestContext.CurrentContext.Test.Name);
-            // EnvManager = new EnvironmentManager();
-            // Driver = EnvManager.CreateDriverInstance(TestContext.CurrentContext.Test.Name);
+           var seleniumSettings = new SeleniumSettings().Deserialize();
+           var driverType = seleniumSettings.DriverType;
+            switch (driverType)
+            {
+                case DriverType.SauceLabs:
+
+                    Driver = Driver.GetSauceDriver<ChromeDriver>(TestContext.CurrentContext.Test.Name);
+                    break;
+                default:
+                    Driver = Driver.GetDriver<ChromeDriver>();
+                    break;
+            }
         }
 
         /// <summary>
@@ -63,7 +70,6 @@ namespace Selenium.WebDriver.Equip.Tests
                 Driver = null;
             }
         }
-
 
         public void UpDateJob(bool outcome)
         {

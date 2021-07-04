@@ -14,12 +14,16 @@ using System.Reflection;
 namespace Selenium.WebDriver.Equip.Tests
 {
     [Parallelizable(ParallelScope.All)]
-    [TestFixture(typeof(ChromeDriver))]
-    [TestFixture(typeof(FirefoxDriver))]
+    [TestFixture(typeof(ChromeDriver), OSType.LINUX)]
+    [TestFixture(typeof(ChromeDriver), OSType.MAC)]
+    [TestFixture(typeof(ChromeDriver), OSType.WINDOWS)]
+    [TestFixture(typeof(FirefoxDriver),OSType.LINUX)]
+    [TestFixture(typeof(FirefoxDriver),OSType.MAC)]
+    [TestFixture(typeof(FirefoxDriver),OSType.WINDOWS)]
     public class BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public IWebDriver Driver;
-
+        public OSType OS;// = null;
         private DriverType driverType;
         private string remoteBrowserName;
         private BrowserName browserName;
@@ -28,13 +32,19 @@ namespace Selenium.WebDriver.Equip.Tests
         private SeleniumServerProxy remoteServer;
         private SeleniumSettings seleniumSettings;
 
+        public BaseFixture(OSType os)
+        {
+            OS = os;
+
+        }
+
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-          
+
 
         }
-             
+
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
@@ -44,7 +54,7 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name);
+            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name, OS);
         }
 
         [TearDown]
