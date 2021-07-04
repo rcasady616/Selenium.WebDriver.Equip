@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Selenium.WebDriver.Equip.WebDriver;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -125,10 +126,8 @@ namespace Selenium.WebDriver.Equip.Settings
         public void Serialize()
         {
             var ser = new XmlSerializer(this.GetType());
-            using (XmlWriter writer = XmlWriter.Create(fileName, new XmlWriterSettings() { OmitXmlDeclaration = true }))
-            {
-                ser.Serialize(writer, this);
-            }
+            using XmlWriter writer = XmlWriter.Create(fileName, new XmlWriterSettings() { OmitXmlDeclaration = true });
+            ser.Serialize(writer, this);
         }
     }
 }

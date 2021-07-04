@@ -318,10 +318,12 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
 
         public static List<List<By>> GetAjaxyControlPageLocators()
         {
-            var ret = new List<List<By>>();
-            ret.Add(new List<By> { AjaxyControlPage.ByLabelsDiv });
-            ret.Add(new List<By> { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio });
-            ret.Add(new List<By> { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton, AjaxyControlPage.ByNewLableText });
+            List<List<By>> ret = new()
+            {
+                new List<By> { AjaxyControlPage.ByLabelsDiv },
+                new List<By> { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio },
+                new List<By> { AjaxyControlPage.ByLabelsDiv, AjaxyControlPage.ByGreenRadio, AjaxyControlPage.ByRedRadio, AjaxyControlPage.BySubmitButton, AjaxyControlPage.ByNewLableText }
+            };
             return ret;
         }
 

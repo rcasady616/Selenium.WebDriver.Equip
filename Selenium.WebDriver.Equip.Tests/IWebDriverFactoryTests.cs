@@ -31,7 +31,7 @@ namespace Selenium.WebDriver.Equip.Tests
         {
 
             Assume.That(_driver.GetNuGetGeckoDriver());
-            _driver = WebDriverFactory.FirefoxBrowser("http://rickcasady.blogspot.com/");
+            _driver = _driver.GetDriver<FirefoxDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(FirefoxDriver), _driver.GetType());
         }
 
@@ -39,7 +39,7 @@ namespace Selenium.WebDriver.Equip.Tests
         public void GetInternetExplorerBrowser()
         {
             Assume.That(_driver.GetNuGetIEDriver());
-            _driver = WebDriverFactory.GetBrowser<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
+            _driver = _driver.GetDriver<InternetExplorerDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(InternetExplorerDriver), _driver.GetType());
         }
 
@@ -47,7 +47,7 @@ namespace Selenium.WebDriver.Equip.Tests
         public void GetChromeBrowser()
         {
             Assume.That(_driver.GetNuGetChromeDriver());
-            _driver = WebDriverFactory.GetBrowser<ChromeDriver>("http://rickcasady.blogspot.com/");
+            _driver = _driver.GetDriver<ChromeDriver>("http://rickcasady.blogspot.com/");
             Assert.AreEqual(typeof(ChromeDriver), _driver.GetType());
         }
 
@@ -57,7 +57,7 @@ namespace Selenium.WebDriver.Equip.Tests
             var options = new ChromeOptions();
             options.AddArgument("-incognito");
             Assume.That(_driver.GetNuGetChromeDriver());
-            _driver = WebDriverFactory.GetBrowser<ChromeDriver, ChromeOptions>(options);
+            _driver = _driver.GetDriver<ChromeDriver, ChromeOptions>(options);
             var html_content = @"
             <html>
               <div id='result'></div>

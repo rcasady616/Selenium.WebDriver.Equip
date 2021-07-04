@@ -2,28 +2,27 @@
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.Settings;
 using Selenium.WebDriver.Equip.WebDriver;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
-    /// <summary>
-    /// A base fixture for Selenium testing single browser per test
-    /// </summary>
-    [Parallelizable(ParallelScope.Fixtures)]
-    [TestFixture]
-    public class BaseTest
+    [Parallelizable(ParallelScope.All)]
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
+    public class BaseTests<TDriver> where TDriver : IWebDriver, new()
     {
-        /// <summary>
-        /// Instance of the browser used for the test
-        /// </summary>
         public IWebDriver Driver;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-
         }
 
         [OneTimeTearDown]
@@ -31,14 +30,11 @@ namespace Selenium.WebDriver.Equip.Tests
         {
         }
 
-        /// <summary>
-        /// Initialize the browser before the test starts
-        /// </summary>
         [SetUp]
         public void SetupTest()
         {
-           var seleniumSettings = new SeleniumSettings().Deserialize();
-           var driverType = seleniumSettings.DriverType;
+            var seleniumSettings = new SeleniumSettings().Deserialize();
+            var driverType = seleniumSettings.DriverType;
             switch (driverType)
             {
                 case DriverType.SauceLabs:
@@ -66,7 +62,7 @@ namespace Selenium.WebDriver.Equip.Tests
                     new TestCapture(Driver, TestContext.CurrentContext.Test.GetCleanName() + ".Failed").CaptureWebPage();
                     UpDateJob(bool.Parse(outcome.ToString()));
                 }
-                    if (Driver != null) Driver.Quit();
+                if (Driver != null) Driver.Quit();
                 Driver = null;
             }
         }

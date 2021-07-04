@@ -1,12 +1,19 @@
 ﻿using NuGet;
 using NuGet.Versioning;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using Selenium.WebDriver.Equip;
+using Selenium.WebDriver.Equip.DriverManager;
 using Selenium.WebDriver.Equip.PageObjectGenerator;
+using Selenium.WebDriver.Equip.SauceLabs;
 using Selenium.WebDriver.Equip.Settings;
+using Selenium.WebDriver.Equip.WebDriver;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace OpenQA.Selenium
 {
@@ -232,5 +239,78 @@ namespace OpenQA.Selenium
         {
             return new POG(iWebDriver);
         }
+
+        #region Driver Manager
+
+        public static TDriver GetDriver<TDriver, TOptions>(this IWebDriver iWebDriver, TOptions options, string url = null) where TDriver : IWebDriver, new()
+        {
+            iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver), options);
+            if (url != null)
+                iWebDriver.Navigate().GoToUrl(url);
+            return (TDriver)iWebDriver;
+        }
+
+
+        public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver, string url = null) where TDriver : IWebDriver, new()
+        {
+            dynamic options = null;
+            switch (typeof(TDriver).Name)
+            {
+                case "ChromeDriver":
+                    if (File.Exists(new ChromeDriverBinary().BrowserExePath))
+                        if (!File.Exists(new ChromeDriverBinary().FileName))
+                            new Manager().GetAndUnpack(new ChromeDriverBinary());
+                    break;
+                case "FirefoxDriver":
+                    if (File.Exists(new FirefoxDriverBinary().BrowserExePath))
+                        if (!File.Exists(new FirefoxDriverBinary().FileName))
+                            new Manager().GetAndUnpack(new FirefoxDriverBinary());
+                    options = new FirefoxOptions();
+                    options.BrowserExecutableLocation = new FirefoxDriverBinary().BrowserExePath;
+                    break;
+                default:
+                    throw new NotImplementedException("unknown Driver");
+            }
+
+            iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver), options);
+            if (url != null)
+                iWebDriver.Navigate().GoToUrl(url);
+            return (TDriver)iWebDriver;
+        }
+
+        public static RemoteWebDriver GetSauceDriver<TDriver>(this IWebDriver iWebDriver, string testName, OSType os = OSType.LINUX, string url = null) where TDriver : IWebDriver, new()
+        {
+            dynamic options = null;
+
+            switch (typeof(TDriver).Name)
+            {
+                case "ChromeDriver":
+                    if (options == null) options = new ChromeOptions();
+                    break;
+                case "FirefoxDriver":
+                    if (options == null) options = new FirefoxOptions();
+                    break;
+                default:
+                    throw new NotImplementedException("unknown Driver");
+            }
+            options.AddAdditionalCapability(CapabilityType.Platform, os.GetDescription(), true);
+            // //options.AcceptInsecureCertificates = true;
+            // sauce
+            string assemblyVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            options.AddAdditionalCapability("build", assemblyVersion, true);
+            options.AddAdditionalCapability("username", SauceDriverKeys.SAUCELABS_USERNAME, true);
+            options.AddAdditionalCapability("accessKey", SauceDriverKeys.SAUCELABS_ACCESSKEY, true);
+            options.AddAdditionalCapability("name", testName, true);
+
+            //iWebDriver = (RemoteWebDriver)Activator.CreateInstance(typeof(RemoteWebDriver),
+            //    args: new object[] { new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities() });
+            iWebDriver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), options.ToCapabilities());
+
+            if (!string.IsNullOrEmpty(url))
+                iWebDriver.Navigate().GoToUrl(url);
+            return (RemoteWebDriver)iWebDriver;
+        }
+
+        #endregion
     }
 }

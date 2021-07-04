@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using Selenium.WebDriver.Equip.WebDriver;
 using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
@@ -28,7 +30,7 @@ namespace Selenium.WebDriver.Equip.Tests.Extensions
             sw.Start();
             var actual = Driver.ElementExists(By.Id(id));
             sw.Stop();
-            Assert.Less(sw.Elapsed.Seconds, 1, $"Time taken was {sw.Elapsed.ToString()}");
+            Assert.Less(sw.Elapsed.Seconds, 1, $"Time taken was {sw.Elapsed}");
             Assert.AreEqual(expected, actual);
         }
     }

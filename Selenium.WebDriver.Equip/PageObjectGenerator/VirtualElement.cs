@@ -32,7 +32,7 @@ namespace Selenium.WebDriver.Equip.PageObjectGenerator
         public HtmlAttributeCollection Attributes { get { return HtmlNode.Attributes; } }
         public string Href { get { return GetAttribute("href"); } }
 
-        public List<VirtualElement> ChildElements = new List<VirtualElement>();
+        public List<VirtualElement> ChildElements = new();
 
         public VirtualElement(HtmlNode htmlNode)
         {
