@@ -4,12 +4,8 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
-using Selenium.WebDriver.Equip.Server;
-using Selenium.WebDriver.Equip.Settings;
 using Selenium.WebDriver.Equip.WebDriver;
 using System;
-using System.IO;
-using System.Reflection;
 
 namespace Selenium.WebDriver.Equip.Tests
 {
@@ -23,28 +19,18 @@ namespace Selenium.WebDriver.Equip.Tests
     public class BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public IWebDriver Driver;
-        public OSType OS;// = null;
-        private DriverType driverType;
-        private string remoteBrowserName;
-        private BrowserName browserName;
-        private string remoteBrowserVersion;
-        private string remoteOsPlatform;
-        private SeleniumServerProxy remoteServer;
-        private SeleniumSettings seleniumSettings;
+        public OSType OS;
 
         public BaseFixture(OSType os)
         {
             OS = os;
-
         }
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
 
-
         }
-
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
@@ -66,7 +52,6 @@ namespace Selenium.WebDriver.Equip.Tests
                 UpDateJob(Boolean.Parse(outcome.ToString()));
             if (Driver != null) Driver.Quit();
         }
-
 
         public void UpDateJob(bool outcome)
         {

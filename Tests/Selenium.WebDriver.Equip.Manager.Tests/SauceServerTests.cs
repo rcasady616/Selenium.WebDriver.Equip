@@ -1,7 +1,5 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.Tests;
 using Selenium.WebDriver.Equip.WebDriver;
@@ -25,7 +23,6 @@ namespace Selenium.WebDriver.Equip.Manager.Tests
                 Assert.AreEqual(typeof(RemoteWebDriver), Driver.GetType());
                 Assert.AreEqual(url, Driver.Url);
             });
-
         }
     }
 }
