@@ -7,17 +7,12 @@ using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {
-    //[TestFixture]
-    // [TestFixture(typeof(ChromeDriver), OSType.LINUX)]
+    [TestFixture]
     [Category(TestCategories.Extension)]
     [Category("lol")]
-    public class SearchContextExtentionTests<TDriver> : BaseFixture<TDriver> where TDriver : IWebDriver, new()
+    public class SearchContextExtentionTests : BaseTest
     {
         public AjaxyControlPage Page;
-
-        public SearchContextExtentionTests(OSType os) : base(os)
-        {
-        }
 
         [SetUp]
         public void SetupSearchContextExtentionTests()

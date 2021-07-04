@@ -8,13 +8,6 @@ using Selenium.WebDriver.Equip.WebDriver;
 
 namespace Selenium.WebDriver.Equip.Manager.Tests
 {
-    [TestFixture]
-    [TestFixture(typeof(ChromeDriver), OSType.LINUX)]
-    [TestFixture(typeof(ChromeDriver), OSType.MAC)]
-    [TestFixture(typeof(ChromeDriver), OSType.WINDOWS)]
-    [TestFixture(typeof(FirefoxDriver), OSType.LINUX)]
-    [TestFixture(typeof(FirefoxDriver), OSType.MAC)]
-    [TestFixture(typeof(FirefoxDriver), OSType.WINDOWS)]
     public class SauceServerTests<TDriver> : BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public SauceServerTests(OSType os) : base(os)
