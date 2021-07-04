@@ -13,9 +13,9 @@ namespace Selenium.WebDriver.Equip.Tests
     [TestFixture(typeof(ChromeDriver), OSType.LINUX)]
     [TestFixture(typeof(ChromeDriver), OSType.MAC)]
     [TestFixture(typeof(ChromeDriver), OSType.WINDOWS)]
-    [TestFixture(typeof(FirefoxDriver),OSType.LINUX)]
-    [TestFixture(typeof(FirefoxDriver),OSType.MAC)]
-    [TestFixture(typeof(FirefoxDriver),OSType.WINDOWS)]
+    [TestFixture(typeof(FirefoxDriver), OSType.LINUX)]
+    [TestFixture(typeof(FirefoxDriver), OSType.MAC)]
+    [TestFixture(typeof(FirefoxDriver), OSType.WINDOWS)]
     public class BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public IWebDriver Driver;
@@ -29,7 +29,6 @@ namespace Selenium.WebDriver.Equip.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-
         }
 
         [OneTimeTearDown]
@@ -40,16 +39,14 @@ namespace Selenium.WebDriver.Equip.Tests
         [SetUp]
         public void SetupTest()
         {
-            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name,os: OS);
+            Driver = Driver.GetSauceDriver<TDriver>(TestContext.CurrentContext.Test.Name, os: OS);
         }
 
         [TearDown]
         public void TearDown()
         {
             var outcome = TestContext.CurrentContext.Result.Outcome == ResultState.Success;
-
-            if (outcome != null)
-                UpDateJob(Boolean.Parse(outcome.ToString()));
+            UpDateJob(outcome);
             if (Driver != null) Driver.Quit();
         }
 

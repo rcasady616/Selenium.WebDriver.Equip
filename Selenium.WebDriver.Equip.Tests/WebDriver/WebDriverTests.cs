@@ -20,15 +20,9 @@ namespace Selenium.WebDriver.Equip.Tests.WebDriver
         }
 
         [TearDown]
-        public void TearDown()
+        public void TearDown() 
         {
-            if (Driver != null)
-            {
-                Driver.Close();
-                Driver.Quit();
-            }
         }
-
 
         [Test]
         public void GetDriverGetBrowser()

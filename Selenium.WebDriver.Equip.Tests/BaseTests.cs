@@ -23,7 +23,6 @@ namespace Selenium.WebDriver.Equip.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-
         }
 
         [OneTimeTearDown]
