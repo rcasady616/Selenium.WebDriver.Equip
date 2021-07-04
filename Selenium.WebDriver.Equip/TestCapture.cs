@@ -25,8 +25,8 @@ namespace Selenium.WebDriver.Equip
         public void PageSource()
         {
             string htmlFile = $"{fileName}.html";
-            using (var sw = new StreamWriter(htmlFile, false))
-                sw.Write(_browser.PageSource);
+            using var sw = new StreamWriter(htmlFile, false);
+            sw.Write(_browser.PageSource);
         }
 
         public void ScreenShot()

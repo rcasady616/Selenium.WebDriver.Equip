@@ -126,10 +126,8 @@ namespace Selenium.WebDriver.Equip.Settings
         public void Serialize()
         {
             var ser = new XmlSerializer(this.GetType());
-            using (XmlWriter writer = XmlWriter.Create(fileName, new XmlWriterSettings() { OmitXmlDeclaration = true }))
-            {
-                ser.Serialize(writer, this);
-            }
+            using XmlWriter writer = XmlWriter.Create(fileName, new XmlWriterSettings() { OmitXmlDeclaration = true });
+            ser.Serialize(writer, this);
         }
     }
 }

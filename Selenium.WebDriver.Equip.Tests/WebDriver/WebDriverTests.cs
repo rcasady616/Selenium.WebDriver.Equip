@@ -11,16 +11,20 @@ namespace Selenium.WebDriver.Equip.Tests.WebDriver
     public class WebDriverTests<TDriver> : BaseTests<TDriver> where TDriver : IWebDriver, new()
     {
         [SetUp]
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         public void SetupTest()
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         {
-            Manager m = new Manager();
+            Manager m = new();
             string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
           //  m.GetAndUnpack(new ChromeDriverBinary(), "");
 
         }
 
         [TearDown]
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
         public void TearDown() 
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         {
         }
 

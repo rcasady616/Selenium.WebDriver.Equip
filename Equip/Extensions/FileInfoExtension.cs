@@ -43,28 +43,22 @@ namespace System.IO
         public static void Decompress(this FileInfo fileInfo)
         {
             // Get the stream of the source file.
-            using (FileStream inFile = fileInfo.OpenRead())
-            {
-                // Get original file extension, for example
-                // "doc" from report.doc.gz.
-                string curFile = fileInfo.FullName;
-                string origName = curFile.Remove(curFile.Length -
-                        fileInfo.Extension.Length);
+            using FileStream inFile = fileInfo.OpenRead();
+            // Get original file extension, for example
+            // "doc" from report.doc.gz.
+            string curFile = fileInfo.FullName;
+            string origName = curFile.Remove(curFile.Length -
+                    fileInfo.Extension.Length);
 
-                //Create the decompressed file.
-                using (FileStream outFile = File.Create(origName))
-                {
-                    using (GZipStream Decompress = new GZipStream(inFile,
-                            CompressionMode.Decompress))
-                    {
-                        // Copy the decompression stream 
-                        // into the output file.
-                        Decompress.CopyTo(outFile);
+            //Create the decompressed file.
+            using FileStream outFile = File.Create(origName);
+            using GZipStream Decompress = new(inFile,
+                    CompressionMode.Decompress);
+            // Copy the decompression stream 
+            // into the output file.
+            Decompress.CopyTo(outFile);
 
-                        Console.WriteLine("Decompressed: {0}", fileInfo.Name);
-                    }
-                }
-            }
+            Console.WriteLine("Decompressed: {0}", fileInfo.Name);
         }
 
         /// <summary>
