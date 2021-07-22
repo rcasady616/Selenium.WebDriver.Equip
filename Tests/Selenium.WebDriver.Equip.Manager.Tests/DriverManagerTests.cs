@@ -12,12 +12,12 @@ namespace Selenium.WebDriver.Equip.Manager.Tests
     public class DriverManagerTests
     {
         public string TestFolder = @$"{AppDomain.CurrentDomain.BaseDirectory}\TestFolder-{DateTime.Now.ToPath()}";
-        public DriverManager.Manager driverManager;
+        public DriverManager.DriverManager driverManager;
 
         [SetUp]
         public void SetupTest()
         {
-            driverManager = new DriverManager.Manager();
+            driverManager = new DriverManager.DriverManager();
             if (!Directory.Exists(TestFolder))
                 Directory.CreateDirectory(TestFolder);
         }

@@ -15,7 +15,7 @@ namespace Selenium.WebDriver.Equip.Tests.WebDriver
         public void SetupTest()
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
         {
-            Manager m = new();
+            DriverManager.DriverManager m = new();
             string RunningPath = AppDomain.CurrentDomain.BaseDirectory;
           //  m.GetAndUnpack(new ChromeDriverBinary(), "");
 

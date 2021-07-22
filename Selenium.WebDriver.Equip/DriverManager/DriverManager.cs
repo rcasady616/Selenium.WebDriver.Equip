@@ -6,9 +6,9 @@ using System.Reflection;
 
 namespace Selenium.WebDriver.Equip.DriverManager
 {
-    public class Manager
+    public class DriverManager
     {
-        public Manager()
+        public DriverManager()
         {
             // ChromeDriver = new DriverBinary() { BrowserUrl = "https://chromedriver.storage.googleapis.com/", };
         }
@@ -38,5 +38,7 @@ namespace Selenium.WebDriver.Equip.DriverManager
                     File.Delete(zipfileName);
             }
         }
+  
+        
     }
 }
