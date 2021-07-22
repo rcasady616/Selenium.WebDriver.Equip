@@ -38,7 +38,5 @@ namespace Selenium.WebDriver.Equip.DriverManager
                     File.Delete(zipfileName);
             }
         }
-  
-        
     }
 }
