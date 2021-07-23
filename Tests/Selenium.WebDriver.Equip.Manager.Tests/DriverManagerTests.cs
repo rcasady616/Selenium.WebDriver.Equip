@@ -43,6 +43,5 @@ namespace Selenium.WebDriver.Equip.Manager.Tests
             driverManager.GetAndUnpack(new FirefoxDriverBinary(), TestFolder);
             Assert.AreEqual(true, File.Exists(@$"{TestFolder}\{new FirefoxDriverBinary().FileName}"));
         }
-
     }
 }

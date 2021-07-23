@@ -24,7 +24,7 @@ namespace Selenium.WebDriver.Equip.DriverManager
 
             if (!File.Exists(localDriverFilePath))
             {
-                string zipfileName = @$"{pathToExtractTo}\chromedriver_win32.zip";
+                string zipfileName = @$"{pathToExtractTo}\{driver.GetType()}.zip";
                 new WebClient().DownloadFile(driver.DownloadString, zipfileName);
                 ZipFile.ExtractToDirectory(zipfileName, pathToExtractTo);
                 if (deleteZip)
