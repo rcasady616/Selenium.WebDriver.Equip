@@ -10,7 +10,6 @@ namespace Selenium.WebDriver.Equip.Tests.WebDriver
         public void GetDriverGetBrowser()
         {
             var url = "http://rickcasady.blogspot.com/";
-
             Driver.Navigate().GoToUrl(url);
             Assert.AreEqual(typeof(TDriver), Driver.GetType());
             Assert.AreEqual(url, Driver.Url);
