@@ -11,8 +11,6 @@ namespace Selenium.WebDriver.Equip.Tests
 {
     [Parallelizable(ParallelScope.All)]
     [TestFixture(typeof(ChromeDriver))]
-    [TestFixture(typeof(ChromeDriver))]
-    [TestFixture(typeof(FirefoxDriver))]
     [TestFixture(typeof(FirefoxDriver))]
     public class BaseTests<TDriver> where TDriver : IWebDriver, new()
     {
