@@ -8,6 +8,8 @@ using TestWebPages.UIFramework.Pages;
 
 namespace Selenium.WebDriver.Equip.Tests.Extensions
 {
+    [TestFixture(typeof(ChromeDriver))]
+    [TestFixture(typeof(FirefoxDriver))]
     [Category(TestCategories.Extension)]
     public class WebDriverExtensionTests : BaseTest
     {
