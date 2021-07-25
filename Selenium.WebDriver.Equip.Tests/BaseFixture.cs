@@ -2,7 +2,6 @@
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using Selenium.WebDriver.Equip.WebDriver;
@@ -17,7 +16,6 @@ namespace Selenium.WebDriver.Equip.Tests
     [TestFixture(typeof(FirefoxDriver), OSType.LINUX)]
     [TestFixture(typeof(FirefoxDriver), OSType.MAC)]
     [TestFixture(typeof(FirefoxDriver), OSType.WINDOWS)]
-   // [TestFixture(typeof(InternetExplorerDriver), OSType.WINDOWS)]
     public class BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public IWebDriver Driver;
