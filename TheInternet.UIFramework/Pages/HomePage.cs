@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.PageObjects;
 using Selenium.WebDriver.Equip;
 
 namespace TheInternet.UIFramework.Pages
