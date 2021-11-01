@@ -6,6 +6,7 @@ using Selenium.WebDriver.Equip.WebDriver;
 
 namespace Selenium.WebDriver.Equip.Manager.Tests
 {
+    [Category(TestCategories.SeleniumServer)]
     public class SauceServerTests<TDriver> : BaseFixture<TDriver> where TDriver : IWebDriver, new()
     {
         public SauceServerTests(OSType os) : base(os)

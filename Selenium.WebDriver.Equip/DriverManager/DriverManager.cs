@@ -6,11 +6,10 @@ using System.Reflection;
 
 namespace Selenium.WebDriver.Equip.DriverManager
 {
-    public class Manager
+    public class DriverManager
     {
-        public Manager()
+        public DriverManager()
         {
-            // ChromeDriver = new DriverBinary() { BrowserUrl = "https://chromedriver.storage.googleapis.com/", };
         }
 
         public void GetAndUnpack(IDriverBinary driver, string pathToExtractTo = "", bool deleteZip = true, bool getFileOnlyIfNewer = true)
@@ -18,7 +17,6 @@ namespace Selenium.WebDriver.Equip.DriverManager
             if (string.IsNullOrEmpty(pathToExtractTo))
                 pathToExtractTo = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
-           // string driverVersion = new WebClient().DownloadString(driver.DownloadString);
             string localDriverFilePath = $@"{pathToExtractTo}\{driver.FileName}";
             if (File.Exists(localDriverFilePath))
                 if (FileVersionInfo.GetVersionInfo(localDriverFilePath).FileVersion != driver.ExeVersion)
@@ -26,13 +24,8 @@ namespace Selenium.WebDriver.Equip.DriverManager
 
             if (!File.Exists(localDriverFilePath))
             {
-                //string searchFileName = $@"{driverVersion}/chromedriver_win32.zip";
-                //var jsonstr = new WebClient().DownloadString("https://www.googleapis.com/storage/v1/b/chromedriver/o");
-
-                string zipfileName = @$"{pathToExtractTo}\chromedriver_win32.zip";
-               // string chromeSource = @$"https://chromedriver.storage.googleapis.com/{driverVersion}/chromedriver_win32.zip";
+                string zipfileName = @$"{pathToExtractTo}\{driver.GetType()}.zip";
                 new WebClient().DownloadFile(driver.DownloadString, zipfileName);
-
                 ZipFile.ExtractToDirectory(zipfileName, pathToExtractTo);
                 if (deleteZip)
                     File.Delete(zipfileName);

@@ -11,6 +11,7 @@ using Selenium.WebDriver.Equip.SauceLabs;
 using Selenium.WebDriver.Equip.Settings;
 using Selenium.WebDriver.Equip.WebDriver;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -94,45 +95,6 @@ namespace OpenQA.Selenium
             return File.Exists(fileNamePath);
         }
 
-        /// <summary>
-        /// Download the Gecko Driver from Mozilla Github https://github.com/mozilla/geckodriver
-        /// Uses the 64 bit driver unless otherwise configured 
-        /// </summary>
-        /// <returns><see langword="true"/> if the driver is present in the working directory; otherwise, <see langword="false"/>.</returns>
-        public static bool DownloadGeckoDriver(this IWebDriver iwebDriver)
-        {
-            if (IntPtr.Size == 4)
-                throw new NotImplementedException("Unknow processor mode");
-            //return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL32);
-            else if (IntPtr.Size == 8)
-                throw new NotImplementedException("Unknow processor mode");
-            //return iwebDriver.DownloadGeckoDriver(DriversConfiguration.GeockoDriverURL64);
-            else
-                throw new NotImplementedException("Unknow processor mode");
-        }
-
-        //public static bool DownloadGeckoDriver(this IWebDriver iwebDriver, string geockoDriverURL)
-        //{
-        //    string fileName = DriversConfiguration.GeockoDriverFileName;
-        //    string zipFileName = "geckodriver.zip";
-        //    var file = new FileInfo(zipFileName);
-        //    if (!File.Exists(fileName))
-        //        file.DownloadUrl(geockoDriverURL).UnZip(Directory.GetCurrentDirectory());
-        //    return File.Exists(fileName);
-        //}
-
-        //public static bool DownloadChromeDriver(this IWebDriver iwebDriver, string chromeDriverURL)
-        //{
-        //    string fileName = DriversConfiguration.GeockoDriverFileName;
-        //    string zipFileName = "chromedriver.zip";
-        //    var file = new FileInfo(zipFileName);
-        //    if (!File.Exists(fileName))
-        //        file.DownloadUrl(chromeDriverURL).UnZip(Directory.GetCurrentDirectory());
-        //    return File.Exists(fileName);
-        //}
-
-
-
         public static IWebDriver SwitchBrowserWindowByTitle(this IWebDriver iWebDriver, string title)
         {
             return iWebDriver.SwitchBrowserWindow(driver => driver.WaitUntilTitleIs(title));
@@ -147,12 +109,11 @@ namespace OpenQA.Selenium
         public static IWebDriver SwitchBrowserWindow<T>(this IWebDriver iWebDriver, Func<IWebDriver, T> condition)
         {
             var CurrentWindowHandle = iWebDriver.CurrentWindowHandle;
-            IWebDriver newWindowDriver = null;
             var windowIterator = iWebDriver.WindowHandles;
             foreach (var window in windowIterator)
             {
                 var handel = window;
-                newWindowDriver = iWebDriver.SwitchTo().Window(window);
+                IWebDriver newWindowDriver = iWebDriver.SwitchTo().Window(window);
                 if (newWindowDriver.DriverWaitUntil(condition, 2))
                     return newWindowDriver;
             }
@@ -242,6 +203,17 @@ namespace OpenQA.Selenium
 
         #region Driver Manager
 
+        public static IWebDriver GetADriver(this IWebDriver iWebDriver)
+        {
+            // get list of browsers
+            var browsers = new List<Browser>();
+            // get list of driver.exe
+            var drivers = new List<DriverType>();
+            // get best combo and spin up driver
+            iWebDriver = iWebDriver.GetDriver<ChromeDriver>();
+            return iWebDriver;
+        }
+
         public static TDriver GetDriver<TDriver, TOptions>(this IWebDriver iWebDriver, TOptions options, string url = null) where TDriver : IWebDriver, new()
         {
             iWebDriver = (TDriver)Activator.CreateInstance(typeof(TDriver), options);
@@ -249,7 +221,6 @@ namespace OpenQA.Selenium
                 iWebDriver.Navigate().GoToUrl(url);
             return (TDriver)iWebDriver;
         }
-
 
         public static TDriver GetDriver<TDriver>(this IWebDriver iWebDriver, string url = null) where TDriver : IWebDriver, new()
         {
@@ -259,12 +230,12 @@ namespace OpenQA.Selenium
                 case "ChromeDriver":
                     if (File.Exists(new ChromeDriverBinary().BrowserExePath))
                         if (!File.Exists(new ChromeDriverBinary().FileName))
-                            new Manager().GetAndUnpack(new ChromeDriverBinary());
+                            new DriverManager().GetAndUnpack(new ChromeDriverBinary());
                     break;
                 case "FirefoxDriver":
                     if (File.Exists(new FirefoxDriverBinary().BrowserExePath))
                         if (!File.Exists(new FirefoxDriverBinary().FileName))
-                            new Manager().GetAndUnpack(new FirefoxDriverBinary());
+                            new DriverManager().GetAndUnpack(new FirefoxDriverBinary());
                     options = new FirefoxOptions();
                     options.BrowserExecutableLocation = new FirefoxDriverBinary().BrowserExePath;
                     break;
